@@ -203,49 +203,6 @@ export default function Home() {
 
   return (
     <div className="font-sans bg-[#faf7f2] text-gray-800 min-h-screen">
-      {/* ── TOP BAR ── */}
-      <div className="bg-[#faf7f2] border-b border-gray-100 md:py-4 py-2 px-4 md:px-15  flex md:flex-row flex-col gap-5 items-center justify-between text-xs text-gray-500">
-        <div className="flex items-center gap-6">
-          <span className="sm:flex hidden items-center gap-1">
-            <CiLocationOn className="text-[#c84b11]" /> Near Nawab Chock Lalian
-          </span>
-          <div className="relative cursor-pointer">
-            <span className="flex items-center  gap-1 text-[#c84b11] font-semibold">
-              <MdWhatsapp className="text-[#c84b11]" /> +92 347 2641 138{" "}
-              <IoMdArrowDropup className="rotate-180 text-lg" />
-            </span>
-            <div className="absolute z-50 bg-green-400 flex flex-col gap-2 top-5">
-              <span className="flex items-center  gap-1 text-[#c84b11] font-semibold">
-                <MdWhatsapp className="text-[#c84b11]" /> +92 347 2641 138{" "}
-              </span>
-              <span className="flex items-center  gap-1 text-[#c84b11] font-semibold">
-                <MdWhatsapp className="text-[#c84b11]" /> +92 347 2641 138{" "}
-              </span>
-            </div>
-          </div>
-          <span className="sm:flex hidden items-center gap-1">
-            <FaClock /> Delivery time: 12:00 PM – 12:00 AM
-          </span>
-          <span className="sm:hidden flex items-center gap-1">
-            <FaClock /> D.T: 12:00 PM – 12:00 AM
-          </span>
-        </div>
-        <div className="sm:flex hidden items-center gap-4">
-          <span className="flex items-center gap-1 cursor-pointer hover:text-[#c84b11]">
-            <FaUser /> Personal Account
-          </span>
-          <span className="flex items-center gap-1 cursor-pointer">
-            <FaGlobe /> UA
-          </span>
-          <a href="#" className="text-blue-600 hover:text-blue-800">
-            <FaFacebookF />
-          </a>
-          <a href="#" className="text-pink-500 hover:text-pink-700">
-            <FaInstagram />
-          </a>
-        </div>
-      </div>
-
       {/* ── NAVBAR ── */}
       <NavBar />
 
