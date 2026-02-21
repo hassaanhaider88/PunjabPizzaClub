@@ -4,7 +4,7 @@ import { IoLocationSharp } from "react-icons/io5";
 
 const DeliveryZoneSection = () => {
   return (
-    <section className="w-full bg-linear-to-b from-white via-[#f4ebe3] to-[#f4ebe3] py-16 px-6 md:px-16">
+    <section className="w-full  md:px-20 px-5 bg-linear-to-b from-white via-[#f4ebe3] to-[#f4ebe3] py-16">
       <div className="grid md:grid-cols-2 gap-10 items-center">
         <div className="relative  py-3 px-2 h-80 rounded-2xl overflow-hidden shadow-lg">
           {/* Map */}

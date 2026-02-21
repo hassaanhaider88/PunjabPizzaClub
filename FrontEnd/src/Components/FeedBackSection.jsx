@@ -6,7 +6,7 @@ const FeedBackSection = () => {
   const [feedbackRating, setFeedbackRating] = useState(null);
 
   return (
-    <section className="py-14 bg-white">
+    <section className="py-14  md:px-20 px-5 bg-white">
       <div className="max-w-7xl mx-auto px-4 grid md:grid-cols-2 md:gap-12 gap-20 items-center">
         {/* Woman photo + emoji */}
         <div className="relative md:order-1 order-2 flex justify-center">

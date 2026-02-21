@@ -10,7 +10,7 @@ function HeroSection() {
         background:
           "#F8EADB;background: linear-gradient(90deg, rgba(248, 234, 219, 1) 68%, rgba(245, 225, 206, 1) 94%)",
       }}
-      className="relative  overflow-hidden"
+      className="relative   md:px-20 px-5 overflow-hidden"
     >
       <div className="max-w-7xl  mx-auto px-10 py-8 md:py-16 grid md:grid-cols-2 items-center gap-40">
         <div className="relative z-10">

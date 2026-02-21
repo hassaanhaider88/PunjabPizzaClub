@@ -10,7 +10,7 @@ import { AiOutlineTikTok } from "react-icons/ai";
 const FooterComponent = () => {
   const CrtYear = new Date();
   return (
-    <footer className="bg-[#af2a2f] text-white">
+    <footer className="bg-[#af2a2f]  md:px-20 px-5 text-white">
       <div className="max-w-7xl mx-auto px-4 py-12 grid grid-cols-2 md:grid-cols-5 gap-8">
         {/* Brand */}
         <div className="col-span-2 md:col-span-1">

@@ -1,11 +1,13 @@
+import { GiHamburger } from "react-icons/gi";
 import React, { useState } from "react";
 import SinglePizzaCart from "./SinglePizzaCart";
+import { Link } from "react-router-dom";
 
 const MenuSection = () => {
   const [activeCategory, setActiveCategory] = useState("Pizza");
 
   // const [guests, setGuests] = useState(2);
-  const [activeFilter, setActiveFilter] = useState(null);
+  // const [activeFilter, setActiveFilter] = useState(null);
 
   const MENU_CATS = [
     "Pizza",
@@ -111,43 +113,40 @@ const MenuSection = () => {
   ];
 
   return (
-    <section id="MenuSection" className="py-14 max-w-7xl mx-auto px-4">
-      <p className="text-xs font-bold uppercase tracking-widest text-gray-400 mb-1">
-        Our Menu
+    <section id="MenuSection" className="py-14 md:px-20 max-w-7xl mx-auto px-4">
+      <p className="text-xs font-bold uppercase tracking-widest text-gray-700 mb-1">
+        OUR MENU
       </p>
-      <h2 className="text-3xl font-black text-gray-800 mb-6">
+      <h2 className="text-4xl font-semibold text-gray-800 mb-6">
         Try our top position
       </h2>
 
       {/* Category tabs */}
-      <div className="flex flex-wrap gap-2 mb-4">
-        {MENU_CATS.map((cat) => (
+      <div className="flex rounded-tl-full rounded-bl-full justify-evenly items-center w-full bg-[#EFD0AB] flex-wrap mb-4">
+        {MENU_CATS.map((cat, idx) => (
           <button
             key={cat}
             onClick={() => setActiveCategory(cat)}
-            className={`px-4 py-1.5 rounded-full text-sm font-semibold transition-all ${
-              activeCategory === cat
-                ? "bg-[#1a3c2e] text-white shadow-md"
-                : "bg-white text-gray-600 border border-gray-200 hover:border-gray-400"
-            }`}
+            className={`flex  ${idx === 1 ? "border-l-0" : "border-l"}   border-white flex-1 text-nowrap py-4 px-6 justify-center items-center gap-3  text-sm font-semibold transition-all ${activeCategory === cat
+              ? "bg-[#1a3c2e] border-r-2 border-white rounded-full text-white shadow-md"
+              : "text-gray-600"
+              }`}
           >
-            {cat === "Pizza" && "🍕 "}
-            {cat}
+            <span className="h-8 w-8 bg-white text-black rounded-full flex justify-center items-center"><GiHamburger /></span>{cat}
           </button>
         ))}
       </div>
 
       {/* Diet filters */}
-      <div className="flex flex-wrap gap-2 mb-8">
+      {/* <div className="flex flex-wrap gap-2 mb-8">
         {FILTERS.map((f) => (
           <button
             key={f}
             onClick={() => setActiveFilter(activeFilter === f ? null : f)}
-            className={`flex items-center gap-1 px-3 py-1 rounded-full text-xs border transition-all ${
-              activeFilter === f
-                ? "bg-[#c84b11] text-white border-[#c84b11]"
-                : "bg-white text-gray-500 border-gray-200 hover:border-gray-400"
-            }`}
+            className={`flex items-center gap-1 px-3 py-1 rounded-full text-xs border transition-all ${activeFilter === f
+              ? "bg-[#c84b11] text-white border-[#c84b11]"
+              : "bg-white text-gray-500 border-gray-200 hover:border-gray-400"
+              }`}
           >
             {f}
           </button>
@@ -155,19 +154,19 @@ const MenuSection = () => {
         <button className="px-3 py-1 rounded-full text-xs border border-gray-200 text-gray-400 hover:border-gray-400 transition-all">
           Reset all
         </button>
-      </div>
+      </div> */}
 
       {/* Pizza grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+      <div className="grid mt-7 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
         {PIZZAS.map((pizza) => (
           <SinglePizzaCart key={pizza.id} pizza={pizza} />
         ))}
       </div>
 
       <div className="flex justify-center mt-10">
-        <button className="border-2 border-gray-800 px-8 py-2.5 rounded-full text-sm font-bold hover:bg-gray-800 hover:text-white transition-all">
+        <Link to={"/menu"} className="border-2 border-[#AF2A2F] px-8 py-2.5 rounded-full text-sm font-bold hover:bg-[#AF2A2F] text-[#AF2A2F] hover:text-white transition-all">
           GO TO MENU
-        </button>
+        </Link>
       </div>
     </section>
   );

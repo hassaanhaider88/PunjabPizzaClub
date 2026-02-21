@@ -1,5 +1,6 @@
 import { AiOutlineTikTok } from "react-icons/ai";
 import { FaFacebook } from "react-icons/fa";
+
 import { useState } from "react";
 import { CiLocationOn } from "react-icons/ci";
 import {
@@ -15,6 +16,7 @@ import { MdWhatsapp } from "react-icons/md";
 
 import { Link, useLocation } from "react-router-dom";
 import CartDiv from "./CartDiv";
+import { FiShoppingCart } from "react-icons/fi";
 
 const NavBar = () => {
   const Location = useLocation();
@@ -170,7 +172,7 @@ const NavBar = () => {
               onClick={() => setIsCartOpen(!IsCartOpen)}
               className="relative cursor-pointer BoxColors text-white rounded-full p-2.5  transition-colors"
             >
-              <FaShoppingCart size={16} />
+              <FiShoppingCart size={16} />
               {cartCount > 0 && (
                 <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
                   {cartCount}
