@@ -38,6 +38,7 @@ import HeroSection from "../Components/HeroSection";
 import DeliveryServiceSection from "../Components/DeliveryServiceSection";
 import DeliveryZoneSection from "../Components/DeliveryZoneSection";
 import FeedBackSection from "../Components/FeedBackSection";
+import FooterComponent from "../Components/FooterComponent"
 
 // ── DATA ────────────────────────────────────────────────────────────────────
 const PIZZAS = [
@@ -277,94 +278,7 @@ export default function Home() {
       <FeedBackSection />
 
       {/* ── FOOTER ── */}
-      <footer className="bg-[#1a3c2e] text-white">
-        <div className="max-w-7xl mx-auto px-4 py-12 grid grid-cols-2 md:grid-cols-5 gap-8">
-          {/* Brand */}
-          <div className="col-span-2 md:col-span-1">
-            <div className="flex items-center gap-2 mb-4">
-              <div className="bg-white text-[#1a3c2e] rounded-lg p-1.5 leading-none">
-                <span className="text-xs font-black tracking-tight">PEPE</span>
-              </div>
-              <div>
-                <div className="text-white font-black text-lg leading-none tracking-tight">
-                  PIZZA
-                </div>
-                <div className="text-green-300 text-[8px] uppercase tracking-widest">
-                  Pizza restaurant
-                </div>
-              </div>
-            </div>
-            <p className="text-green-200 text-xs leading-relaxed mb-3">
-              Open hours: 09:00 – 23:00
-            </p>
-            <p className="text-green-200 text-xs">
-              Delivery time: 09:00 – 23:00
-            </p>
-          </div>
-
-          {/* Links */}
-          {[
-            {
-              title: "Restaurants",
-              links: ["About company", "Our restaurants"],
-            },
-            {
-              title: "Services",
-              links: ["Promotions", "Shipping and payment"],
-            },
-            {
-              title: "Legal information",
-              links: ["Public offer", "Privacy policy"],
-            },
-          ].map((col) => (
-            <div key={col.title}>
-              <h4 className="font-bold text-white mb-3 text-sm">{col.title}</h4>
-              <ul className="space-y-2">
-                {col.links.map((link) => (
-                  <li key={link}>
-                    <a
-                      href="#"
-                      className="text-green-200 text-xs hover:text-white transition-colors"
-                    >
-                      {link}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
-
-          {/* Socials */}
-          <div>
-            <h4 className="font-bold text-white mb-3 text-sm">Follow us</h4>
-            <div className="flex gap-3">
-              <a
-                href="#"
-                className="bg-green-800 hover:bg-green-700 rounded-full w-8 h-8 flex items-center justify-center transition-colors"
-              >
-                <FaFacebookF size={14} />
-              </a>
-              <a
-                href="#"
-                className="bg-green-800 hover:bg-green-700 rounded-full w-8 h-8 flex items-center justify-center transition-colors"
-              >
-                <FaInstagram size={14} />
-              </a>
-            </div>
-          </div>
-        </div>
-
-        <div className="border-t border-green-800 py-4">
-          <div className="max-w-7xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center gap-2 text-xs text-green-400">
-            <p>© 2024 Pepe Pizza. All rights reserved.</p>
-            <div className="flex items-center gap-2">
-              <span>Powered by</span>
-              <span className="font-bold text-white">VISA</span>
-              <span className="font-bold text-white">Mastercard</span>
-            </div>
-          </div>
-        </div>
-      </footer>
+     <FooterComponent/>
     </div>
   );
 }

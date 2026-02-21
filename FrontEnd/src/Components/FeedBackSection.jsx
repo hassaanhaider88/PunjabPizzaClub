@@ -54,7 +54,7 @@ const FeedBackSection = () => {
             LEAVE FEEDBACK
           </Link>
 
-          <div className="flex items-center gap-3">
+          <div className="flex mt-10 items-center gap-6">
             <div className="flex -space-x-2">
               {[1, 2, 3, 4].map((i) => (
                 <img
@@ -66,15 +66,12 @@ const FeedBackSection = () => {
               ))}
             </div>
             <div>
-              <div className="flex items-center gap-1 text-yellow-400">
-                {[...Array(5)].map((_, i) => (
-                  <FaStar key={i} size={12} />
-                ))}
-              </div>
-              <p className="text-xs text-gray-500 font-semibold">
+              <p className="text-lg text-gray-600 font-semibold">
                 Our Happy Customers
               </p>
-              <p className="text-xs text-gray-400">4.8 · 1514 reviews</p>
+              <p className="text-xs flex gap-2 font-semibold items-center text-gray-700 mt-2">
+                <FaStar /> 4.8 · (114 reviews)
+              </p>
             </div>
           </div>
         </div>
