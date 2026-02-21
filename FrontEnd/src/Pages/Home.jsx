@@ -36,6 +36,7 @@ import { MdDeliveryDining, MdWhatsapp, MdAccessTime } from "react-icons/md";
 import NavBar from "../Components/NavBar";
 import HeroSection from "../Components/HeroSection";
 import DeliveryServiceSection from "../Components/DeliveryServiceSection";
+import DeliveryZoneSection from "../Components/DeliveryZoneSection";
 
 // ── DATA ────────────────────────────────────────────────────────────────────
 const PIZZAS = [
@@ -190,7 +191,7 @@ function PizzaCard({ pizza }) {
 export default function Home() {
   const [activeCategory, setActiveCategory] = useState("Pizza");
 
-  const [guests, setGuests] = useState(2);
+  // const [guests, setGuests] = useState(2);
   const [activeFilter, setActiveFilter] = useState(null);
   const [feedbackRating, setFeedbackRating] = useState(null);
 
@@ -267,130 +268,9 @@ export default function Home() {
       </section>
 
       {/* ── DELIVERY ZONES ── */}
-      <section className="bg-white py-14">
-        <div className="max-w-7xl mx-auto px-4 grid md:grid-cols-2 gap-12 items-center">
-          {/* Map placeholder */}
-          <div className="relative">
-            <div className="bg-[#e8f4ea] rounded-2xl h-64 flex items-center justify-center overflow-hidden">
-              <div className="text-center">
-                <div className="text-6xl mb-2">🗺️</div>
-                <p className="text-gray-500 text-sm font-semibold">
-                  Kyiv delivery map
-                </p>
-              </div>
-            </div>
-            <div className="absolute bottom-4 left-4 bg-white rounded-xl shadow-lg px-4 py-2.5 text-sm">
-              <p className="font-bold text-gray-700">Check your address</p>
-              <div className="flex gap-2 mt-1">
-                <input
-                  placeholder="For delivery zone"
-                  className="border rounded-lg px-2 py-1 text-xs w-36 focus:outline-none focus:border-[#1a3c2e]"
-                />
-                <button className="bg-[#1a3c2e] text-white px-3 py-1 rounded-lg text-xs font-bold">
-                  CHECK
-                </button>
-              </div>
-            </div>
-          </div>
+      <DeliveryZoneSection/>
 
-          <div>
-            <p className="text-xs font-bold uppercase tracking-widest text-gray-400 mb-2">
-              Delivery zones
-            </p>
-            <h2 className="text-3xl font-black mb-4">Pizza delivery Kyiv</h2>
-            <p className="text-gray-500 text-sm leading-relaxed mb-6">
-              We currently deliver within the highlighted area. But we are
-              willing to make concessions on larger orders. Check with the
-              manager for details.
-            </p>
-            <button className="bg-[#e8d5b0] text-[#1a3c2e] font-bold px-6 py-2.5 rounded-xl text-sm hover:bg-[#dcc898] transition-colors">
-              📞 (044) 755 45 21
-            </button>
-          </div>
-        </div>
-      </section>
 
-      {/* ── RESTAURANT BOOKING ── */}
-      <section className="py-14 max-w-7xl mx-auto px-4">
-        <div className="bg-[#faf7f2] rounded-3xl overflow-hidden grid md:grid-cols-2 gap-0">
-          <div className="p-10">
-            <p className="text-xs font-bold uppercase tracking-widest text-gray-400 mb-2 flex items-center gap-2">
-              <span className="text-[#c84b11]">〜〜</span> We saved you a seat
-            </p>
-            <h2 className="text-3xl font-black mb-6">
-              We invite you to visit
-              <br />
-              our restaurant
-            </h2>
-
-            <div className="grid grid-cols-2 gap-4 mb-6">
-              <div>
-                <label className="block text-xs font-semibold text-gray-500 mb-1">
-                  Restaurant
-                </label>
-                <select className="w-full border border-gray-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:border-[#1a3c2e] bg-white">
-                  <option>Hanska 516</option>
-                  <option>Kyiv Center</option>
-                </select>
-              </div>
-              <div>
-                <label className="block text-xs font-semibold text-gray-500 mb-1">
-                  Date
-                </label>
-                <input
-                  type="date"
-                  defaultValue="2024-01-12"
-                  className="w-full border border-gray-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:border-[#1a3c2e] bg-white"
-                />
-              </div>
-              <div>
-                <label className="block text-xs font-semibold text-gray-500 mb-1">
-                  Time
-                </label>
-                <select className="w-full border border-gray-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:border-[#1a3c2e] bg-white">
-                  <option>16:30</option>
-                  <option>17:00</option>
-                  <option>18:00</option>
-                </select>
-              </div>
-              <div>
-                <label className="block text-xs font-semibold text-gray-500 mb-1">
-                  Guest
-                </label>
-                <div className="flex items-center gap-2 border border-gray-200 rounded-xl px-3 py-2 bg-white">
-                  <button
-                    onClick={() => setGuests(Math.max(1, guests - 1))}
-                    className="text-gray-400 hover:text-gray-700"
-                  >
-                    <FaMinus size={10} />
-                  </button>
-                  <span className="flex-1 text-center text-sm font-bold">
-                    {guests}
-                  </span>
-                  <button
-                    onClick={() => setGuests(guests + 1)}
-                    className="text-gray-400 hover:text-gray-700"
-                  >
-                    <FaPlus size={10} />
-                  </button>
-                </div>
-              </div>
-            </div>
-
-            <button className="bg-[#1a3c2e] text-white px-8 py-3 rounded-xl font-bold text-sm hover:bg-[#2d6a4f] transition-colors shadow-lg">
-              BOOK NOW
-            </button>
-          </div>
-
-          <div className="relative overflow-hidden rounded-r-3xl min-h-[300px]">
-            <img
-              src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=600&h=500&fit=crop"
-              alt="Restaurant interior"
-              className="w-full h-full object-cover"
-            />
-          </div>
-        </div>
-      </section>
 
       {/* ── FEEDBACK ── */}
       <section className="py-14 bg-white">
@@ -399,7 +279,7 @@ export default function Home() {
           <div className="relative flex justify-center">
             <div className="relative">
               <img
-                src="https://images.unsplash.com/photo-1494790108755-2616b612b48e?w=400&h=500&fit=crop&crop=face"
+                src="https://i.pinimg.com/originals/cb/f3/6b/cbf36b267471d30a6f1f56c1719f1836.png"
                 alt="Happy customer"
                 className="w-64 h-80 object-cover rounded-3xl"
               />

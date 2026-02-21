@@ -12,7 +12,7 @@ const DeliveryServiceSection = () => {
             Our Delivery Service
           </h2>
           <p className="text-lg text-gray-400 leading-relaxed">
-            We currently deliver Only In{" "}
+            We Currently Deliver Only In{" "}
             <span className="block BrandTextColor font-bold">Lalian</span>
           </p>
         </div>
@@ -28,7 +28,7 @@ const DeliveryServiceSection = () => {
             <img className="w-30 h-30" src="./FreeDelivery.svg" alt="" />
           </div>
           <p className="font-bold text-gray-700 text-sm">Free delivery</p>
-          <p className="text-gray-500 text-sm">On Minimum 1k Order</p>
+          <p className="text-gray-500 text-sm">Over Minimum 1k Order</p>
         </div>
         <div className="flex flex-col mb-5 items-center text-center">
           <div className="">

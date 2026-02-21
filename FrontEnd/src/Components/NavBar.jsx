@@ -119,7 +119,7 @@ const NavBar = () => {
             <FaUser /> Personal Account
           </Link>
           <a
-            href="https://maps.app.goo.gl/hJKxP76Pv37yszRs7"
+            href="https://maps.app.goo.gl/hJKxP76Pv37yszRs7" // 31.823775910447818, 72.80149055755028
             className="flex hover:text-blue-500 items-center gap-1 cursor-pointer"
           >
             <FaGlobe /> PK
