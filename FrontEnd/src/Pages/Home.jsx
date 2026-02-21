@@ -35,6 +35,7 @@ import {
 import { MdDeliveryDining, MdWhatsapp, MdAccessTime } from "react-icons/md";
 import NavBar from "../Components/NavBar";
 import HeroSection from "../Components/HeroSection";
+import DeliveryServiceSection from "../Components/DeliveryServiceSection";
 
 // ── DATA ────────────────────────────────────────────────────────────────────
 const PIZZAS = [
@@ -202,36 +203,7 @@ export default function Home() {
       <HeroSection />
 
       {/* ── DELIVERY SERVICE ── */}
-      <section className="bg-white py-12">
-        <div className="max-w-7xl mx-auto px-4 grid md:grid-cols-4 gap-8 items-start">
-          <div>
-            <p className="text-xs font-bold uppercase tracking-widest text-gray-400 mb-2">
-              What we serve
-            </p>
-            <h2 className="text-2xl font-black text-gray-800 mb-2">
-              Our Delivery Service
-            </h2>
-            <p className="text-sm text-gray-400 leading-relaxed">
-              We currently deliver within all areas in Kyiv
-            </p>
-          </div>
-          <div className="flex flex-col items-center text-center">
-            <div className="text-5xl mb-3">🛵</div>
-            <p className="font-bold text-gray-700 text-sm">Delivery time:</p>
-            <p className="text-[#c84b11] font-black text-lg">09:00 – 23:00</p>
-          </div>
-          <div className="flex flex-col items-center text-center">
-            <div className="text-5xl mb-3">🎁</div>
-            <p className="font-bold text-gray-700 text-sm">Free delivery</p>
-            <p className="text-gray-500 text-sm">for orders over 500 uah</p>
-          </div>
-          <div className="flex flex-col items-center text-center">
-            <div className="text-5xl mb-3">⏱️</div>
-            <p className="font-bold text-gray-700 text-sm">Time of delivery:</p>
-            <p className="text-[#c84b11] font-black text-lg">40–90 min</p>
-          </div>
-        </div>
-      </section>
+      <DeliveryServiceSection />
 
       {/* ── MENU ── */}
       <section id="MenuSection" className="py-14 max-w-7xl mx-auto px-4">

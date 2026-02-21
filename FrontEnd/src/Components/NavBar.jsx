@@ -69,26 +69,37 @@ const NavBar = () => {
           </span>
           <div className="relative cursor-pointer">
             <span
+              onClick={() => window.open("https://wa.me/923472641138")}
               onMouseEnter={() => handleUserMouseEnterInPhone()}
               onMouseLeave={() => handleUserMouseLeaveInPhone()}
-              className="flex items-center  gap-1 text-[#c84b11] font-semibold"
+              className="flex items-center gap-2 text-[#c84b11] font-semibold select-none"
             >
-              <MdWhatsapp className="text-[#c84b11]" /> +92 347-2641138{" "}
+              <MdWhatsapp className="text-[#c84b11] text-xl" />
+              +92 347-2641138
               <IoMdArrowDropup
-                className={`${IsMobileNumberHover ? "" : "rotate-180"} duration-300 transition-all text-lg`}
+                className={`text-lg transition-transform duration-300 ${
+                  IsMobileNumberHover ? "rotate-0" : "rotate-180"
+                }`}
               />
             </span>
+
             {IsMobileNumberHover && (
               <div
                 onMouseEnter={() => handleUserMouseEnterInPhone()}
                 onMouseLeave={() => handleUserMouseLeaveInPhone()}
-                className="absolute py-3 rounded-xl px-1 z-50 duration-300 transition-all BoxColors  flex flex-col gap-2 top-5"
+                className="absolute top-6 right-0 flex flex-col gap-2 bg-[#c84b11] shadow-lg rounded-xl py-3 px-4 z-50 transition-all duration-300 w-60"
               >
-                <span className="flex items-center  gap-1 text-white font-semibold">
-                  <MdWhatsapp className="text-white" /> +92 303-0746738
+                <span
+                  onClick={() => window.open("https://wa.me/923030746738")}
+                  className="flex items-center gap-2 text-white font-semibold"
+                >
+                  <MdWhatsapp className="text-white text-lg" /> +92 303-0746738
                 </span>
-                <span className="flex items-center  gap-1 text-white font-semibold">
-                  <MdWhatsapp className="text-white" /> +92 316-0746738{" "}
+                <span
+                  onClick={() => window.open("https://wa.me/923160746738")}
+                  className="flex items-center gap-2 text-white font-semibold"
+                >
+                  <MdWhatsapp className="text-white text-lg" /> +92 316-0746738
                 </span>
               </div>
             )}
