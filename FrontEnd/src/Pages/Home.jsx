@@ -34,6 +34,7 @@ import {
 } from "react-icons/fa";
 import { MdDeliveryDining, MdWhatsapp, MdAccessTime } from "react-icons/md";
 import NavBar from "../Components/NavBar";
+import HeroSection from "../Components/HeroSection";
 
 // ── DATA ────────────────────────────────────────────────────────────────────
 const PIZZAS = [
@@ -132,20 +133,11 @@ const MENU_CATS = [
 const FILTERS = [
   "Without meat",
   "Vegan",
-  "Gluten free",
+  "Gluten fee",
   "Gluten free",
   "Spicy",
   "With Chicken",
   "With seafood",
-];
-
-const NAV_LINKS = [
-  "Home",
-  "Menu",
-  "Promotions",
-  "Shipping and Payment",
-  "About us",
-  "Contacts",
 ];
 
 // ── PIZZA CARD ───────────────────────────────────────────────────────────────
@@ -207,54 +199,7 @@ export default function Home() {
       <NavBar />
 
       {/* ── HERO ── */}
-      <section className="bg-[#faf7f2] relative overflow-hidden">
-        <div className="max-w-7xl mx-auto px-4 py-12 md:py-16 grid md:grid-cols-2 items-center gap-8">
-          <div className="relative z-10">
-            <div className="inline-flex items-center gap-2 bg-white rounded-full px-4 py-1.5 text-sm text-gray-600 shadow-sm mb-6 border border-gray-100">
-              <span>🍕</span> More than just pizza !!
-            </div>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-black leading-tight mb-4">
-              <span className="text-[#c84b11]">Pizza</span> and
-              <br />
-              friends are
-              <br />
-              all we need
-            </h1>
-            <p className="text-gray-500 text-sm md:text-base mb-8 max-w-xs leading-relaxed">
-              We always make our customer happy by providing as many choices as
-              possible
-            </p>
-            <div className="flex flex-wrap items-center gap-3">
-              <button className="bg-[#1a3c2e] text-white px-6 py-3 rounded-xl font-bold text-sm hover:bg-[#2d6a4f] transition-colors shadow-lg shadow-green-900/20">
-                ORDER ONLINE
-              </button>
-              <button className="flex items-center gap-2 border-2 border-gray-200 px-5 py-2.5 rounded-xl font-semibold text-sm hover:border-gray-400 transition-colors bg-white">
-                <FaPhone className="text-[#c84b11]" /> REQUEST A CALL
-              </button>
-            </div>
-          </div>
-
-          {/* Hero Image */}
-          <div className="relative flex justify-center">
-            <div className="w-72 h-72 md:w-96 md:h-96 bg-[#e8d5b0] rounded-full flex items-center justify-center overflow-hidden">
-              <img
-                src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=500&h=500&fit=crop"
-                alt="Pizza hero"
-                className="w-full h-full object-cover rounded-full"
-                style={{ objectPosition: "center top" }}
-              />
-            </div>
-          </div>
-        </div>
-
-        {/* Decorative side tab */}
-        <div className="absolute left-0 top-1/2 -translate-y-1/2 bg-[#1a3c2e] text-white text-xs font-bold py-3 px-1.5 rounded-r-lg [writing-mode:vertical-rl] rotate-180 tracking-widest hidden md:flex">
-          PREV
-        </div>
-        <div className="absolute right-0 top-1/2 -translate-y-1/2 bg-[#1a3c2e] text-white text-xs font-bold py-3 px-1.5 rounded-l-lg [writing-mode:vertical-rl] tracking-widest hidden md:flex">
-          NEXT
-        </div>
-      </section>
+      <HeroSection />
 
       {/* ── DELIVERY SERVICE ── */}
       <section className="bg-white py-12">

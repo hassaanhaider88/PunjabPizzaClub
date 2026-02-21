@@ -25,3 +25,7 @@ html {
 .BrandTextColor {
   color: #af2a2f;
 }
+
+button{
+  cursor: pointer;
+}
