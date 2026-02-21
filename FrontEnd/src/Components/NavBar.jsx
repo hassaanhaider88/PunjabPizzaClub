@@ -1,5 +1,5 @@
-import { SiInstagram } from "react-icons/si"; 
-import { FaFacebook } from "react-icons/fa"; 
+import { AiOutlineTikTok } from "react-icons/ai";
+import { FaFacebook } from "react-icons/fa";
 import React, { useState } from "react";
 import { CiLocationOn } from "react-icons/ci";
 import {
@@ -50,7 +50,7 @@ const NavBar = () => {
               onMouseLeave={() => handleUserMouseLeaveInPhone()}
               className="flex items-center  gap-1 text-[#c84b11] font-semibold"
             >
-              <MdWhatsapp className="text-[#c84b11]" /> +92 347 2641 138{" "}
+              <MdWhatsapp className="text-[#c84b11]" /> +92 347-2641138{" "}
               <IoMdArrowDropup
                 className={`${IsMobileNumberHover ? "" : "rotate-180"} duration-300 transition-all text-lg`}
               />
@@ -59,13 +59,13 @@ const NavBar = () => {
               <div
                 onMouseEnter={() => handleUserMouseEnterInPhone()}
                 onMouseLeave={() => handleUserMouseLeaveInPhone()}
-                className="absolute py-3 rounded-xl px-1 z-50 duration-300 transition-all bg-[#2D6A4F]  flex flex-col gap-2 top-5"
+                className="absolute py-3 rounded-xl px-1 z-50 duration-300 transition-all BoxColors  flex flex-col gap-2 top-5"
               >
                 <span className="flex items-center  gap-1 text-white font-semibold">
-                  <MdWhatsapp className="text-white" /> +92 347 2641 138{" "}
+                  <MdWhatsapp className="text-white" /> +92 347-2641138{" "}
                 </span>
                 <span className="flex items-center  gap-1 text-white font-semibold">
-                  <MdWhatsapp className="text-white" /> +92 347 2641 138{" "}
+                  <MdWhatsapp className="text-white" /> +92 347-2641138{" "}
                 </span>
               </div>
             )}
@@ -81,14 +81,23 @@ const NavBar = () => {
           <span className="flex items-center gap-1 cursor-pointer hover:text-[#c84b11]">
             <FaUser /> Personal Account
           </span>
-          <span className="flex items-center gap-1 cursor-pointer">
-            <FaGlobe /> UA
-          </span>
-          <a href="#" className="text-blue-600 hover:text-blue-800">
-            <FaFacebook />
+          <a
+            href="https://maps.app.goo.gl/hJKxP76Pv37yszRs7"
+            className="flex hover:text-blue-500 items-center gap-1 cursor-pointer"
+          >
+            <FaGlobe /> PK
           </a>
-          <a href="#" className="text-pink-500 hover:text-pink-700">
-            <SiInstagram />
+          <a
+            href="https://www.facebook.com/punjabpizaclub.lallian"
+            className="text-blue-600 hover:text-blue-800"
+          >
+            <FaFacebook size={20} />
+          </a>
+          <a
+            href="https://www.tiktok.com/discover/punjab-pizza-club-lalian"
+            className="hover:text-black"
+          >
+            <AiOutlineTikTok size={20} />
           </a>
         </div>
       </div>
