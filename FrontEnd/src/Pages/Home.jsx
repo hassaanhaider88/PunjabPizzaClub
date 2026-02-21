@@ -289,7 +289,7 @@ export default function Home() {
       </section>
 
       {/* ── MENU ── */}
-      <section className="py-14 max-w-7xl mx-auto px-4">
+      <section id="MenuSection" className="py-14 max-w-7xl mx-auto px-4">
         <p className="text-xs font-bold uppercase tracking-widest text-gray-400 mb-1">
           Our Menu
         </p>

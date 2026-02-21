@@ -1,5 +1,27 @@
 @import "tailwindcss";
 
-.BoxColors{
-    background-color: #af2a2f;
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+.BoxColors {
+  background-color: #af2a2f;
+  transition: all;
+}
+
+.BoxColors:hover {
+  background-color: #af2a2ee1;
+}
+
+.BoxColors:active {
+  scale: 0.97;
+}
+.BrandTextColor {
+  color: #af2a2f;
 }

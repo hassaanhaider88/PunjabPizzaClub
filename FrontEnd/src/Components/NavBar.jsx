@@ -1,13 +1,11 @@
 import { AiOutlineTikTok } from "react-icons/ai";
 import { FaFacebook } from "react-icons/fa";
-import React, { useState } from "react";
+import { useState } from "react";
 import { CiLocationOn } from "react-icons/ci";
 import {
   FaBars,
   FaClock,
-  FaFacebookF,
   FaGlobe,
-  FaInstagram,
   FaShoppingCart,
   FaTimes,
   FaUser,
@@ -15,18 +13,41 @@ import {
 import { IoMdArrowDropup } from "react-icons/io";
 import { MdWhatsapp } from "react-icons/md";
 
+import { Link, useLocation } from "react-router-dom";
+import CartDiv from "./CartDiv";
+
 const NavBar = () => {
+  const Location = useLocation();
   const NAV_LINKS = [
-    "Home",
-    "Menu",
-    "Promotions",
-    "Shipping and Payment",
-    "About us",
-    "Contacts",
+    {
+      label: "Home",
+      redirectUrl: "/",
+    },
+    {
+      label: "Menu",
+      redirectUrl: "/menu",
+    },
+    {
+      label: "Promotions",
+      redirectUrl: "/promotions",
+    },
+    {
+      label: "Shipping and Payment",
+      redirectUrl: "/shipping-payment",
+    },
+    {
+      label: "About us",
+      redirectUrl: "/about",
+    },
+    {
+      label: "Contacts",
+      redirectUrl: "/contacts",
+    },
   ];
   // eslint-disable-next-line no-unused-vars
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [cartCount] = useState(0);
+  const [IsCartOpen, setIsCartOpen] = useState(false);
+  const [cartCount] = useState(10);
   const [IsMobileNumberHover, setIsMobileNumberHover] = useState(false);
 
   const handleUserMouseEnterInPhone = () => {
@@ -38,8 +59,10 @@ const NavBar = () => {
   };
   return (
     <>
-      {/* ── TOP BAR ── */}
-      <div className="bg-[#faf7f2] border-b border-gray-100 md:py-4 py-2 px-4 md:px-15  flex md:flex-row flex-col gap-5 items-center justify-between text-xs text-gray-500">
+      {/* ── TOP BAR only show on Home Page ── */}
+      <div
+        className={`${Location.pathname == "/" ? "flex md:flex-row flex-col" : "hidden"} bg-[#faf7f2] border-b border-gray-100 md:py-4 py-2 px-4 md:px-15  f gap-5 items-center justify-between text-xs text-gray-500`}
+      >
         <div className="flex items-center gap-6">
           <span className="sm:flex hidden items-center gap-1">
             <CiLocationOn className="text-[#c84b11]" /> Near Nawab Chock Lalian
@@ -62,10 +85,10 @@ const NavBar = () => {
                 className="absolute py-3 rounded-xl px-1 z-50 duration-300 transition-all BoxColors  flex flex-col gap-2 top-5"
               >
                 <span className="flex items-center  gap-1 text-white font-semibold">
-                  <MdWhatsapp className="text-white" /> +92 347-2641138{" "}
+                  <MdWhatsapp className="text-white" /> +92 303-0746738
                 </span>
                 <span className="flex items-center  gap-1 text-white font-semibold">
-                  <MdWhatsapp className="text-white" /> +92 347-2641138{" "}
+                  <MdWhatsapp className="text-white" /> +92 316-0746738{" "}
                 </span>
               </div>
             )}
@@ -78,9 +101,12 @@ const NavBar = () => {
           </span>
         </div>
         <div className="sm:flex hidden items-center gap-4">
-          <span className="flex items-center gap-1 cursor-pointer hover:text-[#c84b11]">
+          <Link
+            to={"/login"}
+            className="flex items-center gap-1 cursor-pointer hover:text-[#c84b11]"
+          >
             <FaUser /> Personal Account
-          </span>
+          </Link>
           <a
             href="https://maps.app.goo.gl/hJKxP76Pv37yszRs7"
             className="flex hover:text-blue-500 items-center gap-1 cursor-pointer"
@@ -101,68 +127,68 @@ const NavBar = () => {
           </a>
         </div>
       </div>
+
       <nav className="bg-white shadow-sm sticky top-0 z-30">
         <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
           {/* Logo */}
           <div className="flex items-center gap-2">
-            <div className="bg-[#1a3c2e] text-white rounded-lg p-1.5 leading-none">
-              <span className="text-xs font-black tracking-tight">PEPE</span>
-            </div>
-            <div>
-              <div className="text-[#1a3c2e] font-black text-lg leading-none tracking-tight">
-                PIZZA
-              </div>
-              <div className="text-gray-400 text-[8px] uppercase tracking-widest">
-                Pizza restaurant
-              </div>
-            </div>
+            <img
+              className="w-22 h-13 bg-cover"
+              src="./PPCLogo.png"
+              alt="Punjab Pizza Club Lalian logo"
+            />
           </div>
 
           {/* Desktop Nav */}
           <ul className="hidden lg:flex items-center gap-7 text-sm font-medium">
-            {NAV_LINKS.map((link) => (
-              <li key={link}>
-                <a
-                  href="#"
-                  className={`hover:text-[#c84b11] transition-colors ${link === "Home" ? "text-[#c84b11] border-b-2 border-[#c84b11] pb-0.5" : "text-gray-600"}`}
+            {NAV_LINKS.map((link, idx) => (
+              <li key={idx}>
+                <Link
+                  to={link.redirectUrl}
+                  className={`hover:text-[#c84b11] transition-colors ${link.label === "Home" ? "BrandTextColor border-b-2 border-[#c84b11] pb-0.5" : "text-gray-600"}`}
                 >
-                  {link}
-                </a>
+                  {link.label}
+                </Link>
               </li>
             ))}
           </ul>
 
           {/* Cart + Burger */}
-          <div className="flex items-center gap-3">
-            <button className="relative bg-[#1a3c2e] text-white rounded-full p-2.5 hover:bg-[#2d6a4f] transition-colors">
+          <div className="flex  items-center gap-3">
+            <button
+              onClick={() => setIsCartOpen(!IsCartOpen)}
+              className="relative cursor-pointer BoxColors text-white rounded-full p-2.5  transition-colors"
+            >
               <FaShoppingCart size={16} />
               {cartCount > 0 && (
-                <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-4 h-4 flex items-center justify-center">
+                <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
                   {cartCount}
                 </span>
               )}
             </button>
             <button
-              className="lg:hidden"
+              className="lg:hidden cursor-pointer"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             >
-              {mobileMenuOpen ? <FaTimes size={20} /> : <FaBars size={20} />}
+              {mobileMenuOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
             </button>
           </div>
         </div>
+        {/* User cart goes here */}
+        {IsCartOpen && <CartDiv setIsCartOpen={setIsCartOpen} />}
 
         {/* Mobile Menu */}
         {mobileMenuOpen && (
           <div className="lg:hidden bg-white border-t px-4 py-4">
             <ul className="flex flex-col gap-3">
-              {NAV_LINKS.map((link) => (
-                <li key={link}>
-                  <a
-                    href="#"
+              {NAV_LINKS.map((link, idx) => (
+                <li key={idx + 2}>
+                  <Link
+                    to={link.redirectUrl}
                     className="block text-gray-700 hover:text-[#c84b11] font-medium"
                   >
-                    {link}
-                  </a>
+                    {link.label}
+                  </Link>
                 </li>
               ))}
             </ul>
