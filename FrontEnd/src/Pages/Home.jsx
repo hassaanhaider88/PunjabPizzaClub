@@ -37,6 +37,7 @@ import NavBar from "../Components/NavBar";
 import HeroSection from "../Components/HeroSection";
 import DeliveryServiceSection from "../Components/DeliveryServiceSection";
 import DeliveryZoneSection from "../Components/DeliveryZoneSection";
+import FeedBackSection from "../Components/FeedBackSection";
 
 // ── DATA ────────────────────────────────────────────────────────────────────
 const PIZZAS = [
@@ -193,7 +194,7 @@ export default function Home() {
 
   // const [guests, setGuests] = useState(2);
   const [activeFilter, setActiveFilter] = useState(null);
-  const [feedbackRating, setFeedbackRating] = useState(null);
+
 
   return (
     <div className="font-sans bg-[#faf7f2] text-gray-800 min-h-screen">
@@ -273,85 +274,7 @@ export default function Home() {
 
 
       {/* ── FEEDBACK ── */}
-      <section className="py-14 bg-white">
-        <div className="max-w-7xl mx-auto px-4 grid md:grid-cols-2 gap-12 items-center">
-          {/* Woman photo + emoji */}
-          <div className="relative flex justify-center">
-            <div className="relative">
-              <img
-                src="https://i.pinimg.com/originals/cb/f3/6b/cbf36b267471d30a6f1f56c1719f1836.png"
-                alt="Happy customer"
-                className="w-64 h-80 object-cover rounded-3xl"
-              />
-              <div className="absolute bottom-6 right-0 translate-x-1/3 bg-white rounded-2xl shadow-xl px-4 py-3">
-                <p className="text-xs text-gray-500 mb-2 font-semibold">
-                  How your experience?
-                </p>
-                <div className="flex gap-2 text-2xl">
-                  {[FaFrown, FaMeh, FaSmile, FaGrinStars].map((Icon, i) => (
-                    <button
-                      key={i}
-                      onClick={() => setFeedbackRating(i)}
-                      className={`transition-transform hover:scale-125 ${feedbackRating === i ? "scale-125" : ""}`}
-                    >
-                      <Icon
-                        className={
-                          i === 0
-                            ? "text-red-400"
-                            : i === 1
-                              ? "text-orange-400"
-                              : i === 2
-                                ? "text-yellow-400"
-                                : "text-green-400"
-                        }
-                      />
-                    </button>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div>
-            <p className="text-xs font-bold uppercase tracking-widest text-gray-400 mb-2">
-              Leave feedback
-            </p>
-            <h2 className="text-3xl font-black mb-3">
-              Share your opinion with us
-            </h2>
-            <p className="text-gray-500 text-sm leading-relaxed mb-6">
-              What would you like to see on our website and in the restaurant?
-            </p>
-            <button className="bg-[#e8d5b0] text-[#1a3c2e] font-bold px-6 py-2.5 rounded-xl text-sm hover:bg-[#dcc898] transition-colors mb-8">
-              LEAVE FEEDBACK
-            </button>
-
-            <div className="flex items-center gap-3">
-              <div className="flex -space-x-2">
-                {[1, 2, 3, 4].map((i) => (
-                  <img
-                    key={i}
-                    src={`https://i.pravatar.cc/40?img=${i + 10}`}
-                    alt="Customer"
-                    className="w-8 h-8 rounded-full border-2 border-white object-cover"
-                  />
-                ))}
-              </div>
-              <div>
-                <div className="flex items-center gap-1 text-yellow-400">
-                  {[...Array(5)].map((_, i) => (
-                    <FaStar key={i} size={12} />
-                  ))}
-                </div>
-                <p className="text-xs text-gray-500 font-semibold">
-                  Our Happy Customers
-                </p>
-                <p className="text-xs text-gray-400">4.8 · 1514 reviews</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      <FeedBackSection />
 
       {/* ── FOOTER ── */}
       <footer className="bg-[#1a3c2e] text-white">
