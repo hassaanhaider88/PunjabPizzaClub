@@ -25,9 +25,8 @@ const FeedBackSection = () => {
                   <button
                     key={i}
                     onClick={() => setFeedbackRating(i)}
-                    className={`text-3xl transition-transform hover:scale-125 ${
-                      feedbackRating === i ? "scale-125" : ""
-                    }`}
+                    className={`text-3xl transition-transform hover:scale-125 ${feedbackRating === i ? "scale-125" : ""
+                      }`}
                   >
                     {emoji}
                   </button>
@@ -70,7 +69,7 @@ const FeedBackSection = () => {
                 Our Happy Customers
               </p>
               <p className="text-xs flex gap-2 font-semibold items-center text-gray-700 mt-2">
-                <FaStar /> 4.8 · (114 reviews)
+                <FaStar color="yellow" /> 4.8 · (114 reviews)
               </p>
             </div>
           </div>

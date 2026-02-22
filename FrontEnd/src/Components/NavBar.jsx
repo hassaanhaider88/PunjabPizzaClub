@@ -1,24 +1,28 @@
 import { AiOutlineTikTok } from "react-icons/ai";
 import { FaFacebook } from "react-icons/fa";
 
-import { useState } from "react";
+import {  useState } from "react";
 import { CiLocationOn } from "react-icons/ci";
 import {
   FaBars,
   FaClock,
   FaGlobe,
-  FaShoppingCart,
   FaTimes,
   FaUser,
 } from "react-icons/fa";
 import { IoMdArrowDropup } from "react-icons/io";
 import { MdWhatsapp } from "react-icons/md";
 
+import { } from "../Store/cartSlice"
+
 import { Link, useLocation } from "react-router-dom";
 import CartDiv from "./CartDiv";
 import { FiShoppingCart } from "react-icons/fi";
+import { useSelector } from "react-redux";
 
 const NavBar = () => {
+  const { cartItems } = useSelector((state) => state.cart);
+  console.log(cartItems)
   const Location = useLocation();
   const NAV_LINKS = [
     {
@@ -49,7 +53,9 @@ const NavBar = () => {
   // eslint-disable-next-line no-unused-vars
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [IsCartOpen, setIsCartOpen] = useState(false);
-  const [cartCount] = useState(10);
+
+
+  const cartCount = cartItems.length;
   const [IsMobileNumberHover, setIsMobileNumberHover] = useState(false);
 
   const handleUserMouseEnterInPhone = () => {
@@ -79,9 +85,8 @@ const NavBar = () => {
               <MdWhatsapp className="text-[#c84b11] text-xl" />
               +92 347-2641138
               <IoMdArrowDropup
-                className={`text-lg transition-transform duration-300 ${
-                  IsMobileNumberHover ? "rotate-0" : "rotate-180"
-                }`}
+                className={`text-lg transition-transform duration-300 ${IsMobileNumberHover ? "rotate-0" : "rotate-180"
+                  }`}
               />
             </span>
 
