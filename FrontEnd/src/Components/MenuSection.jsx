@@ -37,7 +37,7 @@ const MenuSection = () => {
       </h2>
 
       {/* Category tabs */}
-      <div className="flex  md:rounded-tl-full rounded-lg md:rounded-bl-full justify-evenly items-center w-full bg-[#EFD0AB] flex-wrap mb-4">
+      <div className="flex  md:rounded-tl-full rounded-lg md:rounded-bl-full md:rounded-tr-full  md:rounded-br-full justify-evenly items-center w-full bg-[#EFD0AB] flex-wrap mb-4">
         {MENU_CATS.map((cat, idx) => (
           <button
             key={cat}

@@ -1,7 +1,7 @@
 import { AiOutlineTikTok } from "react-icons/ai";
 import { FaFacebook } from "react-icons/fa";
 
-import {  useState } from "react";
+import { useState } from "react";
 import { CiLocationOn } from "react-icons/ci";
 import {
   FaBars,
@@ -163,7 +163,7 @@ const NavBar = () => {
               <li key={idx}>
                 <Link
                   to={link.redirectUrl}
-                  className={`hover:text-[#c84b11] transition-colors ${link.label === "Home" ? "BrandTextColor border-b-2 border-[#c84b11] pb-0.5" : "text-gray-600"}`}
+                  className={`hover:text-[#c84b11] transition-colors ${Location.pathname == link.redirectUrl ? "BrandTextColor border-b-2 border-[#c84b11] pb-0.5" : "text-gray-600"}`}
                 >
                   {link.label}
                 </Link>
@@ -203,7 +203,8 @@ const NavBar = () => {
                 <li key={idx + 2}>
                   <Link
                     to={link.redirectUrl}
-                    className="block text-gray-700 hover:text-[#c84b11] font-medium"
+                    className={`hover:text-[#c84b11] transition-colors ${Location.pathname == link.redirectUrl ? "BrandTextColor border-b-2 border-[#c84b11] pb-0.5" : "text-gray-600"}`}
+
                   >
                     {link.label}
                   </Link>
