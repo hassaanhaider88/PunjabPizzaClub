@@ -50,7 +50,7 @@ const NavBar = () => {
       redirectUrl: "/contacts",
     },
   ];
-  // eslint-disable-next-line no-unused-vars
+
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [IsCartOpen, setIsCartOpen] = useState(false);
 
@@ -151,7 +151,7 @@ const NavBar = () => {
           {/* Logo */}
           <div className="flex items-center gap-2">
             <img
-              className="w-22 h-13 bg-cover"
+              className="w-15 h-15 bg-cover"
               src="./PPCLogo.png"
               alt="Punjab Pizza Club Lalian logo"
             />
