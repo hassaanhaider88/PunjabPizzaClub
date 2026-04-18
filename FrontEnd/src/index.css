@@ -12,6 +12,14 @@ body {
   user-select: none;
 }
 
+.BrandColor {
+  color: #FF4757
+}
+
+.BrandBG{
+  background: #FF4757;
+}
+
 button {
   cursor: pointer;
 }

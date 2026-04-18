@@ -1,4 +1,4 @@
-import { RxCross1 } from "react-icons/rx"; 
+import { RxCross1 } from "react-icons/rx";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import { AiOutlineSearch } from "react-icons/ai";
@@ -42,7 +42,7 @@ const NavBar = () => {
         </div>
       </div>
       <div onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} className="MobileMenuIcon md:hidden flex items-center">
-        {isMobileMenuOpen ? <RxCross1  size={32} /> : <RxHamburgerMenu size={32} />}
+        {isMobileMenuOpen ? <RxCross1 size={32} /> : <RxHamburgerMenu size={32} />}
       </div>
 
       {/* mobile menu */}
