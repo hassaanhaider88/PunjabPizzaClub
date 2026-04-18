@@ -1,86 +1,78 @@
-import { MdOutlineKeyboardArrowDown } from "react-icons/md";
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
-const Navbar = () => {
-  const [menuOpen, setMenuOpen] = useState(false);
+import { RxCross1 } from "react-icons/rx"; 
+import { RxHamburgerMenu } from "react-icons/rx";
+import { AiOutlineShoppingCart } from "react-icons/ai";
+import { AiOutlineSearch } from "react-icons/ai";
+import { FaLuggageCart } from "react-icons/fa";
+import React, { useState } from 'react'
+import Logo from "../assets/PPCLLogo.png"
+import { Link } from "react-router-dom"
+
+const NavBar = () => {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
 
   return (
-    <>
-      <nav className="bg-white px-6 md:px-16 lg:px-24 xl:px-32 py-4 flex items-center justify-between relative">
-        <div className="flex items-center gap-20">
-          <Link to={"/"}>
-            <img
-              src="./src/assets/NavBarIcon.png"
-              alt="Punjab Pizza Logo"
-              className="object-coverh-20 w-20"
-            />
-          </Link>
-          <div className="hidden md:flex items-center gap-8">
-            <Link
-              to={"/menu"}
-              className="flex items-center gap-1.5 text-sm text-zinc-800 cursor-pointer bg-transparent border-0 py-2"
-            >
-              Our Menu
-            </Link>
-            <Link
-              to={"/"}
-              className="flex items-center gap-1.5 text-sm text-zinc-800 cursor-pointer bg-transparent border-0 py-2"
-            >
-              Our Menu
-            </Link>
-            <Link
-              to={"/menu"}
-              className="flex items-center gap-1.5 text-sm text-zinc-800 cursor-pointer bg-transparent border-0 py-2"
-            >
-              Our Menu
-            </Link>
-            <Link
-              to={"/menu"}
-              className="flex items-center gap-1.5 text-sm text-zinc-800 cursor-pointer bg-transparent border-0 py-2"
-            >
-              Our Menu
-            </Link>
+    <div className='justify-between flex items-center  px-10'>
+      <div className="LogoContainer flex justify-center items-center w-[20%] md:w-[10%]">
+        <img src={Logo} alt="Punjab Pizza CClub Logo" className='w-30 bg-cover' />
+      </div>
+      <div className="NavLinksContainer md:flex hidden ThreeDivs gap-3 justify-evenly items-center w-[80%] md:w-[90%]">
+        <div className='flex gap-5 text-lg font-medium'>
+          <Link to="/">Home</Link>
+          <Link to="/menu">Menu</Link>
+          <Link to="/about">About</Link>
+          <Link to="/contact">Contact</Link>
+        </div>
+        <div className='HereCartIconAndSearchbar xl:flex hidden items-center gap-5 '>
+          <div className="relative">
+            <AiOutlineShoppingCart size={34} />
+            <span className="absolute -top-2 flexCenter -right-2 bg-red-400 rounded-full h-6 w-6">1</span>
+          </div>
+          <div className="flexCenter gap-3 bg-[#1a1a1a] rounded-full px-3 py-2">
+            <AiOutlineSearch />
+            <input type="text" placeholder="Search Your Pizza/Burgers..." className="outline-none bg-transparent w-60" />
           </div>
         </div>
+        <div className='HereLoginAndSignup flex  gap-2 justify-center items-center'>
+          <button className="px-6 py-2 border-2 border-[#FF4757]  rounded-full bg-[#FF4757] hover:text-[#FF4757] hover:bg-transparent  transition-all duration-300">
+            Sign Up
+          </button>
+          <button className="px-6 py-2 border-2 border-[#FF4757] text-[#FF4757] rounded-full hover:bg-[#FF4757] hover:text-white transition-colors duration-300">
+            Log In
+          </button>
+        </div>
+      </div>
+      <div onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} className="MobileMenuIcon md:hidden flex items-center">
+        {isMobileMenuOpen ? <RxCross1  size={32} /> : <RxHamburgerMenu size={32} />}
+      </div>
 
-        <button className="hidden md:flex items-center gap-2.5 bg-linear-to-r from-zinc-950 to-zinc-500 text-zinc-50 hover:text-zinc-200 text-sm font-medium pl-5 pr-2 py-2 rounded-full cursor-pointer border-0">
-          Get this template
-          <span className="size-7 rounded-full bg-white flex items-center justify-center">
-            <svg
-              width="12"
-              height="10"
-              viewBox="0 0 12 10"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M.6 4.602h10m-4-4 4 4-4 4"
-                stroke="#3f3f47"
-                strokeWidth="1.2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-          </span>
-        </button>
+      {/* mobile menu */}
+      {
+        isMobileMenuOpen && (
+          <div className="MobileMenu md:hidden absolute top-30 left-0 w-full bg-[#1a1a1a] text-white flex flex-col items-center gap-4 py-4">
+            <Link to="/" className="text-lg font-medium">Home</Link>
+            <Link to="/menu" className="text-lg font-medium">Menu</Link>
+            <Link to="/about" className="text-lg font-medium">About</Link>
+            <Link to="/contact" className="text-lg font-medium">Contact</Link>
+            <div className="flex items-center gap-5 mt-4">
+              <div className="relative">
+                <AiOutlineShoppingCart size={34} />
+                <span className="absolute -top-2 flexCenter -right-2 bg-red-400 rounded-full h-6 w-6">1</span>
+              </div>
+            </div>
+            <div className='HereLoginAndSignup flex  gap-2 justify-center items-center'>
+              <button className="px-6 py-2 border-2 border-[#FF4757]  rounded-full bg-[#FF4757] hover:text-[#FF4757] hover:bg-transparent  transition-all duration-300">
+                Sign Up
+              </button>
+              <button className="px-6 py-2 border-2 border-[#FF4757] text-[#FF4757] rounded-full hover:bg-[#FF4757] hover:text-white transition-colors duration-300">
+                Log In
+              </button>
+            </div>
+          </div>
+        )
+      }
 
-        <button
-          onClick={() => setMenuOpen(!menuOpen)}
-          className="md:hidden flex flex-col gap-1.5 cursor-pointer bg-transparent border-0 p-1"
-        >
-          <span
-            className={`block w-6 h-0.5 bg-zinc-800 transition-transform ${menuOpen ? "rotate-45 translate-y-2" : ""}`}
-          ></span>
-          <span
-            className={`block w-6 h-0.5 bg-zinc-800 transition-opacity ${menuOpen ? "opacity-0" : ""}`}
-          ></span>
-          <span
-            className={`block w-6 h-0.5 bg-zinc-800 transition-transform ${menuOpen ? "-rotate-45 -translate-y-2" : ""}`}
-          ></span>
-        </button>
-      </nav>
-    </>
-  );
-};
+    </div>
+  )
+}
 
-export default Navbar;
+export default NavBar
