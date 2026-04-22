@@ -6,7 +6,11 @@ import PizzaSice from "../assets/PizzaSlice.jpeg";
 import LalianMap from "../assets/LalianMap.png";
 import SinglePizzaCard from "../components/SinglePizzaCard";
 import PizzaData from "../dummy/PizzaData.json";
+import DealData from "../dummy/DealsData.json";
 import SpecialDealCard from "../components/SpecialDealCard";
+import Ready from "../assets/Ready.svg";
+import Ride from "../assets/Ride.svg";
+import Serve from "../assets/Serve.svg";
 
 const Home = () => {
   const [activeMenu, setActiveMenu] = useState("Pizza");
@@ -19,7 +23,7 @@ const Home = () => {
   ];
 
   const [allMenuData] = useState(PizzaData);
-  const [specialDeals] = useState([1, 23, 3, 44, 5, 5, 5, 5, 555, 5, 53]);
+  const [specialDeals] = useState(DealData);
 
   return (
     <div className="w-full">
@@ -151,10 +155,53 @@ const Home = () => {
       {/* Special Offers Goes Here */}
       <div className="w-full py-12 px-5 md:px-10 mt-5">
         <h1 className="text-3xl">Special Offers</h1>
-        <div className="SpecialOffersContainer w-full h-[50vh] mt-5 rounded-[30px] bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10 border-2 border-[#484848] flex items-center justify-center">
+        <div className="SpecialOffersContainer w-full gap-10 mt-5 rounded-[30px] bg-clip-padding backdrop-filter flex-wrap backdrop-blur-sm bg-opacity-10 border-2 border-[#484848] flex items-center justify-center">
           {specialDeals.map((deal, idx) => (
             <SpecialDealCard deal={deal} key={idx} />
           ))}
+        </div>
+      </div>
+
+      {/* Services  */}
+      <div className="w-full py-12 px-5 md:px-10 mt-5 flex flex-col items-center justify-center">
+        <h1 className="text-6xl text-center tracking-[0.2em] font-bold text-white">
+          How we serve you and <br />{" "}
+          <span className="text-red-500">deliver</span> your favorite{" "}
+          <span className="text-yellow-400">food</span>
+        </h1>
+
+        <p className="text-4xl mt-3 font-extralight text-center">
+          Fresh, garma garam food at your doorstep <br />
+          fast, reliable, and always on time
+        </p>
+
+        <div className="IconsAndText w-full flex items-center justify-evenly mt-20 md:flex-row flex-col gap-10">
+          <div className="Ready flex-col gap-4 flex items-center justify-center">
+            <img src={Ready} alt="Ready" width="200" height="200" />
+            <h1 className="text-lg font-semibold">Freshly Prepared</h1>
+            <p className="text-md text-center">
+              Your order is made fresh, full taste <br />
+              proper desi flavor, no compromise
+            </p>
+          </div>
+
+          <div className="Ride flex-col gap-4 flex items-center justify-center">
+            <img src={Ride} alt="Ride" width="400" height="400" />
+            <h1 className="text-lg font-semibold">Fast Delivery</h1>
+            <p className="text-md text-center">
+              Rider on the way quickly, no late scene <br />
+              food reaches you hot and fresh
+            </p>
+          </div>
+
+          <div className="Serve flex-col gap-4 flex items-center justify-center">
+            <img src={Serve} alt="Serve" width="400" height="400" />
+            <h1 className="text-lg font-semibold">Ready to Enjoy</h1>
+            <p className="text-md text-center">
+              Open, eat, and enjoy with family <br />
+              full taste, full satisfaction guaranteed
+            </p>
+          </div>
         </div>
       </div>
     </div>

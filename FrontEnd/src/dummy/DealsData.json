@@ -2,71 +2,71 @@
   {
     "id": "Deal One",
     "title": "Buy One Get One Free",
-    "description": "Order any large pizza and get another one absolutely free! Perfect for sharing with friends and family.",
-    "image": "https://example.com/images/bogo-pizza.jpg",
+    "description": "Order any large pizza and get another one free.",
+    "image": "https://images.unsplash.com/photo-1601924638867-3ec3b3f9b1d9",
     "price": "1200"
   },
   {
     "id": "Deal Two",
     "title": "Family Feast",
-    "description": "Get 2 large pizzas, 1 garlic bread, and 1.5L drink at a discounted price.",
-    "image": "https://example.com/images/family-feast.jpg",
+    "description": "2 large pizzas, 1 garlic bread, and 1.5L drink.",
+    "image": "https://images.unsplash.com/photo-1594007654729-407eedc4be65",
     "price": "2200"
   },
   {
     "id": "Deal Three",
-    "title": "Weekend Special",
-    "description": "Enjoy 25% off on all medium pizzas every weekend.",
-    "image": "https://example.com/images/weekend-special.jpg",
-    "price": "900"
-  },
-  {
-    "id": "Deal Four",
-    "title": "Cheese Lovers Combo",
-    "description": "Double cheese pizza with extra toppings and a free dip.",
-    "image": "https://example.com/images/cheese-lovers.jpg",
-    "price": "1400"
-  },
-  {
-    "id": "Deal Five",
-    "title": "Student Deal",
-    "description": "Special discount for students on any regular pizza with valid ID.",
-    "image": "https://example.com/images/student-deal.jpg",
+    "title": "Student Special",
+    "description": "Medium pizza with drink at discounted price.",
+    "image": "https://images.unsplash.com/photo-1548365328-9f547fb0953c",
     "price": "800"
   },
   {
-    "id": "Deal Six",
-    "title": "Midnight Madness",
-    "description": "Flat 30% off on all orders placed after 11 PM.",
-    "image": "https://example.com/images/midnight-deal.jpg",
-    "price": "1000"
-  },
-  {
-    "id": "Deal Seven",
-    "title": "Double Trouble",
-    "description": "Buy 2 medium pizzas and get a free drink.",
-    "image": "https://example.com/images/double-trouble.jpg",
+    "id": "Deal Four",
+    "title": "Weekend Combo",
+    "description": "Any 2 medium pizzas with free dip.",
+    "image": "https://images.unsplash.com/photo-1513104890138-7c749659a591",
     "price": "1500"
   },
   {
+    "id": "Deal Five",
+    "title": "Cheese Lovers Deal",
+    "description": "Extra cheese large pizza with free topping.",
+    "image": "https://images.unsplash.com/photo-1604382355076-af4b0eb60143",
+    "price": "1300"
+  },
+  {
+    "id": "Deal Six",
+    "title": "Spicy Treat",
+    "description": "2 spicy pizzas with chili flakes and dip.",
+    "image": "https://images.unsplash.com/photo-1628840042765-356cda07504e",
+    "price": "1400"
+  },
+  {
+    "id": "Deal Seven",
+    "title": "Mini Party Box",
+    "description": "3 small pizzas with drinks.",
+    "image": "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38",
+    "price": "1100"
+  },
+  {
     "id": "Deal Eight",
-    "title": "Veggie Delight Combo",
-    "description": "2 veggie pizzas with garlic bread and a drink.",
-    "image": "https://example.com/images/veggie-delight.jpg",
-    "price": "1800"
+    "title": "Lunch Deal",
+    "description": "Personal pizza with drink and fries.",
+    "image": "https://images.unsplash.com/photo-1550547660-d9450f859349",
+    "price": "600"
   },
   {
     "id": "Deal Nine",
-    "title": "Meat Lovers Special",
-    "description": "Loaded meat pizza with extra toppings at a special price.",
-    "image": "https://example.com/images/meat-lovers.jpg",
-    "price": "1600"
+    "title": "Meat Lovers Combo",
+    "description": "Large meat pizza with wings.",
+    "image": "https://images.unsplash.com/photo-1600891964599-f61ba0e24092",
+    "price": "1800"
   },
   {
     "id": "Deal Ten",
-    "title": "Party Pack",
-    "description": "4 large pizzas with 2 drinks and sides for group parties.",
-    "image": "https://example.com/images/party-pack.jpg",
-    "price": "3500"
+    "title": "Ultimate Deal",
+    "description": "3 large pizzas, sides, and drinks bundle.",
+    "image": "https://images.unsplash.com/photo-1590947132387-155cc02f3212",
+    "price": "3000"
   }
 ]
