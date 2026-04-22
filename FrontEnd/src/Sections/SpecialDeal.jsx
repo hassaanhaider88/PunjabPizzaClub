@@ -7,7 +7,7 @@ const SpecialDeal = () => {
   return (
     <div className="w-full py-12 px-5 md:px-10 mt-5">
       <h1 className="text-3xl">Special Offers</h1>
-      <div className="SpecialOffersContainer w-full gap-10 mt-5 rounded-[30px] bg-clip-padding backdrop-filter flex-wrap backdrop-blur-sm bg-opacity-10 border-2 border-[#484848] flex items-center justify-center">
+      <div className="SpecialOffersContainer w-full grid md:grid-cols-3 xl:grid-cols-4 sm:grid-cols-2 grid-cols-1">
         {specialDeals.map((deal, idx) => (
           <SpecialDealCard deal={deal} key={idx} />
         ))}
