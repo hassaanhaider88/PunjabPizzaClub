@@ -3,7 +3,7 @@ import MenuSection from "../Sections/MenuSection";
 import SpecialDeal from "../Sections/SpecialDeal";
 import Services from "../Sections/Services";
 import ReviewSection from "../Sections/ReviewSection";
-import OurCheifs from "../Sections/OurCheifs";
+import OurChefs from "../Sections/OurChefs";
 
 const Home = () => {
   return (
@@ -19,7 +19,7 @@ const Home = () => {
       <ReviewSection />
       {/* Reviews */}
       {/* our chiefs */}
-      <OurCheifs />
+      <OurChefs />
     </>
   );
 };
