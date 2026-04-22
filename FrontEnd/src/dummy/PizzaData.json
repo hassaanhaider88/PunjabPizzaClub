@@ -1,0 +1,1089 @@
+[
+  {
+    "_id": "PPCL_001",
+    "name": "Mali Boti Pizza",
+    "desc": "Loaded with Mali Boti Chicken, White Sauce, Bell Pepper, and Olives for a rich, savory bite.",
+    "category": "Pizza",
+    "url": "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=400",
+    "prices": [
+      {
+        "size": "Small",
+        "originalPrice": 350,
+        "offerPrice": 300
+      },
+      {
+        "size": "Medium",
+        "originalPrice": 550,
+        "offerPrice": 500
+      },
+      {
+        "size": "Large",
+        "originalPrice": 750,
+        "offerPrice": 700
+      },
+      {
+        "size": "Xtra Large",
+        "originalPrice": 1000,
+        "offerPrice": 900
+      }
+    ]
+  },
+  {
+    "_id": "PPCL_002",
+    "name": "Kibab Pizza",
+    "desc": "Classic Kibab topped with White Sauce, Olives, Mushroom, and Bell Pepper on a crispy base.",
+    "category": "Pizza",
+    "url": "https://images.unsplash.com/photo-1574071318508-1cdbab80d002?w=400",
+    "prices": [
+      {
+        "size": "Small",
+        "originalPrice": 350,
+        "offerPrice": 300
+      },
+      {
+        "size": "Medium",
+        "originalPrice": 550,
+        "offerPrice": 500
+      },
+      {
+        "size": "Large",
+        "originalPrice": 750,
+        "offerPrice": 700
+      },
+      {
+        "size": "Xtra Large",
+        "originalPrice": 1000,
+        "offerPrice": 900
+      }
+    ]
+  },
+  {
+    "_id": "PPCL_003",
+    "name": "Chicken Supreme",
+    "desc": "Spicy Chicken with Onion, Tomato, Bell Pepper, Olives, and Sweet Corns \u2014 truly supreme.",
+    "category": "Pizza",
+    "url": "https://images.unsplash.com/photo-1513104890138-7c749659a591?w=400",
+    "prices": [
+      {
+        "size": "Small",
+        "originalPrice": 350,
+        "offerPrice": 300
+      },
+      {
+        "size": "Medium",
+        "originalPrice": 550,
+        "offerPrice": 500
+      },
+      {
+        "size": "Large",
+        "originalPrice": 750,
+        "offerPrice": 700
+      },
+      {
+        "size": "Xtra Large",
+        "originalPrice": 1000,
+        "offerPrice": 900
+      }
+    ]
+  },
+  {
+    "_id": "PPCL_004",
+    "name": "Chicken Tikka B.B.Q",
+    "desc": "Juicy Chicken Boti with smoky BBQ flavour, Tomato, Onion, and Bell Pepper.",
+    "category": "Pizza",
+    "url": "https://images.unsplash.com/photo-1571997478779-2adcbbe9ab2f?w=400",
+    "prices": [
+      {
+        "size": "Small",
+        "originalPrice": 350,
+        "offerPrice": 300
+      },
+      {
+        "size": "Medium",
+        "originalPrice": 550,
+        "offerPrice": 500
+      },
+      {
+        "size": "Large",
+        "originalPrice": 750,
+        "offerPrice": 700
+      },
+      {
+        "size": "Xtra Large",
+        "originalPrice": 1000,
+        "offerPrice": 900
+      }
+    ]
+  },
+  {
+    "_id": "PPCL_005",
+    "name": "Fajita Chicken",
+    "desc": "Tender Chicken with Onion, Bell Pepper, Olives, and Sweet Corns in a Mexican-inspired style.",
+    "category": "Pizza",
+    "url": "https://images.unsplash.com/photo-1588315029754-2dd089d39a1a?w=400",
+    "prices": [
+      {
+        "size": "Small",
+        "originalPrice": 350,
+        "offerPrice": 300
+      },
+      {
+        "size": "Medium",
+        "originalPrice": 550,
+        "offerPrice": 500
+      },
+      {
+        "size": "Large",
+        "originalPrice": 750,
+        "offerPrice": 700
+      },
+      {
+        "size": "Xtra Large",
+        "originalPrice": 1000,
+        "offerPrice": 900
+      }
+    ]
+  },
+  {
+    "_id": "PPCL_006",
+    "name": "Achari Pizza",
+    "desc": "Bold and tangy Spicy Chicken with Onion, Tomato, Mushroom, and Olives with an Achari masala twist.",
+    "category": "Pizza",
+    "url": "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=400",
+    "prices": [
+      {
+        "size": "Small",
+        "originalPrice": 350,
+        "offerPrice": 300
+      },
+      {
+        "size": "Medium",
+        "originalPrice": 550,
+        "offerPrice": 500
+      },
+      {
+        "size": "Large",
+        "originalPrice": 750,
+        "offerPrice": 700
+      },
+      {
+        "size": "Xtra Large",
+        "originalPrice": 1000,
+        "offerPrice": 900
+      }
+    ]
+  },
+  {
+    "_id": "PPCL_007",
+    "name": "Hot Spicy Pizza",
+    "desc": "Fiery Spicy Chicken with Onion, Tomato, and Mix Peppers \u2014 for those who love the heat.",
+    "category": "Pizza",
+    "url": "https://images.unsplash.com/photo-1574071318508-1cdbab80d002?w=400",
+    "prices": [
+      {
+        "size": "Small",
+        "originalPrice": 350,
+        "offerPrice": 300
+      },
+      {
+        "size": "Medium",
+        "originalPrice": 550,
+        "offerPrice": 500
+      },
+      {
+        "size": "Large",
+        "originalPrice": 750,
+        "offerPrice": 700
+      },
+      {
+        "size": "Xtra Large",
+        "originalPrice": 1000,
+        "offerPrice": 900
+      }
+    ]
+  },
+  {
+    "_id": "PPCL_008",
+    "name": "Pizza Osago",
+    "desc": "A classic combination of Chicken, Onion, Tomato, Mushroom, and Olives.",
+    "category": "Pizza",
+    "prices": [
+      {
+        "size": "Small",
+        "originalPrice": 350,
+        "offerPrice": 300
+      },
+      {
+        "size": "Medium",
+        "originalPrice": 550,
+        "offerPrice": 500
+      },
+      {
+        "size": "Large",
+        "originalPrice": 750,
+        "offerPrice": 700
+      },
+      {
+        "size": "Xtra Large",
+        "originalPrice": 1000,
+        "offerPrice": 900
+      }
+    ]
+  },
+  {
+    "_id": "PPCL_009",
+    "name": "Pizza Milano",
+    "desc": "Chicken Special with house Sauce, Bell Pepper, and Mushroom \u2014 Italian inspired.",
+    "category": "Pizza",
+    "prices": [
+      {
+        "size": "Small",
+        "originalPrice": 350,
+        "offerPrice": 300
+      },
+      {
+        "size": "Medium",
+        "originalPrice": 550,
+        "offerPrice": 500
+      },
+      {
+        "size": "Large",
+        "originalPrice": 750,
+        "offerPrice": 700
+      },
+      {
+        "size": "Xtra Large",
+        "originalPrice": 1000,
+        "offerPrice": 900
+      }
+    ]
+  },
+  {
+    "_id": "PPCL_010",
+    "name": "Pizza Euro",
+    "desc": "Chicken with rich Tomato Sauce, Onion, and Bell Pepper for a European-style pizza experience.",
+    "category": "Pizza",
+    "prices": [
+      {
+        "size": "Small",
+        "originalPrice": 350,
+        "offerPrice": 300
+      },
+      {
+        "size": "Medium",
+        "originalPrice": 550,
+        "offerPrice": 500
+      },
+      {
+        "size": "Large",
+        "originalPrice": 750,
+        "offerPrice": 700
+      },
+      {
+        "size": "Xtra Large",
+        "originalPrice": 1000,
+        "offerPrice": 900
+      }
+    ]
+  },
+  {
+    "_id": "PPCL_011",
+    "name": "Vegetable Pizza",
+    "desc": "A fresh mix of Chicken, Tomato Sauce, Onion, and Mushroom \u2014 light and delicious.",
+    "category": "Pizza",
+    "prices": [
+      {
+        "size": "Small",
+        "originalPrice": 350,
+        "offerPrice": 300
+      },
+      {
+        "size": "Medium",
+        "originalPrice": 550,
+        "offerPrice": 500
+      },
+      {
+        "size": "Large",
+        "originalPrice": 750,
+        "offerPrice": 700
+      },
+      {
+        "size": "Xtra Large",
+        "originalPrice": 1000,
+        "offerPrice": 900
+      }
+    ]
+  },
+  {
+    "_id": "PPCL_012",
+    "name": "Cheese Lover Pizza",
+    "desc": "Double cheese overload with Spicy Sauce, Olives, and Mushroom \u2014 a dream for cheese fans.",
+    "category": "Pizza",
+    "prices": [
+      {
+        "size": "Small",
+        "originalPrice": 350,
+        "offerPrice": 300
+      },
+      {
+        "size": "Medium",
+        "originalPrice": 550,
+        "offerPrice": 500
+      },
+      {
+        "size": "Large",
+        "originalPrice": 750,
+        "offerPrice": 700
+      },
+      {
+        "size": "Xtra Large",
+        "originalPrice": 1000,
+        "offerPrice": 900
+      }
+    ]
+  },
+  {
+    "_id": "PPCL_013",
+    "name": "BBQ Chicken Pizza",
+    "desc": "Smoky BBQ marinated chicken with caramelised onions and a drizzle of BBQ sauce.",
+    "category": "Pizza",
+    "prices": [
+      {
+        "size": "Small",
+        "originalPrice": 350,
+        "offerPrice": 300
+      },
+      {
+        "size": "Medium",
+        "originalPrice": 550,
+        "offerPrice": 500
+      },
+      {
+        "size": "Large",
+        "originalPrice": 750,
+        "offerPrice": 700
+      },
+      {
+        "size": "Xtra Large",
+        "originalPrice": 1000,
+        "offerPrice": 900
+      }
+    ]
+  },
+  {
+    "_id": "PPCL_014",
+    "name": "Double Cheese Pizza",
+    "desc": "Extra mozzarella and cheddar cheese on a rich white sauce base with Bell Pepper.",
+    "category": "Pizza",
+    "prices": [
+      {
+        "size": "Small",
+        "originalPrice": 400,
+        "offerPrice": 350
+      },
+      {
+        "size": "Medium",
+        "originalPrice": 600,
+        "offerPrice": 550
+      },
+      {
+        "size": "Large",
+        "originalPrice": 800,
+        "offerPrice": 750
+      },
+      {
+        "size": "Xtra Large",
+        "originalPrice": 1100,
+        "offerPrice": 1000
+      }
+    ]
+  },
+  {
+    "_id": "PPCL_015",
+    "name": "Chicken Mushroom Pizza",
+    "desc": "Loaded with grilled chicken pieces and sauteed mushrooms on a creamy white sauce.",
+    "category": "Pizza",
+    "prices": [
+      {
+        "size": "Small",
+        "originalPrice": 350,
+        "offerPrice": 300
+      },
+      {
+        "size": "Medium",
+        "originalPrice": 550,
+        "offerPrice": 500
+      },
+      {
+        "size": "Large",
+        "originalPrice": 750,
+        "offerPrice": 700
+      },
+      {
+        "size": "Xtra Large",
+        "originalPrice": 1000,
+        "offerPrice": 900
+      }
+    ]
+  },
+  {
+    "_id": "PPCL_016",
+    "name": "Garlic Chicken Pizza",
+    "desc": "Aromatic garlic butter base with tender chicken, Olives, and melted Mozzarella.",
+    "category": "Pizza",
+    "prices": [
+      {
+        "size": "Small",
+        "originalPrice": 350,
+        "offerPrice": 300
+      },
+      {
+        "size": "Medium",
+        "originalPrice": 550,
+        "offerPrice": 500
+      },
+      {
+        "size": "Large",
+        "originalPrice": 750,
+        "offerPrice": 700
+      },
+      {
+        "size": "Xtra Large",
+        "originalPrice": 1000,
+        "offerPrice": 900
+      }
+    ]
+  },
+  {
+    "_id": "PPCL_017",
+    "name": "Corn & Capsicum Pizza",
+    "desc": "Sweet corn and colourful capsicum on a tangy tomato base with stretch cheese.",
+    "category": "Pizza",
+    "prices": [
+      {
+        "size": "Small",
+        "originalPrice": 350,
+        "offerPrice": 300
+      },
+      {
+        "size": "Medium",
+        "originalPrice": 550,
+        "offerPrice": 500
+      },
+      {
+        "size": "Large",
+        "originalPrice": 750,
+        "offerPrice": 700
+      },
+      {
+        "size": "Xtra Large",
+        "originalPrice": 1000,
+        "offerPrice": 900
+      }
+    ]
+  },
+  {
+    "_id": "PPCL_018",
+    "name": "Spicy Beef Pizza",
+    "desc": "Seasoned spicy beef mince with Onion, Tomato, and Bell Pepper for a meaty feast.",
+    "category": "Pizza",
+    "prices": [
+      {
+        "size": "Small",
+        "originalPrice": 400,
+        "offerPrice": 350
+      },
+      {
+        "size": "Medium",
+        "originalPrice": 600,
+        "offerPrice": 550
+      },
+      {
+        "size": "Large",
+        "originalPrice": 800,
+        "offerPrice": 750
+      },
+      {
+        "size": "Xtra Large",
+        "originalPrice": 1100,
+        "offerPrice": 1000
+      }
+    ]
+  },
+  {
+    "_id": "PPCL_019",
+    "name": "Chicken Tikka Pizza",
+    "desc": "Marinated tikka chicken chunks with Onion, Coriander, and Mozzarella \u2014 desi style.",
+    "category": "Pizza",
+    "prices": [
+      {
+        "size": "Small",
+        "originalPrice": 350,
+        "offerPrice": 300
+      },
+      {
+        "size": "Medium",
+        "originalPrice": 550,
+        "offerPrice": 500
+      },
+      {
+        "size": "Large",
+        "originalPrice": 750,
+        "offerPrice": 700
+      },
+      {
+        "size": "Xtra Large",
+        "originalPrice": 1000,
+        "offerPrice": 900
+      }
+    ]
+  },
+  {
+    "_id": "PPCL_020",
+    "name": "Classic Chicken Pizza",
+    "desc": "Simple, hearty grilled chicken on tomato sauce with Mozzarella and a sprinkle of oregano.",
+    "category": "Pizza",
+    "prices": [
+      {
+        "size": "Small",
+        "originalPrice": 350,
+        "offerPrice": 300
+      },
+      {
+        "size": "Medium",
+        "originalPrice": 550,
+        "offerPrice": 500
+      },
+      {
+        "size": "Large",
+        "originalPrice": 750,
+        "offerPrice": 700
+      },
+      {
+        "size": "Xtra Large",
+        "originalPrice": 1000,
+        "offerPrice": 900
+      }
+    ]
+  },
+  {
+    "_id": "PPCL_021",
+    "name": "Zinger Burger",
+    "desc": "Crispy fried spicy zinger chicken fillet in a soft bun with mayo and lettuce.",
+    "category": "Burger",
+    "prices": [
+      {
+        "size": null,
+        "originalPrice": 160,
+        "offerPrice": 140
+      }
+    ]
+  },
+  {
+    "_id": "PPCL_022",
+    "name": "Zinger Cheese Burger",
+    "desc": "Our classic Zinger Burger loaded with a melted cheese slice for extra indulgence.",
+    "category": "Burger",
+    "prices": [
+      {
+        "size": null,
+        "originalPrice": 180,
+        "offerPrice": 160
+      }
+    ]
+  },
+  {
+    "_id": "PPCL_023",
+    "name": "Chicken Petty Burger",
+    "desc": "Juicy chicken patty in a soft bun with fresh lettuce, tomato, and creamy mayo.",
+    "category": "Burger",
+    "prices": [
+      {
+        "size": null,
+        "originalPrice": 140,
+        "offerPrice": 120
+      }
+    ]
+  },
+  {
+    "_id": "PPCL_024",
+    "name": "Chicken Petty Cheese Burger",
+    "desc": "Tender chicken patty topped with melted cheese, lettuce, and tangy burger sauce.",
+    "category": "Burger",
+    "prices": [
+      {
+        "size": null,
+        "originalPrice": 160,
+        "offerPrice": 140
+      }
+    ]
+  },
+  {
+    "_id": "PPCL_025",
+    "name": "Double Zinger Burger",
+    "desc": "Two crispy zinger fillets stacked high with double cheese, sauce, and lettuce.",
+    "category": "Burger",
+    "prices": [
+      {
+        "size": null,
+        "originalPrice": 230,
+        "offerPrice": 200
+      }
+    ]
+  },
+  {
+    "_id": "PPCL_026",
+    "name": "Crispy Chicken Burger",
+    "desc": "Extra crunchy fried chicken fillet with coleslaw, pickles, and smoky burger sauce.",
+    "category": "Burger",
+    "prices": [
+      {
+        "size": null,
+        "originalPrice": 180,
+        "offerPrice": 160
+      }
+    ]
+  },
+  {
+    "_id": "PPCL_027",
+    "name": "Spicy Zinger Burger",
+    "desc": "Extra spicy zinger fillet with jalapenos, spicy mayo, and fresh lettuce in a toasted bun.",
+    "category": "Burger",
+    "prices": [
+      {
+        "size": null,
+        "originalPrice": 190,
+        "offerPrice": 160
+      }
+    ]
+  },
+  {
+    "_id": "PPCL_028",
+    "name": "BBQ Chicken Burger",
+    "desc": "Grilled chicken fillet glazed with BBQ sauce, crispy onion rings, and cheddar cheese.",
+    "category": "Burger",
+    "prices": [
+      {
+        "size": null,
+        "originalPrice": 200,
+        "offerPrice": 170
+      }
+    ]
+  },
+  {
+    "_id": "PPCL_029",
+    "name": "Mushroom Chicken Burger",
+    "desc": "Tender chicken patty topped with sauteed mushrooms, Swiss cheese, and garlic mayo.",
+    "category": "Burger",
+    "prices": [
+      {
+        "size": null,
+        "originalPrice": 210,
+        "offerPrice": 180
+      }
+    ]
+  },
+  {
+    "_id": "PPCL_030",
+    "name": "Loaded Cheese Burger",
+    "desc": "Triple cheese chicken burger loaded with sauce, lettuce, tomato, and crispy fried onions.",
+    "category": "Burger",
+    "prices": [
+      {
+        "size": null,
+        "originalPrice": 220,
+        "offerPrice": 190
+      }
+    ]
+  },
+  {
+    "_id": "PPCL_031",
+    "name": "Zinger Shawarma",
+    "desc": "Spicy zinger chicken strips wrapped in soft pita with garlic sauce and fresh veggies.",
+    "category": "Sharwaama",
+    "prices": [
+      {
+        "size": null,
+        "originalPrice": 140,
+        "offerPrice": 120
+      }
+    ]
+  },
+  {
+    "_id": "PPCL_032",
+    "name": "Zinger Cheese Shawarma",
+    "desc": "Zinger chicken shawarma with a generous layer of melted cheese and creamy garlic sauce.",
+    "category": "Sharwaama",
+    "prices": [
+      {
+        "size": null,
+        "originalPrice": 160,
+        "offerPrice": 140
+      }
+    ]
+  },
+  {
+    "_id": "PPCL_033",
+    "name": "Chicken Shawarma",
+    "desc": "Classic marinated chicken shawarma with pickled veggies, tahini, and garlic sauce in soft bread.",
+    "category": "Sharwaama",
+    "prices": [
+      {
+        "size": null,
+        "originalPrice": 100,
+        "offerPrice": 80
+      }
+    ]
+  },
+  {
+    "_id": "PPCL_034",
+    "name": "Chicken Cheese Shawarma",
+    "desc": "Classic chicken shawarma topped with melted cheese and wrapped in warm toasted pita bread.",
+    "category": "Sharwaama",
+    "prices": [
+      {
+        "size": null,
+        "originalPrice": 120,
+        "offerPrice": 100
+      }
+    ]
+  },
+  {
+    "_id": "PPCL_035",
+    "name": "Spicy Chicken Shawarma",
+    "desc": "Extra spicy marinated chicken with chilli sauce, fresh vegetables, and garlic mayo.",
+    "category": "Sharwaama",
+    "prices": [
+      {
+        "size": null,
+        "originalPrice": 140,
+        "offerPrice": 120
+      }
+    ]
+  },
+  {
+    "_id": "PPCL_036",
+    "name": "BBQ Shawarma",
+    "desc": "Smoky BBQ flavoured chicken strips with coleslaw and honey mustard sauce in pita.",
+    "category": "Sharwaama",
+    "prices": [
+      {
+        "size": null,
+        "originalPrice": 150,
+        "offerPrice": 130
+      }
+    ]
+  },
+  {
+    "_id": "PPCL_037",
+    "name": "Garlic Mayo Shawarma",
+    "desc": "Tender chicken strips with heavy garlic mayo, pickled cucumber, and fresh tomatoes.",
+    "category": "Sharwaama",
+    "prices": [
+      {
+        "size": null,
+        "originalPrice": 130,
+        "offerPrice": 110
+      }
+    ]
+  },
+  {
+    "_id": "PPCL_038",
+    "name": "Double Shawarma",
+    "desc": "Double portion of marinated chicken with double cheese and double garlic sauce \u2014 fully loaded.",
+    "category": "Sharwaama",
+    "prices": [
+      {
+        "size": null,
+        "originalPrice": 190,
+        "offerPrice": 160
+      }
+    ]
+  },
+  {
+    "_id": "PPCL_039",
+    "name": "Paratha Roll",
+    "desc": "Crispy paratha stuffed with spicy chicken filling, chutney, and fresh salad.",
+    "category": "Paratha Roll",
+    "prices": [
+      {
+        "size": null,
+        "originalPrice": 120,
+        "offerPrice": 100
+      }
+    ]
+  },
+  {
+    "_id": "PPCL_040",
+    "name": "Zinger Paratha Roll",
+    "desc": "Crispy zinger chicken fillet wrapped in a golden paratha with garlic mayo and vegetables.",
+    "category": "Paratha Roll",
+    "prices": [
+      {
+        "size": null,
+        "originalPrice": 140,
+        "offerPrice": 120
+      }
+    ]
+  },
+  {
+    "_id": "PPCL_041",
+    "name": "Zinger Cheese Paratha Roll",
+    "desc": "Zinger paratha roll with a layer of melted cheese, garlic sauce, and fresh lettuce.",
+    "category": "Paratha Roll",
+    "prices": [
+      {
+        "size": null,
+        "originalPrice": 160,
+        "offerPrice": 140
+      }
+    ]
+  },
+  {
+    "_id": "PPCL_042",
+    "name": "Chicken Tikka Paratha Roll",
+    "desc": "Juicy tikka chicken pieces in a fresh paratha with mint chutney and pickled onions.",
+    "category": "Paratha Roll",
+    "prices": [
+      {
+        "size": null,
+        "originalPrice": 160,
+        "offerPrice": 130
+      }
+    ]
+  },
+  {
+    "_id": "PPCL_043",
+    "name": "BBQ Paratha Roll",
+    "desc": "Smoky BBQ chicken strips in a crispy paratha with coleslaw and tangy BBQ sauce.",
+    "category": "Paratha Roll",
+    "prices": [
+      {
+        "size": null,
+        "originalPrice": 160,
+        "offerPrice": 140
+      }
+    ]
+  },
+  {
+    "_id": "PPCL_044",
+    "name": "Spicy Paratha Roll",
+    "desc": "Fiery spicy chicken filling in a golden paratha with red chilli sauce and onions.",
+    "category": "Paratha Roll",
+    "prices": [
+      {
+        "size": null,
+        "originalPrice": 140,
+        "offerPrice": 120
+      }
+    ]
+  },
+  {
+    "_id": "PPCL_045",
+    "name": "Double Zinger Paratha Roll",
+    "desc": "Double zinger fillets with double cheese in an extra-large crispy paratha roll.",
+    "category": "Paratha Roll",
+    "prices": [
+      {
+        "size": null,
+        "originalPrice": 200,
+        "offerPrice": 160
+      }
+    ]
+  },
+  {
+    "_id": "PPCL_046",
+    "name": "Egg Paratha Roll",
+    "desc": "Fluffy omelette and spiced chicken wrapped together in a hot crispy paratha.",
+    "category": "Paratha Roll",
+    "prices": [
+      {
+        "size": null,
+        "originalPrice": 120,
+        "offerPrice": 90
+      }
+    ]
+  },
+  {
+    "_id": "PPCL_047",
+    "name": "10 Hot Wings",
+    "desc": "10 pieces of crispy fried hot and spicy chicken wings seasoned with signature Punjab spice blend.",
+    "category": "Hot Wings",
+    "prices": [
+      {
+        "size": null,
+        "originalPrice": 320,
+        "offerPrice": 280
+      }
+    ]
+  },
+  {
+    "_id": "PPCL_048",
+    "name": "10 Nuggets",
+    "desc": "10 golden crispy chicken nuggets, perfectly seasoned and served with dipping sauce.",
+    "category": "Hot Wings",
+    "prices": [
+      {
+        "size": null,
+        "originalPrice": 290,
+        "offerPrice": 250
+      }
+    ]
+  },
+  {
+    "_id": "PPCL_049",
+    "name": "5 Hot Wings",
+    "desc": "Half portion of 5 crispy hot wings \u2014 great as a snack or add-on with any meal.",
+    "category": "Hot Wings",
+    "prices": [
+      {
+        "size": null,
+        "originalPrice": 180,
+        "offerPrice": 150
+      }
+    ]
+  },
+  {
+    "_id": "PPCL_050",
+    "name": "15 Hot Wings",
+    "desc": "Feast on 15 pieces of spicy crispy wings \u2014 perfect for sharing with friends.",
+    "category": "Hot Wings",
+    "prices": [
+      {
+        "size": null,
+        "originalPrice": 450,
+        "offerPrice": 400
+      }
+    ]
+  },
+  {
+    "_id": "PPCL_051",
+    "name": "20 Hot Wings",
+    "desc": "Party pack of 20 crispy hot wings with two dipping sauces included.",
+    "category": "Hot Wings",
+    "prices": [
+      {
+        "size": null,
+        "originalPrice": 570,
+        "offerPrice": 500
+      }
+    ]
+  },
+  {
+    "_id": "PPCL_052",
+    "name": "5 Nuggets",
+    "desc": "5 crispy golden nuggets \u2014 perfect as a side snack for any meal.",
+    "category": "Hot Wings",
+    "prices": [
+      {
+        "size": null,
+        "originalPrice": 160,
+        "offerPrice": 130
+      }
+    ]
+  },
+  {
+    "_id": "PPCL_053",
+    "name": "15 Nuggets",
+    "desc": "15 golden crispy nuggets, seasoned to perfection \u2014 great for groups.",
+    "category": "Hot Wings",
+    "prices": [
+      {
+        "size": null,
+        "originalPrice": 400,
+        "offerPrice": 350
+      }
+    ]
+  },
+  {
+    "_id": "PPCL_054",
+    "name": "20 Nuggets",
+    "desc": "20-piece nugget party pack with assorted dipping sauces \u2014 ideal for family gatherings.",
+    "category": "Hot Wings",
+    "prices": [
+      {
+        "size": null,
+        "originalPrice": 520,
+        "offerPrice": 450
+      }
+    ]
+  },
+  {
+    "_id": "PPCL_055",
+    "name": "BBQ Wings (10 pcs)",
+    "desc": "10 wings marinated in smoky BBQ sauce and glazed for a sticky, sweet-savoury finish.",
+    "category": "Hot Wings",
+    "prices": [
+      {
+        "size": null,
+        "originalPrice": 350,
+        "offerPrice": 300
+      }
+    ]
+  },
+  {
+    "_id": "PPCL_056",
+    "name": "Spicy Wings (10 pcs)",
+    "desc": "10 wings tossed in an extra-hot chilli spice coating with a cooling dip on the side.",
+    "category": "Hot Wings",
+    "prices": [
+      {
+        "size": null,
+        "originalPrice": 340,
+        "offerPrice": 290
+      }
+    ]
+  },
+  {
+    "_id": "PPCL_057",
+    "name": "Garlic Wings (10 pcs)",
+    "desc": "10 wings glazed in rich garlic butter sauce \u2014 crispy outside, tender inside.",
+    "category": "Hot Wings",
+    "prices": [
+      {
+        "size": null,
+        "originalPrice": 345,
+        "offerPrice": 295
+      }
+    ]
+  },
+  {
+    "_id": "PPCL_058",
+    "name": "Buffalo Wings (10 pcs)",
+    "desc": "10 wings coated in classic tangy buffalo sauce \u2014 a crowd favourite served with blue cheese dip.",
+    "category": "Hot Wings",
+    "prices": [
+      {
+        "size": null,
+        "originalPrice": 360,
+        "offerPrice": 310
+      }
+    ]
+  },
+  {
+    "_id": "PPCL_059",
+    "name": "Cheese Nuggets (10 pcs)",
+    "desc": "10 crispy nuggets stuffed with gooey melted cheese \u2014 a cheesy twist on a classic.",
+    "category": "Hot Wings",
+    "prices": [
+      {
+        "size": null,
+        "originalPrice": 320,
+        "offerPrice": 270
+      }
+    ]
+  },
+  {
+    "_id": "PPCL_060",
+    "name": "Spicy Nuggets (10 pcs)",
+    "desc": "10 extra-spicy seasoned nuggets with a fiery crunch \u2014 served with cooling garlic dip.",
+    "category": "Hot Wings",
+    "prices": [
+      {
+        "size": null,
+        "originalPrice": 310,
+        "offerPrice": 260
+      }
+    ]
+  }
+]
