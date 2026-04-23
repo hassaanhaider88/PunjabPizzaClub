@@ -587,7 +587,7 @@
     "url": "https://foodish-api.com/images/burger/burger1.jpg",
     "prices": [
       {
-        "size": null,
+        "size": "default",
         "originalPrice": 160,
         "offerPrice": 140
       }
@@ -601,7 +601,7 @@
     "url": "https://foodish-api.com/images/burger/burger2.jpg",
     "prices": [
       {
-        "size": null,
+        "size": "default",
         "originalPrice": 180,
         "offerPrice": 160
       }
@@ -615,7 +615,7 @@
     "url": "https://foodish-api.com/images/burger/burger3.jpg",
     "prices": [
       {
-        "size": null,
+        "size": "default",
         "originalPrice": 140,
         "offerPrice": 120
       }
@@ -629,7 +629,7 @@
     "url": "https://foodish-api.com/images/burger/burger4.jpg",
     "prices": [
       {
-        "size": null,
+        "size": "default",
         "originalPrice": 160,
         "offerPrice": 140
       }
@@ -643,7 +643,7 @@
     "url": "https://foodish-api.com/images/burger/burger5.jpg",
     "prices": [
       {
-        "size": null,
+        "size": "default",
         "originalPrice": 230,
         "offerPrice": 200
       }
@@ -657,7 +657,7 @@
     "url": "https://foodish-api.com/images/burger/burger6.jpg",
     "prices": [
       {
-        "size": null,
+        "size": "default",
         "originalPrice": 180,
         "offerPrice": 160
       }
@@ -671,7 +671,7 @@
     "url": "https://foodish-api.com/images/burger/burger7.jpg",
     "prices": [
       {
-        "size": null,
+        "size": "default",
         "originalPrice": 190,
         "offerPrice": 160
       }
@@ -685,7 +685,7 @@
     "url": "https://foodish-api.com/images/burger/burger8.jpg",
     "prices": [
       {
-        "size": null,
+        "size": "default",
         "originalPrice": 200,
         "offerPrice": 170
       }
@@ -699,7 +699,7 @@
     "url": "https://foodish-api.com/images/burger/burger9.jpg",
     "prices": [
       {
-        "size": null,
+        "size": "default",
         "originalPrice": 210,
         "offerPrice": 180
       }
@@ -713,7 +713,7 @@
     "url": "https://foodish-api.com/images/burger/burger10.jpg",
     "prices": [
       {
-        "size": null,
+        "size": "default",
         "originalPrice": 220,
         "offerPrice": 190
       }
@@ -727,7 +727,7 @@
     "url": "https://i.pinimg.com/originals/0f/85/99/0f85992890b50bb48ac360cd23f76bf7.jpg",
     "prices": [
       {
-        "size": null,
+        "size": "default",
         "originalPrice": 140,
         "offerPrice": 120
       }
@@ -741,7 +741,7 @@
     "url": "https://i.pinimg.com/originals/d0/c2/fd/d0c2fdeab1c377df15a00c804618f7e6.jpg",
     "prices": [
       {
-        "size": null,
+        "size": "default",
         "originalPrice": 160,
         "offerPrice": 140
       }
@@ -755,7 +755,7 @@
     "url": "https://i.pinimg.com/originals/bc/7f/5c/bc7f5c69fb0924216b7dc40d84defefb.jpg",
     "prices": [
       {
-        "size": null,
+        "size": "default",
         "originalPrice": 100,
         "offerPrice": 80
       }
@@ -770,7 +770,7 @@
 
     "prices": [
       {
-        "size": null,
+        "size": "default",
         "originalPrice": 120,
         "offerPrice": 100
       }
@@ -785,7 +785,7 @@
 
     "prices": [
       {
-        "size": null,
+        "size": "default",
         "originalPrice": 140,
         "offerPrice": 120
       }
@@ -800,7 +800,7 @@
 
     "prices": [
       {
-        "size": null,
+        "size": "default",
         "originalPrice": 150,
         "offerPrice": 130
       }
@@ -815,7 +815,7 @@
 
     "prices": [
       {
-        "size": null,
+        "size": "default",
         "originalPrice": 130,
         "offerPrice": 110
       }
@@ -829,7 +829,7 @@
     "url": "https://i.pinimg.com/originals/af/02/0a/af020a9d556472ac51110090d8cc5f8f.png",
     "prices": [
       {
-        "size": null,
+        "size": "default",
         "originalPrice": 190,
         "offerPrice": 160
       }
@@ -843,7 +843,7 @@
     "url": "https://i.pinimg.com/originals/ca/c9/59/cac9592f767eb90bbbcbd0479b6cc01f.jpg",
     "prices": [
       {
-        "size": null,
+        "size": "default",
         "originalPrice": 120,
         "offerPrice": 100
       }
@@ -857,7 +857,7 @@
     "url": "https://i.pinimg.com/originals/d4/ce/00/d4ce00d1ee9c49afabc560852992e3bb.jpg",
     "prices": [
       {
-        "size": null,
+        "size": "default",
         "originalPrice": 140,
         "offerPrice": 120
       }
@@ -871,7 +871,7 @@
     "url": "https://i.pinimg.com/originals/5f/25/2c/5f252cb94b25d377f0cca7aa7154174a.jpg",
     "prices": [
       {
-        "size": null,
+        "size": "default",
         "originalPrice": 160,
         "offerPrice": 140
       }
@@ -885,7 +885,7 @@
     "url": "https://i.pinimg.com/originals/5f/25/2c/5f252cb94b25d377f0cca7aa7154174a.jpg",
     "prices": [
       {
-        "size": null,
+        "size": "default",
         "originalPrice": 160,
         "offerPrice": 130
       }
@@ -899,7 +899,7 @@
     "url": "https://i.pinimg.com/originals/ae/d0/e3/aed0e3d7939a4906a7f2c534a48ca647.jpg",
     "prices": [
       {
-        "size": null,
+        "size": "default",
         "originalPrice": 160,
         "offerPrice": 140
       }
@@ -914,7 +914,7 @@
 
     "prices": [
       {
-        "size": null,
+        "size": "default",
         "originalPrice": 140,
         "offerPrice": 120
       }
@@ -929,7 +929,7 @@
 
     "prices": [
       {
-        "size": null,
+        "size": "default",
         "originalPrice": 200,
         "offerPrice": 160
       }
@@ -943,7 +943,7 @@
     "url": "https://i.pinimg.com/originals/02/95/28/0295283e5a2849cd51af4c042c76b9b0.png",
     "prices": [
       {
-        "size": null,
+        "size": "default",
         "originalPrice": 320,
         "offerPrice": 280
       }
@@ -957,7 +957,7 @@
     "url": "https://i.pinimg.com/originals/11/dd/5f/11dd5fbafb0d51b0bf59ca58138e0142.jpg",
     "prices": [
       {
-        "size": null,
+        "size": "default",
         "originalPrice": 290,
         "offerPrice": 250
       }
@@ -971,7 +971,7 @@
     "url": "https://i.pinimg.com/originals/9b/f3/71/9bf371c4ea4501d4fc6a4fdc9d0d6173.jpg",
     "prices": [
       {
-        "size": null,
+        "size": "default",
         "originalPrice": 180,
         "offerPrice": 150
       }
@@ -985,7 +985,7 @@
     "url": "https://i.pinimg.com/originals/3d/0c/36/3d0c36737b254dfa87adcfb78658cbd9.png",
     "prices": [
       {
-        "size": null,
+        "size": "default",
         "originalPrice": 450,
         "offerPrice": 400
       }
@@ -999,7 +999,7 @@
     "url": "https://i.pinimg.com/originals/3d/0c/36/3d0c36737b254dfa87adcfb78658cbd9.png",
     "prices": [
       {
-        "size": null,
+        "size": "default",
         "originalPrice": 570,
         "offerPrice": 500
       }
@@ -1013,7 +1013,7 @@
     "url": "https://i.pinimg.com/originals/3d/0c/36/3d0c36737b254dfa87adcfb78658cbd9.png",
     "prices": [
       {
-        "size": null,
+        "size": "default",
         "originalPrice": 160,
         "offerPrice": 130
       }
@@ -1027,7 +1027,7 @@
     "url": "https://i.pinimg.com/originals/3d/0c/36/3d0c36737b254dfa87adcfb78658cbd9.png",
     "prices": [
       {
-        "size": null,
+        "size": "default",
         "originalPrice": 400,
         "offerPrice": 350
       }
@@ -1041,7 +1041,7 @@
     "url": "https://i.pinimg.com/originals/ff/c5/94/ffc594b3dd5910f9ea14200c10662f20.jpg",
     "prices": [
       {
-        "size": null,
+        "size": "default",
         "originalPrice": 520,
         "offerPrice": 450
       }
@@ -1055,7 +1055,7 @@
     "url": "https://i.pinimg.com/videos/thumbnails/originals/db/d9/fb/dbd9fb6d365f2552e8741990e74b4c20.0000000.jpg",
     "prices": [
       {
-        "size": null,
+        "size": "default",
         "originalPrice": 350,
         "offerPrice": 300
       }
@@ -1069,7 +1069,7 @@
     "url": "https://i.pinimg.com/originals/37/d6/88/37d688cb768fe2b9889fd2bb58c11bbc.jpg",
     "prices": [
       {
-        "size": null,
+        "size": "default",
         "originalPrice": 340,
         "offerPrice": 290
       }
@@ -1083,7 +1083,7 @@
     "url": "https://i.pinimg.com/originals/37/d6/88/37d688cb768fe2b9889fd2bb58c11bbc.jpg",
     "prices": [
       {
-        "size": null,
+        "size": "default",
         "originalPrice": 345,
         "offerPrice": 295
       }
@@ -1097,7 +1097,7 @@
     "url" : "https://i.pinimg.com/originals/da/48/43/da4843f38a492ff4f448a7df882394fb.jpg",
     "prices": [
       {
-        "size": null,
+        "size": "default",
         "originalPrice": 360,
         "offerPrice": 310
       }
@@ -1111,7 +1111,7 @@
     "url": "https://i.pinimg.com/originals/2f/57/92/2f57929c4557c22288ed29c1fed492b4.webp",
     "prices": [
       {
-        "size": null,
+        "size": "default",
         "originalPrice": 320,
         "offerPrice": 270
       }
@@ -1125,7 +1125,7 @@
     "url": "https://i.pinimg.com/originals/da/48/43/da4843f38a492ff4f448a7df882394fb.jpg",
     "prices": [
       {
-        "size": null,
+        "size": "default",
         "originalPrice": 310,
         "offerPrice": 260
       }

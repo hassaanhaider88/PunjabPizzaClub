@@ -1,19 +1,29 @@
 import React, { useState } from "react";
 import { LazyLoadImage } from "react-lazy-load-image-component";
+import { useDispatch } from "react-redux";
+import { addToCart } from "../store/slices/userCartSlice";
+import { toast } from "react-toastify";
 
 const PizzaCard = ({ item, activeMenu = "All" }) => {
+  const dispatch = useDispatch();
   // State to handle size selection
   const [selectedSize, setSelectedSize] = useState(item?.prices[0]);
 
   const hanleAddToCartClick = () => {
-    // Logic to add the selected pizza with the chosen size to the cart
-    console.log(
-      `Added ${item.name} (${selectedSize.size}) to cart at $${selectedSize.offerPrice}`,
+    dispatch(
+      addToCart({
+        name: item.name,
+        url: item.url,
+        id: item._id,
+        size: selectedSize.size,
+        price: selectedSize.offerPrice,
+      }),
     );
+    toast.success(`${item.name} added to cart!`);
   };
 
   return activeMenu === item.category || activeMenu === "All" ? (
-    <div className="flex shrink-0 items-center justify-center bg-black p-6">
+    <div className="flex shrink-0 items-center justify-center p-6">
       <div className="bg-[#1a1a1a] rounded-[2.5rem] p-6 flex flex-col items-center shadow-2xl transition-transform cursor-pointer">
         {/* Pizza Image */}
         <div className="relative rounded-full overflow-hidden -top-20 w-48 h-48 mb-2 drop-shadow-[0_20px_20px_rgba(0,0,0,0.5)]">
@@ -34,10 +44,10 @@ const PizzaCard = ({ item, activeMenu = "All" }) => {
 
         {/* Size Selection Tabs */}
         <div
-          className={`flex ${item.prices[0].size == null ? "hidden" : "bg-black/40 "} p-1 rounded-xl mb-6 w-full justify-between`}
+          className={`flex ${item.prices[0].size == "default" ? "hidden" : "bg-black/40 "} p-1 rounded-xl mb-6 w-full justify-between`}
         >
           {item.prices.map((item) =>
-            item.size ? (
+            item.size !== "default" ? (
               <button
                 key={item.size}
                 onClick={() => setSelectedSize(item)}

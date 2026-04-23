@@ -1,11 +1,156 @@
-import React from 'react'
+import { AiFillPlusCircle } from "react-icons/ai";
+import { AiOutlineMinusCircle } from "react-icons/ai";
+import { AiOutlineClose } from "react-icons/ai";
+import React from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+
+import {
+  removeFromCart,
+  updateCountItem,
+  clearWholeCart,
+} from "../store/slices/userCartSlice";
 
 const CartContainer = ({ isOpenCart, setIsOpenCart }) => {
-  return (
-    <div className='md:w-1/2 w-full bg-[#141414] bottom-0 right-0 h-full absolute'>
-      <button onClick={()=>setIsOpenCart(!isOpenCart)}>CLoss</button>
-    </div>
-  )
-}
+  const dispatch = useDispatch();
+  const cartItems = useSelector((state) => state.userCart.cartItems);
 
-export default CartContainer
+  const handleIncrease = (item) => {
+    dispatch(
+      updateCountItem({
+        id: item.id,
+        size: item.size,
+        quantity: item.quantity + 1,
+      }),
+    );
+  };
+
+  const handleDecrease = (item) => {
+    dispatch(
+      updateCountItem({
+        id: item.id,
+        size: item.size,
+        quantity: item.quantity - 1,
+      }),
+    );
+  };
+
+  const handleRemove = (item) => {
+    dispatch(removeFromCart({ id: item.id, size: item.size }));
+  };
+
+  const totalPrice = cartItems.reduce(
+    (acc, item) => acc + item.price * item.quantity,
+    0,
+  );
+
+  return (
+    <div
+      className={`md:w-1/2 w-full bg-[#0B0B0B] top-0 right-0 h-full fixed z-50 p-6 transition-transform ${
+        isOpenCart ? "translate-x-0" : "translate-x-full"
+      }`}
+    >
+      {/* Header */}
+      <div className="flex justify-between items-center mb-6">
+        <h2 className="text-white text-2xl font-bold">Your Cart</h2>
+        <button
+          onClick={() => setIsOpenCart(!isOpenCart)}
+          className="text-white px-4 py-2 rounded-lg"
+        >
+          <AiOutlineClose size={30} />
+        </button>
+      </div>
+
+      {/* Cart Items */}
+      <div className="flex flex-col gap-4 overflow-y-auto h-[65%] pr-2">
+        {cartItems.length === 0 ? (
+          <div className="w-full flex-col h-full flexCenter">
+            <LazyLoadImage
+              src="https://i.pinimg.com/originals/17/08/90/170890e64f751e6c7926f851719d4523.gif"
+              className="w-[40vh] h-[40vh]"
+              alt="Page not found in Punjab Pizza Club"
+            />
+            <h1 className="text-4xl">No Product In Cart</h1>
+            <p>Let's Buy One</p>
+          </div>
+        ) : (
+          cartItems.map((item) => (
+            <div
+              key={`${item.id}-${item.size}`}
+              className="flex items-center justify-between bg-[#141414] p-4 rounded-xl"
+            >
+              {/* Info */}
+              <div className="flex items-center gap-4">
+                <LazyLoadImage
+                  src={item.url}
+                  alt={item.name}
+                  className="w-22 h-22 rounded-full object-contain"
+                />
+                <div>
+                  <h3 className="text-white font-bold text-md">{item.name}</h3>
+                  <p className="text-gray-400 text-xs">
+                    {item.size !== "default" ? item.size : ""}
+                  </p>
+                  <p className="text-[#D13E4B] font-bold text-md">
+                    Rs.{item.price}
+                  </p>
+                </div>
+              </div>
+
+              {/* Controls */}
+              <div className="flex justify-evenly  items-center gap-5">
+                <div className="flex items-center gap-2  px-2 py-1 rounded-lg">
+                  <button
+                    onClick={() => handleDecrease(item)}
+                    className="text-white px-2"
+                  >
+                    <AiOutlineMinusCircle size={30} />
+                  </button>
+                  <span className="text-white text-md font-semibold">
+                    {item.quantity}
+                  </span>
+
+                  <button
+                    onClick={() => handleIncrease(item)}
+                    className="text-white px-2"
+                  >
+                    <AiFillPlusCircle size={30} />
+                  </button>
+                </div>
+
+                <button
+                  onClick={() => handleRemove(item)}
+                  className="text-md mt-2 text-red-400"
+                >
+                  Remove
+                </button>
+              </div>
+            </div>
+          ))
+        )}
+      </div>
+
+      <div className="absolute bottom-0 left-0 w-full p-6 bg-[#0B0B0B] border-t border-gray-800">
+        <div className="flex justify-between items-center mb-4">
+          <span className="text-gray-400">Total</span>
+          <span className="text-white text-3xl font-bold">Rs.{totalPrice}</span>
+        </div>
+
+        <button className="w-full bg-[#D13E4B] text-white font-bold py-3 rounded-xl mb-3">
+          Checkout
+        </button>
+
+        {cartItems.length > 0 && (
+          <button
+            onClick={() => dispatch(clearWholeCart())}
+            className="w-full border border-[#D13E4B] text-[#D13E4B] py-2 rounded-xl"
+          >
+            Clear Cart
+          </button>
+        )}
+      </div>
+    </div>
+  );
+};
+
+export default CartContainer;

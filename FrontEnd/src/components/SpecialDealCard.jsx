@@ -1,10 +1,22 @@
 import React from "react";
-import { LazyLoadImage } from 'react-lazy-load-image-component';
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import { useDispatch } from "react-redux";
+import { addToCart } from "../store/slices/userCartSlice";
+import { toast } from "react-toastify";
 
 const SpecialDealCard = ({ deal }) => {
+  const dispatch = useDispatch();
   const handleDealClick = (deal) => {
-    // Logic to handle the deal click, e.g., navigate to the deal page or add to cart
-    console.log(`Deal clicked: ${deal.title} for Rs.${deal.price}`);
+    dispatch(
+      addToCart({
+        id: deal._id,
+        name: deal.title,
+        url: deal.image,
+        price: deal.price,
+        size: "Special Deal",
+      }),
+    );
+    toast.success(`${deal.title} Almost Done!`);
   };
   return (
     <div className="flex shrink-0 items-center justify-center  p-6">

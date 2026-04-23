@@ -8,7 +8,6 @@ const initialState = {
     email: "",
     phone: "",
     address: ""
-
 }
 
 const userSlice = createSlice({

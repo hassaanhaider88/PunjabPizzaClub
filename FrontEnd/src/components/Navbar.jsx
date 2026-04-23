@@ -1,21 +1,29 @@
+/* eslint-disable react-hooks/set-state-in-effect */
 import { HiOutlineUserCircle } from "react-icons/hi";
 import { RxCross1 } from "react-icons/rx";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import { AiOutlineSearch } from "react-icons/ai";
 import { FaLuggageCart } from "react-icons/fa";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Logo from "../assets/PPCLLogo.png";
 import CartContainer from "./CartContainer";
 import UserOptions from "./UserOptions";
 import { Link, useNavigate, useLocation } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 
 const NavBar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isOpenCart, setIsOpenCart] = useState(false);
   const [isOpenUserOption, setIsOpenUserOption] = useState(false);
   const user = useSelector((state) => state.user);
+  const itemsInCart = useSelector((state) => state.userCart);
+  const [CartCount, setCartCount] = useState(itemsInCart?.cartItems.length);
+
+  useEffect(() => {
+    setCartCount(itemsInCart?.cartItems?.length);
+    console.log(itemsInCart)
+  }, [itemsInCart, itemsInCart?.cartItems]);
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -70,9 +78,11 @@ const NavBar = () => {
         <div className="HereCartIconAndSearchbar xl:flex hidden items-center gap-5 ">
           <div onClick={() => setIsOpenCart(!isOpenCart)} className="relative">
             <AiOutlineShoppingCart size={34} />
-            <span className="absolute -top-2 flexCenter -right-2 bg-red-400 rounded-full h-6 w-6">
-              1
-            </span>
+            {CartCount !== 0 && (
+              <span className="absolute -top-2 flexCenter -right-2 bg-red-400 rounded-full h-6 w-6">
+                {CartCount}
+              </span>
+            )}
           </div>
           <div className="flexCenter gap-3 bg-[#1a1a1a] rounded-full px-3 py-2">
             <AiOutlineSearch />
@@ -138,7 +148,7 @@ const NavBar = () => {
             >
               <AiOutlineShoppingCart size={34} />
               <span className="absolute -top-2 flexCenter -right-2 bg-red-400 rounded-full h-6 w-6">
-                1
+                {CartCount}
               </span>
             </div>
           </div>
