@@ -23,7 +23,7 @@ const PizzaCard = ({ item, activeMenu = "All" }) => {
   };
 
   return activeMenu === item.category || activeMenu === "All" ? (
-    <div className="flex shrink-0 items-center justify-center p-6">
+    <div className="flex shrink-0 items-center justify-center  p-6">
       <div className="bg-[#1a1a1a] rounded-[2.5rem] p-6 flex flex-col items-center shadow-2xl transition-transform cursor-pointer">
         {/* Pizza Image */}
         <div className="relative rounded-full overflow-hidden -top-20 w-48 h-48 mb-2 drop-shadow-[0_20px_20px_rgba(0,0,0,0.5)]">

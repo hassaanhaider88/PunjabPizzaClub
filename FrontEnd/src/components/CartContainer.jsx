@@ -10,10 +10,13 @@ import {
   updateCountItem,
   clearWholeCart,
 } from "../store/slices/userCartSlice";
+import { useNavigate } from "react-router-dom";
 
 const CartContainer = ({ isOpenCart, setIsOpenCart }) => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const cartItems = useSelector((state) => state.userCart.cartItems);
+  const user = useSelector((state) => state.user);
 
   const handleIncrease = (item) => {
     dispatch(
@@ -46,7 +49,7 @@ const CartContainer = ({ isOpenCart, setIsOpenCart }) => {
 
   return (
     <div
-      className={`md:w-1/2 w-full bg-[#0B0B0B] top-0 right-0 h-full fixed z-50 p-6 transition-transform ${
+      className={`md:w-1/2 w-full bg-[#0B0B0B]  top-0 right-0 h-full fixed z-50 p-6 transition-transform ${
         isOpenCart ? "translate-x-0" : "translate-x-full"
       }`}
     >
@@ -130,25 +133,41 @@ const CartContainer = ({ isOpenCart, setIsOpenCart }) => {
         )}
       </div>
 
-      <div className="absolute bottom-0 left-0 w-full p-6 bg-[#0B0B0B] border-t border-gray-800">
-        <div className="flex justify-between items-center mb-4">
-          <span className="text-gray-400">Total</span>
-          <span className="text-white text-3xl font-bold">Rs.{totalPrice}</span>
-        </div>
+      {user.isLogged ? (
+        <div className="absolute bottom-0 left-0 w-full p-6 bg-[#0B0B0B] border-t border-gray-800">
+          <div className="flex justify-between items-center mb-4">
+            <span className="text-gray-400">Total</span>
+            <span className="text-white text-3xl font-bold">
+              Rs.{totalPrice}
+            </span>
+          </div>
 
-        <button className="w-full bg-[#D13E4B] text-white font-bold py-3 rounded-xl mb-3">
-          Checkout
-        </button>
-
-        {cartItems.length > 0 && (
           <button
-            onClick={() => dispatch(clearWholeCart())}
-            className="w-full border border-[#D13E4B] text-[#D13E4B] py-2 rounded-xl"
+            onClick={() => {
+              navigate("/checkout");
+              setIsOpenCart(!isOpenCart);
+            }}
+            className="w-full bg-[#D13E4B] text-white font-bold py-3 rounded-xl mb-3"
           >
-            Clear Cart
+            Checkout
           </button>
-        )}
-      </div>
+
+          {cartItems.length > 0 && (
+            <button
+              onClick={() => dispatch(clearWholeCart())}
+              className="w-full border border-[#D13E4B] text-[#D13E4B] py-2 rounded-xl"
+            >
+              Clear Cart
+            </button>
+          )}
+        </div>
+      ) : (
+        cartItems.length > 0 && (
+          <button className="w-full bg-[#D13E4B] text-white font-bold py-3 rounded-xl mb-3">
+            Please Login / Sign Up Frist For Order
+          </button>
+        )
+      )}
     </div>
   );
 };
