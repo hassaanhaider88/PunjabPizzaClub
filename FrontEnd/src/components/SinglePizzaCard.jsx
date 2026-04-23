@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const PizzaCard = ({ item, activeMenu }) => {
+const PizzaCard = ({ item, activeMenu="All" }) => {
   // State to handle size selection
   const [selectedSize, setSelectedSize] = useState(item?.prices[0]);
 
