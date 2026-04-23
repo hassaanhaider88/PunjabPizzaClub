@@ -1,6 +1,7 @@
 import React, { useState } from "react";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
-const PizzaCard = ({ item, activeMenu="All" }) => {
+const PizzaCard = ({ item, activeMenu = "All" }) => {
   // State to handle size selection
   const [selectedSize, setSelectedSize] = useState(item?.prices[0]);
 
@@ -16,7 +17,7 @@ const PizzaCard = ({ item, activeMenu="All" }) => {
       <div className="bg-[#1a1a1a] rounded-[2.5rem] p-6 flex flex-col items-center shadow-2xl transition-transform cursor-pointer">
         {/* Pizza Image */}
         <div className="relative rounded-full overflow-hidden -top-20 w-48 h-48 mb-2 drop-shadow-[0_20px_20px_rgba(0,0,0,0.5)]">
-          <img
+          <LazyLoadImage
             src={item.url}
             alt={item.name}
             className="w-full h-full object-contain  border-4 border-transparent hover:border-yellow-500/20 transition-all"

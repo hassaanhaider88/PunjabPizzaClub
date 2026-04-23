@@ -40,33 +40,5 @@
     "description": "2 spicy pizzas with chili flakes and dip.",
     "image": "https://images.unsplash.com/photo-1628840042765-356cda07504e",
     "price": "1400"
-  },
-  {
-    "id": "Deal Seven",
-    "title": "Mini Party Box",
-    "description": "3 small pizzas with drinks.",
-    "image": "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38",
-    "price": "1100"
-  },
-  {
-    "id": "Deal Eight",
-    "title": "Lunch Deal",
-    "description": "Personal pizza with drink and fries.",
-    "image": "https://images.unsplash.com/photo-1550547660-d9450f859349",
-    "price": "600"
-  },
-  {
-    "id": "Deal Nine",
-    "title": "Meat Lovers Combo",
-    "description": "Large meat pizza with wings.",
-    "image": "https://images.unsplash.com/photo-1600891964599-f61ba0e24092",
-    "price": "1800"
-  },
-  {
-    "id": "Deal Ten",
-    "title": "Ultimate Deal",
-    "description": "3 large pizzas, sides, and drinks bundle.",
-    "image": "https://images.unsplash.com/photo-1590947132387-155cc02f3212",
-    "price": "3000"
   }
 ]

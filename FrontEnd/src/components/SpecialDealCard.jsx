@@ -1,4 +1,5 @@
 import React from "react";
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 const SpecialDealCard = ({ deal }) => {
   const handleDealClick = (deal) => {
@@ -10,7 +11,7 @@ const SpecialDealCard = ({ deal }) => {
       <div className="bg-[#1a1a1a] rounded-[2.5rem] p-6 flex flex-col items-center shadow-2xl transition-transform cursor-pointer">
         {/* Deal Image */}
         <div className="relative rounded-2xl w-80 h-80 overflow-hidden  drop-shadow-[0_20px_20px_rgba(0,0,0,0.5)]">
-          <img
+          <LazyLoadImage
             src={deal.image}
             alt={deal.title}
             width="250"
