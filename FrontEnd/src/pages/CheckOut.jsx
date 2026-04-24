@@ -1,13 +1,18 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { clearWholeCart } from "../store/slices/userCartSlice";
+import { toast } from "react-toastify";
 
 const CheckoutPage = () => {
   const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.userCart.cartItems);
+  const user = useSelector((state) => state.user);
 
   const [paymentMethod, setPaymentMethod] = useState("cod");
-  const [phone, setPhone] = useState("");
+  // they both will get if user don't firstly give use or want to update them
+  const [deliveryAddress, setDeliveryAddress] = useState(user?.address);
+  const [phoneNumber, setphoneNumber] = useState(user?.phone);
+
   const [transactionId, setTransactionId] = useState("");
   const [orderPlaced, setOrderPlaced] = useState(false);
 
@@ -17,12 +22,17 @@ const CheckoutPage = () => {
   );
 
   const handlePlaceOrder = () => {
-    if (!phone) return alert("Phone number required");
+    if (!deliveryAddress || !phoneNumber) {
+      return toast.error("Please provide Phone and address");
+    }
 
     if (paymentMethod === "easypaisa" && !transactionId) {
       return alert("Enter transaction ID");
     }
 
+    // this data will be send to backend then redirect user to his dashborad to track his Order
+    console.log(deliveryAddress, phoneNumber, cartItems, totalPrice);
+    // we will decided here either user will allow to order less than 1000 or not
     setOrderPlaced(true);
     dispatch(clearWholeCart());
   };
@@ -51,9 +61,16 @@ const CheckoutPage = () => {
 
           <input
             type="text"
-            placeholder="Phone Number"
-            value={phone}
-            onChange={(e) => setPhone(e.target.value)}
+            placeholder="Enter Your Adress"
+            value={deliveryAddress}
+            onChange={(e) => setDeliveryAddress(e.target.value)}
+            className="w-full mb-4 p-3 rounded-lg bg-black border border-gray-700 outline-none"
+          />
+          <input
+            type="text"
+            placeholder="Enter Your Phone"
+            value={phoneNumber}
+            onChange={(e) => setphoneNumber(e.target.value)}
             className="w-full mb-4 p-3 rounded-lg bg-black border border-gray-700 outline-none"
           />
 
@@ -72,12 +89,14 @@ const CheckoutPage = () => {
 
             <label className="flex items-center gap-2">
               <input
+                title="Will Be Added Soon."
                 type="radio"
                 value="easypaisa"
+                disabled
                 checked={paymentMethod === "easypaisa"}
                 onChange={() => setPaymentMethod("easypaisa")}
               />
-              EasyPaisa (Online Payment)
+              EasyPaisa (Will Be Added Soon...)
             </label>
           </div>
 
