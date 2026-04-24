@@ -3,6 +3,7 @@ import BurgerBg from "../assets/BurgerBg.png";
 import ChilliBg from "../assets/ChilliBg.png";
 import LalianMap from "../assets/LalianMap.png";
 import PizzaSice from "../assets/PizzaSlice.jpeg";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 import { RxVideo } from "react-icons/rx";
 
 const Hero = () => {
@@ -15,14 +16,14 @@ const Hero = () => {
           </h1>
         </div>
         <div className="absolute z-20 w-full flexCenter">
-          <img
+          <LazyLoadImage
             src={BurgerBg}
             className="md:scale-[0.8] scale-[0.6]"
             alt="Burger"
           />
         </div>
         <div className="absolute z-10 w-full flexCenter">
-          <img
+          <LazyLoadImage
             className="w-full scale-[1.1] md:scale-[0.9] h-full object-fill"
             src={ChilliBg}
             alt="Chilli"
@@ -64,19 +65,19 @@ const Hero = () => {
                 }
                 className="Imges flex -space-x-5"
               >
-                <img
+                <LazyLoadImage
                   className="w-13 h-13 rounded-full "
-                  src="https://lh3.googleusercontent.com/a-/ALV-UjXucs0jb2ZnLblsgMu8e0KJ1Yu8DolPdPx-Em5S9vN_DzKgkkKDXA=w36-h36-p-rp-mo-ba3-br100"
+                  src="https://randomuser.me/api/portraits/men/32.jpg"
                   alt=""
                 />
-                <img
+                <LazyLoadImage
                   className="w-13 h-13 rounded-full "
-                  src="https://lh3.googleusercontent.com/a-/ALV-UjVwdopjG1CwP1zfygDTnoi-BGdw4ewjIKVCjpIqKpVe1tolcJtynw=w36-h36-p-rp-mo-ba5-br100"
+                  src="https://randomuser.me/api/portraits/men/34.jpg"
                   alt=""
                 />
-                <img
+                <LazyLoadImage
                   className="w-13 h-13 rounded-full "
-                  src="https://lh3.googleusercontent.com/a-/ALV-UjU9aPCvtsSOyEWC-JA_vcQRh1IPHEf2n503CPdTWKxwLvRGEG3P=w36-h36-p-rp-mo-ba2-br100"
+                  src="https://randomuser.me/api/portraits/women/42.jpg"
                   alt=""
                 />
               </div>
@@ -86,14 +87,18 @@ const Hero = () => {
             </div>
             {/* Place */}
             <div className="flex justify-center items-center flex-col">
-              <img className="w-13 h-13 rounded-full " src={LalianMap} alt="" />
+              <LazyLoadImage
+                className="w-13 h-13 rounded-full "
+                src={LalianMap}
+                alt=""
+              />
               <h1 className="text-white font-bold mt-2 tracking-[0.2em]">
                 12+ Neighbourhood Places
               </h1>
             </div>
             {/* items */}
             <div className="flex justify-center items-center flex-col">
-              <img
+              <LazyLoadImage
                 className="w-13 h-13 rounded-full "
                 src={PizzaSice}
                 alt="punjab pizza club"
