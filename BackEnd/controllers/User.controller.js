@@ -3,6 +3,7 @@ import jwt from "jsonwebtoken";
 
 import userModel from "../models/User.models.js";
 import BlackListTokenModel from "../models/BlackListTokens.models.js"
+import blackListTokenModel from "../models/BlackListTokens.models.js";
 
 
 const SignUpUser = async (req, res) => {
@@ -116,8 +117,8 @@ const LoginUser = async (req, res) => {
 
 const UserByToken = async (req, res) => {
   try {
-    const token = req.headers.authorization.split(" ")[1];
-    if (!token) {
+    const token = req.headers?.authorization.split(" ")[1];
+    if (!token || token === undefined) {
       return res.send({
         success: false,
         message: "Please provide Token"
@@ -153,4 +154,34 @@ const UserByToken = async (req, res) => {
   }
 }
 
-export { SignUpUser, LoginUser, UserByToken };
+const LogOut = async (req, res) => {
+  try {
+    const token = req.headers.authorization.split(" ")[1];
+    if (!token) {
+      return res.send({
+        success: false,
+        message: "TOken is not provided.."
+      })
+    }
+    const blackList = await blackListTokenModel.create({
+      token
+    })
+    if (!blackList) {
+      return res.send({
+        success: false,
+        message: "Something wents worng..."
+      })
+    }
+    return res.send({
+      success: true,
+      message: "User LogOut successfully"
+    })
+  } catch (error) {
+    return res.send({
+      success: false,
+      message: error.message
+    })
+  }
+}
+
+export { SignUpUser, LoginUser, UserByToken, LogOut };

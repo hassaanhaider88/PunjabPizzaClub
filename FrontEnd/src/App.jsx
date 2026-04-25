@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect } from "react";
 import { Route, Routes, useLocation } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
@@ -21,15 +22,10 @@ const App = () => {
   const location = useLocation();
   const dispacth = useDispatch();
   const user = useSelector((state) => state.user);
-  useEffect(() => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  }, [location.pathname]);
-  useEffect(() => {
-    const token = localStorage.getItem("PPCUserToken");
-    if (!token) {
-      return;
-    }
-    const data = fetchUser();
+
+  const fetchUserData = async (token) => {
+    const data = await fetchUser(token);
+    console.log(data);
     if (!data) {
       return;
     } else {
@@ -46,7 +42,19 @@ const App = () => {
         }),
       );
     }
+  };
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, [location.pathname]);
+  useEffect(() => {
+    const token = localStorage.getItem("PPCUserToken");
+    if (!token) {
+      return;
+    }
+    fetchUserData(token);
   }, []);
+
   return (
     <>
       <NavBar />

@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../store/slices/userSlice";
 import { toast } from "react-toastify";
+import { BACK_END_API } from "../Constants";
 
 const UserOptions = ({
   isOpenCart,
@@ -12,11 +13,34 @@ const UserOptions = ({
   const user = useSelector((state) => state.user);
 
   const dispatch = useDispatch();
-  const hanleUserLogout = () => {
+  const [Loading, setLoading] = useState(false);
+  const token = localStorage.getItem("PPCUserToken");
+  const hanleUserLogout = async () => {
     if (confirm("Are you sure to log Out...")) {
-      dispatch(logout());
-      setIsOpenUserOption(!isOpenUserOption);
-      toast.success("Logout successfully..");
+      if (token) {
+        setLoading(true);
+        try {
+          const res = await fetch(`${BACK_END_API}/api/auth/logout`, {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          });
+          const result = await res.json();
+          if (result.success) {
+            dispatch(logout());
+            setIsOpenUserOption(!isOpenUserOption);
+            toast.success("Logout successfully..");
+          } else {
+            toast.error(result.message);
+          }
+        } catch (error) {
+          toast.error(error.message);
+        } finally {
+          setLoading(false);
+        }
+      }
+    } else {
+      toast.error("Token is not avaible");
     }
   };
   console.log(user);
@@ -42,9 +66,13 @@ const UserOptions = ({
       ) : (
         <div className={CommonClass}>Profile</div>
       )}
-      <div onClick={hanleUserLogout} className={CommonClass}>
-        Sign Out
-      </div>
+      {Loading ? (
+        "Signing Out..."
+      ) : (
+        <div onClick={hanleUserLogout} className={CommonClass}>
+          Sign Out
+        </div>
+      )}
       <div></div>
     </div>
   );
