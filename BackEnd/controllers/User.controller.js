@@ -1,6 +1,9 @@
-import userModel from "../models/User.models.js";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
+
+import userModel from "../models/User.models.js";
+import BlackListTokenModel from "../models/BlackListTokens.models.js"
+
 
 const SignUpUser = async (req, res) => {
   try {
@@ -111,4 +114,43 @@ const LoginUser = async (req, res) => {
   }
 };
 
-export { SignUpUser, LoginUser };
+const UserByToken = async (req, res) => {
+  try {
+    const token = req.headers.authorization.split(" ")[1];
+    if (!token) {
+      return res.send({
+        success: false,
+        message: "Please provide Token"
+      })
+    }
+    // check for black listed token
+    const isBlackList = await BlackListTokenModel.findOne({ token });
+    if (isBlackList) {
+      return res.send({
+        success: false,
+        message: "Token has expired please login agian"
+      })
+    }
+
+    const decode = jwt.verify(token, process.env.JWT_SECRET_KEY);
+    const user = await userModel.findOne({ email: decode.userEmail }).select("-password");
+    if (!user) {
+      return res.send({
+        success: false,
+        message: "User Not Found"
+      })
+    }
+    return res.send({
+      success: true,
+      message: "User Found",
+      data: user
+    })
+  } catch (error) {
+    return res.send({
+      success: false,
+      message: error.message
+    })
+  }
+}
+
+export { SignUpUser, LoginUser, UserByToken };

@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { Route, Routes, useLocation } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 
 import Home from "./pages/Home";
 import AboutUs from "./pages/AboutUs";
@@ -14,13 +14,39 @@ import PageNotFound from "./pages/PageNotFound";
 import NavBar from "./components/NavBar";
 import Footer from "./components/Footer";
 import CheckOut from "./pages/CheckOut";
+import fetchUser from "./utils/fetchUserFromLC";
+import { login } from "./store/slices/userSlice";
 
 const App = () => {
   const location = useLocation();
+  const dispacth = useDispatch();
   const user = useSelector((state) => state.user);
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, [location.pathname]);
+  useEffect(() => {
+    const token = localStorage.getItem("PPCUserToken");
+    if (!token) {
+      return;
+    }
+    const data = fetchUser();
+    if (!data) {
+      return;
+    } else {
+      dispacth(
+        login({
+          isLogged: true,
+          isEmailVerified: data.isEmailVerified,
+          phone: data.phone,
+          role: data.role,
+          email: data.email,
+          name: data.name,
+          address: data.address,
+          token: token,
+        }),
+      );
+    }
+  }, []);
   return (
     <>
       <NavBar />

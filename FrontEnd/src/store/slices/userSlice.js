@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   isLogged: false,
   isEmailVerified: false,
-  isAdmin: false,
+  role: "user",
   name: "",
   email: "",
   phone: "",
@@ -18,7 +18,7 @@ const userSlice = createSlice({
     login: (state, action) => {
       state.isLogged = action.payload.isLogged;
       state.isEmailVerified = action.payload.isEmailVerified;
-      state.isAdmin = action.payload.isAdmin;
+      state.role = action.payload.role;
       ((state.name = action.payload.name),
         (state.email = action.payload.email));
       state.phone = action.payload.phone;
@@ -26,10 +26,9 @@ const userSlice = createSlice({
       state.token = action.payload.token;
     },
     logout: (state) => {
-      localStorage.removeItem("PPCLUserToken")
+      localStorage.clear("")
       state.isLogged = false;
       state.isEmailVerified = false;
-      state.isAdmin = false;
       state.name = "";
       state.email = "";
       state.phone = "";
@@ -37,6 +36,7 @@ const userSlice = createSlice({
     },
     updateProfile: (state, action) => {
       state.isEmailVerified = action.payload.isEmailVerified;
+      state.role = action.payload.role
       state.name = action.payload.name;
       state.email = action.payload.email;
       state.phone = action.payload.phone;
