@@ -47,6 +47,10 @@ const SignUpUser = async (req, res) => {
         token,
         name: c_user?.name,
         email: c_user?.email,
+        isEmailVerified: c_user?.isEmailVerified,
+        role: c_user?.role,
+        phone: c_user?.phone,
+        address: c_user?.phone
       },
     };
   } catch (error) {
@@ -93,6 +97,10 @@ const LoginUser = async (req, res) => {
         token,
         name: checkUserExist?.name,
         email: checkUserExist?.email,
+        isEmailVerified: checkUserExist?.isEmailVerified,
+        role: checkUserExist?.role,
+        phone: checkUserExist?.phone,
+        address: checkUserExist?.address
       },
     };
   } catch (error) {

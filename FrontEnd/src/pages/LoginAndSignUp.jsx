@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { FaRegEyeSlash } from "react-icons/fa";
 import { FaEye } from "react-icons/fa";
 import { MdPassword } from "react-icons/md";
@@ -5,10 +6,17 @@ import { HiOutlineMail } from "react-icons/hi";
 import { CgProfile } from "react-icons/cg";
 import { useState } from "react";
 import { toast } from "react-toastify";
+import { BACK_END_API } from "../Constants";
+import { useDispatch } from "react-redux";
+import { login } from "../store/slices/userSlice";
+import { useNavigate } from "react-router-dom";
 
 const LoginAndSignUp = () => {
-  const [state, setState] = useState("login");
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const [CurrentForm, setCurrentForm] = useState("login");
   const [isShowPass, setIsShowPass] = useState(false);
+  const [Loading, setLoading] = useState(false);
 
   const [formData, setFormData] = useState({
     name: "",
@@ -21,12 +29,85 @@ const LoginAndSignUp = () => {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (formData.password.length < 8) {
       toast.error("Password Must be greater than 8 characters");
     }
-    console.log(formData);
+    try {
+      setLoading(true);
+      if (CurrentForm == "login") {
+        const res = await fetch(`${BACK_END_API}/api/auth/login`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            email: formData.email,
+            password: formData.password,
+          }),
+        });
+
+        const result = await res.json();
+        if (!result.success) {
+          toast.error(result.message);
+        } else {
+          localStorage.setItem("PPCUserToken", result.data.token);
+          toast.success(`WelCome! ${result.data.name}`);
+          dispatch(
+            login({
+              isLogged: true,
+              isEmailVerified: result?.data.isEmailVerified,
+              phone: result?.data.phone,
+              isAdmin: result?.data.isAdmin,
+              email: result?.data.email,
+              name: result?.data.name,
+              address: result?.data.address,
+              token: result?.data.token,
+            }),
+          );
+          navigate("/");
+        }
+      } else {
+        const res = await fetch(`${BACK_END_API}/api/auth/signup`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            email: formData.email,
+            password: formData.password,
+            name: formData.name,
+          }),
+        });
+
+        const result = await res.json();
+        if (!result.success) {
+          toast.error(result.message);
+        } else {
+          localStorage.setItem("PPCUserToken", result.data.token);
+          toast.success(`WelCome! ${result.data.name}`);
+          dispatch(
+            login({
+              isLogged: true,
+              isEmailVerified: result.data.isEmailVerified,
+              phone: result.data.phone,
+              isAdmin: result.data.isAdmin,
+              email: result.data.email,
+              name: result.data.name,
+              address: result.data.address,
+              token: result.data.token,
+            }),
+          );
+          navigate("/");
+        }
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error(error.message);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -36,12 +117,12 @@ const LoginAndSignUp = () => {
         className="w-full sm:w-87.5 text-center bg-white/6 border border-white/10 rounded-2xl px-8"
       >
         <h1 className="text-white text-3xl mt-10 font-medium">
-          {state === "login" ? "Login" : "Sign up"}
+          {CurrentForm === "login" ? "Login" : "Sign up"}
         </h1>
 
         <p className="text-gray-400 text-sm mt-2">Please sign in to continue</p>
 
-        {state !== "login" && (
+        {CurrentForm !== "login" && (
           <div className="flex items-center mt-6 w-full bg-white/5 ring-2 ring-white/10 focus-within:ring-red-500/60 h-12 rounded-full overflow-hidden pl-6 gap-2 transition-all ">
             <CgProfile size={27} color="gray" />
             <input
@@ -101,16 +182,22 @@ const LoginAndSignUp = () => {
           type="submit"
           className="mt-4 w-full h-11 rounded-full text-white bg-[#ff4757] hover:bg-[#ff4756a8] transition "
         >
-          {state === "login" ? "Login" : "Create Acount"}
+          {CurrentForm === "login"
+            ? Loading
+              ? "Loging..."
+              : "Login"
+            : Loading
+              ? "Creating..."
+              : "Create Account"}
         </button>
 
         <p
           onClick={() =>
-            setState((prev) => (prev === "login" ? "register" : "login"))
+            setCurrentForm((prev) => (prev === "login" ? "register" : "login"))
           }
           className="text-gray-400 text-sm mt-3 mb-11 cursor-pointer"
         >
-          {state === "login"
+          {CurrentForm === "login"
             ? "Don't have an account?"
             : "Already have an account?"}
           <span className="text-red-400 hover:underline ml-1">click here</span>

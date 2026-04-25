@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  isLogged: true,
+  isLogged: false,
   isEmailVerified: false,
   isAdmin: false,
   name: "",
@@ -23,8 +23,10 @@ const userSlice = createSlice({
         (state.email = action.payload.email));
       state.phone = action.payload.phone;
       state.address = action.payload.address;
+      state.token = action.payload.token;
     },
     logout: (state) => {
+      localStorage.removeItem("PPCLUserToken")
       state.isLogged = false;
       state.isEmailVerified = false;
       state.isAdmin = false;

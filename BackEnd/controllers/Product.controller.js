@@ -1,4 +1,5 @@
 import ProductModel from "../models/Product.models.js";
+import cloudinary from "../configs/Cloudinary.js";
 const cachedData = {};
 let cacheTime = null;
 const CACHE_DURATION = 60 * 60 * 24 * 1000;
@@ -36,7 +37,31 @@ const SendAllProduct = async (req, res) => {
 
 const CreateNewProduct = async (req, res) => {
   const { name, desc, category, prices } = req.body;
+  if (!name || !desc || !category || !prices) {
+    return res.send({
+      success: false,
+      message: "Please provide all fields",
+    });
+  }
+  const data = await req.file();
+  if (!data) {
+    return res.send({
+      success: false,
+      message: "No file uploaded",
+    });
+  }
+  const buffer = await data.toBuffer();
 
+  const uploadResult = await new Promise((resolve, reject) => {
+    cloudinary.uploader
+      .upload_stream({ folder: "uploads" }, (err, result) => {
+        if (err) reject(err);
+        else resolve(result);
+      })
+      .end(buffer);
+  });
+  // uploadResult.secure_url
+  // the rest program will be written later
   try {
     return res.send({
       success: true,

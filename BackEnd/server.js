@@ -1,17 +1,23 @@
 import fastify from "fastify";
 import dotenv from "dotenv";
+import compression from "compression";
+import fastifyMultipart from "@fastify/multipart";
+import cors from "@fastify/cors"
+
 import connectToDB from "./configs/ConnectDB.js";
 import userRoute from "./routers/User.router.js";
 import productRoute from "./routers/Product.router.js";
-import compression from "compression";
 
 dotenv.config();
 connectToDB();
+
 
 const app = fastify();
 const PORT = process.env.PORT;
 
 app.register(compression());
+app.register(fastifyMultipart);
+app.register(cors)
 
 // Home Route for checking API is working...
 app.get("/", () => {
