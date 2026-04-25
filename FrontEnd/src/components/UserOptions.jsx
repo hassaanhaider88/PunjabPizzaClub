@@ -45,9 +45,9 @@ const UserOptions = ({
   };
   console.log(user);
   const CommonClass =
-    "py-2 px-6 cursor-pointer hover:bg-[#FF4757] rounded-4xl duration-300 transition-all";
+    "py-2 px-6 cursor-pointer hover:bg-[#FF4757]  rounded-4xl duration-300 transition-all";
   return (
-    <div className="fixed z-50 top-120 text-lg md:top-20 right-15 bg-[#141414] drop-shadow-2xl py-6 px-8">
+    <div className="fixed z-50 top-100 bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10 text-lg md:top-19 right-15  py-6 px-8">
       {user.role == "admin" ? (
         <div className={CommonClass}>All Orders</div>
       ) : (

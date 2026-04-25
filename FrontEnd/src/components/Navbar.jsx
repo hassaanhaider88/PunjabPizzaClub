@@ -22,7 +22,7 @@ const NavBar = () => {
 
   useEffect(() => {
     setCartCount(itemsInCart?.cartItems?.length);
-    console.log(itemsInCart)
+    console.log(itemsInCart);
   }, [itemsInCart, itemsInCart?.cartItems]);
 
   const navigate = useNavigate();
@@ -30,7 +30,7 @@ const NavBar = () => {
 
   const LP = location.pathname;
   return (
-    <div className="justify-between flex bg-black items-center sticky top-0 z-100 px-10">
+    <div className="justify-between flex bg-clip-padding backdrop-filter  backdrop-blur-sm bg-opacity-10 items-center sticky top-0 z-100 px-10">
       <div className="LogoContainer flex justify-center items-center w-[20%] md:w-[10%]">
         <img
           src={Logo}
@@ -128,7 +128,7 @@ const NavBar = () => {
 
       {/* mobile menu */}
       {isMobileMenuOpen && (
-        <div className="MobileMenu md:hidden absolute top-30 left-0 w-full bg-[#1a1a1a] text-white flex flex-col items-center gap-4 py-4">
+        <div className="MobileMenu md:hidden absolute top-30 left-0 w-full bg-clip-padding backdrop-filter z-50  backdrop-blur-sm bg-opacity-10 text-white flex flex-col items-center gap-4 py-4">
           <Link to="/" className="text-lg font-medium">
             Home
           </Link>

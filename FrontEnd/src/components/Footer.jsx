@@ -33,7 +33,7 @@ const Footer = () => {
           </div>
         </div>
       </div>
-      <div className="border-t mb-2 border-gray-700 pt-5 mt-3 text-center text-gray-400 text-sm">
+      <div className="border-t mb-2 border-gray-700  pt-5 mt-3 text-center text-gray-400 text-sm">
         <p>&copy; {year} Punbjab Pizza Club. All rights reserved. | <Link to="/privacy" className="hover:text-accent transition">Privacy Policy</Link> | <Link to="/tofs" className="hover:text-accent transition">Terms of Service</Link></p>
       </div>
     </>
