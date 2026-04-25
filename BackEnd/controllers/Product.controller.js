@@ -35,15 +35,17 @@ const SendAllProduct = async (req, res) => {
 };
 
 const CreateNewProduct = async (req, res) => {
-  const { name, desc, category } = req.body;
+  const { name, desc, category, prices } = req.body;
 
   try {
     return res.send({
       success: true,
       message: "Created Successfully",
-      data : {
-        name ,desc,category
-      }
+      data: {
+        name,
+        desc,
+        category,
+      },
     });
   } catch (error) {
     return res.send({

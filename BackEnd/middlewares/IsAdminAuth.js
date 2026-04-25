@@ -30,15 +30,15 @@ const IsAdminAuthMD = async (req, res) => {
     if (user.role !== "admin") {
       return res.send({
         success: false,
-        message: "Access denied",
+        message: "Your not admin",
       });
     }
     req.admin = user;
   } catch (error) {
-    return res.send({
+    return res.send({  
       success: false,
       message: error,
-    });
+    }); 
   }
 };
 
