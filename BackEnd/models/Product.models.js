@@ -48,6 +48,10 @@ const productSchema = new mongoose.Schema(
       type: [priceSchema],
       required: true,
     },
+    stockStatus: { 
+      type: String,
+      enum: ["In Stock", "Out Off Stock", "Soon"],
+    },
   },
   {
     timestamps: true,

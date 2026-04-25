@@ -33,9 +33,13 @@ const SignUpUser = async (req, res) => {
       };
     }
 
-    const token = jwt.sign({ userId: c_user._id }, process.env.JWT_SECRET_KEY, {
-      expiresIn: "7d",
-    });
+    const token = jwt.sign(
+      { userEmail: c_user.email },
+      process.env.JWT_SECRET_KEY,
+      {
+        expiresIn: "7d",
+      },
+    );
     return {
       success: true,
       message: "User Sign Up Successfully",
@@ -78,7 +82,7 @@ const LoginUser = async (req, res) => {
     }
 
     const token = jwt.sign(
-      { userId: checkUserExist._id },
+      { userEmail: checkUserExist.email },
       process.env.JWT_SECRET_KEY,
       { expiresIn: "7d" },
     );
@@ -99,4 +103,4 @@ const LoginUser = async (req, res) => {
   }
 };
 
-export { SignUpUser,LoginUser };
+export { SignUpUser, LoginUser };
