@@ -49,7 +49,7 @@ const CartContainer = ({ isOpenCart, setIsOpenCart }) => {
 
   return (
     <div
-      className={`md:w-1/2 w-full bg-[#0B0B0B]  top-0 right-0 h-full fixed z-50 p-6 transition-transform ${
+      className={`md:w-1/2 w-full bg-[#0B0B0B] h-screen top-0 right-0  fixed z-50 p-6 transition-transform ${
         isOpenCart ? "translate-x-0" : "translate-x-full"
       }`}
     >
@@ -65,7 +65,7 @@ const CartContainer = ({ isOpenCart, setIsOpenCart }) => {
       </div>
 
       {/* Cart Items */}
-      <div className="flex flex-col gap-4 overflow-y-auto h-[65%] pr-2">
+      <div className="flex flex-col gap-4 overflow-scroll h-[65%] pr-2">
         {cartItems.length === 0 ? (
           <div className="w-full flex-col h-full flexCenter">
             <LazyLoadImage

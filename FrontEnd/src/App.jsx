@@ -15,6 +15,9 @@ import PageNotFound from "./pages/PageNotFound";
 import DashBoard from "./pages/DashBoard";
 import AllOrders from "./pages/AllOrder";
 import UserProfile from "./pages/UserProfile";
+import AllProducts from "./pages/AllProducts";
+import AllCustomers from "./pages/AllCustomers";
+import Statistics from "./pages/statistics";
 
 import NavBar from "./components/NavBar";
 import Footer from "./components/Footer";
@@ -22,6 +25,7 @@ import CheckOut from "./pages/CheckOut";
 import fetchUser from "./utils/fetchUserFromLC";
 import { login } from "./store/slices/userSlice";
 import { useState } from "react";
+import AdminSideBar from "./components/AdminSideBar";
 
 const App = () => {
   const location = useLocation();
@@ -29,7 +33,13 @@ const App = () => {
   const user = useSelector((state) => state.user);
 
   // the routes where i dont want to show navbar
-  const RestricetPages = ["/dashboard", "/all-orders"];
+  const RestricetPages = [
+    "/dashboard",
+    "/all-orders",
+    "/all-products",
+    "/all-customers",
+    "/statistics",
+  ];
 
   const isShownNavOrFooter = !RestricetPages.includes(location.pathname);
 
@@ -70,6 +80,7 @@ const App = () => {
   return (
     <>
       <NavBar isShow={isShownNavOrFooter} />
+      {!isShownNavOrFooter && <AdminSideBar />}
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<AboutUs />} />
@@ -97,7 +108,19 @@ const App = () => {
           path="/all-orders"
           element={user?.role == "admin" ? <AllOrders /> : <Home />}
         />
+        <Route
+          path="/all-products"
+          element={user?.role == "admin" ? <AllProducts /> : <Home />}
+        />
 
+        <Route
+          path="/all-customers"
+          element={user?.role == "admin" ? <AllCustomers /> : <Home />}
+        />
+        <Route
+          path="/statistics"
+          element={user?.role == "admin" ? <Statistics /> : <Home />}
+        />
         {/* Page not found  */}
         <Route path="*" element={<PageNotFound />} />
       </Routes>
