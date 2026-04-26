@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { logout } from "../store/slices/userSlice";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
+
 import { BACK_END_API } from "../Constants";
+import { logout } from "../store/slices/userSlice";
 
 const UserOptions = ({
   isOpenCart,
@@ -13,6 +15,7 @@ const UserOptions = ({
   const user = useSelector((state) => state.user);
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [Loading, setLoading] = useState(false);
   const token = localStorage.getItem("PPCUserToken");
   const hanleUserLogout = async () => {
@@ -48,8 +51,10 @@ const UserOptions = ({
     "py-2 px-6 cursor-pointer hover:bg-[#FF4757]  rounded-4xl duration-300 transition-all";
   return (
     <div className="fixed z-50 top-100 bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10 text-lg md:top-19 right-15  py-6 px-8">
-      {user.role == "admin" ? (
-        <div className={CommonClass}>All Orders</div>
+      {user.role == "admin" ? ( // this will be protected
+        <div onClick={() => navigate("/all-orders")} className={CommonClass}>
+          All Orders
+        </div>
       ) : (
         <div
           onClick={() => {
@@ -62,9 +67,9 @@ const UserOptions = ({
         </div>
       )}
       {user.role == "admin" ? (
-        <div className={CommonClass}>Dashboard</div>
+        <div onClick={()=>navigate("/dashboard")} className={CommonClass}>Dashboard</div>
       ) : (
-        <div className={CommonClass}>Profile</div>
+        <div onClick={()=>navigate("/user-profile")} className={CommonClass}>Profile</div>
       )}
       {Loading ? (
         "Signing Out..."
