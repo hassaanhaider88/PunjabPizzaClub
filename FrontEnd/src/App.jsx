@@ -16,9 +16,10 @@ import Privacy from "./pages/Privacy";
 import PageNotFound from "./pages/PageNotFound";
 import AllOrders from "./pages/AllOrder";
 import UserProfile from "./pages/UserProfile";
-import AllProducts from "./pages/AllProducts";
+import AllProductsAdminPage from "./pages/AllProducts";
 import AllCustomers from "./pages/AllCustomers";
 import Statistics from "./pages/statistics";
+import AddNewProduct from "./pages/AddNewProduct";
 
 import NavBar from "./components/NavBar";
 import Footer from "./components/Footer";
@@ -28,6 +29,7 @@ import fetchAllProductsFun from "./utils/fetchAllProduts";
 import { login } from "./store/slices/userSlice";
 import AdminNavBar from "./components/AdminNavBar";
 import { fetchAllProducts } from "./store/slices/productSlice";
+import { RestricetPages } from "./Constants";
 
 const App = () => {
   const location = useLocation();
@@ -35,12 +37,6 @@ const App = () => {
   const user = useSelector((state) => state.user);
 
   // the routes where i dont want to show navbar
-  const RestricetPages = [
-    "/all-orders",
-    "/all-products",
-    "/all-customers",
-    "/statistics",
-  ];
 
   const isShownNavOrFooter = !RestricetPages.includes(location.pathname);
 
@@ -114,7 +110,7 @@ const App = () => {
         />
         <Route
           path="/all-products"
-          element={user?.role == "admin" ? <AllProducts /> : <Home />}
+          element={user?.role == "admin" ? <AllProductsAdminPage /> : <Home />}
         />
 
         <Route
@@ -124,6 +120,10 @@ const App = () => {
         <Route
           path="/statistics"
           element={user?.role == "admin" ? <Statistics /> : <Home />}
+        />
+        <Route
+          path="/add-new-product"
+          element={user?.role == "admin" ? <AddNewProduct /> : <Home />}
         />
         {/* Page not found  */}
         <Route path="*" element={<PageNotFound />} />

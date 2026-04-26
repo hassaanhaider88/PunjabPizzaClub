@@ -7,13 +7,21 @@ import { MdOutlineProductionQuantityLimits } from "react-icons/md";
 
 const BACK_END_API = "http://localhost:3000"
 
-  const AllCategory = [
+const AllCategory = [
     "Pizza",
     "Burger",
     "Sharwaama",
     "Paratha Roll",
     "Hot Wings",
-  ];
+];
+
+const RestricetPages = [
+    "/all-orders",
+    "/all-products",
+    "/all-customers",
+    "/statistics",
+    "/add-new-product"
+];
 
 const sideBarNavLins = [
     {
@@ -45,4 +53,4 @@ const sideBarNavLins = [
 
 
 
-export { BACK_END_API, sideBarNavLins,AllCategory }
+export { BACK_END_API, sideBarNavLins, AllCategory, RestricetPages }
