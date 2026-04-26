@@ -1,18 +1,17 @@
 import React, { useState } from "react";
-import PizzaData from "../dummy/PizzaData.json";
 import SinglePizzaCard from "../components/SinglePizzaCard";
+import { useSelector } from "react-redux";
+import { AllCategory } from "../Constants";
+
+import ErrorInFetchingProdcuts from "../components/ErrorInFetchingProdcuts";
+import ProductLoading from "../components/ProductLoading"
 
 const MenuSection = () => {
   const [activeMenu, setActiveMenu] = useState("Pizza");
-  const AllCategory = [
-    "Pizza",
-    "Burger",
-    "Sharwaama",
-    "Paratha Roll",
-    "Hot Wings",
-  ];
 
-  const [allMenuData] = useState(PizzaData);
+  const products = useSelector((state) => state.products);
+
+  // const [allMenuData,setAllMenuData] = useState(products?.items);
   return (
     <div className="w-full py-12 px-5 md:px-10 mt-5 flex flex-col items-start">
       <h1 className="text-3xl">Menu</h1>
@@ -28,11 +27,21 @@ const MenuSection = () => {
             {category}
           </button>
         ))}
-        <div className="ShowActiveMenuItems grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 md:gap-12 mt-10 w-full">
-          {allMenuData.map((item, index) => (
-            <SinglePizzaCard key={index} activeMenu={activeMenu} item={item} />
-          ))}
-        </div>
+
+        {products.loading ? (
+          <ProductLoading/>
+        ) : (
+          <div className="ShowActiveMenuItems grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 md:gap-12 mt-10 w-full">
+            {products?.items.map((item, index) => (
+              <SinglePizzaCard
+                key={index}
+                activeMenu={activeMenu}
+                item={item}
+              />
+            ))}
+          </div>
+        )}
+        {products.isError && <ErrorInFetchingProdcuts />}
       </div>
     </div>
   );

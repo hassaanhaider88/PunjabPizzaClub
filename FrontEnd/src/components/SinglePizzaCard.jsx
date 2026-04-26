@@ -5,6 +5,7 @@ import { addToCart } from "../store/slices/userCartSlice";
 import { toast } from "react-toastify";
 
 const PizzaCard = ({ item, activeMenu = "All" }) => {
+
   const dispatch = useDispatch();
   // State to handle size selection
   const [selectedSize, setSelectedSize] = useState(item?.prices[0]);

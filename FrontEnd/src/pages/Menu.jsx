@@ -1,18 +1,23 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react-hooks/set-state-in-effect */
 import { AiOutlineSearch } from "react-icons/ai";
 import React, { useEffect, useState } from "react";
-import PizzaData from "../dummy/PizzaData.json";
+// import PizzaData from "../dummy/PizzaData.json";
 import SinglePizzaCard from "../components/SinglePizzaCard";
+import { useSelector } from "react-redux";
+import ErrorInFetchingProdcuts from "../components/ErrorInFetchingProdcuts";
+import ProductLoading from "../components/ProductLoading";
 
 const Menu = () => {
+  const products = useSelector((state) => state.products);
   const [filteredData, setFilteredData] = useState([]);
   const [SearchVal, setSearchVal] = useState("");
 
   useEffect(() => {
     if (!SearchVal) {
-      setFilteredData(PizzaData.sort(() => Math.random() - 0.5));
+      setFilteredData(products?.items);
     }
-    const searchResults = PizzaData.filter((pizza) =>
+    const searchResults = products?.items.filter((pizza) =>
       pizza.name.toLowerCase().includes(SearchVal.toLowerCase()),
     );
     if (searchResults.length < 1) console.log(searchResults);
@@ -33,13 +38,17 @@ const Menu = () => {
           />
         </div>
       </div>
-      <div className="ShowActiveMenuItems  grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 md:gap-12 mt-15 w-full">
-        {filteredData.length > 0 &&
-          filteredData.map((item, index) => (
+      {products.loading ? (
+        <ProductLoading />
+      ) : (
+        <div className="ShowActiveMenuItems  grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 md:gap-12 mt-15 w-full">
+          {filteredData.map((item, index) => (
             <SinglePizzaCard key={index} item={item} />
           ))}
-      </div>
-      {filteredData.length === 0 && (
+        </div>
+      )}
+      {products.isError && <ErrorInFetchingProdcuts />}
+      {filteredData.length === 0 && !products.isError && !products.loading ? (
         <div className="w-full flex-col h-full flexCenter">
           <img
             src="https://i.pinimg.com/originals/17/08/90/170890e64f751e6c7926f851719d4523.gif"
@@ -69,6 +78,8 @@ const Menu = () => {
             </span>
           </p>
         </div>
+      ) : (
+        ""
       )}
     </div>
   );

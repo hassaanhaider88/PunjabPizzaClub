@@ -67,9 +67,13 @@ const UserOptions = ({
         </div>
       )}
       {user.role == "admin" ? (
-        <div onClick={()=>navigate("/dashboard")} className={CommonClass}>Dashboard</div>
+        <div onClick={() => navigate("/all-products")} className={CommonClass}>
+          All Products
+        </div>
       ) : (
-        <div onClick={()=>navigate("/user-profile")} className={CommonClass}>Profile</div>
+        <div onClick={() => navigate("/user-profile")} className={CommonClass}>
+          Profile
+        </div>
       )}
       {Loading ? (
         "Signing Out..."

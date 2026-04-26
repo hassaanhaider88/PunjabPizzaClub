@@ -3,6 +3,8 @@
 import { useEffect } from "react";
 import { Route, Routes, useLocation } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
+import { useState } from "react";
+import { toast } from "react-toastify";
 
 import Home from "./pages/Home";
 import AboutUs from "./pages/AboutUs";
@@ -12,7 +14,6 @@ import LoginAndSignUp from "./pages/LoginAndSignUp";
 import TermsOfServiecs from "./pages/TermsOfServiecs";
 import Privacy from "./pages/Privacy";
 import PageNotFound from "./pages/PageNotFound";
-import DashBoard from "./pages/DashBoard";
 import AllOrders from "./pages/AllOrder";
 import UserProfile from "./pages/UserProfile";
 import AllProducts from "./pages/AllProducts";
@@ -23,9 +24,10 @@ import NavBar from "./components/NavBar";
 import Footer from "./components/Footer";
 import CheckOut from "./pages/CheckOut";
 import fetchUser from "./utils/fetchUserFromLC";
+import fetchAllProductsFun from "./utils/fetchAllProduts";
 import { login } from "./store/slices/userSlice";
-import { useState } from "react";
-import AdminSideBar from "./components/AdminSideBar";
+import AdminNavBar from "./components/AdminNavBar";
+import { fetchAllProducts } from "./store/slices/productSlice";
 
 const App = () => {
   const location = useLocation();
@@ -34,7 +36,6 @@ const App = () => {
 
   // the routes where i dont want to show navbar
   const RestricetPages = [
-    "/dashboard",
     "/all-orders",
     "/all-products",
     "/all-customers",
@@ -43,11 +44,8 @@ const App = () => {
 
   const isShownNavOrFooter = !RestricetPages.includes(location.pathname);
 
-  console.log(isShownNavOrFooter, "Pages in nav");
-
   const fetchUserData = async (token) => {
     const data = await fetchUser(token);
-    console.log(data);
     if (!data) {
       return;
     } else {
@@ -66,7 +64,17 @@ const App = () => {
     }
   };
 
+  const fetchProduct = async () => {
+    const result = await fetchAllProductsFun(false);
+    if (result) {
+      dispacth(fetchAllProducts({ result, isError: false }));
+    } else {
+      dispacth(fetchAllProducts({ result: [], isError: true }));
+      toast.error("Something Wents Wrong While fetching Products");
+    }
+  };
   useEffect(() => {
+    fetchProduct();
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, [location.pathname]);
   useEffect(() => {
@@ -80,7 +88,7 @@ const App = () => {
   return (
     <>
       <NavBar isShow={isShownNavOrFooter} />
-      {!isShownNavOrFooter && <AdminSideBar />}
+      {!isShownNavOrFooter && <AdminNavBar />}
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<AboutUs />} />
@@ -100,10 +108,6 @@ const App = () => {
         />
 
         {/* Only admin can access */}
-        <Route
-          path="/dashboard"
-          element={user?.role == "admin" ? <DashBoard /> : <Home />}
-        />
         <Route
           path="/all-orders"
           element={user?.role == "admin" ? <AllOrders /> : <Home />}

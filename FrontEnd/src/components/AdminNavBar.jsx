@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { sideBarNavLins } from "../Constants";
 
-const AdminSideBar = () => {
+const AdminNavBar = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [CrtTime, setCrtTime] = useState("");
@@ -38,7 +38,7 @@ const AdminSideBar = () => {
           );
         })}
       </div>
-      <div className="SecondHeader bg-gray-900 rounded-3xl p-4 flex md:flex-row flex-col justify-between items-center">
+      <div className="SecondHeader bg-gray-900 rounded-3xl py-2 px-4 flex md:flex-row flex-col justify-between items-center">
         {sideBarNavLins.map((link, idx) => (
           <h1
             key={idx}
@@ -58,4 +58,4 @@ const AdminSideBar = () => {
   );
 };
 
-export default AdminSideBar;
+export default AdminNavBar;

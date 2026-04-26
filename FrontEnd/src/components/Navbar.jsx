@@ -22,7 +22,6 @@ const NavBar = ({ isShow = true }) => {
 
   useEffect(() => {
     setCartCount(itemsInCart?.cartItems?.length);
-    console.log(itemsInCart);
   }, [itemsInCart, itemsInCart?.cartItems]);
 
   const navigate = useNavigate();
@@ -30,7 +29,9 @@ const NavBar = ({ isShow = true }) => {
 
   const LP = location.pathname;
   return (
-    <div className={`${isShow ? "" : "hidden"} justify-between flex bg-clip-padding backdrop-filter  backdrop-blur-sm bg-opacity-10 items-center sticky top-0 z-100 px-10`}>
+    <div
+      className={`${isShow ? "" : "hidden"} justify-between flex bg-clip-padding backdrop-filter  backdrop-blur-sm bg-opacity-10 items-center sticky top-0 z-100 px-10`}
+    >
       <div className="LogoContainer flex justify-center items-center w-[20%] md:w-[10%]">
         <img
           src={Logo}
