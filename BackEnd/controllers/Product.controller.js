@@ -110,9 +110,10 @@ const DeleteProduct = async (req, res) => {
   }
 }
 
-const UpdatePrductStatus = async () => {
+const UpdatePrductStatus = async (req, res) => {
   try {
     const { id, status } = req.body;
+    console.log(id, status)
     if (!id || !status) {
       return res.send({
         success: false,
@@ -145,4 +146,4 @@ const UpdatePrductStatus = async () => {
   }
 }
 
-export { SendAllProduct, CreateNewProduct, DeleteProduct };
+export { SendAllProduct, CreateNewProduct, DeleteProduct, UpdatePrductStatus };

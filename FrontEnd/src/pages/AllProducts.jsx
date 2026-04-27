@@ -31,29 +31,31 @@ export default function AllProductsAdminPage() {
   }, []);
   const [products, setProducts] = useState(allProducts?.items);
 
-  const updateStatus = async(id, value) => {
+  const updateStatus = async (id, value) => {
     setProducts((prev) =>
       prev.map((p) => (p._id === id ? { ...p, stockStatus: value } : p)),
     );
     try {
-      const res = fetch(`${BACK_END_API}/api/products/update-status/${id}`, {
+      console.log(id, value);
+      const res = await fetch(`${BACK_END_API}/api/products/update-status`, {
         method: "POST",
         headers: {
+          "Content-Type": "application/json",
           Authorization: `Bearer ${user?.token}`,
         },
         body: JSON.stringify({
-          id,
+          id: id,
           status: value,
         }),
       });
       const result = await res.json();
       console.log(result);
-      if(result.success){
+      if (result.success) {
         toast.success(result.message);
         dispatch(updateProductStatus({ id, value }));
-      }else{
+      } else {
         toast.error(result.message);
-        setProducts(products?.items)
+        setProducts(products?.items);
       }
     } catch (error) {
       toast.error(error.message);
@@ -106,7 +108,7 @@ export default function AllProductsAdminPage() {
           </thead>
 
           <tbody>
-            {products.map((product) => (
+            {products?.map((product) => (
               <tr key={product._id} className="border-t border-white/10">
                 <td className="p-3 w-40">
                   <img
