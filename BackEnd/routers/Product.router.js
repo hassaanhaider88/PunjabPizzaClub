@@ -2,16 +2,31 @@ import {
   SendAllProduct,
   CreateNewProduct,
   DeleteProduct,
-  UpdatePrductStatus
+  UpdatePrductStatus,
+  UploadeImage,
+  sendSingleProduct
 } from "../controllers/Product.controller.js";
 import IsAdminAuthMD from "../middlewares/IsAdminAuth.js";
 
 const productRotues = (fastify, options) => {
   fastify.get("/all", SendAllProduct);
-  fastify.post("/create", { preHandler: IsAdminAuthMD }, CreateNewProduct);
-  fastify.post("/update-status", { preHandler: IsAdminAuthMD }, UpdatePrductStatus)
+  fastify.post("/upload-image", {
+    preHandler: IsAdminAuthMD,
+  }, UploadeImage);
+  fastify.post(
+    "/create",
+    {
+      preHandler: IsAdminAuthMD,
+    },
+    CreateNewProduct,
+  );
+  fastify.post(
+    "/update-status",
+    { preHandler: IsAdminAuthMD },
+    UpdatePrductStatus,
+  );
   fastify.post("/:id", { preHandler: IsAdminAuthMD }, DeleteProduct);
-
+  fastify.get("/single/:id", { preHandler: IsAdminAuthMD }, sendSingleProduct)
 };
 
 export default productRotues;

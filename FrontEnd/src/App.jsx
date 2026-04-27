@@ -30,6 +30,7 @@ import { login } from "./store/slices/userSlice";
 import AdminNavBar from "./components/AdminNavBar";
 import { fetchAllProducts } from "./store/slices/productSlice";
 import { RestricetPages } from "./Constants";
+import AdminProductUpdate from "./pages/UpdateProduct";
 
 const App = () => {
   const location = useLocation();
@@ -124,6 +125,10 @@ const App = () => {
         <Route
           path="/add-new-product"
           element={user?.role == "admin" ? <AddNewProduct /> : <Home />}
+        />
+          <Route
+          path="/update/:id"
+          element={user?.role == "admin" ? <AdminProductUpdate /> : <Home />}
         />
         {/* Page not found  */}
         <Route path="*" element={<PageNotFound />} />

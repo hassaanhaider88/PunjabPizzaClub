@@ -1,7 +1,7 @@
 import fastify from "fastify";
 import dotenv from "dotenv";
 import compression from "compression";
-import fastifyMultipart from "@fastify/multipart";
+import multipart from "@fastify/multipart";
 import cors from "@fastify/cors"
 
 
@@ -17,8 +17,12 @@ const app = fastify();
 const PORT = process.env.PORT;
 
 app.register(compression());
-app.register(fastifyMultipart);
+app.register(multipart, {
+  limits: { fileSize: 10 * 1024 * 1024 }, // 10MB limit
+});
 app.register(cors)
+app.register(import('@fastify/formbody'))
+
 await app.register(import('@fastify/rate-limit'), {
   max: 100,
   timeWindow: '1 minute'
