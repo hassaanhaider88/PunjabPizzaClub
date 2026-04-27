@@ -33,6 +33,7 @@ const userSlice = createSlice({
       state.email = "";
       state.phone = "";
       state.address = "";
+      state.token = ""
     },
     updateProfile: (state, action) => {
       state.isEmailVerified = action.payload.isEmailVerified;

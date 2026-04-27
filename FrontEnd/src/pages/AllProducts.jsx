@@ -1,9 +1,15 @@
 import { AiFillDelete } from "react-icons/ai";
 import { AiTwotoneEdit } from "react-icons/ai";
 import { MdAddBox } from "react-icons/md";
-import React, { useState } from "react";
-import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import { BACK_END_API } from "../Constants";
+import {
+  deleteProductStatus,
+  updateProductStatus,
+} from "../store/slices/productSlice";
 
 const statusStyles = {
   "In Stock": "bg-green-500/20 text-green-400 border-green-500",
@@ -14,13 +20,68 @@ const statusStyles = {
 const statusOptions = ["In Stock", "Out Off Stock", "Soon"];
 
 export default function AllProductsAdminPage() {
+  const naviagte = useNavigate();
+  const dispatch = useDispatch();
   const allProducts = useSelector((state) => state.products);
+  const user = useSelector((state) => state.user);
+  useEffect(() => {
+    if (!user.isLogged) {
+      naviagte("/");
+    }
+  }, []);
   const [products, setProducts] = useState(allProducts?.items);
 
-  const updateStatus = (id, value) => {
+  const updateStatus = async(id, value) => {
     setProducts((prev) =>
       prev.map((p) => (p._id === id ? { ...p, stockStatus: value } : p)),
     );
+    try {
+      const res = fetch(`${BACK_END_API}/api/products/update-status/${id}`, {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${user?.token}`,
+        },
+        body: JSON.stringify({
+          id,
+          status: value,
+        }),
+      });
+      const result = await res.json();
+      console.log(result);
+      if(result.success){
+        toast.success(result.message);
+        dispatch(updateProductStatus({ id, value }));
+      }else{
+        toast.error(result.message);
+        setProducts(products?.items)
+      }
+    } catch (error) {
+      toast.error(error.message);
+    }
+  };
+
+  const handleDeleteProducts = async (id) => {
+    try {
+      if (confirm("Are You Sure to Delete Product..")) {
+        const res = await fetch(`${BACK_END_API}/api/products/${id}`, {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${user?.token}`,
+          },
+        });
+        const result = await res.json();
+        console.log(result);
+        if (result.success) {
+          toast.success(result.message);
+          dispatch(deleteProductStatus({ id }));
+          setProducts((prev) => prev.filter((p) => p._id !== id));
+        } else {
+          toast.error(result.message);
+        }
+      }
+    } catch (error) {
+      toast.error(error.message);
+    }
   };
 
   return (
@@ -109,8 +170,11 @@ export default function AllProductsAdminPage() {
                   <button className="bg-[green]  px-3 py-1 rounded text-sm hover:opacity-80">
                     <AiTwotoneEdit size={20} /> Edit
                   </button>
-                  <button className="bg-[#ff4757]  ml-5 px-3 py-1 rounded text-sm hover:opacity-80">
-                    <AiFillDelete size={20} /> Edit
+                  <button
+                    onClick={() => handleDeleteProducts(product._id)}
+                    className="bg-[#ff4757]  ml-5 px-3 py-1 rounded text-sm hover:opacity-80"
+                  >
+                    <AiFillDelete size={20} /> Delete
                   </button>
                 </td>
               </tr>

@@ -80,4 +80,69 @@ const CreateNewProduct = async (req, res) => {
   }
 };
 
-export { SendAllProduct, CreateNewProduct };
+const DeleteProduct = async (req, res) => {
+  try {
+    const { id } = req.params;
+    if (!id) {
+      return res.send({
+        success: false,
+        message: "Please provide id"
+      })
+    }
+    const delPro = await ProductModel.findOneAndDelete({ _id: id });
+    if (!delPro) {
+      return res.send({
+        success: false,
+        message: "Error While Deleting.."
+      })
+    }
+    cachedData.products = {};
+    cacheTime = null;
+    return res.send({
+      success: true,
+      message: "Successfully deleted"
+    })
+  } catch (error) {
+    return res.send({
+      success: false,
+      message: error.message
+    })
+  }
+}
+
+const UpdatePrductStatus = async () => {
+  try {
+    const { id, status } = req.body;
+    if (!id || !status) {
+      return res.send({
+        success: false,
+        message: "Please provide all fields"
+      })
+    }
+    const Update = await ProductModel.findOneAndUpdate({ _id: id }, {
+      stockStatus: status
+    }, {
+      new: true
+    })
+    if (!Update) {
+      return res.send({
+        success: false,
+        message: "Error While Updating"
+      })
+    }
+
+    cachedData.products = {};
+    cacheTime = null;
+    return res.send({
+      success: true,
+      message: "Successfully Updated"
+    })
+  } catch (error) {
+    return res.send({
+      success: false,
+      message: error.message
+    })
+  }
+}
+
+export { SendAllProduct, CreateNewProduct, DeleteProduct };

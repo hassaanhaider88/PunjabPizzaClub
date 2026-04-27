@@ -52,7 +52,7 @@ const LoginAndSignUp = () => {
         if (!result.success) {
           toast.error(result.message);
         } else {
-          localStorage.setItem("PPCUserToken", result.data.token);
+          localStorage.setItem("PPCUserToken", result?.data.token);
           toast.success(`WelCome! ${result.data.name}`);
           dispatch(
             login({
@@ -85,18 +85,18 @@ const LoginAndSignUp = () => {
         if (!result.success) {
           toast.error(result.message);
         } else {
-          localStorage.setItem("PPCUserToken", result.data.token);
-          toast.success(`WelCome! ${result.data.name}`);
+          localStorage.setItem("PPCUserToken", result?.data.token);
+          toast.success(`WelCome! ${result?.data.name}`);
           dispatch(
             login({
               isLogged: true,
-              isEmailVerified: result.data.isEmailVerified,
-              phone: result.data.phone,
-              role: result.data.role,
-              email: result.data.email,
-              name: result.data.name,
-              address: result.data.address,
-              token: result.data.token,
+              isEmailVerified: result?.data.isEmailVerified,
+              phone: result?.data.phone,
+              role: result?.data.role,
+              email: result?.data.email,
+              name: result?.data.name,
+              address: result?.data.address,
+              token: result?.data.token,
             }),
           );
           navigate("/");

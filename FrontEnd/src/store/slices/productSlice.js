@@ -15,12 +15,20 @@ const productSlice = createSlice({
             state.items = action.payload.result;
             state.isError = action.payload.isError
         },
-        updateProductStatus:(state,action)=>{
-            // will work later hwo to update product status etc
-            state = action
-        }
+        updateProductStatus: (state, action) => {
+            const { id, status } = action.payload;
+            const product = state.items.find((item) => item._id === id);
+            if (product) {
+                product.stockStatus = status;
+            }
+            console.log(state.items, "user Slice")
+        },
+        deleteProductStatus: (state, action) => {
+            const RemaningItems = state.items.filter((item) => item._id !== action.payload.id);
+            state.items = RemaningItems;
+        },
     }
 })
 
-export const { fetchAllProducts } = productSlice.actions
+export const { fetchAllProducts, updateProductStatus,deleteProductStatus } = productSlice.actions
 export default productSlice.reducer;
