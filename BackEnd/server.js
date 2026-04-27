@@ -4,6 +4,7 @@ import compression from "compression";
 import fastifyMultipart from "@fastify/multipart";
 import cors from "@fastify/cors"
 
+
 import connectToDB from "./configs/ConnectDB.js";
 import userRoute from "./routers/User.router.js";
 import productRoute from "./routers/Product.router.js";
@@ -18,6 +19,10 @@ const PORT = process.env.PORT;
 app.register(compression());
 app.register(fastifyMultipart);
 app.register(cors)
+await app.register(import('@fastify/rate-limit'), {
+  max: 100,
+  timeWindow: '1 minute'
+})
 
 // Home Route for checking API is working...
 app.get("/", () => {

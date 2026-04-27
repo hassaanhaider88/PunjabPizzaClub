@@ -15,7 +15,10 @@ const productSlice = createSlice({
             state.items = action.payload.result;
             state.isError = action.payload.isError
         },
-
+        updateProductStatus:(state,action)=>{
+            // will work later hwo to update product status etc
+            state = action
+        }
     }
 })
 
