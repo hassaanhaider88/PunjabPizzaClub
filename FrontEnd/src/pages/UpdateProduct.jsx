@@ -185,10 +185,7 @@ const AdminProductUpdate = () => {
     return (
         <div className="min-h-screen bg-black text-white p-6">
             <div className="max-w-5xl mx-auto">
-
-
                 <form onSubmit={handleSubmit} className="space-y-6">
-
                     <div>
                         <input
                             type="file"
@@ -304,7 +301,7 @@ const AdminProductUpdate = () => {
 
 
                     <button type="submit" className="w-full py-3 bg-[#CE3B48] rounded">
-                        Submit
+                        Update One
                     </button>
                 </form>
             </div>
