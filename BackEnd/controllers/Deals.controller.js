@@ -173,7 +173,6 @@ const updateWholeDeal = async (req, res) => {
     try {
         const { title, description, image, price, isActive } =
             req.body;
-        console.log(req.body)
         const { id } = req.params;
         if (!id) {
             return res.send({
@@ -223,4 +222,6 @@ const updateWholeDeal = async (req, res) => {
         });
     }
 };
+
+
 export { sendAllDeals, createDeal, updateDealStatus, deleteDeal, updateWholeDeal, sendSingleDeal };

@@ -11,6 +11,9 @@ const PizzaCard = ({ item, activeMenu = "All" }) => {
   const [selectedSize, setSelectedSize] = useState(item?.prices[0]);
 
   const hanleAddToCartClick = () => {
+    if (item.stockStatus !== "In Stock") {
+      toast.warn(`Please Wait Product is Curruntly ${item.stockStatus}`)
+    }
     dispatch(
       addToCart({
         name: item.name,
@@ -52,11 +55,10 @@ const PizzaCard = ({ item, activeMenu = "All" }) => {
               <button
                 key={item.size}
                 onClick={() => setSelectedSize(item)}
-                className={`px-3 py-1.5 text-[10px] font-bold rounded-lg transition-all ${
-                  selectedSize.size === item.size
-                    ? "bg-[#FF4757] text-black"
-                    : "text-gray-500 hover:text-gray-300"
-                }`}
+                className={`px-3 py-1.5 text-[10px] font-bold rounded-lg transition-all ${selectedSize.size === item.size
+                  ? "bg-[#FF4757] text-black"
+                  : "text-gray-500 hover:text-gray-300"
+                  }`}
               >
                 {item.size === "Xtra Large" ? "XL" : item?.size[0]}
               </button>
@@ -86,12 +88,18 @@ const PizzaCard = ({ item, activeMenu = "All" }) => {
         </div>
 
         {/* CTA Button */}
-        <button
-          onClick={hanleAddToCartClick}
-          className="w-full bg-[#FF4757] hover:bg-[#FF4757]/80 text-white font-black py-4 rounded-full transition-all transform active:scale-95 shadow-[0_10px_20px_rgba(234,179,8,0.2)]"
-        >
-          Order Now
-        </button>
+        {
+          item.stockStatus == "In Stock" ? (<button
+            onClick={hanleAddToCartClick}
+            className="w-full bg-[#FF4757] hover:bg-[#FF4757]/80 text-white font-black py-4 rounded-full transition-all transform active:scale-95 shadow-[0_10px_20px_rgba(234,179,8,0.2)]"
+          >
+            Order Now
+          </button>) : (<button
+            className={`w-full ${item.stockStatus == "Soon" ? "bg-yellow-500 hover:bg-yellow-500/80" : "bg-red-700 hover:bg-red-800"} text-white font-black py-4 rounded-full transition-all transform active:scale-95 shadow-[0_10px_20px_rgba(234,179,8,0.2)]`}
+          >
+            {item.stockStatus}
+          </button>)
+        }
       </div>
     </div>
   ) : (

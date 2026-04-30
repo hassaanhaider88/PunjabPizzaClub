@@ -131,16 +131,16 @@ const CartContainer = ({ isOpenCart, setIsOpenCart }) => {
           ))
         )}
       </div>
-      <div className="flex justify-between mt-3 items-center mb-4">
-        <span className="text-gray-400">Total</span>
-        <span className="text-white text-3xl font-bold">
-          Rs.{totalPrice}
-        </span>
-      </div>
+
       {user.isLogged ? (
         <div className="absolute bottom-0 left-0 w-full p-6 bg-[#0B0B0B] border-t border-gray-800">
 
-
+          <div className="flex justify-between mt-3 items-center mb-4">
+            <span className="text-gray-400">Total</span>
+            <span className="text-white text-3xl font-bold">
+              Rs.{totalPrice}
+            </span>
+          </div>
           <button
             onClick={() => {
               navigate("/checkout");
@@ -162,9 +162,14 @@ const CartContainer = ({ isOpenCart, setIsOpenCart }) => {
         </div>
       ) : (
         cartItems.length > 0 && (
-          <button onClick={() => navigate("/auth")} className="w-full bg-[#D13E4B] text-white font-bold py-3 rounded-xl mb-3">
-            Please Login / Sign Up Frist For Order
-          </button>
+          <> <div className="flex justify-between mt-3 items-center mb-4">
+            <span className="text-gray-400">Total</span>
+            <span className="text-white text-3xl font-bold">
+              Rs.{totalPrice}
+            </span>
+          </div> <button onClick={() => navigate("/auth")} className="w-full bg-[#D13E4B] text-white font-bold py-3 rounded-xl mb-3">
+              Please Login / Sign Up Frist For Order
+            </button></>
         )
       )}
     </div>

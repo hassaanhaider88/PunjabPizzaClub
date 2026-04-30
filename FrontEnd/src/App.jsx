@@ -90,7 +90,8 @@ const App = () => {
     fetchProduct();
     fetchDeals()
     window.scrollTo({ top: 0, behavior: "smooth" });
-  }, [location.pathname]);
+  }, []);
+
   useEffect(() => {
     const token = localStorage.getItem("PPCUserToken");
     if (!token) {
