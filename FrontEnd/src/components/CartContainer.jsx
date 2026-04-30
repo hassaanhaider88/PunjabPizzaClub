@@ -49,7 +49,7 @@ const CartContainer = ({ isOpenCart, setIsOpenCart }) => {
 
   return (
     <div
-      className={`md:w-[40%] w-full bg-[#0B0B0B] h-screen top-0 right-0  fixed z-50 p-6 transition-transform ${isOpenCart ? "translate-x-0" : "translate-x-full"
+      className={`md:w-[55%] w-full bg-[#0B0B0B] h-screen top-0 right-0  fixed z-50 p-6 transition-transform ${isOpenCart ? "translate-x-0" : "translate-x-full"
         }`}
     >
       {/* Header */}

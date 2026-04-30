@@ -12,9 +12,11 @@ const CheckoutPage = () => {
   // they both will get if user don't firstly give use or want to update them
   const [deliveryAddress, setDeliveryAddress] = useState(user?.address);
   const [phoneNumber, setphoneNumber] = useState(user?.phone);
+  const [orderCity, setorderCity] = useState("");
+  const [orderStreet, setorderStreet] = useState("");
 
   const [transactionId, setTransactionId] = useState("");
-  const [orderPlaced, setOrderPlaced] = useState(false);
+
 
   const totalPrice = cartItems.reduce(
     (acc, item) => acc + item.price * item.quantity,
@@ -22,7 +24,7 @@ const CheckoutPage = () => {
   );
 
   const handlePlaceOrder = () => {
-    if (!deliveryAddress || !phoneNumber) {
+    if (!deliveryAddress || !phoneNumber || !orderCity || !orderStreet) {
       return toast.error("Please provide Phone and address");
     }
 
@@ -33,22 +35,10 @@ const CheckoutPage = () => {
     // this data will be send to backend then redirect user to his dashborad to track his Order
     console.log(deliveryAddress, phoneNumber, cartItems, totalPrice);
     // we will decided here either user will allow to order less than 1000 or not
-    setOrderPlaced(true);
+
     dispatch(clearWholeCart());
   };
 
-  if (orderPlaced) {
-    return (
-      <div className="min-h-screen bg-[#0B0B0B] flex items-center justify-center text-white">
-        <div className="text-center">
-          <h1 className="text-3xl font-bold text-[#D13E4B]">
-            Order Placed Successfully
-          </h1>
-          <p className="text-gray-400 mt-2">Thank you for your order</p>
-        </div>
-      </div>
-    );
-  }
 
   return (
     <div className="min-h-screen bg-[#0B0B0B] text-white p-6">
@@ -61,9 +51,23 @@ const CheckoutPage = () => {
 
           <input
             type="text"
-            placeholder="Enter Your Adress"
+            placeholder="Enter Your Full Adress"
             value={deliveryAddress}
             onChange={(e) => setDeliveryAddress(e.target.value)}
+            className="w-full mb-4 p-3 rounded-lg bg-black border border-gray-700 outline-none"
+          />
+          <input
+            type="text"
+            placeholder="Enter Your City"
+            value={orderCity}
+            onChange={(e) => setorderCity(e.target.value)}
+            className="w-full mb-4 p-3 rounded-lg bg-black border border-gray-700 outline-none"
+          />
+          <input
+            type="text"
+            placeholder="Enter Your Street name"
+            value={orderStreet}
+            onChange={(e) => setorderStreet(e.target.value)}
             className="w-full mb-4 p-3 rounded-lg bg-black border border-gray-700 outline-none"
           />
           <input
@@ -121,15 +125,23 @@ const CheckoutPage = () => {
             </div>
           )}
 
-          <button
+          {user.isEmailVerified ? <button
             onClick={handlePlaceOrder}
             className="w-full bg-[#D13E4B] py-3 rounded-xl font-bold"
           >
             Place Order
+          </button> : <> <button
+
+            className="w-full bg-[#D13E4B] py-3 rounded-xl font-bold"
+          >
+            Please Verify Your Email Before Placing Order
           </button>
+            <p className="mt-3 text-sm cursor-pointer text-blue-400" onClick={() => window.open(
+              "https://mail.google.com/mail/u/0/#inbox")}>Click Here To Navigate Your Eail</p>
+          </>}
         </div>
 
-        {/* RIGHT SIDE - SUMMARY */}
+
         <div className="bg-[#141414] p-6 rounded-2xl">
           <h2 className="text-xl font-bold mb-4">Order Summary</h2>
 
