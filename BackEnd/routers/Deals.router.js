@@ -4,7 +4,7 @@ async function routes(fastify, option) {
     fastify.get("/all", sendAllDeals);
     fastify.post("/create", { preHandler: IsAdminAuthMD }, createDeal);
     fastify.post("/update-status/:id", { preHandler: IsAdminAuthMD }, updateDealStatus);
-    fastify.post("/delete/:id", { preHandler: IsAdminAuthMD }, deleteDeal);
+    fastify.get("/delete/:id", { preHandler: IsAdminAuthMD }, deleteDeal);
     fastify.post("/update/:id", { preHandler: IsAdminAuthMD }, updateWholeDeal);
 
 }

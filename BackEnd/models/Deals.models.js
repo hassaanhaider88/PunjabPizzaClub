@@ -23,12 +23,6 @@ const dealSchema = new mongoose.Schema(
       required: true,
     },
 
-    validUntile: {
-      type: Number,
-      default: null,
-      min: 1,
-    },
-
     isActive: {
       type: Boolean,
       default: true,
@@ -39,6 +33,6 @@ const dealSchema = new mongoose.Schema(
   },
 );
 
-const DealsModel = mongoose.model("deals", dealSchema);
+const DealsModel = mongoose.model("deal", dealSchema);
 
 export default DealsModel;

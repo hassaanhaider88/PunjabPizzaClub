@@ -84,10 +84,16 @@ const createDeal = async (req, res) => {
 const updateDealStatus = async (req, res) => {
     try {
         const { id } = req.params;
-        const { isActive } = req.body;
+        if (!id) {
+            return res.send({
+                success: false,
+                message: "Please provide id",
+            });
+        }
+        const { activeStatus } = req.body;
         const deal = await DealsModel.findOneAndUpdate(
             { _id: id },
-            { isActive },
+            { $set: { isActive: activeStatus } },
             {
                 returnDocument: "after",
             },
@@ -179,4 +185,4 @@ const updateWholeDeal = async (req, res) => {
         });
     }
 };
-export { sendAllDeals, createDeal, updateDealStatus, deleteDeal,updateWholeDeal };
+export { sendAllDeals, createDeal, updateDealStatus, deleteDeal, updateWholeDeal };

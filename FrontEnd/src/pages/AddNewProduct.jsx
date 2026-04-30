@@ -33,7 +33,6 @@ const AdminProductForm = () => {
     file: null,
     preview: null,
     price: "",
-    validUntile: "",
     isActive: true,
   });
 
@@ -342,24 +341,18 @@ const AdminProductForm = () => {
                   onChange={handleDealChange}
                   className="p-2 bg-white/10  rounded"
                 />
-                <input
-                  name="validUntile"
-                  type="date"
-                  placeholder="Valid Until"
-                  onChange={handleDealChange}
-                  className="p-2 bg-white/10 rounded"
-                />
+                <label className="flex items-center gap-2">
+                  <input
+                    type="checkbox"
+                    name="isActive"
+                    checked={deal.isActive}
+                    onChange={handleDealChange}
+                  />
+                  Active
+                </label>
               </div>
 
-              <label className="flex items-center gap-2">
-                <input
-                  type="checkbox"
-                  name="isActive"
-                  checked={deal.isActive}
-                  onChange={handleDealChange}
-                />
-                Active
-              </label>
+
             </>
           )}
 

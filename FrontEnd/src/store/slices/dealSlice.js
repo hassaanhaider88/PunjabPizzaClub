@@ -1,10 +1,10 @@
-import { createSlice } from "@reduxjs/toolkit"
+import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
     deals: [],
     loading: true,
     isError: false,
-}
+};
 
 const DealSlice = createSlice({
     name: "deals",
@@ -17,15 +17,18 @@ const DealSlice = createSlice({
         },
         updateDealStatus: (state, action) => {
             const { id, status } = action.payload;
-            const deal = state.deals.filter((item) => item._id !== id);
+            const deal = state.deals.find((item) => item._id === id);
             if (deal) {
                 deal.isActive = status;
             }
-
-
+        },
+        deleteDeal: (state, action) => {
+            const { id } = action.payload
+            const deals = state.deals.filter((item) => item._id !== id)
+            state.deals = deals
         }
-    }
-})
+    },
+});
 
-export const { allDeals, updateDealStatus} = DealSlice.actions
+export const { allDeals, updateDealStatus,deleteDeal } = DealSlice.actions;
 export default DealSlice.reducer;

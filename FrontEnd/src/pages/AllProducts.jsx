@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react-hooks/exhaustive-deps */
 import { AiFillDelete } from "react-icons/ai";
 import { AiTwotoneEdit } from "react-icons/ai";
@@ -11,6 +12,7 @@ import {
   deleteProductStatus,
   updateProductStatus,
 } from "../store/slices/productSlice";
+import { deleteDeal, updateDealStatus } from "../store/slices/dealSlice"
 
 const statusStyles = {
   "In Stock": "bg-green-500/20 text-green-400 border-green-500",
@@ -24,6 +26,7 @@ export default function AllProductsAdminPage() {
   const naviagte = useNavigate();
   const dispatch = useDispatch();
   const allProducts = useSelector((state) => state.products);
+  const allDeals = useSelector(state => state.deals.deals);
   const user = useSelector((state) => state.user);
   const [OpenTab, setOpenTab] = useState("ProductTab");
   useEffect(() => {
@@ -88,124 +91,239 @@ export default function AllProductsAdminPage() {
     }
   };
 
+
+
+  const hanleUpdationDealStatusClick = async (id, isActive) => {
+    if (confirm("Are You Sure to Update Status")) {
+      try {
+        const res = await fetch(`${BACK_END_API}/api/deals/update-status/${id}`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${user?.token}`,
+          },
+          body: JSON.stringify({
+            activeStatus: !isActive,
+          }),
+        });
+
+        const result = await res.json();
+        console.log(result);
+        if (result.success) {
+          toast.success(result.message);
+          dispatch(updateDealStatus({ id, status: !isActive }));
+        } else {
+          toast.error(result.message);
+        }
+
+      } catch (error) {
+        toast.error(error.message);
+      }
+    }
+  }
+
+  const handleDeleteDeal = async (id) => {
+    try {
+      const res = await fetch(`${BACK_END_API}/api/deals/delete/${id}`, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${user?.token}`
+        }
+      });
+      const result = await res.json();
+      if (!result.success) {
+        toast.error(result.message)
+      } else {
+        toast.success(result.message)
+        dispatch(deleteDeal({ id }));
+      }
+
+    } catch (error) {
+      toast.error(error.message)
+    }
+
+  };
+
   return (
     <div className="min-h-screen py-6">
       <div className="flex py-3 gap-3 mr-5 justify-between items-center">
         <div className="flexCenter gap-2">
-          <button onClick={() => setOpenTab("ProductTab")} className={`py-3 px-2 rounded-xl ${OpenTab == "ProductTab" ? "bg-[#CE3B48]" : "bg-white/10"}`}>Products</button>
-          <button onClick={() => setOpenTab("DealTab")} className={`py-3 px-2 rounded-xl ${OpenTab == "DealTab" ? "bg-[#CE3B48]" : "bg-white/10"}`}>Deals</button>
+          <button
+            onClick={() => setOpenTab("ProductTab")}
+            className={`py-3 px-2 rounded-xl ${OpenTab == "ProductTab" ? "bg-[#CE3B48]" : "bg-white/10"}`}
+          >
+            Products
+          </button>
+          <button
+            onClick={() => setOpenTab("DealTab")}
+            className={`py-3 px-2 rounded-xl ${OpenTab == "DealTab" ? "bg-[#CE3B48]" : "bg-white/10"}`}
+          >
+            Deals
+          </button>
         </div>
         <Link to={"/add-new-product"} className="flexCenter w-fit">
           <MdAddBox size={30} />
           Add New Products
         </Link>
       </div>
-      {OpenTab == "ProductTab" ? <div className="overflow-x-auto">
-        <table className="w-full border border-white/10 rounded-lg overflow-hidden">
-          <thead className="bg-white/5 text-left">
-            <tr>
-              <th className="p-3">Image</th>
-              <th className="p-3">Product</th>
-              <th className="p-3">Category</th>
-              <th className="p-3">Stock</th>
-              <th className="p-3">Prices</th>
-              <th className="p-3">Action</th>
-            </tr>
-          </thead>
-
-          <tbody>
-            {products?.map((product) => (
-              <tr key={product._id} className="border-t border-white/10">
-                <td className="p-3 w-40">
-                  <img
-                    src={product.url}
-                    alt={product.name}
-                    className="w-14 h-14 object-cover rounded"
-                  />
-                </td>
-                <td className="p-3 w-40 font-medium">
-                  {product.name.slice(0, 20)}...
-                </td>
-
-                <td className="p-3 w-40">{product.category}</td>
-
-                <td className="p-3 w-40">
-                  <span
-                    className={`px-2 py-1 text-xs border rounded ${statusStyles[product.stockStatus]
-                      }`}
-                  >
-                    {product.stockStatus}
-                  </span>
-
-                  <div className="mt-2">
-                    <select
-                      value={product.stockStatus}
-                      onChange={(e) =>
-                        updateStatus(product._id, e.target.value)
-                      }
-                      className="bg-black border border-white/20 text-white text-sm p-1 rounded focus:outline-none"
-                    >
-                      {statusOptions.map((status) => (
-                        <option key={status} value={status}>
-                          {status}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-                </td>
-
-                <td className="p-3 ">
-                  <div className="space-y-1 grid grid-cols-2 gap-2">
-                    {product.prices.map((p, idx) => (
-                      <div key={idx} className="text-xs bg-white/5 p-2 rounded">
-                        <div className="font-medium">{p.size}</div>
-                        <div>
-                          Original:{" "}
-                          <span className="line-through text-white/60">
-                            {p.originalPrice}
-                          </span>
-                        </div>
-                        <div className="text-[#ff4757]">
-                          Offer: {p.offerPrice}
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </td>
-
-                <td className="p-3 w-40">
-                  <button onClick={() => naviagte(`/update/${product._id}`)} className="bg-[green]  px-3 py-1 rounded text-sm hover:opacity-80">
-                    <AiTwotoneEdit size={20} /> Edit
-                  </button>
-                  <button
-                    onClick={() => handleDeleteProducts(product._id)}
-                    className="bg-[#ff4757]  ml-5 px-3 py-1 rounded text-sm hover:opacity-80"
-                  >
-                    <AiFillDelete size={20} /> Delete
-                  </button>
-                </td>
+      {OpenTab == "ProductTab" ? (
+        <div className="overflow-x-auto">
+          <table className="w-full border border-white/10 rounded-lg overflow-hidden">
+            <thead className="bg-white/5 text-left">
+              <tr>
+                <th className="p-3">Image</th>
+                <th className="p-3">Name</th>
+                <th className="p-3">Category</th>
+                <th className="p-3">Stock</th>
+                <th className="p-3">Prices</th>
+                <th className="p-3">Action</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
-      </div> : <div className="overflow-x-auto">
-        <table className="w-full border border-white/10 rounded-lg overflow-hidden">
-          <thead className="bg-white/5 text-left">
-            <tr>
-              <th className="p-3">Image</th>
-              <th className="p-3">Product</th>
-              <th className="p-3">Category</th>
-              <th className="p-3">Stock</th>
-              <th className="p-3">Prices</th>
-              <th className="p-3">Action</th>
-            </tr>
-          </thead>
+            </thead>
 
-          <tbody>
-            asdf
-          </tbody>
-        </table>
-      </div>}
+            <tbody>
+              {products?.map((product) => (
+                <tr key={product._id} className="border-t border-white/10">
+                  <td className="p-3 w-40">
+                    <img
+                      src={product.url}
+                      alt={product.name}
+                      className="w-14 h-14 object-cover rounded"
+                    />
+                  </td>
+                  <td className="p-3 w-40 font-medium">
+                    {product.name.slice(0, 20)}...
+                  </td>
+
+                  <td className="p-3 w-40">{product.category}</td>
+
+                  <td className="p-3 w-40">
+                    <span
+                      className={`px-2 py-1 text-xs border rounded ${statusStyles[product.stockStatus]
+                        }`}
+                    >
+                      {product.stockStatus}
+                    </span>
+
+                    <div className="mt-2">
+                      <select
+                        value={product.stockStatus}
+                        onChange={(e) =>
+                          updateStatus(product._id, e.target.value)
+                        }
+                        className="bg-black border border-white/20 text-white text-sm p-1 rounded focus:outline-none"
+                      >
+                        {statusOptions.map((status) => (
+                          <option key={status} value={status}>
+                            {status}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+                  </td>
+
+                  <td className="p-3 ">
+                    <div className="space-y-1 grid grid-cols-2 gap-2">
+                      {product.prices.map((p, idx) => (
+                        <div
+                          key={idx}
+                          className="text-xs bg-white/5 p-2 rounded"
+                        >
+                          <div className="font-medium">{p.size}</div>
+                          <div>
+                            Original:{" "}
+                            <span className="line-through text-white/60">
+                              {p.originalPrice}
+                            </span>
+                          </div>
+                          <div className="text-[#ff4757]">
+                            Offer: {p.offerPrice}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </td>
+
+                  <td className="p-3 w-40">
+                    <button
+                      onClick={() => naviagte(`/update/${product._id}`)}
+                      className="bg-[green]  px-3 py-1 rounded text-sm hover:opacity-80"
+                    >
+                      <AiTwotoneEdit size={20} /> Edit
+                    </button>
+                    <button
+                      onClick={() => handleDeleteProducts(product._id)}
+                      className="bg-[#ff4757]  ml-5 px-3 py-1 rounded text-sm hover:opacity-80"
+                    >
+                      <AiFillDelete size={20} /> Delete
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      ) : (
+        <div className="overflow-x-auto">
+          <table className="w-full border border-white/10 rounded-lg overflow-hidden">
+            <thead className="bg-white/5 text-left">
+              <tr>
+                <th className="p-3">Image</th>
+                <th className="p-3">Name</th>
+                <th className="p-3">Desc.</th>
+                <th className="p-3">IsActive</th>
+                <th className="p-3">Prices</th>
+                <th className="p-3">Action</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              {allDeals?.map((deal) => (
+                <tr key={deal._id} className="border-t border-white/10">
+                  <td className="p-3 w-40">
+                    <img
+                      src={deal.image}
+                      alt={deal.title}
+                      className="w-14 h-14 object-cover rounded"
+                    />
+                  </td>
+                  <td className="p-3 w-50 font-medium">
+                    {deal.title.slice(0, 20)}...
+                  </td>
+
+                  <td className="p-3 w-100">{deal.description}</td>
+
+                  <td className="p-3 flex justify-around w-30">
+                    <span
+                      onClick={() => hanleUpdationDealStatusClick(deal._id, deal.isActive)}
+                      className={`px-2  flex py-1 text-xs border rounded ${deal.isActive ? "bg-green-500/20 text-green-400 border-green-500" : ""}`}
+                    >
+                    </span>
+                    {deal.isActive} <p>{deal.isActive ? "Active" : "Not Active"}</p>
+                  </td>
+                  <td className="p-3 w-40">
+                    {deal.price}
+                  </td>
+
+                  <td className="p-3 w-40">
+                    <button
+                      onClick={() => naviagte(`/update/${deal._id}`)}
+                      className="bg-[green]  px-3 py-1 rounded text-sm hover:opacity-80"
+                    >
+                      <AiTwotoneEdit size={20} /> Edit
+                    </button>
+                    <button
+                      onClick={() => handleDeleteDeal(deal._id)}
+                      className="bg-[#ff4757]  ml-5 px-3 py-1 rounded text-sm hover:opacity-80"
+                    >
+                      <AiFillDelete size={20} /> Delete
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
     </div>
   );
 }
