@@ -21,7 +21,8 @@ const RestricetPages = [
     "/menu",
     "/about",
     "/contact",
-    "/auth"
+    "/auth",
+    "/checkout"
 ];
 
 const sideBarNavLins = [

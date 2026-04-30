@@ -33,6 +33,7 @@ import { RestricetPages } from "./Constants";
 import AdminProductUpdate from "./pages/UpdateProduct";
 import fetchAllDealsfun from "./utils/fetchAllDeals";
 import { allDeals } from "./store/slices/dealSlice"
+import UpdateDeal from "./pages/updateDeal";
 
 const App = () => {
   const location = useLocation();
@@ -145,6 +146,10 @@ const App = () => {
         <Route
           path="/update/:id"
           element={user?.role == "admin" ? <AdminProductUpdate /> : <Home />}
+        />
+        <Route
+          path="/update-deal/:id"
+          element={user?.role == "admin" ? <UpdateDeal /> : <Home />}
         />
         {/* Page not found  */}
         <Route path="*" element={<PageNotFound />} />

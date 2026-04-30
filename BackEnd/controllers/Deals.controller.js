@@ -36,6 +36,35 @@ const sendAllDeals = async (req, res) => {
     }
 };
 
+const sendSingleDeal = async (req, res) => {
+    try {
+        const { id } = req.params;
+        if (!id) {
+            return res.send({
+                success: false,
+                message: "Please provide id",
+            });
+        }
+        const deal = await DealsModel.findOne({ _id: id });
+        if (!deal) {
+            return res.send({
+                success: false,
+                message: "Deal not found",
+            });
+        }
+        return res.send({
+            success: true,
+            message: "Deal Founded..",
+            data: deal,
+        });
+    } catch (error) {
+        return res.send({
+            success: false,
+            message: error.message,
+        });
+    }
+}
+
 const createDeal = async (req, res) => {
     try {
         const { title, description, image, price, isActive } =
@@ -142,8 +171,9 @@ const deleteDeal = async (req, res) => {
 
 const updateWholeDeal = async (req, res) => {
     try {
-        const { title, description, image, price, validUntile, isActive } =
+        const { title, description, image, price, isActive } =
             req.body;
+        console.log(req.body)
         const { id } = req.params;
         if (!id) {
             return res.send({
@@ -155,9 +185,7 @@ const updateWholeDeal = async (req, res) => {
             !title ||
             !description ||
             !image ||
-            !price ||
-            !validUntile ||
-            !isActive
+            !price
         ) {
             return res.send({
                 success: false,
@@ -170,11 +198,23 @@ const updateWholeDeal = async (req, res) => {
             description,
             image,
             price,
-            validUntile,
             isActive,
         }, {
             returnDocument: "after",
         },)
+        if (!deal) {
+            return res.send({
+                success: false,
+                message: "Error in updating deal",
+            })
+        }
+        cachedDeals.deals = {};
+        cacheTime = null;
+        return res.send({
+            success: true,
+            message: "Deal Updated Successfully",
+            data: deal
+        });
 
     } catch (error) {
         return res.send({
@@ -183,4 +223,4 @@ const updateWholeDeal = async (req, res) => {
         });
     }
 };
-export { sendAllDeals, createDeal, updateDealStatus, deleteDeal, updateWholeDeal };
+export { sendAllDeals, createDeal, updateDealStatus, deleteDeal, updateWholeDeal, sendSingleDeal };

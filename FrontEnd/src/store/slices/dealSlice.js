@@ -26,9 +26,19 @@ const DealSlice = createSlice({
             const { id } = action.payload
             const deals = state.deals.filter((item) => item._id !== id)
             state.deals = deals
+        },
+        updateDeal: (state, action) => {
+            const { id, title, description, price, isActive } = action.payload
+            const deal = state.deals.find((item) => item._id === id);
+            if (deal) {
+                deal.title = title,
+                    deal.description = description,
+                    deal.price = price,
+                    deal.isActive = isActive
+            }
         }
     },
 });
 
-export const { allDeals, updateDealStatus,deleteDeal } = DealSlice.actions;
+export const { allDeals, updateDealStatus, deleteDeal,updateDeal } = DealSlice.actions;
 export default DealSlice.reducer;

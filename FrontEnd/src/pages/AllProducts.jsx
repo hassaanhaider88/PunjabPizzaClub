@@ -123,23 +123,25 @@ export default function AllProductsAdminPage() {
   }
 
   const handleDeleteDeal = async (id) => {
-    try {
-      const res = await fetch(`${BACK_END_API}/api/deals/delete/${id}`, {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${user?.token}`
+    if (confirm("Are You Sure to Delete Deal..")) {
+      try {
+        const res = await fetch(`${BACK_END_API}/api/deals/delete/${id}`, {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${user?.token}`
+          }
+        });
+        const result = await res.json();
+        if (!result.success) {
+          toast.error(result.message)
+        } else {
+          toast.success(result.message)
+          dispatch(deleteDeal({ id }));
         }
-      });
-      const result = await res.json();
-      if (!result.success) {
-        toast.error(result.message)
-      } else {
-        toast.success(result.message)
-        dispatch(deleteDeal({ id }));
-      }
 
-    } catch (error) {
-      toast.error(error.message)
+      } catch (error) {
+        toast.error(error.message)
+      }
     }
 
   };
@@ -306,7 +308,7 @@ export default function AllProductsAdminPage() {
 
                   <td className="p-3 w-40">
                     <button
-                      onClick={() => naviagte(`/update/${deal._id}`)}
+                      onClick={() => naviagte(`/update-deal/${deal._id}`)}
                       className="bg-[green]  px-3 py-1 rounded text-sm hover:opacity-80"
                     >
                       <AiTwotoneEdit size={20} /> Edit

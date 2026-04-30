@@ -18,7 +18,7 @@ const MenuSection = () => {
       {/* Menu Filters will be displayed here */}
 
       <div className="flex  text-xl font-semibold items-center w-full justify-evenly flex-wrap gap-5 mt-8">
-        {AllCategory.map((category, index) => (
+        {AllCategory?.map((category, index) => (
           <button
             key={index}
             onClick={() => setActiveMenu(category)}
@@ -28,8 +28,8 @@ const MenuSection = () => {
           </button>
         ))}
 
-        {products.loading ? (
-          <ProductLoading/>
+        {products?.loading ? (
+          <ProductLoading />
         ) : (
           <div className="ShowActiveMenuItems grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 md:gap-12 mt-10 w-full">
             {products?.items.map((item, index) => (
@@ -41,7 +41,7 @@ const MenuSection = () => {
             ))}
           </div>
         )}
-        {products.isError && <ErrorInFetchingProdcuts />}
+        {products?.isError && <ErrorInFetchingProdcuts />}
       </div>
     </div>
   );
