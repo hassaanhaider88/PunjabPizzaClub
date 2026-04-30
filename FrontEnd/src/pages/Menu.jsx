@@ -9,20 +9,23 @@ import ErrorInFetchingProdcuts from "../components/ErrorInFetchingProdcuts";
 import ProductLoading from "../components/ProductLoading";
 
 const Menu = () => {
-  const products = useSelector((state) => state.products);
+  const products = useSelector((state) => state.products.items);
+  const productLoading = useSelector(state => state.products.loading)
+  const productError = useSelector(state => state.products.isError)
+
   const [filteredData, setFilteredData] = useState([]);
   const [SearchVal, setSearchVal] = useState("");
 
   useEffect(() => {
     if (!SearchVal) {
-      setFilteredData(products?.items);
+      setFilteredData(products);
     }
-    const searchResults = products?.items.filter((pizza) =>
+    const searchResults = products.filter((pizza) =>
       pizza.name.toLowerCase().includes(SearchVal.toLowerCase()),
     );
     if (searchResults.length < 1) console.log(searchResults);
     setFilteredData(searchResults);
-  }, [SearchVal]);
+  }, [SearchVal, products]);
 
   return (
     <div className="w-full py-12 px-5 md:px-10 mt-5 flex flex-col items-start">
@@ -38,7 +41,7 @@ const Menu = () => {
           />
         </div>
       </div>
-      {products.loading ? (
+      {productLoading ? (
         <ProductLoading />
       ) : (
         <div className="ShowActiveMenuItems  grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 md:gap-12 mt-15 w-full">
@@ -47,7 +50,7 @@ const Menu = () => {
           ))}
         </div>
       )}
-      {products.isError && <ErrorInFetchingProdcuts />}
+      {productError && <ErrorInFetchingProdcuts />}
       {filteredData.length === 0 && !products.isError && !products.loading ? (
         <div className="w-full flex-col h-full flexCenter">
           <img
