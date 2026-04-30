@@ -38,14 +38,13 @@ const sendAllDeals = async (req, res) => {
 
 const createDeal = async (req, res) => {
     try {
-        const { title, description, image, price, validUntile, isActive } =
+        const { title, description, image, price, isActive } =
             req.body;
         if (
             !title ||
             !description ||
             !image ||
             !price ||
-            !validUntile ||
             !isActive
         ) {
             return res.send({
@@ -58,7 +57,6 @@ const createDeal = async (req, res) => {
             description,
             image,
             price,
-            validUntile,
             isActive,
         });
         if (!deal) {

@@ -162,7 +162,27 @@ const AdminProductForm = () => {
         alert("Missing deal fields");
         return;
       }
-
+      const dealres = await fetch(`${BACK_END_API}/api/deals/create`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${user?.token}`
+        },
+        body: JSON.stringify({
+          title: deal.title,
+          description: deal.description,
+          image: deal.preview,
+          price: deal.price,
+          isActive: deal.isActive
+        })
+      });
+      const dealresult = await dealres.json();
+      if (dealresult.success) {
+        toast.success(dealresult.message)
+        navigate("/all-products")
+      } else {
+        toast.error(dealresult.message)
+      }
       console.log("DEAL:", deal);
     }
   };
