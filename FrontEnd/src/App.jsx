@@ -39,7 +39,7 @@ const App = () => {
 
   // the routes where i dont want to show navbar
 
-  const isShownNavOrFooter = !RestricetPages.includes(location.pathname);
+  const isShownNavOrFooter = RestricetPages.includes(location.pathname);
 
   const fetchUserData = async (token) => {
     const data = await fetchUser(token);
@@ -126,7 +126,7 @@ const App = () => {
           path="/add-new-product"
           element={user?.role == "admin" ? <AddNewProduct /> : <Home />}
         />
-          <Route
+        <Route
           path="/update/:id"
           element={user?.role == "admin" ? <AdminProductUpdate /> : <Home />}
         />

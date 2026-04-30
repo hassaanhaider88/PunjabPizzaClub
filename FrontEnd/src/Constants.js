@@ -15,12 +15,12 @@ const AllCategory = [
     "Hot Wings",
 ];
 
+// To show user navbar on these navbars
 const RestricetPages = [
-    "/all-orders",
-    "/all-products",
-    "/all-customers",
-    "/statistics",
-    "/add-new-product"
+    "/",
+    "/menu",
+    "/about",
+    "/contact"
 ];
 
 const sideBarNavLins = [

@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { AiFillDelete } from "react-icons/ai";
 import { AiTwotoneEdit } from "react-icons/ai";
 import { MdAddBox } from "react-icons/md";
@@ -125,9 +126,8 @@ export default function AllProductsAdminPage() {
 
                 <td className="p-3 w-40">
                   <span
-                    className={`px-2 py-1 text-xs border rounded ${
-                      statusStyles[product.stockStatus]
-                    }`}
+                    className={`px-2 py-1 text-xs border rounded ${statusStyles[product.stockStatus]
+                      }`}
                   >
                     {product.stockStatus}
                   </span>
@@ -169,7 +169,7 @@ export default function AllProductsAdminPage() {
                 </td>
 
                 <td className="p-3 w-40">
-                  <button className="bg-[green]  px-3 py-1 rounded text-sm hover:opacity-80">
+                  <button onClick={() => naviagte(`/update/${product._id}`)} className="bg-[green]  px-3 py-1 rounded text-sm hover:opacity-80">
                     <AiTwotoneEdit size={20} /> Edit
                   </button>
                   <button

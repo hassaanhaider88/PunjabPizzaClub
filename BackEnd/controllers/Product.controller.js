@@ -1,10 +1,7 @@
 import cloudinary from "../configs/Cloudinary.js";
 import ProductModel from "../models/Product.models.js";
 import fs from "fs";
-import { pipeline } from 'stream/promises';
-
-
-
+import { pipeline } from "stream/promises";
 
 const cachedData = {};
 let cacheTime = null;
@@ -43,7 +40,7 @@ const SendAllProduct = async (req, res) => {
 
 const CreateNewProduct = async (req, res) => {
   const { name, desc, category, prices, stockStatus, url, ImageId } = req.body;
-  console.log(name, desc, category, prices, stockStatus, url, ImageId)
+  console.log(name, desc, category, prices, stockStatus, url, ImageId);
   if (
     !name ||
     !desc ||
@@ -175,49 +172,49 @@ const sendSingleProduct = async (req, res) => {
     if (!id) {
       return res.send({
         success: false,
-        message: "Please provide Id"
-      })
+        message: "Please provide Id",
+      });
     }
     const product = await ProductModel.findOne({ _id: id });
     if (!product) {
       return res.send({
         success: false,
-        message: "Product not found"
-      })
+        message: "Product not found",
+      });
     }
     return res.send({
       success: true,
       message: "Product Founded..",
-      data: product
-    })
+      data: product,
+    });
   } catch (error) {
     return res.send({
       success: false,
-      massage: error.message
-    })
+      massage: error.message,
+    });
   }
-}
+};
 
 const UploadeImage = async (req, res) => {
   try {
     const data = await req.file();
     if (!data) {
-      return res.status(400).send({ error: 'No file provided' });
+      return res.status(400).send({ error: "No file provided" });
     }
     const result = await new Promise((resolve, reject) => {
       const uploadStream = cloudinary.uploader.upload_stream(
         {
-          folder: 'PPCLUpload',
-          resource_type: 'image',
+          folder: "PPCLUpload",
+          resource_type: "image",
         },
         (error, result) => {
           if (error) reject(error);
           else resolve(result);
-        }
+        },
       );
       data.file.pipe(uploadStream);
-      data.file.on('error', reject);
-      uploadStream.on('error', reject);
+      data.file.on("error", reject);
+      uploadStream.on("error", reject);
     });
     return res.send({
       success: true,
@@ -233,4 +230,73 @@ const UploadeImage = async (req, res) => {
   }
 };
 
-export { SendAllProduct, CreateNewProduct, DeleteProduct, UpdatePrductStatus,sendSingleProduct ,UploadeImage };
+const UpdateWholeProduct = async (req, res) => {
+  try {
+    const { name, desc, category, prices, stockStatus, url } =
+      req.body;
+    console.log(req.body)
+    const { id } = req.params;
+    if (!id) {
+      return res.send({
+        success: false,
+        message: "Please provide id",
+      });
+    }
+    if (
+      !name ||
+      !desc ||
+      !category ||
+      !prices ||
+      !stockStatus ||
+      !url
+    ) {
+      return res.send({
+        success: false,
+        message: "Please provide all fields",
+      });
+    }
+
+    const product = await ProductModel.findOneAndUpdate(
+      { _id: id },
+      {
+        name,
+        desc,
+        category,
+        prices,
+        stockStatus,
+        url,
+      }
+    );
+    
+    if (!product) {
+      return res.send({
+        success: false,
+        message: "Error While Updating",
+      });
+    }
+    cachedData.products = {};
+    cacheTime = null;
+
+    return res.send({
+      success: true,
+      message: "Successfully Updated",
+    })
+
+
+  } catch (error) {
+    return res.send({
+      success: false,
+      message: error.message,
+    });
+  }
+};
+
+export {
+  SendAllProduct,
+  CreateNewProduct,
+  DeleteProduct,
+  UpdatePrductStatus,
+  sendSingleProduct,
+  UploadeImage,
+  UpdateWholeProduct
+};

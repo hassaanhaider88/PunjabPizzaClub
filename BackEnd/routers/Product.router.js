@@ -4,7 +4,8 @@ import {
   DeleteProduct,
   UpdatePrductStatus,
   UploadeImage,
-  sendSingleProduct
+  sendSingleProduct,
+  UpdateWholeProduct
 } from "../controllers/Product.controller.js";
 import IsAdminAuthMD from "../middlewares/IsAdminAuth.js";
 
@@ -26,7 +27,8 @@ const productRotues = (fastify, options) => {
     UpdatePrductStatus,
   );
   fastify.post("/:id", { preHandler: IsAdminAuthMD }, DeleteProduct);
-  fastify.get("/single/:id", { preHandler: IsAdminAuthMD }, sendSingleProduct)
+  fastify.get("/single/:id", { preHandler: IsAdminAuthMD }, sendSingleProduct);
+  fastify.post("/update/:id", { preHandler: IsAdminAuthMD }, UpdateWholeProduct)
 };
 
 export default productRotues;

@@ -3,23 +3,27 @@ import { CgAdd } from "react-icons/cg";
 import { AiOutlineDelete } from "react-icons/ai";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { BACK_END_API } from "../Constants"
+import { BACK_END_API } from "../Constants";
 import { toast } from "react-toastify";
 import { useNavigate, useParams } from "react-router-dom";
+import fetchAllProductSFun from "../utils/fetchAllProduts";
+import { fetchAllProducts } from "../store//slices/productSlice"
+import { useDispatch } from "react-redux";
 
 const SIZE_OPTIONS = ["Small", "Medium", "Large", "Xtra Large", "default"];
 
 const AdminProductUpdate = () => {
     const { id } = useParams();
-    console.log(id)
-    const user = useSelector((state) => state.user)
-    const navigate = useNavigate()
-
+    const dispatch = useDispatch()
+    const user = useSelector((state) => state.user);
+    const navigate = useNavigate();
 
     const [imagePreview, setImagePreview] = useState(null);
     const [LoadingImgUplaod, setLoadingImgUplaod] = useState(false);
-    const [ImgUrl, setUrl] = useState("")
-    const [imageId, setImageId] = useState("")
+    const [isUploadNewImage, setIsUploadNewImage] = useState(false);
+    const [oldImg, setOldImg] = useState("")
+    const [ImgUrl, setUrl] = useState("");
+    const [imageId, setImageId] = useState("");
     const [product, setProduct] = useState({
         name: "",
         desc: "",
@@ -29,20 +33,19 @@ const AdminProductUpdate = () => {
         prices: [{ size: "default", originalPrice: "", offerPrice: "" }],
     });
 
-
     const fetchProductData = async () => {
         try {
             const res = await fetch(`${BACK_END_API}/api/products/single/${id}`, {
                 headers: {
-                    Authorization: `Bearer ${user?.token}`
-                }
+                    Authorization: `Bearer ${user?.token}`,
+                },
             });
             const result = await res.json();
-            console.log(result)
+            console.log(result);
             if (result.success) {
-                toast.success(result.message)
+                toast.success(result.message);
                 setUrl(result.data.url);
-                setImagePreview(result.data.url);
+                setOldImg(result.data.url);
                 setImageId(result.data.imageId);
                 setProduct({
                     name: result?.data.name,
@@ -50,24 +53,20 @@ const AdminProductUpdate = () => {
                     category: result?.data.category,
                     stockStatus: result?.data.stockStatus,
                     file: result?.data.url,
-                    prices: result?.data.prices
-                })
+                    prices: result?.data.prices,
+                });
             } else {
                 toast.error(result.error);
             }
         } catch (error) {
             toast.error(error.message);
-            navigate("/")
+            navigate("/");
         }
-    }
-
+    };
 
     useEffect(() => {
         fetchProductData();
-    }, [])
-
-
-
+    }, []);
 
     // IMAGE
     const handleImageUpload = async (e, typeField) => {
@@ -76,26 +75,26 @@ const AdminProductUpdate = () => {
         const formData = new FormData();
         formData.append("image", file);
         try {
-            setLoadingImgUplaod(true)
+            setLoadingImgUplaod(true);
             const res = await fetch(`${BACK_END_API}/api/products/upload-image`, {
                 method: "POST",
                 headers: {
                     Authorization: `Bearer ${user?.token}`,
                 },
-                body: formData
-            })
+                body: formData,
+            });
             const result = await res.json();
             if (result.success) {
                 toast.success(result.message);
                 setUrl(result.url);
-                setImageId(result.ImageId)
+                setImageId(result.ImageId);
             } else {
                 toast.error(result.message);
             }
         } catch (error) {
-            toast.error(error.message)
+            toast.error(error.message);
         } finally {
-            setLoadingImgUplaod(false)
+            setLoadingImgUplaod(false);
         }
 
         const blob = URL.createObjectURL(file);
@@ -110,8 +109,6 @@ const AdminProductUpdate = () => {
     const handleProductChange = (e) => {
         setProduct({ ...product, [e.target.name]: e.target.value });
     };
-
-
 
     // PRICE
     const handlePriceChange = (i, field, value) => {
@@ -139,7 +136,6 @@ const AdminProductUpdate = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-
         if (!product.name || !product.category) {
             alert("Missing fields");
             return;
@@ -152,7 +148,7 @@ const AdminProductUpdate = () => {
             }
         }
         try {
-            const res = await fetch(`${BACK_END_API}/api/products/create`, {
+            const res = await fetch(`${BACK_END_API}/api/products/update/${id}`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -164,29 +160,29 @@ const AdminProductUpdate = () => {
                     desc: product.desc,
                     stockStatus: product.stockStatus,
                     prices: product.prices,
-                    url: ImgUrl,
+                    url: isUploadNewImage ? ImgUrl : oldImg,
                     ImageId: imageId,
-
-                })
+                }),
             });
             const result = await res.json();
             if (result.success) {
                 toast.success(result.message);
-                navigate("/all-products");
+                const pResult = await fetchAllProductSFun(true);
+                dispatch(fetchAllProducts({ pResult, isError: false }));
+                navigate("/")
             } else {
                 toast.error(result.message);
             }
         } catch (error) {
-            toast.error(error.message)
+            toast.error(error.message);
         }
-
     };
 
     return (
         <div className="min-h-screen bg-black text-white p-6">
             <div className="max-w-5xl mx-auto">
                 <form onSubmit={handleSubmit} className="space-y-6">
-                    <div>
+                    {isUploadNewImage && <div>
                         <input
                             type="file"
                             onChange={(e) => handleImageUpload(e, "product")}
@@ -198,7 +194,41 @@ const AdminProductUpdate = () => {
                                 className="mt-3 w-40 h-40 object-cover rounded"
                             />
                         )}
-                    </div>
+                    </div>}
+                    {
+                        isUploadNewImage == false && <div className="w-full flexCenter"><img
+                            src={oldImg}
+                            className="mt-3 w-40 h-40 object-cover rounded"
+                        /></div>
+                    }
+
+                    <label
+                        class="relative text-[#E7414F] w-fit flex cursor-pointer items-center justify-center gap-[1em]"
+                        for="tick"
+                    >
+                        <input value={isUploadNewImage} onChange={() => setIsUploadNewImage((pre) => !pre)} class="peer appearance-none" id="tick" name="tick" type="checkbox" />
+                        <span
+                            class="absolute left-0 top-1/2 h-[2em] w-[2em] -translate-x-full -translate-y-1/2 rounded-[0.25em] border-2 border-[#E7414F]"
+                        >
+                        </span>
+                        <svg
+                            viewBox="0 0 69 89"
+                            class="absolute left-0 top-1/2 h-[2em] w-[2em] -translate-x-full -translate-y-1/2 duration-500 ease-out [stroke-dasharray:100] [stroke-dashoffset:100] peer-checked:[stroke-dashoffset:0]"
+                            fill="none"
+                            height="89"
+                            width="69"
+                            xmlns="http://www.w3.org/2000/svg"
+                        >
+                            <path
+                                d="M.93 63.984c3.436.556 7.168.347 10.147 2.45 4.521 3.19 10.198 8.458 13.647 12.596 1.374 1.65 4.181 5.922 5.598 8.048.267.4-1.31.823-1.4.35-5.744-30.636 9.258-59.906 29.743-81.18C62.29 2.486 63.104 1 68.113 1"
+                                stroke-width="6px"
+                                stroke="#E7414F"
+                                pathLength="100"
+                            ></path>
+                        </svg>
+                        <p class="text-[1em] font-bold [user-select:none]">Uplaod New Image</p>
+                    </label>
+
 
                     {/* ROWS */}
                     <div className="grid md:grid-cols-2 gap-4">
@@ -297,8 +327,6 @@ const AdminProductUpdate = () => {
                             <CgAdd size={20} /> Add Price
                         </button>
                     </div>
-
-
 
                     <button type="submit" className="w-full py-3 bg-[#CE3B48] rounded">
                         Update One
