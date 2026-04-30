@@ -20,7 +20,8 @@ const RestricetPages = [
     "/",
     "/menu",
     "/about",
-    "/contact"
+    "/contact",
+    "/auth"
 ];
 
 const sideBarNavLins = [

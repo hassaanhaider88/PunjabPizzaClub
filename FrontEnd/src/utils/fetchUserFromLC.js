@@ -7,7 +7,6 @@ const fetchUser = async (token) => {
         }
     });
     const result = await res.json();
-    console.log(result)
     if (result.success) {
         return result.data;
     } else {

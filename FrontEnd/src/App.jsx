@@ -31,6 +31,8 @@ import AdminNavBar from "./components/AdminNavBar";
 import { fetchAllProducts } from "./store/slices/productSlice";
 import { RestricetPages } from "./Constants";
 import AdminProductUpdate from "./pages/UpdateProduct";
+import fetchAllDealsfun from "./utils/fetchAllDeals";
+import { allDeals } from "./store/slices/dealSlice"
 
 const App = () => {
   const location = useLocation();
@@ -70,8 +72,22 @@ const App = () => {
       toast.error("Something Wents Wrong While fetching Products");
     }
   };
+
+  const fetchDeals = async () => {
+    try {
+      const response = await fetchAllDealsfun();
+      if (response) {
+        dispacth(allDeals({ deals: response, isError: false }));
+      } else {
+        toast.error("Something Wents Wrong While fetching Deals");
+      }
+    } catch (error) {
+      toast.error(error.message || "Something Wents Wrong While fetching Deals");
+    }
+  }
   useEffect(() => {
     fetchProduct();
+    fetchDeals()
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, [location.pathname]);
   useEffect(() => {

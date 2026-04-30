@@ -265,9 +265,11 @@ const UpdateWholeProduct = async (req, res) => {
         prices,
         stockStatus,
         url,
-      }
+      }, {
+      returnDocument: 'after'
+    }
     );
-    
+
     if (!product) {
       return res.send({
         success: false,

@@ -21,7 +21,6 @@ const productSlice = createSlice({
             if (product) {
                 product.stockStatus = status;
             }
-            console.log(state.items, "user Slice")
         },
         deleteProductStatus: (state, action) => {
             const RemaningItems = state.items.filter((item) => item._id !== action.payload.id);
@@ -30,5 +29,5 @@ const productSlice = createSlice({
     }
 })
 
-export const { fetchAllProducts, updateProductStatus,deleteProductStatus } = productSlice.actions
+export const { fetchAllProducts, updateProductStatus, deleteProductStatus } = productSlice.actions
 export default productSlice.reducer;

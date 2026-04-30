@@ -48,7 +48,7 @@ const AdminNavBar = () => {
           </h1>
         ))}
         <div className="flex flex-wrap gap-2">
-          <div className="flexCenter gap-2">
+          <div onClick={() => window.location.reload()} className="flexCenter gap-2">
             <HiOutlineRefresh size={27} /> Data Refresh
           </div>
           <div className="py-2 px-8 bg-[#00183A] rounded-2xl">{CrtTime}</div>

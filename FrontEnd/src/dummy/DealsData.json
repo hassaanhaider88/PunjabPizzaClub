@@ -1,44 +1,56 @@
 [
   {
-    "_id": "Deal One",
+    "_id": "665f1a2b9c1a4f0012340001",
     "title": "Buy One Get One Free",
     "description": "Order any large pizza and get another one free.",
     "image": "https://images.unsplash.com/photo-1601924638867-3ec3b3f9b1d9",
-    "price": "1200"
+    "price": 1200,
+    "validUntile": 1735689600,
+    "isActive": true
   },
   {
-    "_id": "Deal Two",
+    "_id": "665f1a2b9c1a4f0012340002",
     "title": "Family Feast",
     "description": "2 large pizzas, 1 garlic bread, and 1.5L drink.",
     "image": "https://images.unsplash.com/photo-1594007654729-407eedc4be65",
-    "price": "2200"
+    "price": 2200,
+    "validUntile": 1735689600,
+    "isActive": true
   },
   {
-    "_id": "Deal Three",
+    "_id": "665f1a2b9c1a4f0012340003",
     "title": "Student Special",
     "description": "Medium pizza with drink at discounted price.",
     "image": "https://images.unsplash.com/photo-1548365328-9f547fb0953c",
-    "price": "800"
+    "price": 800,
+    "validUntile": 1733011200,
+    "isActive": true
   },
   {
-    "_id": "Deal Four",
+    "_id": "665f1a2b9c1a4f0012340004",
     "title": "Weekend Combo",
     "description": "Any 2 medium pizzas with free dip.",
     "image": "https://images.unsplash.com/photo-1513104890138-7c749659a591",
-    "price": "1500"
+    "price": 1500,
+    "validUntile": 1733270400,
+    "isActive": true
   },
   {
-    "_id": "Deal Five",
+    "_id": "665f1a2b9c1a4f0012340005",
     "title": "Cheese Lovers Deal",
     "description": "Extra cheese large pizza with free topping.",
     "image": "https://images.unsplash.com/photo-1604382355076-af4b0eb60143",
-    "price": "1300"
+    "price": 1300,
+    "validUntile": 1735689600,
+    "isActive": true
   },
   {
-    "_id": "Deal Six",
+    "_id": "665f1a2b9c1a4f0012340006",
     "title": "Spicy Treat",
     "description": "2 spicy pizzas with chili flakes and dip.",
     "image": "https://images.unsplash.com/photo-1628840042765-356cda07504e",
-    "price": "1400"
+    "price": 1400,
+    "validUntile": 1735689600,
+    "isActive": true
   }
 ]

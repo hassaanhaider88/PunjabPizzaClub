@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const offerSchema = new mongoose.Schema(
+const dealSchema = new mongoose.Schema(
   {
     title: {
       type: String,
@@ -39,6 +39,6 @@ const offerSchema = new mongoose.Schema(
   },
 );
 
-const OfferModel = mongoose.model("Offer", offerSchema);
+const DealsModel = mongoose.model("deals", dealSchema);
 
-export default OfferModel;
+export default DealsModel;

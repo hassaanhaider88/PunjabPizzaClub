@@ -25,6 +25,7 @@ export default function AllProductsAdminPage() {
   const dispatch = useDispatch();
   const allProducts = useSelector((state) => state.products);
   const user = useSelector((state) => state.user);
+  const [OpenTab, setOpenTab] = useState("ProductTab");
   useEffect(() => {
     if (!user.isLogged) {
       naviagte("/");
@@ -89,13 +90,17 @@ export default function AllProductsAdminPage() {
 
   return (
     <div className="min-h-screen py-6">
-      <div className="flex py-3 gap-3 mr-5 justify-end items-center">
-        <Link to={"/add-new-product"} className="flexCenter">
+      <div className="flex py-3 gap-3 mr-5 justify-between items-center">
+        <div className="flexCenter gap-2">
+          <button onClick={() => setOpenTab("ProductTab")} className={`py-3 px-2 rounded-xl ${OpenTab == "ProductTab" ? "bg-[#CE3B48]" : "bg-white/10"}`}>Products</button>
+          <button onClick={() => setOpenTab("DealTab")} className={`py-3 px-2 rounded-xl ${OpenTab == "DealTab" ? "bg-[#CE3B48]" : "bg-white/10"}`}>Deals</button>
+        </div>
+        <Link to={"/add-new-product"} className="flexCenter w-fit">
           <MdAddBox size={30} />
           Add New Products
         </Link>
       </div>
-      <div className="overflow-x-auto">
+      {OpenTab == "ProductTab" ? <div className="overflow-x-auto">
         <table className="w-full border border-white/10 rounded-lg overflow-hidden">
           <thead className="bg-white/5 text-left">
             <tr>
@@ -183,7 +188,24 @@ export default function AllProductsAdminPage() {
             ))}
           </tbody>
         </table>
-      </div>
+      </div> : <div className="overflow-x-auto">
+        <table className="w-full border border-white/10 rounded-lg overflow-hidden">
+          <thead className="bg-white/5 text-left">
+            <tr>
+              <th className="p-3">Image</th>
+              <th className="p-3">Product</th>
+              <th className="p-3">Category</th>
+              <th className="p-3">Stock</th>
+              <th className="p-3">Prices</th>
+              <th className="p-3">Action</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            asdf
+          </tbody>
+        </table>
+      </div>}
     </div>
   );
 }

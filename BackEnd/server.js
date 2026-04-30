@@ -8,6 +8,7 @@ import cors from "@fastify/cors"
 import connectToDB from "./configs/ConnectDB.js";
 import userRoute from "./routers/User.router.js";
 import productRoute from "./routers/Product.router.js";
+import dealRoute from "./routers/Deals.router.js"
 
 dotenv.config();
 connectToDB();
@@ -41,6 +42,9 @@ app.register(userRoute, { prefix: "/api/auth" });
 
 // Product Routes
 app.register(productRoute, { prefix: "/api/products" });
+
+// Deals Routes
+app.register(dealRoute, { prefix: "/api/deals" });
 
 app.listen({ port: PORT }, function (err, address) {
   if (err) {

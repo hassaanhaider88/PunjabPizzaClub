@@ -1,9 +1,15 @@
-import React, { useState } from "react";
+/* eslint-disable react-hooks/set-state-in-effect */
+import React, { useEffect, useState } from "react";
 import DealData from "../dummy/DealsData.json";
 import SpecialDealCard from "../components/SpecialDealCard";
+import { useSelector } from "react-redux";
 
 const SpecialDeal = () => {
-  const [specialDeals] = useState(DealData);
+  const [specialDeals, setSpecialDeals] = useState(DealData);
+  const deals = useSelector((state) => state.deals)
+  useEffect(() => {
+    setSpecialDeals(deals.deals)
+  }, [deals.deals])
   return (
     <div className="w-full py-12 px-5 md:px-10 mt-5">
       <h1 className="text-3xl">Special Offers</h1>
