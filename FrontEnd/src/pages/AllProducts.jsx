@@ -28,12 +28,12 @@ export default function AllProductsAdminPage() {
   const allDeals = useSelector(state => state.deals.deals);
   const user = useSelector((state) => state.user);
   const [OpenTab, setOpenTab] = useState("ProductTab");
-  
-   useEffect(() => {
-     if (user.role !== "admin") {
-       navigate('/')
-     }
-   }, [])
+
+  useEffect(() => {
+    if (user.role !== "admin") {
+      navigate('/')
+    }
+  }, [])
 
   const [products, setProducts] = useState(allProducts?.items);
 

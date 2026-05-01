@@ -4,6 +4,8 @@ import userCartSlice from "./slices/userCartSlice";
 import productSlice from "./slices/productSlice"
 import dealSlice from "./slices/dealSlice"
 import orderSlice from "./slices/orderSlice"
+import customerSlice from "./slices/customerSlice"
+
 
 
 export const store = configureStore({
@@ -12,6 +14,7 @@ export const store = configureStore({
     userCart: userCartSlice,
     products: productSlice,
     deals: dealSlice,
-    orders: orderSlice
+    orders: orderSlice,
+    customers: customerSlice
   },
 });

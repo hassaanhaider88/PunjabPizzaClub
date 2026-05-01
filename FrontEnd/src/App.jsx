@@ -92,7 +92,6 @@ const App = () => {
   const fetchAllOrder = async () => {
     try {
       const response = await fetchAllOrderfun(user.token);
-      console.log(response)
       if (response) {
         dispacth(allOrders({ orders: response, isError: false }));
       } else {
@@ -113,7 +112,6 @@ const App = () => {
   useEffect(() => {
     fetchProduct();
     fetchDeals()
-    console.log(user)
     if (user.role === "admin") {
       fetchAllOrder()
     }

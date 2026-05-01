@@ -33,13 +33,12 @@ const AllOrder = () => {
 
   const fetchRiders = async () => {
     try {
-      const res = await fetch(`${BACK_END_API}/api/auth/riders`, {
+      const res = await fetch(`${BACK_END_API}/api/customers/riders`, {
         headers: {
           Authorization: `Bearer ${user.token}`,
         },
       });
       const data = await res.json();
-      console.log(data)
       if (data.success) {
         setRiders(data.data);
       }
@@ -110,7 +109,7 @@ const AllOrder = () => {
     }
   };
 
-  // ✔ Assign Rider
+
   const handleAssignRider = async (id, riderId) => {
     if (riderId == "") {
       return toast.error("Please Select Rider")
@@ -136,8 +135,6 @@ const AllOrder = () => {
     }
   };
 
-  console.log(orders)
-
   return (
     <div className="p-6 text-white">
       <h1 className="text-2xl font-bold mb-6">Order Management</h1>
@@ -156,19 +153,21 @@ const AllOrder = () => {
 
           <tbody>
             {orders.map((order) => (
-              <tr key={order._id} className="border-t border-white/10 align-top">
+              <tr key={order._id} className="border-t border-white/10  align-top">
 
-                {/* Order Info */}
-                <td className="p-3 text-xs">
-                  <p className="">{order.orderBy?.name}</p>
+
+                <td className="p-3 text-xs w-40 ">
+
+                  <p className="text-gray-400">{order.orderBy?.name}</p>
                   <p>{order.orderBy?.email || order.orderBy}</p>
                   <p className="text-gray-400">{order.contactNumber}</p>
                   <p className="text-gray-400">{order.deliveryAddress}</p>
                   <p className="text-gray-400">City : <span className="text-md font-semibold text-green-400">{order.city}</span></p>
+                  <p className="text-gray-400">{`${order.createdAt.split("T")[0]} at ${order.createdAt.split("T")[1].slice(0, 5)}`}</p>
                 </td>
 
-                {/* Items */}
-                <td className="p-3">
+
+                <td className="p-3 w-100">
                   <div className=" gap-2 grid-cols-1 md:grid-cols-2 w-full grid">
                     {order.items.map((item) => (
                       <div
@@ -191,7 +190,7 @@ const AllOrder = () => {
                   </div>
                 </td>
 
-                {/* Price */}
+
                 <td className="p-3 text-[#FF4757] font-bold">
                   Rs.{order.totalPrice}
                 </td>

@@ -47,7 +47,6 @@ const orderSchema = new mongoose.Schema(
     city: String,
     street: String,
     contactNumber: String,
-    deliveredAt: Date,
     totalPrice: Number,
     orderAssignTo: {
       type: mongoose.Types.ObjectId,

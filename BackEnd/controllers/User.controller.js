@@ -184,27 +184,6 @@ const LogOut = async (req, res) => {
   }
 }
 
-const sendRiders = async (req, res) => {
-  try {
-    const riders = await userModel.find({ role: "rider" });
-    if (!riders) {
-      return res.send({
-        success: false,
-        message: "Error in fetching data"
-      })
-    }
-    return res.send({
-      success: true,
-      message: "Find From DB",
-      data: riders
-    })
 
-  } catch (error) {
-    return res.send({
-      success: false,
-      message: error.message
-    })
-  }
-}
 
-export { SignUpUser, LoginUser, UserByToken, LogOut,sendRiders };
+export { SignUpUser, LoginUser, UserByToken, LogOut };

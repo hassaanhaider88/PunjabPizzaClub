@@ -10,6 +10,7 @@ import userRoute from "./routers/User.router.js";
 import productRoute from "./routers/Product.router.js";
 import dealRoute from "./routers/Deals.router.js"
 import orderRoute from "./routers/Order.router.js"
+import customerRouter from "./routers/Customer.router.js"
 
 dotenv.config();
 connectToDB();
@@ -48,7 +49,10 @@ app.register(productRoute, { prefix: "/api/products" });
 app.register(dealRoute, { prefix: "/api/deals" });
 
 // Orders Routes
-app.register(orderRoute, { prefix: "/api/orders" })
+app.register(orderRoute, { prefix: "/api/orders" });
+
+// Customers Routes
+app.register(customerRouter, { prefix: "/api/customers" });
 
 app.listen({ port: PORT }, function (err, address) {
   if (err) {
