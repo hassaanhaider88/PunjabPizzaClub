@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect } from "react";
-import { Route, Routes, useLocation } from "react-router-dom";
+import { Route, Routes, useLocation, Navigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { useState } from "react";
 import { toast } from "react-toastify";
@@ -34,6 +34,8 @@ import AdminProductUpdate from "./pages/UpdateProduct";
 import fetchAllDealsfun from "./utils/fetchAllDeals";
 import { allDeals } from "./store/slices/dealSlice"
 import UpdateDeal from "./pages/updateDeal";
+import fetchAllOrderfun from "./utils/fetchAllOrders";
+import { allOrders } from "./store/slices/orderSlice";
 
 const App = () => {
   const location = useLocation();
@@ -86,12 +88,20 @@ const App = () => {
       toast.error(error.message || "Something Wents Wrong While fetching Deals");
     }
   }
-  useEffect(() => {
-    fetchProduct();
-    fetchDeals()
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  }, []);
 
+  const fetchAllOrder = async () => {
+    try {
+      const response = await fetchAllOrderfun(user.token);
+      console.log(response)
+      if (response) {
+        dispacth(allOrders({ orders: response, isError: false }));
+      } else {
+        toast.error("Something Wents Wrong While fetching Orders");
+      }
+    } catch (error) {
+      toast.error(error.message)
+    }
+  }
   useEffect(() => {
     const token = localStorage.getItem("PPCUserToken");
     if (!token) {
@@ -99,6 +109,17 @@ const App = () => {
     }
     fetchUserData(token);
   }, []);
+
+  useEffect(() => {
+    fetchProduct();
+    fetchDeals()
+    console.log(user)
+    if (user.role === "admin") {
+      fetchAllOrder()
+    }
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, [user.role]);
+
 
   return (
     <>
@@ -125,32 +146,32 @@ const App = () => {
         {/* Only admin can access */}
         <Route
           path="/all-orders"
-          element={user?.role == "admin" ? <AllOrders /> : <Home />}
+          element={user?.role == "admin" ? <AllOrders /> : <Navigate to="/" replace />}
         />
         <Route
           path="/all-products"
-          element={user?.role == "admin" ? <AllProductsAdminPage /> : <Home />}
+          element={user?.role == "admin" ? <AllProductsAdminPage /> : <Navigate to="/" replace />}
         />
 
         <Route
           path="/all-customers"
-          element={user?.role == "admin" ? <AllCustomers /> : <Home />}
+          element={user?.role == "admin" ? <AllCustomers /> : <Navigate to="/" replace />}
         />
         <Route
           path="/statistics"
-          element={user?.role == "admin" ? <Statistics /> : <Home />}
+          element={user?.role == "admin" ? <Statistics /> : <Navigate to="/" replace />}
         />
         <Route
           path="/add-new-product"
-          element={user?.role == "admin" ? <AddNewProduct /> : <Home />}
+          element={user?.role == "admin" ? <AddNewProduct /> : <Navigate to="/" replace />}
         />
         <Route
           path="/update/:id"
-          element={user?.role == "admin" ? <AdminProductUpdate /> : <Home />}
+          element={user?.role == "admin" ? <AdminProductUpdate /> : <Navigate to="/" replace />}
         />
         <Route
           path="/update-deal/:id"
-          element={user?.role == "admin" ? <UpdateDeal /> : <Home />}
+          element={user?.role == "admin" ? <UpdateDeal /> : <Navigate to="/" replace />}
         />
         {/* Page not found  */}
         <Route path="*" element={<PageNotFound />} />

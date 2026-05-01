@@ -46,7 +46,6 @@ const UserOptions = ({
       toast.error("Token is not avaible");
     }
   };
-  console.log(user);
   const CommonClass =
     "py-2 px-6 cursor-pointer hover:bg-[#FF4757]  rounded-4xl duration-300 transition-all";
   return (

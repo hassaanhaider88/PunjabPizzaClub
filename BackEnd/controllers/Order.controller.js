@@ -3,7 +3,10 @@ import userModel from "../models/User.models.js";
 
 const SendAllOrders = async (req, res) => {
     try {
-        const orders = await orderModel.find().sort({ createdAt: -1 });
+        const orders = await orderModel.find().sort({ createdAt: -1 }).populate({
+            path: "orderBy orderAssignTo",
+            select: "-password",
+        });;
         if (!orders) {
             return res.send({
                 success: false,
@@ -141,10 +144,10 @@ const CancelOrder = async (req, res) => {
         const cenceledOrder = await orderModel.findOneAndUpdate(
             { _id: id },
             {
-                orderStatus: "cancelled"
+                orderStatus: "cancelled",
             },
             {
-                new: true
+                new: true,
             },
         );
         if (!cenceledOrder) {
@@ -169,7 +172,7 @@ const CancelOrder = async (req, res) => {
 const updateOrderStatus = async (req, res) => {
     try {
         const { id } = req.params;
-        const { paymentStatus, orderStatus } = req.body;
+        const { orderStatus } = req.body;
         if (!id) {
             return res.send({
                 success: false,
@@ -177,14 +180,17 @@ const updateOrderStatus = async (req, res) => {
             });
         }
 
-        const updateOrder = await orderModel.findOneAndUpdate({
-            _id: id
-        }, {
-            paymentStatus,
-            orderStatus
-        }, {
-            new: true
-        });
+        const updateOrder = await orderModel.findOneAndUpdate(
+            {
+                _id: id,
+            },
+            {
+                orderStatus,
+            },
+            {
+                new: true,
+            },
+        );
         if (!updateOrder) {
             return res.send({
                 success: false,
@@ -196,15 +202,97 @@ const updateOrderStatus = async (req, res) => {
         return res.send({
             success: true,
             message: "Order Updated Successfully",
-            data: updateOrder
+            data: updateOrder,
         });
-
     } catch (error) {
         return res.send({
             success: false,
-            message: error.message
-        })
+            message: error.message,
+        });
     }
-}
+};
 
-export { SendAllOrders, createOrder, MyOrders, CancelOrder,updateOrderStatus };
+const updateOrderPaymentStatus = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const { paymentStatus } = req.body;
+        if (!id) {
+            return res.send({
+                success: false,
+                message: "Please provide id",
+            });
+        }
+
+        const updateOrder = await orderModel.findOneAndUpdate(
+            {
+                _id: id,
+            },
+            {
+                paymentStatus,
+            },
+            {
+                new: true,
+            },
+        );
+
+        if (!updateOrder) {
+            return res.send({
+                success: false,
+                message: "Error in updating order",
+            });
+        }
+
+        return res.send({
+            success: true,
+            message: "Order Updated Successfully",
+            data: updateOrder,
+        });
+    } catch (error) {
+        return res.send({
+            success: false,
+            message: error.message,
+        });
+    }
+};
+
+const AssignRiderToOrder = async (req, res) => {
+    const { id } = req.params;
+    const { riderId } = req.body;
+    if (!id || !riderId) {
+        return res.send({
+            success: false,
+            message: "Please provide all fields",
+        });
+    }
+
+    const order = await orderModel.findOneAndUpdate(
+        { _id: id },
+        {
+            orderAssignTo: riderId,
+        },
+        {
+            new: true,
+        },
+    );
+    if (!order) {
+        return res.send({
+            success: false,
+            message: "Error in updating order",
+        });
+    }
+    return res.send({
+        success: true,
+        message: "Order Updated Successfully",
+        data: order,
+    });
+};
+
+export {
+    SendAllOrders,
+    createOrder,
+    MyOrders,
+    CancelOrder,
+    updateOrderStatus,
+    updateOrderPaymentStatus,
+    AssignRiderToOrder,
+};

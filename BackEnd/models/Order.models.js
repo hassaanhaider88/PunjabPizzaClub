@@ -51,7 +51,8 @@ const orderSchema = new mongoose.Schema(
     totalPrice: Number,
     orderAssignTo: {
       type: mongoose.Types.ObjectId,
-      ref: "user"
+      ref: "user",
+      default: null,
     }
   },
   {

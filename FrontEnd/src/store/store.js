@@ -3,12 +3,15 @@ import userReducer from "./slices/userSlice";
 import userCartSlice from "./slices/userCartSlice";
 import productSlice from "./slices/productSlice"
 import dealSlice from "./slices/dealSlice"
+import orderSlice from "./slices/orderSlice"
+
 
 export const store = configureStore({
   reducer: {
     user: userReducer,
     userCart: userCartSlice,
     products: productSlice,
-    deals: dealSlice
+    deals: dealSlice,
+    orders: orderSlice
   },
 });
