@@ -11,6 +11,7 @@ import productRoute from "./routers/Product.router.js";
 import dealRoute from "./routers/Deals.router.js"
 import orderRoute from "./routers/Order.router.js"
 import customerRouter from "./routers/Customer.router.js"
+import Statistics from "./routers/Statistics.router.js"
 
 dotenv.config();
 connectToDB();
@@ -53,6 +54,9 @@ app.register(orderRoute, { prefix: "/api/orders" });
 
 // Customers Routes
 app.register(customerRouter, { prefix: "/api/customers" });
+
+// Statistics route
+app.register(Statistics,{prefix: "/api/statistics"})
 
 app.listen({ port: PORT }, function (err, address) {
   if (err) {

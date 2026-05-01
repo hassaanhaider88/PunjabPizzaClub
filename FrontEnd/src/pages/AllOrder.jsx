@@ -138,8 +138,8 @@ const AllOrder = () => {
   return (
     <div className="p-6 text-white">
       <h1 className="text-2xl font-bold mb-6">Order Management</h1>
-      {showRiders ? "" : <div className="overflow-x-auto">
-        <table className="w-full border border-white/10 rounded-lg">
+      {showRiders ? "" : <div className="overflow-x-auto felxCenter">
+        <table className="w-300 border border-white/10 rounded-lg">
           <thead className="bg-white/5">
             <tr>
               <th className="p-3">Order By</th>
@@ -167,7 +167,7 @@ const AllOrder = () => {
                 </td>
 
 
-                <td className="p-3 w-100">
+                <td className="p-3  w-100">
                   <div className=" gap-2 grid-cols-1 md:grid-cols-2 w-full grid">
                     {order.items.map((item) => (
                       <div

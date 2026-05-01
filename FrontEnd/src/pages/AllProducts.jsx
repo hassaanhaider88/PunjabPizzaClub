@@ -168,8 +168,8 @@ export default function AllProductsAdminPage() {
         </Link>
       </div>
       {OpenTab == "ProductTab" ? (
-        <div className="overflow-x-auto">
-          <table className="w-full border border-white/10 rounded-lg overflow-hidden">
+        <div className="overflow-x-auto flexCenter">
+          <table className="w-300 border border-white/10 rounded-lg overflow-hidden">
             <thead className="bg-white/5 text-left">
               <tr>
                 <th className="p-3">Image</th>

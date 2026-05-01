@@ -85,8 +85,8 @@ const AdminCustomersPage = () => {
 
   return (
     <div className="p-6 text-white">
-      <div className="overflow-x-auto">
-        <table className="w-full border border-white/10 rounded-lg">
+      <div className="overflow-x-auto flexCenter">
+        <table className="w-300 border border-white/10 rounded-lg">
           <thead className="bg-white/5">
             <tr>
               <th className="p-3">Name</th>
