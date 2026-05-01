@@ -15,7 +15,6 @@ const SendAllOrders = async (req, res) => {
             message: "Find From DB",
             data: orders,
         });
-
     } catch (error) {
         return res.send({
             success: false,
@@ -27,19 +26,33 @@ const SendAllOrders = async (req, res) => {
 // only logged User can order and whol emial is verified
 const createOrder = async (req, res) => {
     try {
-        const { items, paymentMethod, deliveryAddress, contactNumber, totalPrice, orderStreet, orderCity } = req.body;
-        if (!items || !paymentMethod || !deliveryAddress || !contactNumber || !totalPrice) {
+        const {
+            items,
+            paymentMethod,
+            deliveryAddress,
+            contactNumber,
+            totalPrice,
+            orderStreet,
+            orderCity,
+        } = req.body;
+        if (
+            !items ||
+            !paymentMethod ||
+            !deliveryAddress ||
+            !contactNumber ||
+            !totalPrice
+        ) {
             return res.send({
                 success: false,
-                message: "Please provide all fields"
-            })
+                message: "Please provide all fields",
+            });
         }
         const userId = req.user?._id;
         if (!userId) {
             return res.send({
                 success: false,
-                message: "User not found"
-            })
+                message: "User not found",
+            });
         }
         const order = await orderModel.create({
             orderBy: userId,
@@ -49,36 +62,39 @@ const createOrder = async (req, res) => {
             street: orderStreet,
             city: orderCity,
             contactNumber,
-            totalPrice
+            totalPrice,
         });
         if (!order) {
             return res.send({
                 success: false,
-                message: "Error in creating order"
-            })
+                message: "Error in creating order",
+            });
         }
 
-        const user = await userModel.findOneAndUpdate({
-            _id: userId
-        }, {
-            phone: contactNumber,
-            address: deliveryAddress
-        }, {
-            new: true
-        })
+        const user = await userModel.findOneAndUpdate(
+            {
+                _id: userId,
+            },
+            {
+                phone: contactNumber,
+                address: deliveryAddress,
+            },
+            {
+                new: true,
+            },
+        );
         return res.send({
             success: true,
             message: "Order Created Successfully",
-            data: order
-        })
+            data: order,
+        });
     } catch (error) {
         return res.send({
             success: false,
-            message: error.message
-        })
+            message: error.message,
+        });
     }
-}
-
+};
 
 const MyOrders = async (req, res) => {
     try {
@@ -86,30 +102,67 @@ const MyOrders = async (req, res) => {
         if (!userId) {
             return res.send({
                 success: false,
-                message: "User not found"
-            })
+                message: "User not found",
+            });
         }
 
-        const allOrders = await orderModel.find({ orderBy: userId }).sort({ createdAt: -1 });
+        const allOrders = await orderModel
+            .find({ orderBy: userId })
+            .sort({ createdAt: -1 });
         if (!allOrders) {
             return res.send({
                 success: false,
-                message: "Error in fetching data"
-            })
+                message: "Error in fetching data",
+            });
         }
 
         return res.send({
             success: true,
             message: "Find From DB",
-            data: allOrders
-        })
-
+            data: allOrders,
+        });
     } catch (error) {
         return res.send({
             success: false,
-            message: error.message
-        })
+            message: error.message,
+        });
     }
-}
+};
 
-export { SendAllOrders, createOrder, MyOrders }
+const CancelOrder = async (req, res) => {
+    try {
+        const { id } = req.params;
+        if (!id) {
+            return res.send({
+                success: false,
+                message: "Please provide id",
+            });
+        }
+        const cenceledOrder = await orderModel.findOneAndUpdate(
+            { _id: id },
+            {
+                orderStatus: "cancelled"
+            },
+            {
+                new: true
+            },
+        );
+        if (!cenceledOrder) {
+            return res.send({
+                success: false,
+                message: "Error in cenceling order",
+            });
+        }
+        return res.send({
+            success: true,
+            message: "Order cencel successfully",
+        });
+    } catch (error) {
+        return res.send({
+            success: false,
+            message: error.message,
+        });
+    }
+};
+
+export { SendAllOrders, createOrder, MyOrders, CancelOrder };

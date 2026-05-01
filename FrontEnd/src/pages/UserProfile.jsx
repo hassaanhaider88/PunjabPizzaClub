@@ -41,7 +41,19 @@ const UserProfile = () => {
 
   const handeUserCenelClcik = async (orderId) => {
     if (confirm("Are Your Sure to Cancel Order?")) {
-      console.log(orderId)
+      const res = await fetch(`${BACK_END_API}/api/orders/cancel/${orderId}`, {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${user?.token}`
+        }
+      });
+      const result = await res.json();
+      if (result.success) {
+        setUserOrders(() => userOrdrers.filter(order => order._id !== orderId))
+        toast.success(result.message)
+      } else {
+        toast.error(result.message)
+      }
     }
   }
   return (
