@@ -38,6 +38,11 @@ const orderSchema = new mongoose.Schema(
       ],
       default: "placed",
     },
+    paymentStatus: {
+      type: String,
+      enum: ["paid", "unpaid"],
+      default: "unpaid",
+    },
     deliveryAddress: String,
     city: String,
     street: String,

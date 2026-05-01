@@ -23,6 +23,7 @@ const UserProfile = () => {
         }
       });
       const result = await res.json();
+      console.log(result)
       if (result.success) {
         toast.success(result.message)
         setUserOrders(result.data)

@@ -59,10 +59,14 @@ const OrderCardForUser = ({ order, onCancel }) => {
                 </div>
 
                 {/* RIGHT → Order Info */}
-                <div className="w-full md:w-70 bg-white/5 p-4 rounded-xl space-y-2 text-sm text-gray-300">
+                <div className="w-full md:w-70 bg-white/5 p-4 rounded-xl space-y-2 text-md text-gray-300">
                     <p>
                         <span className="text-white">Payment:</span>{" "}
                         {order.paymentMethod == "COD" ? "Cash On Delivery" : "EasyPaisa"}
+                    </p>
+                    <p>
+                        <span className="text-white">payment Status:</span>{" "}
+                        {order.paymentStatus == "unpaid" ? <span className="text-red-500">{order.paymentStatus}</span> : <span>{order.paymentStatus}</span>}
                     </p>
 
                     <p>
