@@ -112,6 +112,9 @@ const AllOrder = () => {
 
   // ✔ Assign Rider
   const handleAssignRider = async (id, riderId) => {
+    if (riderId == "") {
+      return toast.error("Please Select Rider")
+    }
     try {
       const res = await fetch(`${BACK_END_API}/api/orders/assgin-rider/${id}`, {
         method: "POST",

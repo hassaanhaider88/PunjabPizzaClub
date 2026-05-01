@@ -57,6 +57,7 @@ const createOrder = async (req, res) => {
                 message: "User not found",
             });
         }
+
         const order = await orderModel.create({
             orderBy: userId,
             items,

@@ -48,8 +48,9 @@ const UserProfile = () => {
         }
       });
       const result = await res.json();
+      console.log(result)
       if (result.success) {
-        setUserOrders(() => userOrdrers.filter(order => order._id !== orderId))
+        setUserOrders(() => userOrdrers?.filter(order => order._id !== orderId))
         toast.success(result.message)
       } else {
         toast.error(result.message)
