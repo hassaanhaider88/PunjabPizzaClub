@@ -38,14 +38,16 @@ const orderSchema = new mongoose.Schema(
       ],
       default: "placed",
     },
-    deliveryAddress: {
-      fullAddress: String,
-      city: String,
-      street: String,
-    },
+    deliveryAddress: String,
+    city: String,
+    street: String,
     contactNumber: String,
     deliveredAt: Date,
-    note: String,
+    totalPrice: Number,
+    orderAssignTo: {
+      type: mongoose.Types.ObjectId,
+      ref: "user"
+    }
   },
   {
     timestamps: true,

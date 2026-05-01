@@ -9,7 +9,7 @@ import {
 } from "../controllers/Product.controller.js";
 import IsAdminAuthMD from "../middlewares/IsAdminAuth.js";
 
-const productRotues = (fastify, options) => {
+function productRotues(fastify, options) {
   fastify.get("/all", SendAllProduct);
   fastify.post("/upload-image", {
     preHandler: IsAdminAuthMD,

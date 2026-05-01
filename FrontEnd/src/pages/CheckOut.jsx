@@ -1,14 +1,24 @@
-import React, { useState } from "react";
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { clearWholeCart } from "../store/slices/userCartSlice";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
+import { BACK_END_API } from "../Constants"
+
 
 const CheckoutPage = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate()
   const cartItems = useSelector((state) => state.userCart.cartItems);
   const user = useSelector((state) => state.user);
 
-  const [paymentMethod, setPaymentMethod] = useState("cod");
+  useEffect(() => {
+    if (!user.name) {
+      navigate("/")
+    }
+  }, [])
+  const [paymentMethod, setPaymentMethod] = useState("COD");
   // they both will get if user don't firstly give use or want to update them
   const [deliveryAddress, setDeliveryAddress] = useState(user?.address);
   const [phoneNumber, setphoneNumber] = useState(user?.phone);
@@ -23,7 +33,7 @@ const CheckoutPage = () => {
     0,
   );
 
-  const handlePlaceOrder = () => {
+  const handlePlaceOrder = async () => {
     if (!deliveryAddress || !phoneNumber || !orderCity || !orderStreet) {
       return toast.error("Please provide Phone and address");
     }
@@ -34,9 +44,40 @@ const CheckoutPage = () => {
 
     // this data will be send to backend then redirect user to his dashborad to track his Order
     console.log(deliveryAddress, phoneNumber, cartItems, totalPrice);
+    if (cartItems.length < 1 || cartItems.length === 0 || totalPrice === 0) {
+      toast.error("Please First Select Product To Order");
+      return;
+    }
     // we will decided here either user will allow to order less than 1000 or not
-
-    dispatch(clearWholeCart());
+    const res = await fetch(`${BACK_END_API}/api/orders/create`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${user?.token}`,
+      },
+      body: JSON.stringify({
+        items: cartItems,
+        paymentMethod,
+        deliveryAddress,
+        contactNumber: phoneNumber,
+        orderCity,
+        orderStreet,
+        totalPrice,
+      })
+    })
+    const result = await res.json();
+    if (result.success) {
+      toast.success(result.message);
+      const oldIds = localStorage.getItem("OrderIds");
+      let orders = oldIds ? JSON.parse(oldIds) : {};
+      const nextKey = Object.keys(orders).length + 1;
+      orders[nextKey] = result.data._id;
+      localStorage.setItem("OrderIds", JSON.stringify(orders));
+      dispatch(clearWholeCart());
+      navigate("/user-profile");
+    } else {
+      toast.error(result.message)
+    }
   };
 
 
@@ -84,9 +125,9 @@ const CheckoutPage = () => {
             <label className="flex items-center gap-2">
               <input
                 type="radio"
-                value="cod"
-                checked={paymentMethod === "cod"}
-                onChange={() => setPaymentMethod("cod")}
+                value="COD"
+                checked={paymentMethod === "COD"}
+                onChange={() => setPaymentMethod("COD")}
               />
               Cash on Delivery
             </label>

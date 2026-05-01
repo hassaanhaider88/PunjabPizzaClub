@@ -11,7 +11,6 @@ const IsUserLoginAuth = async (req, res) => {
     }
 
     const token = authHeader.split(" ")[1];
-
     const decode = jwt.verify(token, process.env.JWT_SECRET_KEY);
 
     if (!decode) {
@@ -27,7 +26,7 @@ const IsUserLoginAuth = async (req, res) => {
         message: "User not found",
       });
     }
-    if (user.role !== "user") {
+    if (user.role !== "user" || user.isEmailVerified === false) {
       return res.send({
         success: false,
         message: "Access denied",
@@ -37,7 +36,7 @@ const IsUserLoginAuth = async (req, res) => {
   } catch (error) {
     return res.send({
       success: false,
-      message: error,
+      message: error.message,
     });
   }
 };

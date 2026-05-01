@@ -9,6 +9,7 @@ import connectToDB from "./configs/ConnectDB.js";
 import userRoute from "./routers/User.router.js";
 import productRoute from "./routers/Product.router.js";
 import dealRoute from "./routers/Deals.router.js"
+import orderRoute from "./routers/Order.router.js"
 
 dotenv.config();
 connectToDB();
@@ -46,9 +47,12 @@ app.register(productRoute, { prefix: "/api/products" });
 // Deals Routes
 app.register(dealRoute, { prefix: "/api/deals" });
 
+// Orders Routes
+app.register(orderRoute, { prefix: "/api/orders" })
+
 app.listen({ port: PORT }, function (err, address) {
   if (err) {
-    fastify.log.error(err);
+    console.error(err);
     process.exit(1);
   }
   console.log(`Server is now listening on ${address}`);

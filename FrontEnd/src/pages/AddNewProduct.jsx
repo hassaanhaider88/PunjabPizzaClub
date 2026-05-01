@@ -1,6 +1,6 @@
 import { CgAdd } from "react-icons/cg";
 import { AiOutlineDelete } from "react-icons/ai";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { BACK_END_API } from "../Constants"
 import { toast } from "react-toastify";
@@ -11,6 +11,12 @@ const SIZE_OPTIONS = ["Small", "Medium", "Large", "Xtra Large", "default"];
 const AdminProductForm = () => {
   const user = useSelector((state) => state.user)
   const navigate = useNavigate()
+  // check for admin 
+  useEffect(() => {
+    if (user.role !== "admin") {
+      navigate("/")
+    }
+  }, [])
   const [type, setType] = useState("product");
 
   const [imagePreview, setImagePreview] = useState(null);

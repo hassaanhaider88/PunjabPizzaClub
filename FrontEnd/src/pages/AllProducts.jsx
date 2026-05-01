@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 /* eslint-disable react-hooks/exhaustive-deps */
 import { AiFillDelete } from "react-icons/ai";
 import { AiTwotoneEdit } from "react-icons/ai";
@@ -23,7 +22,7 @@ const statusStyles = {
 const statusOptions = ["In Stock", "Out Off Stock", "Soon"];
 
 export default function AllProductsAdminPage() {
-  const naviagte = useNavigate();
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const allProducts = useSelector((state) => state.products);
   const allDeals = useSelector(state => state.deals.deals);
@@ -31,7 +30,7 @@ export default function AllProductsAdminPage() {
   const [OpenTab, setOpenTab] = useState("ProductTab");
   useEffect(() => {
     if (!user.isLogged) {
-      naviagte("/");
+      navigate("/");
     }
   }, []);
   const [products, setProducts] = useState(allProducts?.items);
@@ -247,7 +246,7 @@ export default function AllProductsAdminPage() {
 
                   <td className="p-3 w-40">
                     <button
-                      onClick={() => naviagte(`/update/${product._id}`)}
+                      onClick={() => navigate(`/update/${product._id}`)}
                       className="bg-[green]  px-3 py-1 rounded text-sm hover:opacity-80"
                     >
                       <AiTwotoneEdit size={20} /> Edit
@@ -308,7 +307,7 @@ export default function AllProductsAdminPage() {
 
                   <td className="p-3 w-40">
                     <button
-                      onClick={() => naviagte(`/update-deal/${deal._id}`)}
+                      onClick={() => navigate(`/update-deal/${deal._id}`)}
                       className="bg-[green]  px-3 py-1 rounded text-sm hover:opacity-80"
                     >
                       <AiTwotoneEdit size={20} /> Edit

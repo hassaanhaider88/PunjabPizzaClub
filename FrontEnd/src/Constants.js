@@ -22,7 +22,8 @@ const RestricetPages = [
     "/about",
     "/contact",
     "/auth",
-    "/checkout"
+    "/checkout",
+    "/user-profile"
 ];
 
 const sideBarNavLins = [

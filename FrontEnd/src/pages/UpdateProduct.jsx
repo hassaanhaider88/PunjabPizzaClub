@@ -17,6 +17,11 @@ const AdminProductUpdate = () => {
     const dispatch = useDispatch()
     const user = useSelector((state) => state.user);
     const navigate = useNavigate();
+     useEffect(() => {
+    if (user.role !== "admin") {
+      navigate("/")
+    }
+  }, [])
 
     const [imagePreview, setImagePreview] = useState(null);
     const [LoadingImgUplaod, setLoadingImgUplaod] = useState(false);

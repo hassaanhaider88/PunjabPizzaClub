@@ -4,16 +4,22 @@ import { FaEye } from "react-icons/fa";
 import { MdPassword } from "react-icons/md";
 import { HiOutlineMail } from "react-icons/hi";
 import { CgProfile } from "react-icons/cg";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { BACK_END_API } from "../Constants";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { login } from "../store/slices/userSlice";
 import { useNavigate } from "react-router-dom";
 
 const LoginAndSignUp = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const user = useSelector((state) => state.user);
+  useEffect(() => {
+    if (user.name) {
+      navigate("/")
+    }
+  }, [])
   const [CurrentForm, setCurrentForm] = useState("login");
   const [isShowPass, setIsShowPass] = useState(false);
   const [Loading, setLoading] = useState(false);
