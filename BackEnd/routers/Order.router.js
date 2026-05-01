@@ -1,10 +1,11 @@
 
-import { SendAllOrders, createOrder, MyOrders ,CancelOrder} from "../controllers/Order.controller.js";
+import { SendAllOrders, createOrder, MyOrders, CancelOrder, updateOrderStatus } from "../controllers/Order.controller.js";
 import IsAdminAuthMD from "../middlewares/IsAdminAuth.js";
 import IsUserLoginAuth from "../middlewares/IsUserLoginAuth.js";
 
 async function routes(fastify, option) {
     fastify.get("/all", { preHandler: IsAdminAuthMD }, SendAllOrders);
+    fastify.post("/update-status/:id", { preHandler: IsAdminAuthMD }, updateOrderStatus)
     // user routes
     fastify.post("/create", { preHandler: IsUserLoginAuth }, createOrder);
     fastify.get("/me", { preHandler: IsUserLoginAuth }, MyOrders);

@@ -165,4 +165,46 @@ const CancelOrder = async (req, res) => {
     }
 };
 
-export { SendAllOrders, createOrder, MyOrders, CancelOrder };
+// admin contoller to update payment and order status
+const updateOrderStatus = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const { paymentStatus, orderStatus } = req.body;
+        if (!id) {
+            return res.send({
+                success: false,
+                message: "Please provide id",
+            });
+        }
+
+        const updateOrder = await orderModel.findOneAndUpdate({
+            _id: id
+        }, {
+            paymentStatus,
+            orderStatus
+        }, {
+            new: true
+        });
+        if (!updateOrder) {
+            return res.send({
+                success: false,
+                message: "Error in updating order",
+            });
+        }
+
+        // here we will inform user about his order later
+        return res.send({
+            success: true,
+            message: "Order Updated Successfully",
+            data: updateOrder
+        });
+
+    } catch (error) {
+        return res.send({
+            success: false,
+            message: error.message
+        })
+    }
+}
+
+export { SendAllOrders, createOrder, MyOrders, CancelOrder,updateOrderStatus };
