@@ -76,7 +76,7 @@ const NavBar = ({ isShow = true }) => {
             ></span>
           </Link>
         </div>
-        <div className="HereCartIconAndSearchbar xl:flex hidden items-center gap-5 ">
+        <div className="HereCartIconAndSearchbar  gap-5 ">
           <div onClick={() => setIsOpenCart(!isOpenCart)} className="relative">
             <AiOutlineShoppingCart size={34} />
             {CartCount !== 0 && (
@@ -85,20 +85,16 @@ const NavBar = ({ isShow = true }) => {
               </span>
             )}
           </div>
-          <div className="flexCenter gap-3 bg-[#1a1a1a] rounded-full px-3 py-2">
-            <AiOutlineSearch />
-            <input
-              type="text"
-              placeholder="Search Your Pizza/Burgers..."
-              className="outline-none bg-transparent w-60"
-            />
-          </div>
         </div>
         {user.isLogged ? (
-          <div onClick={() => setIsOpenUserOption(!isOpenUserOption)}>
-            {" "}
-            <HiOutlineUserCircle size={34} />{" "}
+          <div className="border-2 border-white rounded-full" onClick={() => setIsOpenUserOption(!isOpenUserOption)}>
+            <img
+              className="w-12 h-12 m-1 rounded-full"
+              src={user?.profile ? user.profile : "https://i.pinimg.com/originals/1f/a1/66/1fa166b8be7105927a3af53cc8891458.png"}
+              alt="user profile"
+            />
           </div>
+
         ) : (
           <div className="HereLoginAndSignup flex  gap-2 justify-center items-center">
             <button
@@ -129,7 +125,7 @@ const NavBar = ({ isShow = true }) => {
 
       {/* mobile menu */}
       {isMobileMenuOpen && (
-        <div className="MobileMenu md:hidden absolute top-30 left-0 w-full bg-clip-padding backdrop-filter z-50  backdrop-blur-sm bg-opacity-10 text-white flex flex-col items-center gap-4 py-4">
+        <div className="MobileMenu md:hidden bg-black absolute top-20 left-0 w-full bg-clip-padding backdrop-filter z-50  backdrop-blur-sm bg-opacity-10 text-white flex flex-col items-center gap-4 py-4">
           <Link to="/" className="text-lg font-medium">
             Home
           </Link>
@@ -148,16 +144,18 @@ const NavBar = ({ isShow = true }) => {
               className="relative"
             >
               <AiOutlineShoppingCart size={34} />
-              <span className="absolute -top-2 flexCenter -right-2 bg-red-400 rounded-full h-6 w-6">
+              {CartCount > 0 && <span className="absolute -top-2 flexCenter -right-2 bg-red-400 rounded-full h-6 w-6">
                 {CartCount}
-              </span>
+              </span>}
             </div>
           </div>
           {user.isLogged ? (
             <div onClick={() => setIsOpenUserOption(!isOpenUserOption)}>
-              {" "}
-              <HiOutlineUserCircle size={34} />{" "}
-              {isOpenUserOption && <UserOptions />}{" "}
+              <img
+                className="w-12 h-12 m-1 rounded-full"
+                src={user?.profile ? user.profile : "https://i.pinimg.com/originals/1f/a1/66/1fa166b8be7105927a3af53cc8891458.png"}
+                alt="user profile"
+              />
             </div>
           ) : (
             <div className="HereLoginAndSignup flex  gap-2 justify-center items-center">

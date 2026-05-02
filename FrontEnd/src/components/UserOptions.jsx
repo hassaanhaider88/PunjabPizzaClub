@@ -47,9 +47,9 @@ const UserOptions = ({
     }
   };
   const CommonClass =
-    "py-2 px-6 cursor-pointer hover:bg-[#FF4757]  rounded-4xl duration-300 transition-all";
+    "py-2 px-6 cursor-pointer  hover:bg-[#FF4757]  rounded-4xl duration-300 transition-all";
   return (
-    <div className="fixed z-50 top-100 bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10 text-lg md:top-19 right-15  py-6 px-8">
+    <div className="fixed z-50 top-100 bg-black rounded-2xl shadow-2xl bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10 text-lg md:top-19 right-15  py-6 px-8">
       {user.role == "admin" ? ( // this will be protected
         <div onClick={() => navigate("/all-orders")} className={CommonClass}>
           All Orders

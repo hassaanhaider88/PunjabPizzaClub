@@ -8,8 +8,8 @@ import blackListTokenModel from "../models/BlackListTokens.models.js";
 
 const SignUpUser = async (req, res) => {
   try {
-    const { email, name, password } = req.body;
-    if (!email || !name || !password) {
+    const { email, name, password, profile } = req.body;
+    if (!email || !name || !password || !profile) {
       return {
         success: false,
         message: "please provide all fields",
@@ -29,6 +29,7 @@ const SignUpUser = async (req, res) => {
       email,
       password: hashpass,
       name,
+      profile,
     });
     if (!c_user) {
       return {
@@ -49,6 +50,7 @@ const SignUpUser = async (req, res) => {
       message: "User Sign Up Successfully",
       data: {
         token,
+        profile: c_user?.profile,
         name: c_user?.name,
         email: c_user?.email,
         isEmailVerified: c_user?.isEmailVerified,
@@ -99,6 +101,7 @@ const LoginUser = async (req, res) => {
       message: "User Login  Successfully",
       data: {
         token,
+        profile: checkUserExist?.profile,
         name: checkUserExist?.name,
         email: checkUserExist?.email,
         isEmailVerified: checkUserExist?.isEmailVerified,

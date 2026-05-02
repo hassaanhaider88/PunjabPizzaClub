@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   isLogged: false,
   isEmailVerified: false,
+  profile: "",
   role: "user",
   name: "",
   email: "",
@@ -19,8 +20,9 @@ const userSlice = createSlice({
       state.isLogged = action.payload.isLogged;
       state.isEmailVerified = action.payload.isEmailVerified;
       state.role = action.payload.role;
-      ((state.name = action.payload.name),
-        (state.email = action.payload.email));
+      state.name = action.payload.name;
+      state.email = action.payload.email;
+      state.profile = action.payload.profile;
       state.phone = action.payload.phone;
       state.address = action.payload.address;
       state.token = action.payload.token;
@@ -29,6 +31,8 @@ const userSlice = createSlice({
       localStorage.clear("")
       state.isLogged = false;
       state.isEmailVerified = false;
+      state.profile = "";
+      state.role = "user";
       state.name = "";
       state.email = "";
       state.phone = "";
@@ -37,6 +41,7 @@ const userSlice = createSlice({
     },
     updateProfile: (state, action) => {
       state.isEmailVerified = action.payload.isEmailVerified;
+      state.profile = action.payload.profile;
       state.role = action.payload.role
       state.name = action.payload.name;
       state.email = action.payload.email;

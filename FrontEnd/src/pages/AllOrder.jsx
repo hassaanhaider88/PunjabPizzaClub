@@ -138,7 +138,7 @@ const AllOrder = () => {
   return (
     <div className="p-6 text-white">
       <h1 className="text-2xl font-bold mb-6">Order Management</h1>
-      {showRiders ? "" : <div className="overflow-x-auto felxCenter">
+      {showRiders ? "" : <div className="overflow-x-auto flexCenter">
         <table className="w-300 border border-white/10 rounded-lg">
           <thead className="bg-white/5">
             <tr>

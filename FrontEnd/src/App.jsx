@@ -57,6 +57,7 @@ const App = () => {
           isEmailVerified: data.isEmailVerified,
           phone: data.phone,
           role: data.role,
+          profile: data.profile,
           email: data.email,
           name: data.name,
           address: data.address,

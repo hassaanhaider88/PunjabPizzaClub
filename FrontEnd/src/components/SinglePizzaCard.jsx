@@ -5,14 +5,13 @@ import { addToCart } from "../store/slices/userCartSlice";
 import { toast } from "react-toastify";
 
 const PizzaCard = ({ item, activeMenu = "All" }) => {
-
   const dispatch = useDispatch();
   // State to handle size selection
   const [selectedSize, setSelectedSize] = useState(item?.prices[0]);
 
   const hanleAddToCartClick = () => {
     if (item.stockStatus !== "In Stock") {
-      toast.warn(`Please Wait Product is Curruntly ${item.stockStatus}`)
+      toast.warn(`Please Wait Product is Curruntly ${item.stockStatus}`);
     }
     dispatch(
       addToCart({
@@ -30,11 +29,11 @@ const PizzaCard = ({ item, activeMenu = "All" }) => {
     <div className="flex shrink-0 items-center justify-center  p-6">
       <div className="bg-[#1a1a1a] rounded-[2.5rem] p-6 flex flex-col items-center shadow-2xl transition-transform cursor-pointer">
         {/* Pizza Image */}
-        <div className="relative rounded-full overflow-hidden -top-20 w-48 h-48 mb-2 drop-shadow-[0_20px_20px_rgba(0,0,0,0.5)]">
+        <div className="relative rounded-full overflow-hidden -top-14 shadow-sm shadow-red-300 w-52 h-52 mb-2 drop-shadow-[0_20px_20px_rgba(0,0,0,0.5)]">
           <LazyLoadImage
             src={item.url}
             alt={item.name}
-            className="w-full h-full object-contain  border-4 border-transparent hover:border-yellow-500/20 transition-all"
+            className="w-full h-full object-cover  border-4 border-transparent hover:border-yellow-500/20 transition-all"
           />
         </div>
 
@@ -46,7 +45,6 @@ const PizzaCard = ({ item, activeMenu = "All" }) => {
           {item.desc}
         </p>
 
-        {/* Size Selection Tabs */}
         <div
           className={`flex ${item.prices[0].size == "default" ? "hidden" : "bg-black/40 "} p-1 rounded-xl mb-6 w-full justify-between`}
         >
@@ -68,7 +66,6 @@ const PizzaCard = ({ item, activeMenu = "All" }) => {
           )}
         </div>
 
-        {/* Pricing */}
         <div className="flex  items-center gap-3 mb-6">
           {selectedSize.offerPrice == selectedSize.originalPrice ? (
             <span className="text-[#FF4757] text-3xl font-black">
@@ -87,19 +84,20 @@ const PizzaCard = ({ item, activeMenu = "All" }) => {
           )}
         </div>
 
-        {/* CTA Button */}
-        {
-          item.stockStatus == "In Stock" ? (<button
+        {item.stockStatus == "In Stock" ? (
+          <button
             onClick={hanleAddToCartClick}
-            className="w-full bg-[#FF4757] hover:bg-[#FF4757]/80 text-white font-black py-4 rounded-full transition-all transform active:scale-95 shadow-[0_10px_20px_rgba(234,179,8,0.2)]"
+            className="w-full bg-[#FF4757] hover:bg-[#FF4757]/80 text-white font-black py-4 rounded-full transition-all transform active:scale-95 "
           >
             Order Now
-          </button>) : (<button
-            className={`w-full ${item.stockStatus == "Soon" ? "bg-yellow-500 hover:bg-yellow-500/80" : "bg-red-700 hover:bg-red-800"} text-white font-black py-4 rounded-full transition-all transform active:scale-95 shadow-[0_10px_20px_rgba(234,179,8,0.2)]`}
+          </button>
+        ) : (
+          <button
+            className={`w-full ${item.stockStatus == "Soon" ? "bg-yellow-500 hover:bg-yellow-500/80" : "bg-red-700 hover:bg-red-800"} text-white font-black py-4 rounded-full transition-all transform active:scale-95 `}
           >
             {item.stockStatus}
-          </button>)
-        }
+          </button>
+        )}
       </div>
     </div>
   ) : (

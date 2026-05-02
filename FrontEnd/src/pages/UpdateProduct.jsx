@@ -17,11 +17,11 @@ const AdminProductUpdate = () => {
     const dispatch = useDispatch()
     const user = useSelector((state) => state.user);
     const navigate = useNavigate();
-     useEffect(() => {
-    if (user.role !== "admin") {
-      navigate("/")
-    }
-  }, [])
+    useEffect(() => {
+        if (user.role !== "admin") {
+            navigate("/")
+        }
+    }, [])
 
     const [imagePreview, setImagePreview] = useState(null);
     const [LoadingImgUplaod, setLoadingImgUplaod] = useState(false);
@@ -73,7 +73,7 @@ const AdminProductUpdate = () => {
         fetchProductData();
     }, []);
 
-    // IMAGE
+
     const handleImageUpload = async (e, typeField) => {
         const file = e.target.files[0];
         if (!file) return;
@@ -110,12 +110,12 @@ const AdminProductUpdate = () => {
         }
     };
 
-    // PRODUCT CHANGE
+
     const handleProductChange = (e) => {
         setProduct({ ...product, [e.target.name]: e.target.value });
     };
 
-    // PRICE
+
     const handlePriceChange = (i, field, value) => {
         const updated = [...product.prices];
         updated[i][field] = value;
@@ -137,7 +137,7 @@ const AdminProductUpdate = () => {
         setProduct({ ...product, prices: updated });
     };
 
-    // SUBMIT
+
     const handleSubmit = async (e) => {
         e.preventDefault();
 
