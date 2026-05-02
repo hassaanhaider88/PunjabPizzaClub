@@ -14,18 +14,16 @@ const AllOrder = () => {
   const dispatch = useDispatch();
   const orders = useSelector((state) => state.orders.orders);
   const user = useSelector((state) => state.user);
+  const [isAddingOrderModelOpen, setIsAddingOrderModelOpen] = useState(false)
 
   const [localOrders, setLocalOrders] = useState([]);
   const [riders, setRiders] = useState([]);
-  const [showRiders, setShowRiders] = useState(false)
 
   useEffect(() => {
     if (user.role !== "admin") {
       navigate("/");
     }
   }, []);
-
-
 
   useEffect(() => {
     fetchRiders();
@@ -149,8 +147,11 @@ const AllOrder = () => {
     }
   };
 
+  console.log(riders)
+
   return (
     <div className="p-6 text-white">
+      {isAddingOrderModelOpen && <div>Home</div>}
       <div className="flex gap-5 w-full mb-5 mt-2">
         <div className="ProductFIlter flex gap-2">
           <p>Order Filters By</p>
@@ -185,7 +186,7 @@ const AllOrder = () => {
           </select>
         </div>
       </div>
-      {showRiders ? "" : <div className="overflow-x-auto w-full flexCenter">
+      <div className="overflow-x-auto w-full flexCenter">
         <table className="min-w-300 border border-white/10 rounded-lg">
           <thead className="bg-white/5">
             <tr>
@@ -277,12 +278,13 @@ const AllOrder = () => {
                       onChange={(e) =>
                         handleAssignRider(order._id, e.target.value)
                       }
-                      className="bg-black border border-white/20 p-1 rounded"
+                      className="bg-black w-40 border border-white/20 p-1 rounded"
                     >
                       <option value="">Select Rider</option>
                       {riders.map((r) => (
-                        <option key={r._id} value={r._id}>
-                          {r.name}
+                        <option className="flex" key={r._id} value={r._id}>
+                          <img src={r.profile} alt={r.name} className="w-10 h-10 object-cover" />
+                          <span className="text-md font-semibold">{r.name}</span>
                         </option>
                       ))}
                     </select>
@@ -292,7 +294,7 @@ const AllOrder = () => {
             ))}
           </tbody>
         </table>
-      </div>}
+      </div>
     </div>
   );
 };

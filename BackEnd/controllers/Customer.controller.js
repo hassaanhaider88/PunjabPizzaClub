@@ -26,7 +26,7 @@ const SendAllCustomers = async (req, res) => {
 
 const SendRiders = async (req, res) => {
     try {
-        const riders = await userModel.find({ role: "rider" });
+        const riders = await userModel.find({ role: "rider" }).select("-password");
         if (!riders) {
             return res.send({
                 success: false,
