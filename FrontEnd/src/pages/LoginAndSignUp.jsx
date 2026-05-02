@@ -106,6 +106,9 @@ const LoginAndSignUp = () => {
           navigate("/");
         }
       } else {
+        if (profileImg == "") {
+          return toast.error("Please Upload Profile Image")
+        }
         const res = await fetch(`${BACK_END_API}/api/auth/signup`, {
           method: "POST",
           headers: {

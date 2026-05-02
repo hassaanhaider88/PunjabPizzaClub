@@ -20,6 +20,8 @@ const statusStyles = {
 };
 
 const statusOptions = ["In Stock", "Out Off Stock", "Soon"];
+const ProductFilters = ["All", "In Stock", "Out Off Stock", "Soon"];
+const DealFilters = ["Active", "InActiv", "All"]
 
 export default function AllProductsAdminPage() {
   const navigate = useNavigate();
@@ -28,12 +30,16 @@ export default function AllProductsAdminPage() {
   const allDeals = useSelector(state => state.deals.deals);
   const user = useSelector((state) => state.user);
   const [OpenTab, setOpenTab] = useState("ProductTab");
+  const [productFilter, setProductFilter] = useState("All") // this will based on stack
+  const [dealFilter, setDealFilter] = useState("Active")
+
 
   useEffect(() => {
     if (user.role !== "admin") {
       navigate('/')
     }
-  }, [])
+  }, []);
+  console.log(productFilter)
 
   const [products, setProducts] = useState(allProducts?.items);
 
@@ -148,7 +154,7 @@ export default function AllProductsAdminPage() {
   return (
     <div className="min-h-screen py-6">
       <div className="flex py-3 gap-3 mr-5 justify-between items-center">
-        <div className="flexCenter gap-2">
+        <div className="flexCenter px-10 gap-2">
           <button
             onClick={() => setOpenTab("ProductTab")}
             className={`py-3 px-2 rounded-xl ${OpenTab == "ProductTab" ? "bg-[#CE3B48]" : "bg-white/10"}`}
@@ -162,14 +168,52 @@ export default function AllProductsAdminPage() {
             Deals
           </button>
         </div>
+
+        {/* Deal and Prodduct filters */}
+        <div>
+          {OpenTab == "ProductTab" ? <div className="ProductFIlter flex gap-2">
+            <p>Product Filters By</p>
+            <select
+              value={productFilter}
+              onChange={(e) =>
+                setProductFilter(e.target.value)
+              }
+              className="bg-black border border-white/20 text-white text-sm p-1 rounded focus:outline-none"
+            >
+              {ProductFilters.map((status) => (
+                <option key={status} value={status}>
+                  {status}
+                </option>
+              ))}
+            </select>
+          </div> :
+            <div className="Deals flex gap-2">
+              <p>Deals Filters By</p>
+              <select
+                value={dealFilter}
+                onChange={(e) =>
+                  setDealFilter(e.target.value)
+                }
+                className="bg-black border border-white/20 text-white text-sm p-1 rounded focus:outline-none"
+              >
+                {DealFilters.map((status) => (
+                  <option key={status} value={status}>
+                    {status}
+                  </option>
+                ))}
+              </select>
+            </div>}
+        </div>
+
         <Link to={"/add-new-product"} className="flexCenter w-fit">
           <MdAddBox size={30} />
           Add New Products
         </Link>
       </div>
       {OpenTab == "ProductTab" ? (
-        <div className="overflow-x-auto flexCenter">
-          <table className="w-300 border border-white/10 rounded-lg overflow-hidden">
+        <div className="w-full overflow-x-auto">
+
+          <table className="min-w-300 mx-auto border border-white/10 rounded-lg overflow-scroll">
             <thead className="bg-white/5 text-left">
               <tr>
                 <th className="p-3">Image</th>
@@ -183,89 +227,90 @@ export default function AllProductsAdminPage() {
 
             <tbody>
               {products?.map((product) => (
-                <tr key={product._id} className="border-t border-white/10">
-                  <td className="p-3 w-40">
-                    <img
-                      src={product.url}
-                      alt={product.name}
-                      className="w-14 h-14 object-cover rounded"
-                    />
-                  </td>
-                  <td className="p-3 w-40 font-medium">
-                    {product.name.slice(0, 20)}...
-                  </td>
+                product.stockStatus === productFilter || productFilter === "All" ?
+                  <tr key={product._id} className="border-t border-white/10">
+                    <td className="p-3 w-40">
+                      <img
+                        src={product.url}
+                        alt={product.name}
+                        className="w-14 h-14 object-cover rounded"
+                      />
+                    </td>
+                    <td className="p-3 w-40 font-medium">
+                      {product.name.slice(0, 20)}...
+                    </td>
 
-                  <td className="p-3 w-40">{product.category}</td>
+                    <td className="p-3 w-40">{product.category}</td>
 
-                  <td className="p-3 w-40">
-                    <span
-                      className={`px-2 py-1 text-xs border rounded ${statusStyles[product.stockStatus]
-                        }`}
-                    >
-                      {product.stockStatus}
-                    </span>
-
-                    <div className="mt-2">
-                      <select
-                        value={product.stockStatus}
-                        onChange={(e) =>
-                          updateStatus(product._id, e.target.value)
-                        }
-                        className="bg-black border border-white/20 text-white text-sm p-1 rounded focus:outline-none"
+                    <td className="p-3 w-40">
+                      <span
+                        className={`px-2 py-1 text-xs border rounded ${statusStyles[product.stockStatus]
+                          }`}
                       >
-                        {statusOptions.map((status) => (
-                          <option key={status} value={status}>
-                            {status}
-                          </option>
-                        ))}
-                      </select>
-                    </div>
-                  </td>
+                        {product.stockStatus}
+                      </span>
 
-                  <td className="p-3 ">
-                    <div className="space-y-1 grid grid-cols-2 gap-2">
-                      {product.prices.map((p, idx) => (
-                        <div
-                          key={idx}
-                          className="text-xs bg-white/5 p-2 rounded"
+                      <div className="mt-2">
+                        <select
+                          value={product.stockStatus}
+                          onChange={(e) =>
+                            updateStatus(product._id, e.target.value)
+                          }
+                          className="bg-black border border-white/20 text-white text-sm p-1 rounded focus:outline-none"
                         >
-                          <div className="font-medium">{p.size}</div>
-                          <div>
-                            Original:{" "}
-                            <span className="line-through text-white/60">
-                              {p.originalPrice}
-                            </span>
-                          </div>
-                          <div className="text-[#ff4757]">
-                            Offer: {p.offerPrice}
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  </td>
+                          {statusOptions.map((status) => (
+                            <option key={status} value={status}>
+                              {status}
+                            </option>
+                          ))}
+                        </select>
+                      </div>
+                    </td>
 
-                  <td className="p-3 w-40">
-                    <button
-                      onClick={() => navigate(`/update/${product._id}`)}
-                      className="bg-[green]  px-3 py-1 rounded text-sm hover:opacity-80"
-                    >
-                      <AiTwotoneEdit size={20} /> Edit
-                    </button>
-                    <button
-                      onClick={() => handleDeleteProducts(product._id)}
-                      className="bg-[#ff4757]  ml-5 px-3 py-1 rounded text-sm hover:opacity-80"
-                    >
-                      <AiFillDelete size={20} /> Delete
-                    </button>
-                  </td>
-                </tr>
+                    <td className="p-3 ">
+                      <div className="space-y-1 grid grid-cols-2 gap-2">
+                        {product.prices.map((p, idx) => (
+                          <div
+                            key={idx}
+                            className="text-xs bg-white/5 p-2 rounded"
+                          >
+                            <div className="font-medium">{p.size}</div>
+                            <div>
+                              Original:{" "}
+                              <span className="line-through text-white/60">
+                                {p.originalPrice}
+                              </span>
+                            </div>
+                            <div className="text-[#ff4757]">
+                              Offer: {p.offerPrice}
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </td>
+
+                    <td className="p-3 w-40">
+                      <button
+                        onClick={() => navigate(`/update/${product._id}`)}
+                        className="bg-[green]  px-3 py-1 rounded text-sm hover:opacity-80"
+                      >
+                        <AiTwotoneEdit size={20} /> Edit
+                      </button>
+                      <button
+                        onClick={() => handleDeleteProducts(product._id)}
+                        className="bg-[#ff4757]  ml-5 px-3 py-1 rounded text-sm hover:opacity-80"
+                      >
+                        <AiFillDelete size={20} /> Delete
+                      </button>
+                    </td>
+                  </tr> : ""
               ))}
             </tbody>
           </table>
         </div>
       ) : (
-        <div className="overflow-x-auto">
-          <table className="w-full border border-white/10 rounded-lg overflow-hidden">
+        <div className="overflow-x-auto w-full  ">
+          <table className="min-w-250 mx-auto border border-white/10 rounded-lg ">
             <thead className="bg-white/5 text-left">
               <tr>
                 <th className="p-3">Image</th>
@@ -279,47 +324,48 @@ export default function AllProductsAdminPage() {
 
             <tbody>
               {allDeals?.map((deal) => (
-                <tr key={deal._id} className="border-t border-white/10">
-                  <td className="p-3 w-40">
-                    <img
-                      src={deal.image}
-                      alt={deal.title}
-                      className="w-14 h-14 object-cover rounded"
-                    />
-                  </td>
-                  <td className="p-3 w-50 font-medium">
-                    {deal.title.slice(0, 20)}...
-                  </td>
+                dealFilter === "All" || dealFilter === (deal.isActive ? "Active" : "InActiv") ?
+                  <tr key={deal._id} className="border-t border-white/10">
+                    <td className="p-3 w-40">
+                      <img
+                        src={deal.image}
+                        alt={deal.title}
+                        className="w-14 h-14 object-cover rounded"
+                      />
+                    </td>
+                    <td className="p-3 w-50 font-medium">
+                      {deal.title.slice(0, 20)}...
+                    </td>
 
-                  <td className="p-3 w-100">{deal.description}</td>
+                    <td className="p-3 w-100">{deal.description}</td>
 
-                  <td className="p-3 flex justify-around w-30">
-                    <span
-                      onClick={() => hanleUpdationDealStatusClick(deal._id, deal.isActive)}
-                      className={`px-2  flex py-1 text-xs border rounded ${deal.isActive ? "bg-green-500/20 text-green-400 border-green-500" : ""}`}
-                    >
-                    </span>
-                    {deal.isActive} <p>{deal.isActive ? "Active" : "Not Active"}</p>
-                  </td>
-                  <td className="p-3 w-40">
-                    {deal.price}
-                  </td>
+                    <td className="p-3 flex justify-around w-30">
+                      <span
+                        onClick={() => hanleUpdationDealStatusClick(deal._id, deal.isActive)}
+                        className={`px-2  flex py-1 text-xs border rounded ${deal.isActive ? "bg-green-500/20 text-green-400 border-green-500" : ""}`}
+                      >
+                      </span>
+                      {deal.isActive} <p>{deal.isActive ? "Active" : "Not Active"}</p>
+                    </td>
+                    <td className="p-3 w-40">
+                      {deal.price}
+                    </td>
 
-                  <td className="p-3 w-40">
-                    <button
-                      onClick={() => navigate(`/update-deal/${deal._id}`)}
-                      className="bg-[green]  px-3 py-1 rounded text-sm hover:opacity-80"
-                    >
-                      <AiTwotoneEdit size={20} /> Edit
-                    </button>
-                    <button
-                      onClick={() => handleDeleteDeal(deal._id)}
-                      className="bg-[#ff4757]  ml-5 px-3 py-1 rounded text-sm hover:opacity-80"
-                    >
-                      <AiFillDelete size={20} /> Delete
-                    </button>
-                  </td>
-                </tr>
+                    <td className="p-3 w-40">
+                      <button
+                        onClick={() => navigate(`/update-deal/${deal._id}`)}
+                        className="bg-[green]  px-3 py-1 rounded text-sm hover:opacity-80"
+                      >
+                        <AiTwotoneEdit size={20} /> Edit
+                      </button>
+                      <button
+                        onClick={() => handleDeleteDeal(deal._id)}
+                        className="bg-[#ff4757]  ml-5 px-3 py-1 rounded text-sm hover:opacity-80"
+                      >
+                        <AiFillDelete size={20} /> Delete
+                      </button>
+                    </td>
+                  </tr> : ""
               ))}
             </tbody>
           </table>
