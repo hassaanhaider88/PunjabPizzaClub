@@ -18,7 +18,6 @@ import AllOrders from "./pages/AllOrder";
 import UserProfile from "./pages/UserProfile";
 import AllProductsAdminPage from "./pages/AllProducts";
 import AllCustomers from "./pages/AllCustomers";
-import Statistics from "./pages/statistics";
 import AddNewProduct from "./pages/AddNewProduct";
 
 import NavBar from "./components/NavBar";
@@ -36,10 +35,12 @@ import { allDeals } from "./store/slices/dealSlice"
 import UpdateDeal from "./pages/updateDeal";
 import fetchAllOrderfun from "./utils/fetchAllOrders";
 import { allOrders } from "./store/slices/orderSlice";
+import fetchUsersFun from "./utils/fetchAllCustomers";
+import { allUser } from "./store/slices/customerSlice";
 
 const App = () => {
   const location = useLocation();
-  const dispacth = useDispatch();
+  const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
 
   // the routes where i dont want to show navbar
@@ -51,7 +52,7 @@ const App = () => {
     if (!data) {
       return;
     } else {
-      dispacth(
+      dispatch(
         login({
           isLogged: true,
           isEmailVerified: data.isEmailVerified,
@@ -70,9 +71,9 @@ const App = () => {
   const fetchProduct = async () => {
     const result = await fetchAllProductsFun(false);
     if (result) {
-      dispacth(fetchAllProducts({ result, isError: false }));
+      dispatch(fetchAllProducts({ result, isError: false }));
     } else {
-      dispacth(fetchAllProducts({ result: [], isError: true }));
+      dispatch(fetchAllProducts({ result: [], isError: true }));
       toast.error("Something Wents Wrong While fetching Products");
     }
   };
@@ -81,7 +82,7 @@ const App = () => {
     try {
       const response = await fetchAllDealsfun();
       if (response) {
-        dispacth(allDeals({ deals: response, isError: false }));
+        dispatch(allDeals({ deals: response, isError: false }));
       } else {
         toast.error("Something Wents Wrong While fetching Deals");
       }
@@ -94,7 +95,7 @@ const App = () => {
     try {
       const response = await fetchAllOrderfun(user.token);
       if (response) {
-        dispacth(allOrders({ orders: response, isError: false }));
+        dispatch(allOrders({ orders: response, isError: false }));
       } else {
         toast.error("Something Wents Wrong While fetching Orders");
       }
@@ -102,6 +103,22 @@ const App = () => {
       toast.error(error.message)
     }
   }
+
+  const fetchUsers = async () => {
+    try {
+      const res = await fetchUsersFun(user?.token)
+      if (res) {
+        dispatch(allUser({ data: res }));
+        return toast.success("Users fetched successfully")
+      } else {
+        return toast.error("Something Wents Wrong While fetching Users");
+      }
+    } catch (err) {
+      toast.error(err.message);
+      console.log(err);
+    }
+  };
+
   useEffect(() => {
     const token = localStorage.getItem("PPCUserToken");
     if (!token) {
@@ -114,7 +131,9 @@ const App = () => {
     fetchProduct();
     fetchDeals()
     if (user.role === "admin") {
-      fetchAllOrder()
+      fetchAllOrder();
+      fetchUsers();
+      return;
     }
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, [user.role]);
@@ -145,32 +164,29 @@ const App = () => {
         {/* Only admin can access */}
         <Route
           path="/all-orders"
-          element={user?.role == "admin" ? <AllOrders /> : <Navigate to="/" replace />}
+          element={<AllOrders />}
         />
         <Route
           path="/all-products"
-          element={user?.role == "admin" ? <AllProductsAdminPage /> : <Navigate to="/" replace />}
+          element={<AllProductsAdminPage />}
         />
 
         <Route
           path="/all-customers"
-          element={user?.role == "admin" ? <AllCustomers /> : <Navigate to="/" replace />}
+          element={<AllCustomers />}
         />
-        <Route
-          path="/statistics"
-          element={user?.role == "admin" ? <Statistics /> : <Navigate to="/" replace />}
-        />
+
         <Route
           path="/add-new-product"
-          element={user?.role == "admin" ? <AddNewProduct /> : <Navigate to="/" replace />}
+          element={<AddNewProduct />}
         />
         <Route
           path="/update/:id"
-          element={user?.role == "admin" ? <AdminProductUpdate /> : <Navigate to="/" replace />}
+          element={<AdminProductUpdate />}
         />
         <Route
           path="/update-deal/:id"
-          element={user?.role == "admin" ? <UpdateDeal /> : <Navigate to="/" replace />}
+          element={<UpdateDeal />}
         />
         {/* Page not found  */}
         <Route path="*" element={<PageNotFound />} />

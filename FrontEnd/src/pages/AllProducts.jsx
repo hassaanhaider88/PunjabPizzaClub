@@ -210,6 +210,7 @@ export default function AllProductsAdminPage() {
           Add New Products
         </Link>
       </div>
+
       {OpenTab == "ProductTab" ? (
         <div className="w-full overflow-x-auto">
 

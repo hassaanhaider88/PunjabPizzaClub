@@ -2,11 +2,12 @@ import { AiOutlineDelete } from "react-icons/ai";
 import { MdOutlineVerified } from "react-icons/md";
 import { MdVerified } from "react-icons/md";
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { toast } from "react-toastify";
 import { BACK_END_API } from "../Constants";
 import { useDispatch, useSelector } from "react-redux";
-import { allUser, updateRole, deleteCustomer } from "../store/slices/customerSlice"
+import { updateRole, deleteCustomer } from "../store/slices/customerSlice"
+
 
 const roleOptions = ["user", "admin", "rider"];
 const roleFilters = ["user", "admin", "rider", "All"];
@@ -20,23 +21,9 @@ const AdminCustomersPage = () => {
 
 
 
-  const fetchUsers = async () => {
-    try {
-      const res = await fetch(`${BACK_END_API}/api/customers/all`);
-      const result = await res.json();
-      if (result.success) {
-        dispatch(allUser({ data: result.data }));
-      } else {
-        toast.error(result.message);
-      }
-    } catch (err) {
-      console.log(err);
-    }
-  };
 
-  useEffect(() => {
-    fetchUsers();
-  }, []);
+
+
 
   const handleRoleChange = async (id, role) => {
     try {

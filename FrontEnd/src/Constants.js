@@ -47,11 +47,6 @@ const sideBarNavLins = [
         link: "/all-customers",
         icon: FaUsers,
     },
-    {
-        name: "Statistics",
-        link: "/statistics",
-        icon: FcStatistics,
-    },
 ];
 
 
