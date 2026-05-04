@@ -127,7 +127,7 @@ const LoginAndSignUp = () => {
           toast.error(result.message);
         } else {
           localStorage.setItem("PPCUserToken", result?.data.token);
-          toast.success(`WelCome! ${result?.data.name}`);
+          toast.success(`WelCome! ${result?.data.name} Please Verify Your Email`);
           dispatch(
             login({
               isLogged: true,

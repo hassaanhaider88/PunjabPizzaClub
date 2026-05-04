@@ -2,6 +2,9 @@ import orderModel from "../models/Order.models.js";
 import userModel from "../models/User.models.js";
 import productModel from "../models/Product.models.js";
 import dealsModel from "../models/Deals.models.js";
+import sendEmail from "../utils/sendEmails.js";
+import orderEmailBody from "../utils/orderEmailTem.js";
+
 
 const SendAllOrders = async (req, res) => {
     try {
@@ -82,6 +85,7 @@ const createOrder = async (req, res) => {
                 }
             }
         }
+
         const order = await orderModel.create({
             orderBy: userId,
             items,
@@ -99,6 +103,7 @@ const createOrder = async (req, res) => {
             });
         }
 
+        sendEmail(req.user?.email, "Order Placed Successfully", null, orderEmailBody(order));
         const user = await userModel.findOneAndUpdate(
             {
                 _id: userId,
@@ -215,13 +220,14 @@ const updateOrderStatus = async (req, res) => {
             {
                 new: true,
             },
-        );
+        ).populate({ path: "orderBy orderAssignTo", select: "-password" });
         if (!updateOrder) {
             return res.send({
                 success: false,
                 message: "Error in updating order",
             });
         }
+        sendEmail(updateOrder?.orderBy?.email, "Order Status Updated", null, orderEmailBody(updateOrder))
 
         // here we will inform user about his order later
         return res.send({
@@ -281,35 +287,75 @@ const updateOrderPaymentStatus = async (req, res) => {
 };
 
 const AssignRiderToOrder = async (req, res) => {
-    const { id } = req.params;
-    const { riderId } = req.body;
-    if (!id || !riderId) {
-        return res.send({
-            success: false,
-            message: "Please provide all fields",
-        });
-    }
+    try {
+        const { id } = req.params;
+        const { riderId } = req.body;
 
-    const order = await orderModel.findOneAndUpdate(
-        { _id: id },
-        {
-            orderAssignTo: riderId,
-        },
-        {
-            new: true,
-        },
-    );
-    if (!order) {
+        if (!id || !riderId) {
+            return res.send({
+                success: false,
+                message: "Please provide all fields",
+            });
+        }
+
+        // ✅ Single update with populate
+        const order = await orderModel
+            .findByIdAndUpdate(
+                id,
+                { orderAssignTo: riderId },
+                { new: true }
+            )
+            .populate("orderAssignTo", "-password")
+            .populate("orderBy", "-password");
+
+        if (!order) {
+            return res.send({
+                success: false,
+                message: "Order not found",
+            });
+        }
+
+        const riderEmail = order.orderAssignTo?.email;
+        const userEmail = order.orderBy?.email;
+
+        const emailPromises = [];
+
+        if (userEmail) {
+            emailPromises.push(
+                sendEmail(
+                    userEmail,
+                    "Order Assigned",
+                    null,
+                    orderEmailBody(order)
+                )
+            );
+        }
+
+        if (riderEmail) {
+            emailPromises.push(
+                sendEmail(
+                    riderEmail,
+                    "New Order Assigned to You",
+                    null,
+                    orderEmailBody(order)
+                )
+            );
+        }
+
+
+        Promise.allSettled(emailPromises);
+
+        return res.send({
+            success: true,
+            message: "Order assigned successfully",
+            data: order,
+        });
+    } catch (error) {
         return res.send({
             success: false,
-            message: "Error in updating order",
+            message: error.message,
         });
     }
-    return res.send({
-        success: true,
-        message: "Order Updated Successfully",
-        data: order,
-    });
 };
 
 const ridersOrder = async (req, res) => {

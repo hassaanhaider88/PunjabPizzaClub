@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react-hooks/set-state-in-effect */
 import { HiOutlineUserCircle } from "react-icons/hi";
 import { RxCross1 } from "react-icons/rx";
@@ -11,6 +12,7 @@ import CartContainer from "./CartContainer";
 import UserOptions from "./UserOptions";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { toast } from "react-toastify";
 
 const NavBar = ({ isShow = true }) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -27,6 +29,11 @@ const NavBar = ({ isShow = true }) => {
   const navigate = useNavigate();
   const location = useLocation();
 
+  useEffect(() => {
+    if (user.isEmailVerified == false && user.isLogged) {
+      toast.warn("Please Verify Your Email First")
+    }
+  }, [])
   const LP = location.pathname;
   return (
     <div
