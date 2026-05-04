@@ -1,13 +1,14 @@
+import { AiOutlineCamera } from "react-icons/ai";
 /* eslint-disable react-hooks/exhaustive-deps */
 import { CgAdd } from "react-icons/cg";
 import { AiOutlineDelete } from "react-icons/ai";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import { BACK_END_API } from "../Constants"
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import { SIZE_OPTIONS, AllCategory } from "../Constants";
 
-const SIZE_OPTIONS = ["Small", "Medium", "Large", "Xtra Large", "default"];
 
 const AdminProductForm = () => {
   const user = useSelector((state) => state.user)
@@ -42,6 +43,8 @@ const AdminProductForm = () => {
     price: "",
     isActive: true,
   });
+
+  const ImageRef = useRef(null)
 
   // IMAGE
   const handleImageUpload = async (e, typeField) => {
@@ -219,10 +222,13 @@ const AdminProductForm = () => {
             <>
               <div>
                 <input
+                  ref={ImageRef}
+                  hidden
                   type="file"
                   onChange={(e) => handleImageUpload(e, "product")}
                   className="w-full p-2 bg-white/10 rounded"
                 />
+                <div onClick={() => ImageRef.current.click()} className="w-full py-10 px-5 rounded-4xl border-2 border-dashed gap-5 flexCenter"><AiOutlineCamera size={34} />Click Here to Select Image</div>
                 {imagePreview && (
                   <img
                     src={imagePreview}
@@ -235,22 +241,28 @@ const AdminProductForm = () => {
               <div className="grid md:grid-cols-2 gap-4">
                 <input
                   name="name"
-                  placeholder="Product Name"
+                  placeholder="Product Name Goes here.."
                   onChange={handleProductChange}
                   className="p-2 bg-white/10 rounded"
                 />
-                <input
+                <select
                   name="category"
-                  placeholder="Category"
                   onChange={handleProductChange}
-                  className="p-2 bg-white/10 rounded"
-                />
+                  className="p-2 appearance-none bg-white/10 rounded"
+                >
+                  {
+                    AllCategory.map((cat, idx) => {
+                      return <option key={idx} className="bg-black">{cat}</option>
+                    })
+                  }
+                </select>
+
               </div>
 
               <div className="grid md:grid-cols-2 gap-4">
                 <input
                   name="desc"
-                  placeholder="Description"
+                  placeholder="Description Goes here"
                   onChange={handleProductChange}
                   className="p-2 bg-white/10 text-black rounded"
                 />
@@ -333,9 +345,12 @@ const AdminProductForm = () => {
               <div>
                 <input
                   type="file"
+                  ref={ImageRef}
+                  hidden
                   onChange={(e) => handleImageUpload(e, "deal")}
                   className="w-full p-2 bg-white/10 rounded"
                 />
+                <div onClick={() => ImageRef.current.click()} className="w-full py-10 px-5 rounded-4xl border-2 border-dashed gap-5 flexCenter"><AiOutlineCamera size={34} /> Click Here to Select Image</div>
                 {deal.preview && (
                   <img
                     src={deal.preview}

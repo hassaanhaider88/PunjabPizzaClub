@@ -11,6 +11,7 @@ import productRoute from "./routers/Product.router.js";
 import dealRoute from "./routers/Deals.router.js"
 import orderRoute from "./routers/Order.router.js"
 import customerRouter from "./routers/Customer.router.js"
+import sendEmail from "./utils/sendEmails.js";
 
 
 dotenv.config();
@@ -55,6 +56,13 @@ app.register(orderRoute, { prefix: "/api/orders" });
 // Customers Routes
 app.register(customerRouter, { prefix: "/api/customers" });
 
+app.get("/sendemail", async (req, res) => {
+  await sendEmail('hassaanhaider088@gmail.com', "Kuchh bhi", "", `<h1>Hello yar</h1>`);
+  return res.send({
+    success: true,
+    message: "Email Sent Successfully"
+  })
+})
 
 app.listen({ port: PORT }, function (err, address) {
   if (err) {

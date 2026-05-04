@@ -2,9 +2,10 @@ import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 
 import userModel from "../models/User.models.js";
-import BlackListTokenModel from "../models/BlackListTokens.models.js"
+import BlackListTokenModel from "../models/BlackListTokens.models.js";
 import blackListTokenModel from "../models/BlackListTokens.models.js";
-
+import verifyEmailModel from "../models/VerifyEmail.models.js";
+import sendEmail from "../utils/sendEmails.js";
 
 const SignUpUser = async (req, res) => {
   try {
@@ -18,10 +19,10 @@ const SignUpUser = async (req, res) => {
 
     const isExistEmail = await userModel.findOne({ email });
     if (isExistEmail) {
-      return {
+      return res.send({
         success: false,
         message: "User Exist Already",
-      };
+      });
     }
 
     const hashpass = await bcrypt.hash(password, 10);
@@ -32,10 +33,10 @@ const SignUpUser = async (req, res) => {
       profile,
     });
     if (!c_user) {
-      return {
+      return res.send({
         success: false,
         message: "Something wents wrong....",
-      };
+      });
     }
 
     const token = jwt.sign(
@@ -45,7 +46,43 @@ const SignUpUser = async (req, res) => {
         expiresIn: "7d",
       },
     );
-    return {
+    const otpNum = Math.floor(1000 + Math.random() * 90000000);
+
+    const verifyEmail = await verifyEmailModel.create({
+      email: c_user.email,
+      otp: otpNum,
+    });
+    const verifyUrl = `${process.env.SERVER_URL}/api/auth/verify-email?otp=${otpNum}&email=${c_user.email}`;
+    sendEmail(
+      c_user.email,
+      "Verify Your Email",
+      null,
+      `
+  <div style="font-family: Arial, sans-serif; background:#0f172a; padding:30px; color:#fff;">
+    
+    <div style="max-width:500px; margin:auto; background:#1e293b; padding:30px; border-radius:12px; text-align:center;">
+      
+      <h2 style="color:#FF4757;">Verify Your Email</h2>
+      
+      <p style="color:#cbd5e1; margin-bottom:20px;">
+        Click the button below to verify your email address
+      </p>
+
+      <a href="${verifyUrl}" 
+         style="display:inline-block; padding:12px 25px; background:#FF4757; color:white; text-decoration:none; border-radius:30px; font-weight:bold;">
+         Verify Email
+      </a>
+
+      <p style="margin-top:20px; font-size:12px; color:#94a3b8;">
+        If you didn’t request this, ignore this email.
+      </p>
+
+    </div>
+  </div>
+  `,
+    ).catch(console.error);
+
+    return res.send({
       success: true,
       message: "User Sign Up Successfully",
       data: {
@@ -56,14 +93,14 @@ const SignUpUser = async (req, res) => {
         isEmailVerified: c_user?.isEmailVerified,
         role: c_user?.role,
         phone: c_user?.phone,
-        address: c_user?.phone
+        address: c_user?.address,
       },
-    };
+    });
   } catch (error) {
-    return {
+    return res.send({
       success: false,
       message: error,
-    };
+    });
   }
 };
 
@@ -107,7 +144,7 @@ const LoginUser = async (req, res) => {
         isEmailVerified: checkUserExist?.isEmailVerified,
         role: checkUserExist?.role,
         phone: checkUserExist?.phone,
-        address: checkUserExist?.address
+        address: checkUserExist?.address,
       },
     };
   } catch (error) {
@@ -124,38 +161,40 @@ const UserByToken = async (req, res) => {
     if (!token || token === undefined) {
       return res.send({
         success: false,
-        message: "Please provide Token"
-      })
+        message: "Please provide Token",
+      });
     }
     // check for black listed token
     const isBlackList = await BlackListTokenModel.findOne({ token });
     if (isBlackList) {
       return res.send({
         success: false,
-        message: "Token has expired please login agian"
-      })
+        message: "Token has expired please login agian",
+      });
     }
 
     const decode = jwt.verify(token, process.env.JWT_SECRET_KEY);
-    const user = await userModel.findOne({ email: decode.userEmail }).select("-password");
+    const user = await userModel
+      .findOne({ email: decode.userEmail })
+      .select("-password");
     if (!user) {
       return res.send({
         success: false,
-        message: "User Not Found"
-      })
+        message: "User Not Found",
+      });
     }
     return res.send({
       success: true,
       message: "User Found",
-      data: user
-    })
+      data: user,
+    });
   } catch (error) {
     return res.send({
       success: false,
-      message: error.message
-    })
+      message: error.message,
+    });
   }
-}
+};
 
 const LogOut = async (req, res) => {
   try {
@@ -163,30 +202,80 @@ const LogOut = async (req, res) => {
     if (!token) {
       return res.send({
         success: false,
-        message: "TOken is not provided.."
-      })
+        message: "TOken is not provided..",
+      });
     }
     const blackList = await blackListTokenModel.create({
-      token
-    })
+      token,
+    });
     if (!blackList) {
       return res.send({
         success: false,
-        message: "Something wents worng..."
-      })
+        message: "Something wents worng...",
+      });
     }
     return res.send({
       success: true,
-      message: "User LogOut successfully"
-    })
+      message: "User LogOut successfully",
+    });
   } catch (error) {
     return res.send({
       success: false,
-      message: error.message
-    })
+      message: error.message,
+    });
   }
-}
+};
 
+const VerifyEmail = async (req, res) => {
+  try {
+    const { otp, email } = req.query;
+    if (!otp || !email) {
+      return res.send({
+        success: false,
+        message: "OTP and email required",
+      });
+    }
 
+    const checkForEmailAndOTP = await verifyEmailModel.findOne({ email });
+    if (!checkForEmailAndOTP) {
+      return res.send({
+        success: false,
+        message: "Something wents wrong while verifying email..",
+      });
+    }
 
-export { SignUpUser, LoginUser, UserByToken, LogOut };
+    const same = String(checkForEmailAndOTP.otp) == String(otp);
+    console.log(same, "is email are same or not")
+    if (!same) {
+      return res.send({
+        success: false,
+        message: "Something wents wrong while verifying email..",
+      });
+    }
+
+    const user = await userModel.findOneAndUpdate(
+      { email },
+      { isEmailVerified: true },
+      { new: true },
+    );
+
+    if (!user) {
+      return res.send({
+        success: false,
+        message: "Something wents wrong while verifying email..",
+      });
+    }
+    await verifyEmailModel.deleteOne({ _id: checkForEmailAndOTP._id });
+    return res.send({
+      success: true,
+      message: "Email Verified Successfully Login to your account",
+    });
+  } catch (error) {
+    return res.send({
+      success: false,
+      message: error.message,
+    });
+  }
+};
+
+export { SignUpUser, LoginUser, UserByToken, LogOut, VerifyEmail };

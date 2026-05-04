@@ -202,21 +202,21 @@ const AllOrder = () => {
 
           <tbody>
             {orders?.map((order) => (
-              order.orderStatus === orderStatusFilter || order.paymentStatus === paymentStatusFilter || orderStatusFilter === "All" && paymentStatusFilter === "All" ?
-                <tr key={order._id} className="border-t border-white/10  align-top">
+              order?.orderStatus === orderStatusFilter || order?.paymentStatus === paymentStatusFilter || orderStatusFilter === "All" && paymentStatusFilter === "All" ?
+                <tr key={order?._id} className="border-t border-white/10  align-top">
                   <td className="p-3 text-xs w-40 ">
-                    <p className="text-gray-400">{order.orderBy?.name}</p>
-                    <p>{order.orderBy?.email || order.orderBy}</p>
-                    <p className="text-gray-400">{order.contactNumber}</p>
-                    <p className="text-gray-400">{order.deliveryAddress}</p>
-                    <p className="text-gray-400">City : <span className="text-md font-semibold text-green-400">{order.city}</span></p>
-                    <p className="text-gray-400">{`${order.createdAt.split("T")[0]} at ${order.createdAt.split("T")[1].slice(0, 5)}`}</p>
+                    <p className="text-gray-400">{order?.orderBy?.name}</p>
+                    <p>{order?.orderBy?.email || order?.orderBy}</p>
+                    <p className="text-gray-400">{order?.contactNumber}</p>
+                    <p className="text-gray-400">{order?.deliveryAddress}</p>
+                    <p className="text-gray-400">City : <span className="text-md font-semibold text-green-400">{order?.city}</span></p>
+                    <p className="text-gray-400">{`${order?.createdAt.split("T")[0]} at ${order?.createdAt.split("T")[1].slice(0, 5)}`}</p>
                   </td>
 
 
                   <td className="p-3  w-100">
                     <div className=" gap-2 grid-cols-1 md:grid-cols-2 w-full grid">
-                      {order.items.map((item) => (
+                      {order?.items.map((item) => (
                         <div
                           key={item._id}
                           className="flex bg-black/5 gap-2 items-center b p-2 rounded"
@@ -239,15 +239,15 @@ const AllOrder = () => {
 
 
                   <td className="p-3 text-[#FF4757] font-bold">
-                    Rs.{order.totalPrice}
+                    Rs.{order?.totalPrice}
                   </td>
 
                   {/* Order Status */}
                   <td className="p-3">
                     <select
-                      value={order.orderStatus}
+                      value={order?.orderStatus}
                       onChange={(e) =>
-                        handleOrderStatus(order._id, e.target.value)
+                        handleOrderStatus(order?._id, e.target.value)
                       }
                       className="bg-black border border-white/20 p-1 rounded"
                     >
@@ -260,9 +260,9 @@ const AllOrder = () => {
                   {/* Payment */}
                   <td className="p-3">
                     <select
-                      value={order.paymentStatus}
+                      value={order?.paymentStatus}
                       onChange={(e) =>
-                        handlePaymentStatus(order._id, e.target.value)
+                        handlePaymentStatus(order?._id, e.target.value)
                       }
                       className="bg-black border border-white/20 p-1 rounded"
                     >
@@ -277,11 +277,11 @@ const AllOrder = () => {
                     <select
                       value={order?.orderAssignTo?.name || ""}
                       onChange={(e) =>
-                        handleAssignRider(order._id, e.target.value)
+                        handleAssignRider(order?._id, e.target.value)
                       }
                       className="bg-black w-40 border border-white/20 p-1 rounded"
                     >
-                      <option value="">{order.orderAssignTo.name || "Select Rider"}</option>
+                      <option value="">{order?.orderAssignTo?.name || "Select Rider"}</option>
                       {riders.map((r) => (
                         <option className="flex" key={r._id} value={r._id}>
                           <img src={r.profile} alt={r.name} className="w-10 h-10 object-cover" />

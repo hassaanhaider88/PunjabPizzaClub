@@ -49,6 +49,8 @@ const sideBarNavLins = [
     },
 ];
 
+const SIZE_OPTIONS = ["Small", "Medium", "Large", "Xtra Large", "default"];
 
 
-export { BACK_END_API, sideBarNavLins, AllCategory, RestricetPages }
+
+export { BACK_END_API, sideBarNavLins, AllCategory, RestricetPages ,SIZE_OPTIONS}

@@ -8,10 +8,19 @@ const PizzaCard = ({ item, activeMenu = "All" }) => {
   const dispatch = useDispatch();
   // State to handle size selection
   const [selectedSize, setSelectedSize] = useState(item?.prices[0]);
+  function checkPercentOff(originalPrice, offerPrice) {
+    const discount = originalPrice - offerPrice;
+    const percent = (discount / originalPrice) * 100;
 
-  const hanleAddToCartClick = () => {
+    return Math.round(percent); // ya .toFixed(2)
+  }
+
+  console.log(checkPercentOff(350, 350)); // 14
+
+  const handleAddToCartClick = () => {
+    console.log(item)
     if (item.stockStatus !== "In Stock") {
-      toast.warn(`Please Wait Product is Curruntly ${item.stockStatus}`);
+      toast.warn(`Please Wait Product is Currently ${item.stockStatus}`);
     }
     dispatch(
       addToCart({
@@ -80,13 +89,16 @@ const PizzaCard = ({ item, activeMenu = "All" }) => {
               <span className="text-gray-600  text-lg line-through decoration-red-500/50">
                 Rs.{selectedSize.originalPrice}
               </span>
+              <span className="text-[#FF4757]  text-sm font-black">
+                {checkPercentOff(selectedSize.originalPrice, selectedSize.offerPrice,)} % off
+              </span>
             </>
           )}
         </div>
 
         {item.stockStatus == "In Stock" ? (
           <button
-            onClick={hanleAddToCartClick}
+            onClick={handleAddToCartClick}
             className="w-full bg-[#FF4757] hover:bg-[#FF4757]/80 text-white font-black py-4 rounded-full transition-all transform active:scale-95 "
           >
             Order Now

@@ -85,7 +85,7 @@ const AdminNavBar = () => {
           );
         })}
       </div>
-      <div className="SecondHeader bg-gray-900 rounded-3xl py-2 px-4 flex md:flex-row flex-col justify-between items-center">
+      {location.pathname == "/add-new-product" ? "" : <div className="SecondHeader bg-gray-900 rounded-3xl py-2 px-4 flex md:flex-row flex-col justify-between items-center">
         {sideBarNavLins.map((link, idx) => (
           <h1
             key={idx}
@@ -100,7 +100,7 @@ const AdminNavBar = () => {
           </div>
           <div className="py-2 px-8 bg-[#00183A] rounded-2xl">{CrtTime}</div>
         </div>
-      </div>
+      </div>}
     </>
   );
 };

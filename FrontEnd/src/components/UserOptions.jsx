@@ -18,7 +18,7 @@ const UserOptions = ({
   const navigate = useNavigate();
   const [Loading, setLoading] = useState(false);
   const token = localStorage.getItem("PPCUserToken");
-  const hanleUserLogout = async () => {
+  const handleUserLogout = async () => {
     if (confirm("Are you sure to log Out...")) {
       if (token) {
         setLoading(true);
@@ -71,13 +71,13 @@ const UserOptions = ({
         </div>
       ) : (
         <div onClick={() => navigate("/user-profile")} className={CommonClass}>
-          Profile
+          My Orders
         </div>
       )}
       {Loading ? (
         "Signing Out..."
       ) : (
-        <div onClick={hanleUserLogout} className={CommonClass}>
+        <div onClick={handleUserLogout} className={CommonClass}>
           Sign Out
         </div>
       )}
