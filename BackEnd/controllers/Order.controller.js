@@ -1,5 +1,7 @@
 import orderModel from "../models/Order.models.js";
 import userModel from "../models/User.models.js";
+import productModel from "../models/Product.models.js";
+import dealsModel from "../models/Deals.models.js";
 
 const SendAllOrders = async (req, res) => {
     try {
@@ -57,7 +59,30 @@ const createOrder = async (req, res) => {
                 message: "User not found",
             });
         }
+        // check if items is in in stock state or not In Stock" for product and isActive true for deal
+        // ✅ STOCK VALIDATION
+        for (let item of items) {
+            // check in products
+            const product = await productModel.findById({ _id: item.id });
+            if (product) {
+                if (product.stockStatus !== "In Stock") {
+                    return res.send({
+                        success: false,
+                        message: `${product.name} is currently ${product.stockStatus}`,
+                    });
+                }
+            } else {
+                // check in deals
+                const deal = await dealsModel.findById({ _id: item.id });
 
+                if (!deal || !deal.isActive) {
+                    return res.send({
+                        success: false,
+                        message: `${item.name} is not available right now`,
+                    });
+                }
+            }
+        }
         const order = await orderModel.create({
             orderBy: userId,
             items,
