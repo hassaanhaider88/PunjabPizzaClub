@@ -266,6 +266,7 @@ const VerifyEmail = async (req, res) => {
       });
     }
     await verifyEmailModel.deleteOne({ _id: checkForEmailAndOTP._id });
+    
     return res.send({
       success: true,
       message: "Email Verified Successfully Login to your account",
