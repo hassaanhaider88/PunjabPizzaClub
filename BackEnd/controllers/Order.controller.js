@@ -28,7 +28,7 @@ const SendAllOrders = async (req, res) => {
     }
 };
 
-// only logged User can order and whol emial is verified
+// only logged User can order and who's email is verified
 const createOrder = async (req, res) => {
     try {
         const {
@@ -60,7 +60,6 @@ const createOrder = async (req, res) => {
             });
         }
         // check if items is in in stock state or not In Stock" for product and isActive true for deal
-        // ✅ STOCK VALIDATION
         for (let item of items) {
             // check in products
             const product = await productModel.findById({ _id: item.id });
@@ -137,7 +136,7 @@ const MyOrders = async (req, res) => {
 
         const allOrders = await orderModel
             .find({ orderBy: userId })
-            .sort({ createdAt: -1 });
+            .sort({ createdAt: -1 }).populate({ path: "orderAssignTo", select: "-password" });
         if (!allOrders) {
             return res.send({
                 success: false,
@@ -194,7 +193,7 @@ const CancelOrder = async (req, res) => {
     }
 };
 
-// admin contoller to update payment and order status
+// admin controller to update payment and order status
 const updateOrderStatus = async (req, res) => {
     try {
         const { id } = req.params;
@@ -313,6 +312,37 @@ const AssignRiderToOrder = async (req, res) => {
     });
 };
 
+const ridersOrder = async (req, res) => {
+    try {
+        const riderId = req.user?._id;
+        if (!riderId) {
+            return res.send({
+                success: false,
+                message: "Rider not found",
+            });
+        }
+        const orders = await orderModel.find({ orderAssignTo: riderId }).sort({ createdAt: -1 }).populate({ path: "orderAssignTo", select: "-password" });
+        if (!orders) {
+            return res.send({
+                success: false,
+                message: "Not Found Any Orders"
+            })
+        }
+
+        return res.send({
+            success: true,
+            message: "Your Orders Assigned To You",
+            data: orders
+        })
+
+    } catch (error) {
+        return res.send({
+            success: false,
+            message: error.message
+        })
+    }
+}
+
 export {
     SendAllOrders,
     createOrder,
@@ -321,4 +351,5 @@ export {
     updateOrderStatus,
     updateOrderPaymentStatus,
     AssignRiderToOrder,
+    ridersOrder
 };

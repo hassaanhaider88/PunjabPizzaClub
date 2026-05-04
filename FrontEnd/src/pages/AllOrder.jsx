@@ -147,7 +147,8 @@ const AllOrder = () => {
     }
   };
 
-  console.log(riders)
+  console.log(orders)
+
 
   return (
     <div className="p-6 text-white">
@@ -200,7 +201,7 @@ const AllOrder = () => {
           </thead>
 
           <tbody>
-            {orders.map((order) => (
+            {orders?.map((order) => (
               order.orderStatus === orderStatusFilter || order.paymentStatus === paymentStatusFilter || orderStatusFilter === "All" && paymentStatusFilter === "All" ?
                 <tr key={order._id} className="border-t border-white/10  align-top">
                   <td className="p-3 text-xs w-40 ">
@@ -274,13 +275,13 @@ const AllOrder = () => {
                   {/* Assign Rider */}
                   <td className="p-3">
                     <select
-                      value={order.orderAssignTo || ""}
+                      value={order?.orderAssignTo?.name || ""}
                       onChange={(e) =>
                         handleAssignRider(order._id, e.target.value)
                       }
                       className="bg-black w-40 border border-white/20 p-1 rounded"
                     >
-                      <option value="">Select Rider</option>
+                      <option value="">{order.orderAssignTo.name || "Select Rider"}</option>
                       {riders.map((r) => (
                         <option className="flex" key={r._id} value={r._id}>
                           <img src={r.profile} alt={r.name} className="w-10 h-10 object-cover" />

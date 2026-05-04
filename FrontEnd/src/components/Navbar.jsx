@@ -89,7 +89,7 @@ const NavBar = ({ isShow = true }) => {
         {user.isLogged ? (
           <div className="border-2 border-white rounded-full" onClick={() => setIsOpenUserOption(!isOpenUserOption)}>
             <img
-              className="w-12 h-12 m-1 rounded-full"
+              className="w-8 h-8 m-1 rounded-full"
               src={user?.profile ? user.profile : "https://i.pinimg.com/originals/1f/a1/66/1fa166b8be7105927a3af53cc8891458.png"}
               alt="user profile"
             />
@@ -152,7 +152,7 @@ const NavBar = ({ isShow = true }) => {
           {user.isLogged ? (
             <div onClick={() => setIsOpenUserOption(!isOpenUserOption)}>
               <img
-                className="w-12 h-12 m-1 rounded-full"
+                className="w-8 h-8 m-1 rounded-full"
                 src={user?.profile ? user.profile : "https://i.pinimg.com/originals/1f/a1/66/1fa166b8be7105927a3af53cc8891458.png"}
                 alt="user profile"
               />

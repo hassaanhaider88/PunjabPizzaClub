@@ -6,8 +6,10 @@ import {
   updateOrderStatus,
   updateOrderPaymentStatus,
   AssignRiderToOrder,
+  ridersOrder
 } from "../controllers/Order.controller.js";
 import IsAdminAuthMD from "../middlewares/IsAdminAuth.js";
+import IsRiderAuthMw from "../middlewares/IsRiderAuth.js";
 import IsUserLoginAuth from "../middlewares/IsUserLoginAuth.js";
 
 async function routes(fastify, option) {
@@ -30,6 +32,7 @@ async function routes(fastify, option) {
   // user routes
   fastify.post("/create", { preHandler: IsUserLoginAuth }, createOrder);
   fastify.get("/me", { preHandler: IsUserLoginAuth }, MyOrders);
+  fastify.get("/rider/me", { preHandler: IsRiderAuthMw }, ridersOrder);
   fastify.get("/cancel/:id", { preHandler: IsUserLoginAuth }, CancelOrder);
 }
 

@@ -10,10 +10,8 @@ import { store } from "./store/store";
 ReactDOM.createRoot(document.getElementById("root")).render(
   <Provider store={store}>
     <BrowserRouter>
-      <React.StrictMode>
-        <App />
-        <ToastContainer />
-      </React.StrictMode>
+      <App />
+      <ToastContainer />
     </BrowserRouter>
   </Provider>,
 );

@@ -128,6 +128,7 @@ const App = () => {
   }, []);
 
   useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
     fetchProduct();
     fetchDeals()
     if (user.role === "admin") {
@@ -135,7 +136,6 @@ const App = () => {
       fetchUsers();
       return;
     }
-    window.scrollTo({ top: 0, behavior: "smooth" });
   }, [user.role]);
 
 
