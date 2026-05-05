@@ -13,13 +13,13 @@ import orderRoute from "./routers/Order.router.js"
 import customerRouter from "./routers/Customer.router.js"
 
 
-
+// middlewares
 dotenv.config();
 connectToDB();
 
 
 const app = fastify();
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 5000;
 
 app.register(compression());
 app.register(multipart, {
@@ -63,10 +63,11 @@ app.register(customerRouter, { prefix: "/api/customers" });
 
 
 
-app.listen({ port: PORT }, function (err, address) {
+app.listen({ port: PORT, host: "0.0.0.0" }, function (err, address) {
   if (err) {
     console.error(err);
     process.exit(1);
   }
   console.log(`Server is now listening on ${address}`);
 });
+ 
