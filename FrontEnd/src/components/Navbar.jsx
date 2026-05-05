@@ -6,12 +6,12 @@ import { AiOutlineShoppingCart } from "react-icons/ai";
 import { AiOutlineSearch } from "react-icons/ai";
 import { FaLuggageCart } from "react-icons/fa";
 import React, { useEffect, useState } from "react";
-import Logo from "../assets/PPCLLogo.png";
 import CartContainer from "./CartContainer";
 import UserOptions from "./UserOptions";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
 const NavBar = ({ isShow = true }) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -40,8 +40,8 @@ const NavBar = ({ isShow = true }) => {
       className={`${isShow ? "" : "hidden"} justify-between flex bg-clip-padding backdrop-filter  backdrop-blur-sm bg-opacity-10 items-center sticky top-0 z-100 px-10`}
     >
       <div className="LogoContainer flex justify-center items-center w-[20%] md:w-[10%]">
-        <img
-          src={Logo}
+        <LazyLoadImage
+          src="https://res.cloudinary.com/dcrkdgbd9/image/upload/v1777964324/PPCLLogo_bvoffl.png"
           alt="Punjab Pizza CClub Logo"
           className="w-30 bg-cover"
         />
