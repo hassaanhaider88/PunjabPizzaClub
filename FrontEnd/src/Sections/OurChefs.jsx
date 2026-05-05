@@ -1,4 +1,5 @@
 import React from "react";
+import { LazyLoadImage } from "react-lazy-load-image-component"
 
 const OurChefs = () => {
   const chefs = [
@@ -26,16 +27,17 @@ const OurChefs = () => {
   return (
     <div className="w-full min-h-screen flex flex-col items-start justify-start  py-10 px-5 md:px-10">
       <h1 className="text-left text-4xl">Meet Our Chefs</h1>
-      <div className="flex flex-wrap  w-full  justify-center items-center mt-10">
+      <div className="flex   w-full  justify-center items-center mt-10">
         {chefs.map((chef, index) => (
           <div
             key={index}
-            className="flex flex-col justify-center items-center mx-5"
+            className="flex flex-wrap flex-col justify-center items-center mx-5"
           >
-            <img
+            <LazyLoadImage
               src={chef.image}
               alt={chef.name}
-              className="w-80 h-150 rounded-[20px] object-cover"
+              className="w-70 h-120 rounded-[20px] object-cover"
+              placeholderSrc="https://via.placeholder.com/300x200"
             />
             <h2 className="text-xl font-bold mt-4">{chef.name}</h2>
           </div>

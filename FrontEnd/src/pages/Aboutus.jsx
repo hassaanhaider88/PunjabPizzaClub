@@ -7,7 +7,7 @@ import aboutData from "../dummy/AboutUs";
 import OurChefs from "../Sections/OurChefs";
 
 export default function AboutPage() {
-  const videoRef = useRef();
+  const videoRef = useRef(); 
   const [isVideoPlaying, setIsVideoPlaying] = useState(false);
   useEffect(() => {
     if (isVideoPlaying) {
@@ -76,7 +76,7 @@ export default function AboutPage() {
             return (
               <div
                 key={i}
-                className="bg-gray-900 p-6 rounded-lg hover:scale-105 transition duration-300"
+                className="px-10 py-5 flex border-2 border-b-4 border-[#484848]  items-center  flex-col w-full  rounded-r-[100px] bg-clip-padding backdrop-filter z-50 relative backdrop-blur-sm bg-opacity-10"
               >
                 <div className="w-18 h-18 mx-auto bg-[#ff6467] rounded-full flex items-center justify-center text-white text-xl mb-4">
                   <Icon size={30} />
