@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import BurgerChief from "../assets/BurgerForChief.png";
+
 import ReviewsData from "../dummy/ReviewsData.json";
 import { BiRightArrowAlt, BiLeftArrowAlt } from "react-icons/bi";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
 const ReviewSection = () => {
   const [activeReview, setActiveReview] = useState(0);
@@ -21,7 +22,7 @@ const ReviewSection = () => {
       {/* Image Section */}
       <div className="w-full xl:w-[35%] flex justify-center">
         <img
-          src={BurgerChief}
+          src="https://res.cloudinary.com/dcrkdgbd9/image/upload/v1777964338/BurgerForChief_eiwgac.png"
           className="w-[80%] md:w-[60%] xl:w-full object-contain"
           alt="Burger"
         />
@@ -37,7 +38,7 @@ const ReviewSection = () => {
         {/* Review Card */}
         <div className="mt-10 w-full bg-black bg-clip-padding backdrop-filter   backdrop-blur-sm  shadow-lg rounded-2xl p-6 md:p-8 flex flex-col md:flex-row items-center gap-6 relative">
           {/* Profile */}
-          <img
+          <LazyLoadImage
             src={review.profile}
             className="w-32 h-32 md:w-40 md:h-40 rounded-full object-cover border-4 border-[#FF4757]"
             alt={review.name}

@@ -1,23 +1,29 @@
-import React from "react";
-import BurgerBg from "../assets/BurgerBg.png";
-import ChilliBg from "../assets/ChilliBg.png";
-import LalianMap from "../assets/LalianMap.png";
-import PizzaSice from "../assets/PizzaSlice.jpeg";
+import React, { useState } from "react";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import { RxVideo } from "react-icons/rx";
 
 const Hero = () => {
+  const [isVideoDialogOpen, setIsVideoDialogOpen] = useState(false)
   return (
     <>
+      {isVideoDialogOpen &&
+        <div className="h-screen w-screen fixed top-0 left-0 bg-black z-100">
+          <div className="w-[80%] h-[80%] flexCenter">
+            <button onClick={() => setIsVideoDialogOpen(false)} className="absolute px-5 py-2 rounded-full bg-[#ff4757] right-10 top-5">Close</button>
+            <video className="w-full h-full" autoPlay muted loop>
+              <source src="https://res.cloudinary.com/dcrkdgbd9/video/upload/v1777965107/Online_delivery_tracking_on_smartphone_gif_video_animation_gb0hzp.mp4" type="video/mp4" />
+            </video>
+          </div>
+        </div>}
       <div className="NameImageContainer w-full h-[50vh] sm:min-h-screen flex items-start justify-center relative">
         <div className="absolute w-full flexCenter">
-          <h1 className="text-9xl md:text-[400px] tracking-[50px] text-[#797979]  font-bold text-center mt-20">
+          <h1 className="text-8xl md:text-[400px] tracking-[50px] text-[#797979]  font-bold text-center mt-20">
             Punjab
           </h1>
         </div>
         <div className="absolute z-20 w-full flexCenter">
           <LazyLoadImage
-            src={BurgerBg}
+            src="https://res.cloudinary.com/dcrkdgbd9/image/upload/v1777964121/BurgerBG_xy73p4.png"
             className="md:scale-[0.8] scale-[0.6]"
             alt="Burger"
           />
@@ -25,7 +31,7 @@ const Hero = () => {
         <div className="absolute z-10 w-full flexCenter">
           <LazyLoadImage
             className="w-full scale-[1.1] md:scale-[0.9] h-full object-fill"
-            src={ChilliBg}
+            src="https://res.cloudinary.com/dcrkdgbd9/image/upload/v1777964149/ChilliBg_hmvme9.png"
             alt="Chilli"
           />
         </div>
@@ -51,7 +57,7 @@ const Hero = () => {
             <button className="mt-5 px-10 border-2 border-[#FF4757] py-3 BrandBG text-white font-bold rounded-full hover:opacity-90 transition duration-300">
               Order Now!
             </button>
-            <button className="mt-5 px-10 flexCenter gap-4  py-3  font-bold rounded-full hover:bg-[#FF4757] border-2 border-[#FF4757] hover:text-white hover:border-none text-[#FF4757] transition duration-300">
+            <button onClick={() => setIsVideoDialogOpen(true)} className="mt-5 px-10 flexCenter gap-4  py-3  font-bold rounded-full hover:bg-[#FF4757] border-2 border-[#FF4757] hover:text-white hover:border-none text-[#FF4757] transition duration-300">
               <RxVideo size={24} /> How to process order
             </button>
           </div>
@@ -89,7 +95,7 @@ const Hero = () => {
             <div className="flex justify-center items-center flex-col">
               <LazyLoadImage
                 className="w-13 h-13 rounded-full "
-                src={LalianMap}
+                src="https://res.cloudinary.com/dcrkdgbd9/image/upload/v1777964215/LalianMap_wpowph.jpg"
                 alt=""
               />
               <h1 className="text-white font-bold mt-2 tracking-[0.2em]">
@@ -100,7 +106,7 @@ const Hero = () => {
             <div className="flex justify-center items-center flex-col">
               <LazyLoadImage
                 className="w-13 h-13 rounded-full "
-                src={PizzaSice}
+                src="https://res.cloudinary.com/dcrkdgbd9/image/upload/v1777964216/PizzaSlice_xet5sn.jpg"
                 alt="punjab pizza club"
               />
               <h1 className="text-white font-bold mt-2 tracking-[0.2em]">

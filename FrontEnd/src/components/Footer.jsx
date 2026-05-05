@@ -5,7 +5,8 @@ import { MdOutlineMail } from "react-icons/md";
 import { BsWhatsapp } from "react-icons/bs";
 import { Link } from "react-router-dom";
 import React from "react";
-import Logo from "../assets/PPCLLogo.png";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+
 
 const Footer = ({ isShow }) => {
   const year = new Date().getFullYear();
@@ -14,8 +15,8 @@ const Footer = ({ isShow }) => {
       <>
         <div className="flex h-fit flex-col md:flex-row justify-evenly md:gap-30 gap-5 items-center w-full">
           <div className="md:w-1/2 w-full flexCenter">
-            <img
-              src={Logo}
+            <LazyLoadImage
+              src="https://res.cloudinary.com/dcrkdgbd9/image/upload/v1777964324/PPCLLogo_bvoffl.png"
               alt="Punjab Pizza Club Lalian"
               className="w-full h-full"
             />
