@@ -2,7 +2,7 @@ import fastify from "fastify";
 import dotenv from "dotenv";
 import compression from "compression";
 import multipart from "@fastify/multipart";
-import cors from "@fastify/cors"
+
 
 
 import connectToDB from "./configs/ConnectDB.js";
@@ -25,7 +25,12 @@ app.register(compression());
 app.register(multipart, {
   limits: { fileSize: 10 * 1024 * 1024 }, // 10MB limit
 });
-app.register(cors)
+
+app.register(import("@fastify/cors"), {
+  origin: "http://localhost:5173", // exact frontend origin
+  credentials: true,
+});
+
 app.register(import('@fastify/formbody'))
 
 await app.register(import('@fastify/rate-limit'), {

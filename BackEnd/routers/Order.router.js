@@ -34,6 +34,7 @@ async function routes(fastify, option) {
   fastify.get("/me", { preHandler: IsUserLoginAuth }, MyOrders);
   fastify.get("/rider/me", { preHandler: IsRiderAuthMw }, ridersOrder);
   fastify.get("/cancel/:id", { preHandler: IsUserLoginAuth }, CancelOrder);
+
 }
 
 export default routes;
