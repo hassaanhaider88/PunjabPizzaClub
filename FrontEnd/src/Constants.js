@@ -5,7 +5,8 @@ import { FaSitemap } from "react-icons/fa";
 import { MdOutlineProductionQuantityLimits } from "react-icons/md";
 
 
-const BACK_END_API = "http://localhost:3000"
+// const BACK_END_API = "http://localhost:3000"
+const BACK_END_API = "https://punjabpizzaclub.onrender.com"
 
 const AllCategory = [
     "Pizza",
@@ -55,4 +56,4 @@ const SIZE_OPTIONS = ["Small", "Medium", "Large", "Xtra Large", "default"];
 
 
 
-export { BACK_END_API, sideBarNavLins, AllCategory, RestrictPages ,SIZE_OPTIONS}
+export { BACK_END_API, sideBarNavLins, AllCategory, RestrictPages, SIZE_OPTIONS }
