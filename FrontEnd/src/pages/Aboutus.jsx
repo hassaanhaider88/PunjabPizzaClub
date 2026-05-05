@@ -6,8 +6,8 @@ import React, { useEffect, useRef, useState } from "react";
 import aboutData from "../dummy/AboutUs";
 import OurChefs from "../Sections/OurChefs";
 
-export default function AboutPage() {
-  const videoRef = useRef(); 
+const AboutPage = () => {
+  const videoRef = useRef();
   const [isVideoPlaying, setIsVideoPlaying] = useState(false);
   useEffect(() => {
     if (isVideoPlaying) {
@@ -98,3 +98,5 @@ export default function AboutPage() {
     </div>
   );
 }
+
+export default AboutPage;
