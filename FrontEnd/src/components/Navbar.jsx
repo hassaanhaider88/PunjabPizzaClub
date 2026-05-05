@@ -1,5 +1,4 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-/* eslint-disable react-hooks/set-state-in-effect */
 import { HiOutlineUserCircle } from "react-icons/hi";
 import { RxCross1 } from "react-icons/rx";
 import { RxHamburgerMenu } from "react-icons/rx";
@@ -33,7 +32,8 @@ const NavBar = ({ isShow = true }) => {
     if (user.isEmailVerified == false && user.isLogged) {
       toast.warn("Please Verify Your Email First")
     }
-  }, [])
+  }, [user.isLogged])
+
   const LP = location.pathname;
   return (
     <div

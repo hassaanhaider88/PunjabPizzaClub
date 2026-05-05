@@ -28,7 +28,7 @@ import fetchAllProductsFun from "./utils/fetchAllProduts";
 import { login } from "./store/slices/userSlice";
 import AdminNavBar from "./components/AdminNavBar";
 import { fetchAllProducts } from "./store/slices/productSlice";
-import { RestricetPages } from "./Constants";
+import { RestrictPages } from "./Constants";
 import AdminProductUpdate from "./pages/UpdateProduct";
 import fetchAllDealsfun from "./utils/fetchAllDeals";
 import { allDeals } from "./store/slices/dealSlice"
@@ -38,14 +38,15 @@ import { allOrders } from "./store/slices/orderSlice";
 import fetchUsersFun from "./utils/fetchAllCustomers";
 import { allUser } from "./store/slices/customerSlice";
 
+
 const App = () => {
   const location = useLocation();
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
 
-  // the routes where i dont want to show navbar
+  // the routes where i don't want to show navbar
 
-  const isShownNavOrFooter = RestricetPages.includes(location.pathname);
+  const isShownNavOrFooter = RestrictPages.includes(location.pathname);
 
   const fetchUserData = async (token) => {
     const data = await fetchUser(token);

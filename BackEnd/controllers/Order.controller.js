@@ -6,6 +6,7 @@ import sendEmail from "../utils/sendEmails.js";
 import orderEmailBody from "../utils/orderEmailTem.js";
 
 
+
 const SendAllOrders = async (req, res) => {
     try {
         const orders = await orderModel.find().sort({ createdAt: -1 }).populate({
@@ -227,7 +228,7 @@ const updateOrderStatus = async (req, res) => {
                 message: "Error in updating order",
             });
         }
-        sendEmail(updateOrder?.orderBy?.email, "Order Status Updated", null, orderEmailBody(updateOrder))
+
 
         // here we will inform user about his order later
         return res.send({

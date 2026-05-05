@@ -10,20 +10,22 @@ const BACK_END_API = "http://localhost:3000"
 const AllCategory = [
     "Pizza",
     "Burger",
-    "Sharwaama",
+    "Shoarwaama",
     "Paratha Roll",
     "Hot Wings",
 ];
 
-// To show user navbar on these navbars
-const RestricetPages = [
+// To show user navbar on these navbar
+const RestrictPages = [
     "/",
     "/menu",
     "/about",
     "/contact",
     "/auth",
     "/checkout",
-    "/user-profile"
+    "/user-profile",
+    "/privacy",
+    "/tofs"
 ];
 
 const sideBarNavLins = [
@@ -53,4 +55,4 @@ const SIZE_OPTIONS = ["Small", "Medium", "Large", "Xtra Large", "default"];
 
 
 
-export { BACK_END_API, sideBarNavLins, AllCategory, RestricetPages ,SIZE_OPTIONS}
+export { BACK_END_API, sideBarNavLins, AllCategory, RestrictPages ,SIZE_OPTIONS}
