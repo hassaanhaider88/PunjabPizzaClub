@@ -27,7 +27,7 @@ app.register(multipart, {
 });
 
 app.register(import("@fastify/cors"), {
-  origin: "http://localhost:5173", // exact frontend origin
+  origin: "*", // exact frontend origin
   credentials: true,
 });
 
@@ -70,4 +70,3 @@ app.listen({ port: PORT, host: "0.0.0.0" }, function (err, address) {
   }
   console.log(`Server is now listening on ${address}`);
 });
- 
