@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/set-state-in-effect */
 /* eslint-disable react-hooks/exhaustive-deps */
 import { CgAdd } from "react-icons/cg";
 import { AiOutlineDelete } from "react-icons/ai";
@@ -34,6 +35,7 @@ const AdminDealUpdate = () => {
         preview: null,
         price: "",
         isActive: true,
+        activetill: null
     });
 
     const fetchDealData = async () => {
@@ -54,6 +56,7 @@ const AdminDealUpdate = () => {
                     description: result?.data.description,
                     price: result?.data.price,
                     isActive: result?.data.isActive,
+                    activetill: result?.data.activetill
                 });
             } else {
                 toast.error(result.error);
@@ -131,6 +134,7 @@ const AdminDealUpdate = () => {
                     price: deal.price,
                     isActive: deal.isActive,
                     image: isUploadNewImage ? ImgUrl : oldImg,
+                    activetill: deal.activetill
                 }),
             });
             const result = await res.json();
@@ -244,15 +248,17 @@ const AdminDealUpdate = () => {
                             />
                             Active
                         </label>
+
                     </div>
+                  
 
 
-                    <button disabled={LoadingImgUplaod} type="submit" className="w-full py-3 bg-[#CE3B48] rounded">
-                        Update One
+                    <button disabled={LoadingImgUplaod} type="submit" className="w-fit px-5  py-3 bg-[#CE3B48] rounded-xl relative left-1/2 -translate-x-1/2">
+                        Update <Deal></Deal>
                     </button>
                 </form>
-            </div>
-        </div>
+            </div >
+        </div >
     );
 };
 

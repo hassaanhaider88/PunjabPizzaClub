@@ -42,11 +42,12 @@ const AdminProductForm = () => {
     preview: null,
     price: "",
     isActive: true,
+    activetill: null
   });
 
   const ImageRef = useRef(null)
 
-  // IMAGE
+
   const handleImageUpload = async (e, typeField) => {
     const file = e.target.files[0];
     if (!file) return;
@@ -85,12 +86,11 @@ const AdminProductForm = () => {
     }
   };
 
-  // PRODUCT CHANGE
+
   const handleProductChange = (e) => {
     setProduct({ ...product, [e.target.name]: e.target.value });
   };
 
-  // DEAL CHANGE
   const handleDealChange = (e) => {
     const { name, value, type, checked } = e.target;
     setDeal({
@@ -99,7 +99,7 @@ const AdminProductForm = () => {
     });
   };
 
-  // PRICE
+
   const handlePriceChange = (i, field, value) => {
     const updated = [...product.prices];
     updated[i][field] = value;
@@ -121,7 +121,7 @@ const AdminProductForm = () => {
     setProduct({ ...product, prices: updated });
   };
 
-  // SUBMIT
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -181,9 +181,10 @@ const AdminProductForm = () => {
         body: JSON.stringify({
           title: deal.title,
           description: deal.description,
-          image: deal.preview,
+          image: ImgUrl,
           price: deal.price,
-          isActive: deal.isActive
+          isActive: deal.isActive,
+          activetill: deal.activetill
         })
       });
       const dealresult = await dealres.json();
@@ -350,7 +351,7 @@ const AdminProductForm = () => {
                   onChange={(e) => handleImageUpload(e, "deal")}
                   className="w-full p-2 bg-white/10 rounded"
                 />
-                <div onClick={() => ImageRef.current.click()} className="w-full py-10 px-5 rounded-4xl border-2 border-dashed gap-5 flexCenter"><AiOutlineCamera size={34} /> Click Here to Select Image</div>
+                {deal.preview == null && <div onClick={() => ImageRef.current.click()} className="w-full py-10 px-5 rounded-4xl border-2 border-dashed gap-5 flexCenter"><AiOutlineCamera size={34} /> Click Here to Select Image</div>}
                 {deal.preview && (
                   <img
                     src={deal.preview}
@@ -392,13 +393,23 @@ const AdminProductForm = () => {
                   />
                   Active
                 </label>
+
+                <label className="flex items-center gap-2">
+                  <input
+                    type="datetime-local"
+                    name="activetill"
+                    checked={deal.activetill}
+                    onChange={handleDealChange}
+                  />
+                  Active Till
+                </label>
               </div>
 
 
             </>
           )}
 
-          <button type="submit" className="w-full py-3 bg-[#CE3B48] rounded">
+          <button type="submit" className="w-fit px-5  py-3 bg-[#CE3B48] rounded-xl relative left-1/2 -translate-x-1/2">
             Submit
           </button>
         </form>

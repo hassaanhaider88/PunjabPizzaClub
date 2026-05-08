@@ -13,7 +13,14 @@ const sendAllDeals = async (req, res) => {
             });
         }
 
-        const deals = await DealsModel.find({}).sort({ createdAt: -1 });
+        const deals = await DealsModel.aggregate([
+            {
+                $sort: {
+                    isActive: -1,
+                    createdAt: -1,
+                },
+            },
+        ]);
         if (deals) {
             cachedDeals.deals = deals;
             cacheTime = Date.now();
@@ -35,6 +42,7 @@ const sendAllDeals = async (req, res) => {
         });
     }
 };
+
 
 const sendSingleDeal = async (req, res) => {
     try {
@@ -67,14 +75,13 @@ const sendSingleDeal = async (req, res) => {
 
 const createDeal = async (req, res) => {
     try {
-        const { title, description, image, price, isActive } =
+        const { title, description, image, price, isActive, activetill = null } =
             req.body;
         if (
             !title ||
             !description ||
             !image ||
-            !price ||
-            !isActive
+            !price
         ) {
             return res.send({
                 success: false,
@@ -87,6 +94,7 @@ const createDeal = async (req, res) => {
             image,
             price,
             isActive,
+            activetill
         });
         if (!deal) {
             return res.send({
@@ -197,7 +205,7 @@ const updateWholeDeal = async (req, res) => {
             description,
             image,
             price,
-            isActive,
+            isActive
         }, {
             returnDocument: "after",
         },)

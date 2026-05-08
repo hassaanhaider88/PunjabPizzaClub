@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/set-state-in-effect */
 /* eslint-disable react-hooks/exhaustive-deps */
 import { CgAdd } from "react-icons/cg";
 import { AiOutlineDelete } from "react-icons/ai";
@@ -333,8 +334,8 @@ const AdminProductUpdate = () => {
                         </button>
                     </div>
 
-                    <button type="submit" className="w-full py-3 bg-[#CE3B48] rounded">
-                        Update One
+                    <button type="submit" className="w-fit px-5  py-3 bg-[#CE3B48] rounded-xl relative left-1/2 -translate-x-1/2">
+                        Update Product
                     </button>
                 </form>
             </div>

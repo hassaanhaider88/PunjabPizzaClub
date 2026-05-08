@@ -17,7 +17,7 @@ const Hero = () => {
         </div>}
       <div className="NameImageContainer w-full h-[50vh] sm:min-h-screen flex items-start justify-center relative">
         <div className="absolute w-full flexCenter">
-          <h1 className="text-8xl md:text-[400px] tracking-[50px] text-[#797979]  font-bold text-center mt-20">
+          <h1 className="text-[0px] sm:text-6xl md:text-[400px] tracking-[50px] text-[#797979]  font-bold text-center mt-20">
             Punjab
           </h1>
         </div>
@@ -36,13 +36,13 @@ const Hero = () => {
           />
         </div>
       </div>
-      <div className="SectionWithTextEtc relative w-full flex items-center px-10  justify-center z-50 -sm:mt-20 mt-0">
+      <div className="SectionWithTextEtc relative w-full flex items-center md:px-10 px-5  justify-center z-50 -sm:mt-20 mt-0">
         <div className="px-10 py-14 flex border-2 border-b-4 border-[#484848]  items-center  flex-col w-full  rounded-[30px] bg-clip-padding backdrop-filter z-50 relative backdrop-blur-sm bg-opacity-10 ">
-          <h1 className="text-3xl WholeSiteFont text-white">Try Our New</h1>
-          <h1 className="text-4xl mt-5 font-semibold text-white uppercase">
+          <h1 className="md:text-3xl text-md WholeSiteFont text-white">Try Our New</h1>
+          <h1 className="md:text-4xl text-lg mt-5 font-semibold text-white uppercase">
             Cheeze Bluster
           </h1>
-          <p className="text-2xl mt-2 font-semibold tracking-[0.2em] text-white md:w-[90%] w-full text-center">
+          <p className="md:text-2xl text-md mt-2 font-semibold tracking-[0.2em] text-white md:w-[90%] w-full text-center">
             At Punjab, we invite you to embark on a culinary journey that
             celebrates the rich tapestry of flavors and traditions that define
             our beloved region. Our menu is a vibrant mosaic of authentic

@@ -18,7 +18,7 @@ const Footer = ({ isShow }) => {
             <LazyLoadImage
               src="https://res.cloudinary.com/dcrkdgbd9/image/upload/v1777964324/PPCLLogo_bvoffl.png"
               alt="Punjab Pizza Club Lalian"
-              className="w-full h-full"
+              className="w-1/2 h-full"
             />
           </div>
           <div className="md:w-1/2 w-full gap-2 text-lg flex-col flex justify-center items-center">

@@ -1,4 +1,5 @@
-import React from "react";
+import { BsFillCalendarDayFill } from "react-icons/bs";
+import React, { useState, useEffect } from "react";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../store/slices/userCartSlice";
@@ -6,14 +7,51 @@ import { toast } from "react-toastify";
 
 const SpecialDealCard = ({ deal }) => {
   const dispatch = useDispatch();
+  const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, mins: 0 });
+  const [isExpired, setIsExpired] = useState(false);
+
+
+  useEffect(() => {
+    const tick = () => {
+      const expiry = deal.activetill ? new Date(deal.activetill) : null;
+      if (!expiry) return;
+
+      const diff = expiry - Date.now();
+      if (diff <= 0) {
+        setIsExpired(true);
+        setTimeLeft({ days: 0, hours: 0, mins: 0 });
+        return;
+      }
+      setIsExpired(false);
+      setTimeLeft({
+        days: Math.floor(diff / 86_400_000),
+        hours: Math.floor((diff % 86_400_000) / 3_600_000),
+        mins: Math.floor((diff % 3_600_000) / 60_000),
+      });
+    };
+
+    tick();
+    const id = setInterval(tick, 60_000);
+    return () => clearInterval(id);
+  }, [deal.activetill]);
+
+  const formattedExpiry = deal.activetill
+    ? new Date(deal.activetill).toLocaleDateString("en-PK", {
+      day: "numeric",
+      month: "long",
+      year: "numeric",
+    })
+    : null;
+
+
+  const isAvailable = deal.isActive && !isExpired;
+
 
   const handleDealClick = () => {
-    console.log(deal)
-    if (!deal.isActive) {
+    if (!isAvailable) {
       toast.error("This deal is no longer available");
       return;
     }
-
     dispatch(
       addToCart({
         id: deal._id,
@@ -23,69 +61,102 @@ const SpecialDealCard = ({ deal }) => {
         size: "Special Deal",
       })
     );
-
-    toast.success(`${deal.title} Almost Done!`);
-  };
-
-  const formatDate = (timestamp) => {
-    if (!timestamp) return null;
-    return new Date(timestamp * 1000).toLocaleDateString();
+    toast.success(`${deal.title} added — Almost done!`);
   };
 
   return (
-    <div className="flex shrink-0 items-center justify-center p-6">
-      <div className="bg-[#1a1a1a] rounded-[2.5rem] p-6 px-10 flex flex-col items-center shadow-2xl transition-transform cursor-pointer">
+    <div className="flex shrink-0 items-center justify-center p-4 md:p-6">
+      <div
+        className={`relative bg-linear-to-b from-[#1e1e1e] to-[#141414] rounded-[2.5rem] p-6 flex flex-col items-center shadow-2xl transition-transform duration-300 cursor-pointer
+          ${isAvailable ? "hover:-translate-y-2" : "opacity-70"}`}
+      >
 
-        {/* Deal Image */}
-        <div className="relative rounded-2xl w-80 h-80 overflow-hidden drop-shadow-[0_20px_20px_rgba(0,0,0,0.5)]">
+        <div className="relative rounded-2xl w-full h-64 overflow-hidden shadow-[0_20px_40px_rgba(0,0,0,0.5)] mb-5">
           <LazyLoadImage
             src={deal.image}
             alt={deal.title}
-            className="w-full hover:scale-110 duration-300 transition-all h-full object-cover border-4 border-transparent hover:border-yellow-500/20"
+            className={`w-full h-full object-cover transition-transform duration-500 ${isAvailable ? "group-hover:scale-110" : "grayscale"}`}
           />
 
-          {/* Status Badge */}
-          {!deal.isActive && (
-            <span className="absolute top-2 left-2 bg-red-600 text-white text-xs px-3 py-1 rounded-full">
-              UnActive </span>
+          <div className="absolute inset-0 bg-linear-to-t from-black/60 via-transparent to-transparent" />
+
+          {!isAvailable && (
+            <span className="absolute top-3 left-3 bg-gray-700/90 backdrop-blur-sm text-white/80 text-[10px] font-semibold px-3 py-1 rounded-full tracking-widest uppercase">
+              {isExpired ? "Expired" : "Unavailable"}
+            </span>
           )}
+
+          {isAvailable && (
+            <span className="absolute top-3 left-3 flex items-center gap-1.5 bg-black/50 backdrop-blur-sm text-[#FF4757] text-[10px] font-semibold px-3 py-1 rounded-full tracking-widest uppercase">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#FF4757] animate-pulse" />
+              Live Deal
+            </span>
+          )}
+
+          <div className="absolute bottom-3 right-3 bg-black/70 backdrop-blur-sm rounded-full px-4 py-1.5">
+            <span className="text-[#FF4757] text-lg font-black">Rs.{deal.price}</span>
+          </div>
         </div>
 
-        {/* Title */}
-        <h2 className="text-white ItalicFont text-3xl mt-3 font-bold text-center mb-2">
+        <h2 className="text-white font-serif text-2xl font-bold text-center leading-tight tracking-tight">
           {deal.title}
         </h2>
 
-        {/* Description */}
-        <p className="text-gray-400 text-xs text-center mb-3 px-2 leading-relaxed">
+        <p className="text-white/40 text-xs text-center mt-2 mb-4 leading-relaxed px-2">
           {deal.description}
         </p>
 
-        {/* Expiry */}
-        {deal.validUntile && (
-          <p className="text-yellow-400 text-xs mb-3">
-            Valid till: {formatDate(deal.validUntile)}
-          </p>
+        {formattedExpiry && (
+          <div className="w-full mb-4">
+
+            <div className="flex items-center justify-between bg-white/4 border border-white/[0.07] rounded-2xl px-4 py-3 mb-3">
+              <div className="flex items-center gap-2">
+
+                <BsFillCalendarDayFill size={20} color="gray" />
+                <span className="text-white/40 text-[11px] tracking-wide uppercase font-medium">
+                  Offer ends
+                </span>
+              </div>
+              <span className={`text-sm font-semibold ${isExpired ? "text-red-400" : "text-white"}`}>
+                {formattedExpiry}
+              </span>
+            </div>
+
+
+            {isAvailable && (
+              <div className="grid grid-cols-3 gap-2">
+                {[
+                  { value: timeLeft.days, label: "Days" },
+                  { value: timeLeft.hours, label: "Hours" },
+                  { value: timeLeft.mins, label: "Mins" },
+                ].map(({ value, label }) => (
+                  <div
+                    key={label}
+                    className="flex flex-col items-center bg-[#FF4757]/10 border border-[#FF4757]/20 rounded-xl py-2.5"
+                  >
+                    <span className="text-[#FF4757] text-xl font-black leading-none">
+                      {String(value).padStart(2, "0")}
+                    </span>
+                    <span className="text-white/30 text-[10px] font-medium tracking-widest uppercase mt-1">
+                      {label}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
         )}
 
-        {/* Price */}
-        <div className="flex items-center gap-3 mb-6">
-          <span className="text-[#FF4757] text-3xl font-black">
-            Rs.{deal.price}
-          </span>
-        </div>
-
-        {/* CTA Button */}
         <button
-          onClick={() => handleDealClick()}
-          disabled={!deal.isActive}
-          className={`w-full font-black py-4 rounded-full transition-all transform active:scale-95 shadow-[0_10px_20px_rgba(234,179,8,0.2)]
-            ${deal.isActive
-              ? "bg-[#FF4757] hover:bg-[#FF4757]/80 text-white" : "bg-gray-600 cursor-not-allowed"
-
+          onClick={handleDealClick}
+          disabled={!isAvailable}
+          className={`w-full py-4 rounded-full font-black text-sm tracking-wide transition-all duration-200 active:scale-95
+            ${isAvailable
+              ? "bg-[#FF4757] hover:bg-[#ff5e6a] text-white shadow-[0_8px_24px_rgba(255,71,87,0.35)] hover:shadow-[0_8px_32px_rgba(255,71,87,0.5)]"
+              : "bg-white/5 text-white/30 cursor-not-allowed border border-white/10"
             }`}
         >
-          {deal.isActive ? "Grab Deal" : "Unavailable"}
+          {isAvailable ? "Grab This Deal →" : isExpired ? "Deal Expired" : "Unavailable"}
         </button>
       </div>
     </div>

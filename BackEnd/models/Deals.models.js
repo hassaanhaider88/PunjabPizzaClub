@@ -22,6 +22,10 @@ const dealSchema = new mongoose.Schema(
       type: Number,
       required: true,
     },
+    activetill: {
+      type: Date,
+      default: null
+    },
 
     isActive: {
       type: Boolean,

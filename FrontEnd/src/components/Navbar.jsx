@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/set-state-in-effect */
 /* eslint-disable react-hooks/exhaustive-deps */
 import { HiOutlineUserCircle } from "react-icons/hi";
 import { RxCross1 } from "react-icons/rx";
@@ -33,6 +34,10 @@ const NavBar = ({ isShow = true }) => {
       toast.warn("Please Verify Your Email First")
     }
   }, [user.isLogged])
+
+  useEffect(() => {
+    setIsMobileMenuOpen(false)
+  }, [location.pathname])
 
   const LP = location.pathname;
   return (
@@ -132,7 +137,7 @@ const NavBar = ({ isShow = true }) => {
 
       {/* mobile menu */}
       {isMobileMenuOpen && (
-        <div className="MobileMenu md:hidden bg-black absolute top-20 left-0 w-full bg-clip-padding backdrop-filter z-50  backdrop-blur-sm bg-opacity-10 text-white flex flex-col items-center gap-4 py-4">
+        <div className="MobileMenu md:hidden w-full bg-black absolute top-20 left-0  bg-clip-padding backdrop-filter z-50  backdrop-blur-sm bg-opacity-10 text-white flex flex-col items-center gap-4 py-4">
           <Link to="/" className="text-lg font-medium">
             Home
           </Link>

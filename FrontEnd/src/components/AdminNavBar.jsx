@@ -69,18 +69,18 @@ const AdminNavBar = () => {
 
   return (
     <>
-      <div className="sticky right-0 flex-wrap py-3 px-10 gap-3 flex bottom-0 justify-between items-stretch h-full">
+      <div className="sticky top-0 mb-5  left-0 w-full  flex  py-3 px-10  gap-12 justify-center items-center">
         {sideBarNavLins.map((link, idx) => {
           return (
             <div
+              title={link.name}
               onClick={() => navigate(link.link)}
-              className={`flex gap-3 py-2 px-3 rounded-2xl hover:bg-[#ff4757] duration-200 transition-all cursor-pointer ${location.pathname == link.link ? "bg-[#ff4757]" : ""} w-40 items-center`}
+              className={`flex gap-3 py-2 px-3 rounded-2xl hover:bg-[#ff4757] duration-200 transition-all  cursor-pointer ${location.pathname == link.link ? "bg-[#ff4757]" : ""} items-center`}
               key={idx}
             >
               <p>
                 <link.icon size={27} />
               </p>
-              <h1>{link.name}</h1>
             </div>
           );
         })}

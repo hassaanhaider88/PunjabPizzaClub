@@ -1,6 +1,8 @@
+import { BiRightArrowAlt } from "react-icons/bi";
 import React, { useState } from "react";
 import SinglePizzaCard from "../components/SinglePizzaCard";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom"
 import { AllCategory } from "../Constants";
 
 import ErrorInFetchingProdcuts from "../components/ErrorInFetchingProdcuts";
@@ -8,6 +10,7 @@ import ProductLoading from "../components/ProductLoading"
 
 const MenuSection = () => {
   const [activeMenu, setActiveMenu] = useState("Pizza");
+  const navigate = useNavigate()
 
   const products = useSelector((state) => state.products);
 
@@ -18,7 +21,7 @@ const MenuSection = () => {
       {/* Menu Filters will be displayed here */}
 
       <div className="flex  text-xl font-semibold items-center w-full justify-evenly flex-wrap gap-5 mt-8">
-        {AllCategory?.map((category, index) => (
+        {AllCategory.map((category, index) => (
           <button
             key={index}
             onClick={() => setActiveMenu(category)}
@@ -32,7 +35,7 @@ const MenuSection = () => {
           <ProductLoading />
         ) : (
           <div className="ShowActiveMenuItems grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 md:gap-12 mt-10 w-full">
-            {products?.items.map((item, index) => (
+            {products?.items?.slice(0, 12)?.map((item, index) => (
               <SinglePizzaCard
                 key={index}
                 activeMenu={activeMenu}
@@ -43,6 +46,7 @@ const MenuSection = () => {
         )}
         {products?.isError && <ErrorInFetchingProdcuts />}
       </div>
+      <button onClick={() => navigate("/menu")} className="relative text-xl left-1/2 flexCenter gap-2 mt-5 -translate-x-1/2 group">See More Products <BiRightArrowAlt size={30} className="group-hover:translate-x-3 rotate-180 group-hover:rotate-0 duration-200 transition-all " /></button>
     </div>
   );
 };

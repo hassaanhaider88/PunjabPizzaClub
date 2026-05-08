@@ -1,3 +1,4 @@
+import { CgAdd } from "react-icons/cg";
 import { AiOutlineHome } from "react-icons/ai";
 import { FcStatistics } from "react-icons/fc";
 import { FaUsers } from "react-icons/fa";
@@ -5,8 +6,8 @@ import { FaSitemap } from "react-icons/fa";
 import { MdOutlineProductionQuantityLimits } from "react-icons/md";
 
 
-// const BACK_END_API = "http://localhost:3000"
-const BACK_END_API = "https://punjabpizzaclub.onrender.com"
+const BACK_END_API = "http://localhost:3000"
+// const BACK_END_API = "https://punjabpizzaclub.onrender.com"
 
 const AllCategory = [
     "Pizza",
@@ -34,6 +35,11 @@ const sideBarNavLins = [
         name: "Home",
         link: "/",
         icon: AiOutlineHome,
+    },
+    {
+        name: "Add Product",
+        link: "/add-new-product",
+        icon: CgAdd,
     },
     {
         name: "Products",

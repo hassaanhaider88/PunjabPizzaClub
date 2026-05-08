@@ -10,6 +10,7 @@ const SpecialDeal = () => {
   useEffect(() => {
     setSpecialDeals(deals.deals)
   }, [deals.deals])
+
   return (
     <div className="w-full py-12 px-5 md:px-10 mt-5">
       <h1 className="text-3xl">Special Offers</h1>

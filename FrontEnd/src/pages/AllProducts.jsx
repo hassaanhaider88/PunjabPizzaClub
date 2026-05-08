@@ -151,6 +151,8 @@ export default function AllProductsAdminPage() {
 
   };
 
+console.log(allDeals)
+
   return (
     <div className="min-h-screen py-6">
       <div className="flex py-3 gap-3 mr-5 justify-between items-center">
@@ -318,6 +320,7 @@ export default function AllProductsAdminPage() {
                 <th className="p-3">Name</th>
                 <th className="p-3">Desc.</th>
                 <th className="p-3">IsActive</th>
+                <th className="p-3">Active Until</th>
                 <th className="p-3">Prices</th>
                 <th className="p-3">Action</th>
               </tr>
@@ -347,6 +350,9 @@ export default function AllProductsAdminPage() {
                       >
                       </span>
                       {deal.isActive} <p>{deal.isActive ? "Active" : "Not Active"}</p>
+                    </td>
+                    <td className="p-3 w-40">
+                      {deal?.activetill}
                     </td>
                     <td className="p-3 w-40">
                       {deal.price}

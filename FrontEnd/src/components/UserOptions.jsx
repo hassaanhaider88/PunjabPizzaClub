@@ -51,7 +51,7 @@ const UserOptions = ({
   return (
     <div className="fixed z-50 top-100 bg-black rounded-2xl shadow-2xl bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10 text-lg md:top-19 right-15  py-6 px-8">
       {user.role == "admin" ? ( // this will be protected
-        <div onClick={() => navigate("/all-orders")} className={CommonClass}>
+        <div onClick={() => { navigate("/all-orders"); setIsOpenUserOption(!isOpenUserOption); }} className={CommonClass}>
           All Orders
         </div>
       ) : (
@@ -66,11 +66,11 @@ const UserOptions = ({
         </div>
       )}
       {user.role == "admin" ? (
-        <div onClick={() => navigate("/all-products")} className={CommonClass}>
+        <div onClick={() => { navigate("/all-products"); setIsOpenUserOption(!isOpenUserOption); }} className={CommonClass}>
           All Products
         </div>
       ) : (
-        <div onClick={() => navigate("/user-profile")} className={CommonClass}>
+        <div onClick={() => { navigate("/user-profile"); setIsOpenUserOption(!isOpenUserOption); }} className={CommonClass}>
           My Orders
         </div>
       )}

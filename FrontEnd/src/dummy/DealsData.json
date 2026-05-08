@@ -2,43 +2,41 @@
   {
     "title": "Buy One Get One Free",
     "description": "Order any large pizza and get another one free.",
-    "image": "https://images.unsplash.com/photo-1601924638867-3ec3b3f9b1d9",
+    "image": "https://i.pinimg.com/originals/44/83/ec/4483ec3ff17ec093306b1ac5e8bd90e5.jpg",
     "price": 1200,
-    "isActive": true
+    "isActive": true,
+    "activetill": "2026-05-12T23:59:59Z"
   },
   {
     "title": "Family Feast",
     "description": "2 large pizzas, 1 garlic bread, and 1.5L drink.",
-    "image": "https://images.unsplash.com/photo-1594007654729-407eedc4be65",
+    "image": "https://i.pinimg.com/originals/78/91/f1/7891f13b8f4786363c0d5ef8a9d04415.jpg",
     "price": 2200,
-    "isActive": false
+    "isActive": false,
+    "activetill": "2026-05-02T23:59:59Z"
   },
   {
     "title": "Student Special",
     "description": "Medium pizza with drink at discounted price.",
-    "image": "https://images.unsplash.com/photo-1548365328-9f547fb0953c",
+    "image": "https://i.pinimg.com/originals/2f/bb/03/2fbb034777b88c723fb63a00e3d5ddd8.jpg",
     "price": 800,
-    "isActive": true
+    "isActive": true,
+    "activetill": "2026-05-13T23:59:59Z"
   },
   {
     "title": "Weekend Combo",
     "description": "Any 2 medium pizzas with free dip.",
-    "image": "https://images.unsplash.com/photo-1513104890138-7c749659a591",
+    "image": "https://i.pinimg.com/originals/10/c9/80/10c9800d88cf0199dc50b1f416783490.jpg",
     "price": 1500,
-    "isActive": false
+    "isActive": false,
+    "activetill": "2026-05-01T23:59:59Z"
   },
   {
     "title": "Cheese Lovers Deal",
     "description": "Extra cheese large pizza with free topping.",
-    "image": "https://images.unsplash.com/photo-1604382355076-af4b0eb60143",
+    "image": "https://i.pinimg.com/originals/9b/6f/80/9b6f8031c7dd2700a5c6713a98a4bf51.jpg",
     "price": 1300,
-    "isActive": true
-  },
-  {
-    "title": "Spicy Treat",
-    "description": "2 spicy pizzas with chili flakes and dip.",
-    "image": "https://images.unsplash.com/photo-1628840042765-356cda07504e",
-    "price": 1400,
-    "isActive": true
+    "isActive": true,
+    "activetill": "2026-05-22T23:59:59Z"
   }
 ]
