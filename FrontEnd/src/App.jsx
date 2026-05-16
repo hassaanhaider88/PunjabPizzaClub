@@ -31,18 +31,23 @@ import { fetchAllProducts } from "./store/slices/productSlice";
 import { RestrictPages } from "./Constants";
 import AdminProductUpdate from "./pages/UpdateProduct";
 import fetchAllDealsfun from "./utils/fetchAllDeals";
-import { allDeals } from "./store/slices/dealSlice"
+import { allDeals } from "./store/slices/dealSlice";
 import UpdateDeal from "./pages/updateDeal";
 import fetchAllOrderfun from "./utils/fetchAllOrders";
 import { allOrders } from "./store/slices/orderSlice";
 import fetchUsersFun from "./utils/fetchAllCustomers";
 import { allUser } from "./store/slices/customerSlice";
-
+import useSSE from "./hooks/useSSE";
+import { UserStatusContext } from "./store/contextStore/userUserStatus";
+import { useContext } from "react";
+import { fetchUserOrdersAsRider } from "./utils/fetchRiderOrders";
 
 const App = () => {
   const location = useLocation();
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
+  const { orderStatus, setOrderStatus, setRiderOrders } =
+    useContext(UserStatusContext);
 
   // the routes where i don't want to show navbar
 
@@ -88,9 +93,11 @@ const App = () => {
         toast.error("Something Wents Wrong While fetching Deals");
       }
     } catch (error) {
-      toast.error(error.message || "Something Wents Wrong While fetching Deals");
+      toast.error(
+        error.message || "Something Wents Wrong While fetching Deals",
+      );
     }
-  }
+  };
 
   const fetchAllOrder = async () => {
     try {
@@ -101,16 +108,16 @@ const App = () => {
         toast.error("Something Wents Wrong While fetching Orders");
       }
     } catch (error) {
-      toast.error(error.message)
+      toast.error(error.message);
     }
-  }
+  };
 
   const fetchUsers = async () => {
     try {
-      const res = await fetchUsersFun(user?.token)
+      const res = await fetchUsersFun(user?.token);
       if (res) {
         dispatch(allUser({ data: res }));
-        return toast.success("Users fetched successfully")
+        return toast.success("Users fetched successfully");
       } else {
         return toast.error("Something Wents Wrong While fetching Users");
       }
@@ -128,17 +135,56 @@ const App = () => {
     fetchUserData(token);
   }, []);
 
+  useSSE({
+    onOrderStatus: (data) => {
+      setOrderStatus((prevOrders) => {
+        const orderExists = prevOrders.find((order) => order._id === data._id);
+
+        // Update existing order
+        if (orderExists) {
+          return prevOrders.map((order) =>
+            order._id === data._id
+              ? {
+                  ...order,
+                  ...data,
+                }
+              : order,
+          );
+        }
+
+        // Add new order
+        return [data, ...prevOrders];
+      });
+      toast.success(`Your Order ${data.orderId} Is Update To ${data.status}`);
+    },
+    onNewOrder: (data) => {
+      if (user?.role === "admin") {
+        console.log("New order came in:", data);
+        toast.info(`New Order Placed: ${data.orderId}`);
+        fetchAllOrder();
+        // dispatch(fetchAllOrders()); // refresh admin orders
+      }
+    },
+    AssignOrder: (data) => {
+      if (user?.role !== "admin") {
+        toast.info(data.status);
+        fetchUserOrdersAsRider(user).then((orders) => {
+          setRiderOrders(orders);
+        });
+      }
+    },
+  });
+
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
     fetchProduct();
-    fetchDeals()
+    fetchDeals();
     if (user.role === "admin") {
       fetchAllOrder();
       fetchUsers();
       return;
     }
   }, [user.role]);
-
 
   return (
     <>
@@ -163,32 +209,14 @@ const App = () => {
         />
 
         {/* Only admin can access */}
-        <Route
-          path="/all-orders"
-          element={<AllOrders />}
-        />
-        <Route
-          path="/all-products"
-          element={<AllProductsAdminPage />}
-        />
+        <Route path="/all-orders" element={<AllOrders />} />
+        <Route path="/all-products" element={<AllProductsAdminPage />} />
 
-        <Route
-          path="/all-customers"
-          element={<AllCustomers />}
-        />
+        <Route path="/all-customers" element={<AllCustomers />} />
 
-        <Route
-          path="/add-new-product"
-          element={<AddNewProduct />}
-        />
-        <Route
-          path="/update/:id"
-          element={<AdminProductUpdate />}
-        />
-        <Route
-          path="/update-deal/:id"
-          element={<UpdateDeal />}
-        />
+        <Route path="/add-new-product" element={<AddNewProduct />} />
+        <Route path="/update/:id" element={<AdminProductUpdate />} />
+        <Route path="/update-deal/:id" element={<UpdateDeal />} />
         {/* Page not found  */}
         <Route path="*" element={<PageNotFound />} />
       </Routes>

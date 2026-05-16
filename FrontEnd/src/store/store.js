@@ -8,6 +8,7 @@ import customerSlice from "./slices/customerSlice"
 
 
 
+
 export const store = configureStore({
   reducer: {
     user: userReducer,
@@ -15,6 +16,6 @@ export const store = configureStore({
     products: productSlice,
     deals: dealSlice,
     orders: orderSlice,
-    customers: customerSlice
+    customers: customerSlice,
   },
 });

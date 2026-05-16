@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/immutability */
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from "react";
@@ -6,15 +7,18 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { BACK_END_API } from "../Constants";
 
-import { LazyLoadImage } from 'react-lazy-load-image-component'
-import { updateAssingToRider, updateOrderStatus } from "../store/slices/orderSlice";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import {
+  updateAssingToRider,
+  updateOrderStatus,
+} from "../store/slices/orderSlice";
 
 const AllOrder = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const orders = useSelector((state) => state.orders.orders);
   const user = useSelector((state) => state.user);
-  const [isAddingOrderModelOpen, setIsAddingOrderModelOpen] = useState(false)
+  const [isAddingOrderModelOpen, setIsAddingOrderModelOpen] = useState(false);
 
   const [localOrders, setLocalOrders] = useState([]);
   const [riders, setRiders] = useState([]);
@@ -53,6 +57,7 @@ const AllOrder = () => {
     "delivered",
     "cancelled",
   ];
+
   const orderFilters = [
     "placed",
     "confirmed",
@@ -66,10 +71,8 @@ const AllOrder = () => {
   const paymentStatusOptions = ["paid", "unpaid"];
   const paymentFilters = ["paid", "unpaid", "All"];
 
-  const [orderStatusFilter, setOrderStatusFilter] = useState("All")
-  const [paymentStatusFilter, setPaymentStatusFilter] = useState("All")
-
-
+  const [orderStatusFilter, setOrderStatusFilter] = useState("All");
+  const [paymentStatusFilter, setPaymentStatusFilter] = useState("All");
 
   const handleOrderStatus = async (id, value) => {
     try {
@@ -82,19 +85,24 @@ const AllOrder = () => {
             Authorization: `Bearer ${user.token}`,
           },
           body: JSON.stringify({ orderStatus: value }),
-        }
+        },
       );
       const result = await res.json();
       if (!result.success) {
         toast.error(result.message);
       }
-      dispatch(updateOrderStatus({ id: result.data._id, paymentStatus: result.data.paymentStatus, orderStatus: result.data.orderStatus }))
-      toast.success(result.message)
+      dispatch(
+        updateOrderStatus({
+          id: result.data._id,
+          paymentStatus: result.data.paymentStatus,
+          orderStatus: result.data.orderStatus,
+        }),
+      );
+      toast.success(result.message);
     } catch (err) {
       toast.error(err.message);
     }
   };
-
 
   const handlePaymentStatus = async (id, value) => {
     try {
@@ -107,37 +115,47 @@ const AllOrder = () => {
             Authorization: `Bearer ${user.token}`,
           },
           body: JSON.stringify({ paymentStatus: value }),
-        }
+        },
       );
 
       const result = await res.json();
       if (!result.success) {
         toast.error(result.message);
       }
-      dispatch(updateOrderStatus({ id: result.data._id, paymentStatus: result.data.paymentStatus, orderStatus: result.data.orderStatus }))
-      toast.success(result.message)
+      dispatch(
+        updateOrderStatus({
+          id: result.data._id,
+          paymentStatus: result.data.paymentStatus,
+          orderStatus: result.data.orderStatus,
+        }),
+      );
+      toast.success(result.message);
     } catch (err) {
       toast.error(err.message);
     }
   };
 
-
   const handleAssignRider = async (id, riderId) => {
     if (riderId == "") {
-      return toast.error("Please Select Rider")
+      return toast.error("Please Select Rider");
     }
     try {
       const res = await fetch(`${BACK_END_API}/api/orders/assgin-rider/${id}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${user.token}`
+          Authorization: `Bearer ${user.token}`,
         },
-        body: JSON.stringify({ riderId })
-      })
+        body: JSON.stringify({ riderId }),
+      });
       const result = await res.json();
       if (result.success) {
-        dispatch(updateAssingToRider({ id: result.data._id, riderId: result?.data.orderAssignTo }))
+        dispatch(
+          updateAssingToRider({
+            id: result.data._id,
+            riderId: result?.data.orderAssignTo,
+          }),
+        );
         toast.success(result.message);
       } else {
         toast.error(result.message);
@@ -147,8 +165,7 @@ const AllOrder = () => {
     }
   };
 
-  console.log(orders)
-
+  console.log(orders);
 
   return (
     <div className="p-6 text-white">
@@ -158,9 +175,7 @@ const AllOrder = () => {
           <p>Order Filters By</p>
           <select
             value={orderStatusFilter}
-            onChange={(e) =>
-              setOrderStatusFilter(e.target.value)
-            }
+            onChange={(e) => setOrderStatusFilter(e.target.value)}
             className="bg-black border border-white/20 text-white text-sm p-1 rounded focus:outline-none"
           >
             {orderFilters.map((status) => (
@@ -174,9 +189,7 @@ const AllOrder = () => {
           <p>Payment Filters By</p>
           <select
             value={paymentStatusFilter}
-            onChange={(e) =>
-              setPaymentStatusFilter(e.target.value)
-            }
+            onChange={(e) => setPaymentStatusFilter(e.target.value)}
             className="bg-black border border-white/20 text-white text-sm p-1 rounded focus:outline-none"
           >
             {paymentFilters.map((status) => (
@@ -201,18 +214,27 @@ const AllOrder = () => {
           </thead>
 
           <tbody>
-            {orders?.map((order) => (
-              order?.orderStatus === orderStatusFilter || order?.paymentStatus === paymentStatusFilter || orderStatusFilter === "All" && paymentStatusFilter === "All" ?
-                <tr key={order?._id} className="border-t border-white/10  align-top">
+            {orders?.map((order) =>
+              order?.orderStatus === orderStatusFilter ||
+              order?.paymentStatus === paymentStatusFilter ||
+              (orderStatusFilter === "All" && paymentStatusFilter === "All") ? (
+                <tr
+                  key={order?._id}
+                  className="border-t border-white/10  align-top"
+                >
                   <td className="p-3 text-xs w-40 ">
                     <p className="text-gray-400">{order?.orderBy?.name}</p>
                     <p>{order?.orderBy?.email || order?.orderBy}</p>
                     <p className="text-gray-400">{order?.contactNumber}</p>
                     <p className="text-gray-400">{order?.deliveryAddress}</p>
-                    <p className="text-gray-400">City : <span className="text-md font-semibold text-green-400">{order?.city}</span></p>
+                    <p className="text-gray-400">
+                      City :{" "}
+                      <span className="text-md font-semibold text-green-400">
+                        {order?.city}
+                      </span>
+                    </p>
                     <p className="text-gray-400">{`${order?.createdAt.split("T")[0]} at ${order?.createdAt.split("T")[1].slice(0, 5)}`}</p>
                   </td>
-
 
                   <td className="p-3  w-100">
                     <div className=" gap-2 grid-cols-1 md:grid-cols-2 w-full grid">
@@ -236,7 +258,6 @@ const AllOrder = () => {
                       ))}
                     </div>
                   </td>
-
 
                   <td className="p-3 text-[#FF4757] font-bold">
                     Rs.{order?.totalPrice}
@@ -281,18 +302,26 @@ const AllOrder = () => {
                       }
                       className="bg-black w-40 border border-white/20 p-1 rounded"
                     >
-                      <option value="">{order?.orderAssignTo?.name || "Select Rider"}</option>
+                      <option value="">
+                        {order?.orderAssignTo?.name || "Select Rider"}
+                      </option>
                       {riders.map((r) => (
                         <option className="flex" key={r._id} value={r._id}>
-                          <img src={r.profile} alt={r.name} className="w-10 h-10 object-cover" />
-                          <span className="text-md font-semibold">{r.name}</span>
+                          <img
+                            src={r.profile}
+                            alt={r.name}
+                            className="w-10 h-10 object-cover"
+                          />
+                          <span className="text-md font-semibold">
+                            {r.name}
+                          </span>
                         </option>
                       ))}
                     </select>
                   </td>
-
-                </tr> : null
-            ))}
+                </tr>
+              ) : null,
+            )}
           </tbody>
         </table>
       </div>

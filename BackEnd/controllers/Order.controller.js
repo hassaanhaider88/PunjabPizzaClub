@@ -5,6 +5,9 @@ import dealsModel from "../models/Deals.models.js";
 import sendEmail from "../utils/sendEmails.js";
 import orderEmailBody from "../utils/orderEmailTem.js";
 
+// Remove: import sendNotification from "../utils/sendNotification.js";
+import { sendToAdmins, sendToUser, sendToRider } from "../utils/sseManager.js";
+
 
 
 const SendAllOrders = async (req, res) => {
@@ -104,7 +107,6 @@ const createOrder = async (req, res) => {
             });
         }
 
-        sendEmail(req.user?.email, "Order Placed Successfully", null, orderEmailBody(order));
         const user = await userModel.findOneAndUpdate(
             {
                 _id: userId,
@@ -117,6 +119,11 @@ const createOrder = async (req, res) => {
                 new: true,
             },
         );
+
+        sendToAdmins("new_order", {
+            message: `New order placed by ${req.user?.name}`,
+            orderId: order._id,
+        });
         return res.send({
             success: true,
             message: "Order Created Successfully",
@@ -228,9 +235,12 @@ const updateOrderStatus = async (req, res) => {
                 message: "Error in updating order",
             });
         }
-
-
         // here we will inform user about his order later
+        sendToUser(updateOrder.orderBy.email, "order_status", {
+            orderId: updateOrder._id,
+            status: orderStatus,
+        });
+
         return res.send({
             success: true,
             message: "Order Updated Successfully",
@@ -273,6 +283,11 @@ const updateOrderPaymentStatus = async (req, res) => {
                 message: "Error in updating order",
             });
         }
+
+        sendToUser(updateOrder.orderBy.email, "payment_status", {
+            orderId: id,
+            status: paymentStatus,
+        });
 
         return res.send({
             success: true,
@@ -317,34 +332,14 @@ const AssignRiderToOrder = async (req, res) => {
         }
 
         const riderEmail = order.orderAssignTo?.email;
-        const userEmail = order.orderBy?.email;
 
-        const emailPromises = [];
-
-        if (userEmail) {
-            emailPromises.push(
-                sendEmail(
-                    userEmail,
-                    "Order Assigned",
-                    null,
-                    orderEmailBody(order)
-                )
-            );
-        }
-
-        if (riderEmail) {
-            emailPromises.push(
-                sendEmail(
-                    riderEmail,
-                    "New Order Assigned to You",
-                    null,
-                    orderEmailBody(order)
-                )
-            );
-        }
+        sendToRider(riderEmail, "order_assigned", {
+            orderId: order._id,
+            status: "A new order has been assigned to you",
+        });
 
 
-        Promise.allSettled(emailPromises);
+
 
         return res.send({
             success: true,

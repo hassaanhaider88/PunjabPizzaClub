@@ -13,6 +13,8 @@ import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { LazyLoadImage } from "react-lazy-load-image-component";
+import NotificationIcon from "./NotificationIcon";
+import NotificationsCard from "./NotificationsCard";
 
 const NavBar = ({ isShow = true }) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -21,6 +23,7 @@ const NavBar = ({ isShow = true }) => {
   const user = useSelector((state) => state.user);
   const itemsInCart = useSelector((state) => state.userCart);
   const [CartCount, setCartCount] = useState(itemsInCart?.cartItems.length);
+  const [ShowNotificationCard, setShowNotificationCard] = useState(false);
 
   useEffect(() => {
     setCartCount(itemsInCart?.cartItems?.length);
@@ -31,13 +34,13 @@ const NavBar = ({ isShow = true }) => {
 
   useEffect(() => {
     if (user.isEmailVerified == false && user.isLogged) {
-      toast.warn("Please Verify Your Email First")
+      toast.warn("Please Verify Your Email First");
     }
-  }, [user.isLogged])
+  }, [user.isLogged]);
 
   useEffect(() => {
-    setIsMobileMenuOpen(false)
-  }, [location.pathname])
+    setIsMobileMenuOpen(false);
+  }, [location.pathname]);
 
   const LP = location.pathname;
   return (
@@ -88,7 +91,7 @@ const NavBar = ({ isShow = true }) => {
             ></span>
           </Link>
         </div>
-        <div className="HereCartIconAndSearchbar  gap-5 ">
+        <div className="HereCartIconAndSearchbar flexCenter   gap-5 ">
           <div onClick={() => setIsOpenCart(!isOpenCart)} className="relative">
             <AiOutlineShoppingCart size={34} />
             {CartCount !== 0 && (
@@ -97,16 +100,27 @@ const NavBar = ({ isShow = true }) => {
               </span>
             )}
           </div>
+
+          <NotificationIcon
+            setShowNotificationCard={setShowNotificationCard}
+            ShowNotificationCard={ShowNotificationCard}
+          />
         </div>
         {user.isLogged ? (
-          <div className="border-2 border-white rounded-full" onClick={() => setIsOpenUserOption(!isOpenUserOption)}>
+          <div
+            className="border-2 border-white rounded-full"
+            onClick={() => setIsOpenUserOption(!isOpenUserOption)}
+          >
             <img
               className="w-8 h-8 m-1 rounded-full"
-              src={user?.profile ? user.profile : "https://i.pinimg.com/originals/1f/a1/66/1fa166b8be7105927a3af53cc8891458.png"}
+              src={
+                user?.profile
+                  ? user.profile
+                  : "https://i.pinimg.com/originals/1f/a1/66/1fa166b8be7105927a3af53cc8891458.png"
+              }
               alt="user profile"
             />
           </div>
-
         ) : (
           <div className="HereLoginAndSignup flex  gap-2 justify-center items-center">
             <button
@@ -150,22 +164,32 @@ const NavBar = ({ isShow = true }) => {
           <Link to="/contact" className="text-lg font-medium">
             Contact
           </Link>
-          <div className="flex items-center gap-5 mt-4">
+          <div className="flex items-center justify-center flex-row gap-5 mt-4">
             <div
               onClick={() => setIsOpenCart(!isOpenCart)}
               className="relative"
             >
               <AiOutlineShoppingCart size={34} />
-              {CartCount > 0 && <span className="absolute -top-2 flexCenter -right-2 bg-red-400 rounded-full h-6 w-6">
-                {CartCount}
-              </span>}
+              {CartCount > 0 && (
+                <span className="absolute -top-2 flexCenter -right-2 bg-red-400 rounded-full h-6 w-6">
+                  {CartCount}
+                </span>
+              )}
             </div>
+            <NotificationIcon
+              setShowNotificationCard={setShowNotificationCard}
+              ShowNotificationCard={ShowNotificationCard}
+            />
           </div>
           {user.isLogged ? (
             <div onClick={() => setIsOpenUserOption(!isOpenUserOption)}>
               <img
                 className="w-8 h-8 m-1 rounded-full"
-                src={user?.profile ? user.profile : "https://i.pinimg.com/originals/1f/a1/66/1fa166b8be7105927a3af53cc8891458.png"}
+                src={
+                  user?.profile
+                    ? user.profile
+                    : "https://i.pinimg.com/originals/1f/a1/66/1fa166b8be7105927a3af53cc8891458.png"
+                }
                 alt="user profile"
               />
             </div>
@@ -197,6 +221,10 @@ const NavBar = ({ isShow = true }) => {
           isOpenCart={isOpenCart}
           setIsOpenCart={setIsOpenCart}
         />
+      )}
+
+      {ShowNotificationCard && (
+        <NotificationsCard setShowNotificationCard={setShowNotificationCard} />
       )}
     </div>
   );

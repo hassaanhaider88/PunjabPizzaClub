@@ -15,8 +15,6 @@ const PizzaCard = ({ item, activeMenu = "All" }) => {
     return Math.round(percent); // ya .toFixed(2)
   }
 
-  console.log(checkPercentOff(350, 350)); // 14
-
   const handleAddToCartClick = () => {
     console.log(item)
     if (item.stockStatus !== "In Stock") {

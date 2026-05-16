@@ -35,7 +35,7 @@ const MenuSection = () => {
           <ProductLoading />
         ) : (
           <div className="ShowActiveMenuItems grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 md:gap-12 mt-10 w-full">
-            {products?.items?.slice(0, 12)?.map((item, index) => (
+            {products?.items?.map((item, index) => (
               <SinglePizzaCard
                 key={index}
                 activeMenu={activeMenu}
