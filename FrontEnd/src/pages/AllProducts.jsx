@@ -11,7 +11,7 @@ import {
   deleteProductStatus,
   updateProductStatus,
 } from "../store/slices/productSlice";
-import { deleteDeal, updateDealStatus } from "../store/slices/dealSlice"
+import { deleteDeal, updateDealStatus } from "../store/slices/dealSlice";
 
 const statusStyles = {
   "In Stock": "bg-green-500/20 text-green-400 border-green-500",
@@ -21,25 +21,24 @@ const statusStyles = {
 
 const statusOptions = ["In Stock", "Out Off Stock", "Soon"];
 const ProductFilters = ["All", "In Stock", "Out Off Stock", "Soon"];
-const DealFilters = ["Active", "InActiv", "All"]
+const DealFilters = ["Active", "InActiv", "All"];
 
 export default function AllProductsAdminPage() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const allProducts = useSelector((state) => state.products);
-  const allDeals = useSelector(state => state.deals.deals);
+  const allDeals = useSelector((state) => state.deals.deals);
   const user = useSelector((state) => state.user);
   const [OpenTab, setOpenTab] = useState("ProductTab");
-  const [productFilter, setProductFilter] = useState("All") // this will based on stack
-  const [dealFilter, setDealFilter] = useState("Active")
-
+  const [productFilter, setProductFilter] = useState("All"); // this will based on stack
+  const [dealFilter, setDealFilter] = useState("Active");
 
   useEffect(() => {
     if (user.role !== "admin") {
-      navigate('/')
+      navigate("/");
     }
   }, []);
-  console.log(productFilter)
+  console.log(productFilter);
 
   const [products, setProducts] = useState(allProducts?.items);
 
@@ -101,16 +100,19 @@ export default function AllProductsAdminPage() {
   const hanleUpdationDealStatusClick = async (id, isActive) => {
     if (confirm("Are You Sure to Update Status")) {
       try {
-        const res = await fetch(`${BACK_END_API}/api/deals/update-status/${id}`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${user?.token}`,
+        const res = await fetch(
+          `${BACK_END_API}/api/deals/update-status/${id}`,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${user?.token}`,
+            },
+            body: JSON.stringify({
+              activeStatus: !isActive,
+            }),
           },
-          body: JSON.stringify({
-            activeStatus: !isActive,
-          }),
-        });
+        );
 
         const result = await res.json();
         console.log(result);
@@ -120,12 +122,11 @@ export default function AllProductsAdminPage() {
         } else {
           toast.error(result.message);
         }
-
       } catch (error) {
         toast.error(error.message);
       }
     }
-  }
+  };
 
   const handleDeleteDeal = async (id) => {
     if (confirm("Are You Sure to Delete Deal..")) {
@@ -133,29 +134,32 @@ export default function AllProductsAdminPage() {
         const res = await fetch(`${BACK_END_API}/api/deals/delete/${id}`, {
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${user?.token}`
-          }
+            Authorization: `Bearer ${user?.token}`,
+          },
         });
         const result = await res.json();
         if (!result.success) {
-          toast.error(result.message)
+          toast.error(result.message);
         } else {
-          toast.success(result.message)
+          toast.success(result.message);
           dispatch(deleteDeal({ id }));
         }
-
       } catch (error) {
-        toast.error(error.message)
+        toast.error(error.message);
       }
     }
-
   };
 
-console.log(allDeals)
+  const formatDate = (dateString) => {
+    return new Intl.DateTimeFormat("en-GB", {
+      dateStyle: "medium",
+      timeStyle: "short",
+    }).format(new Date(dateString));
+  };
 
   return (
     <div className="min-h-screen py-6">
-      <div className="flex py-3 gap-3 mr-5 justify-between items-center">
+      <div className="flex py-3 sm:flex-row flex-col gap-3 mr-5 justify-between items-center">
         <div className="flexCenter px-10 gap-2">
           <button
             onClick={() => setOpenTab("ProductTab")}
@@ -170,32 +174,28 @@ console.log(allDeals)
             Deals
           </button>
         </div>
-
-        {/* Deal and Prodduct filters */}
         <div>
-          {OpenTab == "ProductTab" ? <div className="ProductFIlter flex gap-2">
-            <p>Product Filters By</p>
-            <select
-              value={productFilter}
-              onChange={(e) =>
-                setProductFilter(e.target.value)
-              }
-              className="bg-black border border-white/20 text-white text-sm p-1 rounded focus:outline-none"
-            >
-              {ProductFilters.map((status) => (
-                <option key={status} value={status}>
-                  {status}
-                </option>
-              ))}
-            </select>
-          </div> :
+          {OpenTab == "ProductTab" ? (
+            <div className="ProductFIlter flex gap-2">
+              <p>Product Filters By</p>
+              <select
+                value={productFilter}
+                onChange={(e) => setProductFilter(e.target.value)}
+                className="bg-black border border-white/20 text-white text-sm p-1 rounded focus:outline-none"
+              >
+                {ProductFilters.map((status) => (
+                  <option key={status} value={status}>
+                    {status}
+                  </option>
+                ))}
+              </select>
+            </div>
+          ) : (
             <div className="Deals flex gap-2">
               <p>Deals Filters By</p>
               <select
                 value={dealFilter}
-                onChange={(e) =>
-                  setDealFilter(e.target.value)
-                }
+                onChange={(e) => setDealFilter(e.target.value)}
                 className="bg-black border border-white/20 text-white text-sm p-1 rounded focus:outline-none"
               >
                 {DealFilters.map((status) => (
@@ -204,18 +204,13 @@ console.log(allDeals)
                   </option>
                 ))}
               </select>
-            </div>}
+            </div>
+          )}
         </div>
-
-        <Link to={"/add-new-product"} className="flexCenter w-fit">
-          <MdAddBox size={30} />
-          Add New Products
-        </Link>
       </div>
 
       {OpenTab == "ProductTab" ? (
         <div className="w-full overflow-x-auto">
-
           <table className="min-w-300 mx-auto border border-white/10 rounded-lg overflow-scroll">
             <thead className="bg-white/5 text-left">
               <tr>
@@ -229,8 +224,9 @@ console.log(allDeals)
             </thead>
 
             <tbody>
-              {products?.map((product) => (
-                product.stockStatus === productFilter || productFilter === "All" ?
+              {products?.map((product) =>
+                product.stockStatus === productFilter ||
+                productFilter === "All" ? (
                   <tr key={product._id} className="border-t border-white/10">
                     <td className="p-3 w-40">
                       <img
@@ -247,8 +243,9 @@ console.log(allDeals)
 
                     <td className="p-3 w-40">
                       <span
-                        className={`px-2 py-1 text-xs border rounded ${statusStyles[product.stockStatus]
-                          }`}
+                        className={`px-2 py-1 text-xs border rounded ${
+                          statusStyles[product.stockStatus]
+                        }`}
                       >
                         {product.stockStatus}
                       </span>
@@ -306,8 +303,11 @@ console.log(allDeals)
                         <AiFillDelete size={20} /> Delete
                       </button>
                     </td>
-                  </tr> : ""
-              ))}
+                  </tr>
+                ) : (
+                  ""
+                ),
+              )}
             </tbody>
           </table>
         </div>
@@ -327,8 +327,9 @@ console.log(allDeals)
             </thead>
 
             <tbody>
-              {allDeals?.map((deal) => (
-                dealFilter === "All" || dealFilter === (deal.isActive ? "Active" : "InActiv") ?
+              {allDeals?.map((deal) =>
+                dealFilter === "All" ||
+                dealFilter === (deal.isActive ? "Active" : "InActiv") ? (
                   <tr key={deal._id} className="border-t border-white/10">
                     <td className="p-3 w-40">
                       <img
@@ -345,18 +346,16 @@ console.log(allDeals)
 
                     <td className="p-3 flex justify-around w-30">
                       <span
-                        onClick={() => hanleUpdationDealStatusClick(deal._id, deal.isActive)}
+                        onClick={() =>
+                          hanleUpdationDealStatusClick(deal._id, deal.isActive)
+                        }
                         className={`px-2  flex py-1 text-xs border rounded ${deal.isActive ? "bg-green-500/20 text-green-400 border-green-500" : ""}`}
-                      >
-                      </span>
-                      {deal.isActive} <p>{deal.isActive ? "Active" : "Not Active"}</p>
+                      ></span>
+                      {deal.isActive}{" "}
+                      <p>{deal.isActive ? "Active" : "Not Active"}</p>
                     </td>
-                    <td className="p-3 w-40">
-                      {deal?.activetill}
-                    </td>
-                    <td className="p-3 w-40">
-                      {deal.price}
-                    </td>
+                    <td className="p-3 w-40">{formatDate(deal?.activetill)}</td>
+                    <td className="p-3 w-40">{deal.price}</td>
 
                     <td className="p-3 w-40">
                       <button
@@ -372,8 +371,11 @@ console.log(allDeals)
                         <AiFillDelete size={20} /> Delete
                       </button>
                     </td>
-                  </tr> : ""
-              ))}
+                  </tr>
+                ) : (
+                  ""
+                ),
+              )}
             </tbody>
           </table>
         </div>

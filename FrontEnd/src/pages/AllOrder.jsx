@@ -165,8 +165,6 @@ const AllOrder = () => {
     }
   };
 
-  console.log(orders);
-
   return (
     <div className="p-6 text-white">
       {isAddingOrderModelOpen && <div>Home</div>}
@@ -200,8 +198,8 @@ const AllOrder = () => {
           </select>
         </div>
       </div>
-      <div className="overflow-x-auto w-full flexCenter">
-        <table className="min-w-300 border border-white/10 rounded-lg">
+      <div className="overflow-x-auto w-full">
+        <table className="min-w-300 mx-auto  border border-white/10 rounded-lg">
           <thead className="bg-white/5">
             <tr>
               <th className="p-3">Order By</th>

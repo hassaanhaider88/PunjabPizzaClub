@@ -7,7 +7,7 @@ import { LazyLoadImage } from "react-lazy-load-image-component";
 import { UserStatusContext } from "../store/contextStore/userUserStatus";
 import { useEffect } from "react";
 import { useState } from "react";
-import OrderStatusStepper from "./OrderStatusStepper"; // ← adjust path if needed
+
 
 const OrderCardForUser = ({ order, user, onCancel }) => {
   const { setOrderStatus, orderStatus } = useContext(UserStatusContext);

@@ -13,8 +13,6 @@ import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { LazyLoadImage } from "react-lazy-load-image-component";
-import NotificationIcon from "./NotificationIcon";
-import NotificationsCard from "./NotificationsCard";
 
 const NavBar = ({ isShow = true }) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -23,7 +21,6 @@ const NavBar = ({ isShow = true }) => {
   const user = useSelector((state) => state.user);
   const itemsInCart = useSelector((state) => state.userCart);
   const [CartCount, setCartCount] = useState(itemsInCart?.cartItems.length);
-  const [ShowNotificationCard, setShowNotificationCard] = useState(false);
 
   useEffect(() => {
     setCartCount(itemsInCart?.cartItems?.length);
@@ -100,11 +97,6 @@ const NavBar = ({ isShow = true }) => {
               </span>
             )}
           </div>
-
-          <NotificationIcon
-            setShowNotificationCard={setShowNotificationCard}
-            ShowNotificationCard={ShowNotificationCard}
-          />
         </div>
         {user.isLogged ? (
           <div
@@ -176,10 +168,6 @@ const NavBar = ({ isShow = true }) => {
                 </span>
               )}
             </div>
-            <NotificationIcon
-              setShowNotificationCard={setShowNotificationCard}
-              ShowNotificationCard={ShowNotificationCard}
-            />
           </div>
           {user.isLogged ? (
             <div onClick={() => setIsOpenUserOption(!isOpenUserOption)}>
@@ -221,10 +209,6 @@ const NavBar = ({ isShow = true }) => {
           isOpenCart={isOpenCart}
           setIsOpenCart={setIsOpenCart}
         />
-      )}
-
-      {ShowNotificationCard && (
-        <NotificationsCard setShowNotificationCard={setShowNotificationCard} />
       )}
     </div>
   );
