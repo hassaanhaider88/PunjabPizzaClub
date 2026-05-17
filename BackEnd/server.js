@@ -10,7 +10,7 @@ import productRoute from "./routers/Product.router.js";
 import dealRoute from "./routers/Deals.router.js"
 import orderRoute from "./routers/Order.router.js"
 import customerRouter from "./routers/Customer.router.js"
-
+import DmRoutes from "./routers/DirectMessage.router.js"
 import sseRoutes from "./routers/Sse.routes.js";
 
 
@@ -69,6 +69,9 @@ app.register(customerRouter, { prefix: "/api/customers" });
 
 // SSE Routes
 app.register(sseRoutes, { prefix: "/api/sse" });
+
+// Direct Messages 
+app.register(DmRoutes, { prefix: "/api/dm" })
 
 app.listen({ port: PORT, host: "0.0.0.0" }, function (err, address) {
   if (err) {

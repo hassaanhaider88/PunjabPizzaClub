@@ -9,8 +9,9 @@ import { BACK_END_API } from "../Constants";
 
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import {
-  updateAssingToRider,
+  updateAssignToRider,
   updateOrderStatus,
+  deleteOrder,
 } from "../store/slices/orderSlice";
 
 const AllOrder = () => {
@@ -151,7 +152,7 @@ const AllOrder = () => {
       const result = await res.json();
       if (result.success) {
         dispatch(
-          updateAssingToRider({
+          updateAssignToRider({
             id: result.data._id,
             riderId: result?.data.orderAssignTo,
           }),
@@ -162,6 +163,27 @@ const AllOrder = () => {
       }
     } catch (err) {
       toast.error(err.message);
+    }
+  };
+
+  const handleOrderDeletions = async (id) => {
+    console.log(id);
+    try {
+      const res = await fetch(`${BACK_END_API}/api/orders/delete-order/${id}`, {
+        headers: {
+          Authorization: `Bearer ${user.token}`,
+        },
+      });
+      const result = await res.json();
+      if (result.success) {
+        console.log(result);
+        dispatch(deleteOrder({ id: result?.data._id }));
+        toast.success(result.message);
+      } else {
+        toast.error(result.message);
+      }
+    } catch (error) {
+      toast.error(error.message);
     }
   };
 
@@ -208,6 +230,7 @@ const AllOrder = () => {
               <th className="p-3">Order Status</th>
               <th className="p-3">Payment</th>
               <th className="p-3">Assign Rider</th>
+              <th className="p-3">Actions</th>
             </tr>
           </thead>
 
@@ -294,28 +317,58 @@ const AllOrder = () => {
                   {/* Assign Rider */}
                   <td className="p-3">
                     <select
-                      value={order?.orderAssignTo?.name || ""}
+                      value={order?.orderAssignTo?._id || ""}
                       onChange={(e) =>
                         handleAssignRider(order?._id, e.target.value)
                       }
                       className="bg-black w-40 border border-white/20 p-1 rounded"
                     >
-                      <option value="">
-                        {order?.orderAssignTo?.name || "Select Rider"}
-                      </option>
+                      <option value="">Select Rider</option>
                       {riders.map((r) => (
-                        <option className="flex" key={r._id} value={r._id}>
-                          <img
-                            src={r.profile}
-                            alt={r.name}
-                            className="w-10 h-10 object-cover"
-                          />
-                          <span className="text-md font-semibold">
-                            {r.name}
-                          </span>
+                        <option key={r._id} value={r._id}>
+                          {r.name}
                         </option>
                       ))}
                     </select>
+
+                    {/* Currently assigned rider info */}
+                    {order?.orderAssignTo?.name && (
+                      <div className="flex items-center gap-2 mt-2">
+                        {order.orderAssignTo?.url ||
+                        order.orderAssignTo?.image ? (
+                          <LazyLoadImage
+                            src={
+                              order.orderAssignTo?.url ||
+                              order.orderAssignTo?.image
+                            }
+                            alt={order.orderAssignTo.name}
+                            className="w-8 h-8 rounded-full object-cover border border-white/20"
+                          />
+                        ) : (
+                          <div className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-xs font-bold text-white border border-white/20">
+                            {order.orderAssignTo.name.charAt(0).toUpperCase()}
+                          </div>
+                        )}
+                        <div className="text-xs">
+                          <p className="text-green-400 font-semibold">
+                            {order.orderAssignTo.name}
+                          </p>
+                          {order.orderAssignTo?.phone && (
+                            <p className="text-gray-400">
+                              {order.orderAssignTo.phone}
+                            </p>
+                          )}
+                        </div>
+                      </div>
+                    )}
+                  </td>
+                  <td className="p-3">
+                    <button
+                      onClick={() => handleOrderDeletions(order?._id)}
+                      className="bg-[#FF4757] text-white px-3 py-1 rounded"
+                    >
+                      Delete
+                    </button>
                   </td>
                 </tr>
               ) : null,

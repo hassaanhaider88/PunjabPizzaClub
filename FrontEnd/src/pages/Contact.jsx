@@ -1,7 +1,61 @@
-import React from "react";
+import React, { useState } from "react";
 import { MdEmail, MdPhone, MdLocationOn } from "react-icons/md";
+import { toast } from "react-toastify";
+import { BACK_END_API } from "../Constants";
 
 export default function ContactPage() {
+  const [Loading, setLoading] = useState(false);
+  const [IsSubmitted] = useState(
+    localStorage.getItem("AlreadyMSG") ??
+      JSON.parse(localStorage.getItem("AlreadyMSG")),
+  );
+  console.log(IsSubmitted);
+  const [FormData, setFormData] = useState({
+    name: "",
+    email: "",
+    message: "",
+  });
+
+  const handleChange = (e) => {
+    setFormData({
+      ...FormData,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (!FormData.email || !FormData.name || !FormData.message) {
+      toast.error("Please provide All Fields");
+    }
+
+    if (FormData.email == IsSubmitted) {
+      toast.error("This email already Exist");
+      return;
+    }
+    try {
+      setLoading(true);
+      const res = await fetch(`${BACK_END_API}/api/dm/create`, {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(FormData),
+      });
+      const data = await res.json();
+      console.log(data);
+      if (data.success) {
+        localStorage.setItem("AlreadyMSG", data.data.email);
+        toast.success(`${data.data.name}! thanks for Message.Please wait`);
+      } else {
+        toast.error(data.message);
+      }
+    } catch (error) {
+      toast.error(error.message);
+    } finally {
+      setLoading(false);
+    }
+  };
   return (
     <div className="bg-black text-gray-200">
       {/* Hero */}
@@ -56,31 +110,38 @@ export default function ContactPage() {
         <div className="p-8 rounded-lg">
           <h3 className="text-xl text-white mb-4">Send Message</h3>
 
-          <form className="space-y-4">
+          <form onSubmit={handleSubmit} className="space-y-4">
             <input
               type="text"
+              name="name"
+              onChange={handleChange}
               placeholder="Your Name"
               className="w-full rounded-3xl px-4 py-2 bg-black border border-gray-700 outline-none focus:border-[#ff6467]"
             />
 
             <input
               type="email"
+              name="email"
+              onChange={handleChange}
               placeholder="Your Email"
               className="w-full px-4 py-2 rounded-3xl bg-black border border-gray-700 outline-none focus:border-[#ff6467]"
             />
 
             <textarea
               rows="4"
+              onChange={handleChange}
+              name="message"
               placeholder="Your Message"
               className="w-full px-4 py-2 rounded-3xl bg-black border border-gray-700 outline-none focus:border-[#ff6467]"
             ></textarea>
 
             <div className="w-full flexCenter">
               <button
+                disabled={Loading}
                 type="submit"
                 className="bg-[#ff6467] w-fit px-6 py-2 text-white rounded-full hover:opacity-90 transition"
               >
-                Send Message
+                {Loading ? "Sending..." : "Send Message"}
               </button>
             </div>
           </form>

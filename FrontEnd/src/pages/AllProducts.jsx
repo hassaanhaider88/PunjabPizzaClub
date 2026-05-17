@@ -12,6 +12,7 @@ import {
   updateProductStatus,
 } from "../store/slices/productSlice";
 import { deleteDeal, updateDealStatus } from "../store/slices/dealSlice";
+import { formatDate } from "../utils/dateFormat";
 
 const statusStyles = {
   "In Stock": "bg-green-500/20 text-green-400 border-green-500",
@@ -38,9 +39,9 @@ export default function AllProductsAdminPage() {
       navigate("/");
     }
   }, []);
-  console.log(productFilter);
 
   const [products, setProducts] = useState(allProducts?.items);
+  console.log(products);
 
   const updateStatus = async (id, value) => {
     setProducts((prev) =>
@@ -150,13 +151,6 @@ export default function AllProductsAdminPage() {
     }
   };
 
-  const formatDate = (dateString) => {
-    return new Intl.DateTimeFormat("en-GB", {
-      dateStyle: "medium",
-      timeStyle: "short",
-    }).format(new Date(dateString));
-  };
-
   return (
     <div className="min-h-screen py-6">
       <div className="flex py-3 sm:flex-row flex-col gap-3 mr-5 justify-between items-center">
@@ -219,6 +213,7 @@ export default function AllProductsAdminPage() {
                 <th className="p-3">Category</th>
                 <th className="p-3">Stock</th>
                 <th className="p-3">Prices</th>
+                <th className="p-3">Last Updated</th>
                 <th className="p-3">Action</th>
               </tr>
             </thead>
@@ -290,6 +285,10 @@ export default function AllProductsAdminPage() {
                     </td>
 
                     <td className="p-3 w-40">
+                      {formatDate(product.updatedAt)}
+                    </td>
+
+                    <td className="p-3 w-40">
                       <button
                         onClick={() => navigate(`/update/${product._id}`)}
                         className="bg-[green]  px-3 py-1 rounded text-sm hover:opacity-80"
@@ -320,8 +319,8 @@ export default function AllProductsAdminPage() {
                 <th className="p-3">Name</th>
                 <th className="p-3">Desc.</th>
                 <th className="p-3">IsActive</th>
-                <th className="p-3">Active Until</th>
                 <th className="p-3">Prices</th>
+                <th className="p-3">Last Updated</th>
                 <th className="p-3">Action</th>
               </tr>
             </thead>
@@ -354,9 +353,9 @@ export default function AllProductsAdminPage() {
                       {deal.isActive}{" "}
                       <p>{deal.isActive ? "Active" : "Not Active"}</p>
                     </td>
-                    <td className="p-3 w-40">{formatDate(deal?.activetill)}</td>
                     <td className="p-3 w-40">{deal.price}</td>
 
+                    <td className="p-3 w-40">{formatDate(deal.updatedAt)}</td>
                     <td className="p-3 w-40">
                       <button
                         onClick={() => navigate(`/update-deal/${deal._id}`)}

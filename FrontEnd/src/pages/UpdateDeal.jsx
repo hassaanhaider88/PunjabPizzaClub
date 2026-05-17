@@ -26,8 +26,6 @@ const AdminDealUpdate = () => {
     title: "",
     description: "",
     price: "",
-    isActive: true,
-    activetill: "",
   });
 
   useEffect(() => {
@@ -50,9 +48,7 @@ const AdminDealUpdate = () => {
         setDeal({
           title: d.title,
           description: d.description,
-          price: d.price,
-          isActive: d.isActive,
-          activetill: d.activetill?.slice(0, 16) || "",
+          price: d.price
         });
 
         setImage((prev) => ({
@@ -214,16 +210,7 @@ const AdminDealUpdate = () => {
             className="w-full p-2 bg-white/10 rounded"
           />
 
-          <label className="flex  items-center gap-2">
-            <input
-              type="datetime-local"
-              name="activetill"
-              value={deal.activetill}
-              onChange={handleChange}
-              className="p-2 bg-white/10 rounded w-full"
-            />
-           <p className="text-nowrap"> Active Till</p>
-          </label>
+         
 
           <button
             disabled={loading}

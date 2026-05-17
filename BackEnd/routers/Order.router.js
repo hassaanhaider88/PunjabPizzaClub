@@ -6,7 +6,8 @@ import {
   updateOrderStatus,
   updateOrderPaymentStatus,
   AssignRiderToOrder,
-  ridersOrder
+  ridersOrder,
+  deleteOrder
 } from "../controllers/Order.controller.js";
 import IsAdminAuthMD from "../middlewares/IsAdminAuth.js";
 import IsRiderAuthMw from "../middlewares/IsRiderAuth.js";
@@ -34,6 +35,7 @@ async function routes(fastify, option) {
   fastify.get("/me", { preHandler: IsUserLoginAuth }, MyOrders);
   fastify.get("/rider/me", { preHandler: IsRiderAuthMw }, ridersOrder);
   fastify.get("/cancel/:id", { preHandler: IsUserLoginAuth }, CancelOrder);
+  fastify.get("/delete-order/:id", { preHandler: IsAdminAuthMD }, deleteOrder);
 
 }
 

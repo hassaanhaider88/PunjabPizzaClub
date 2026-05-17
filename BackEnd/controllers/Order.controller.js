@@ -385,6 +385,39 @@ const ridersOrder = async (req, res) => {
     }
 }
 
+const deleteOrder = async (req, res) => {
+    try {
+        const { id } = req.params;
+        if (!id) {
+            return res.send({
+                success: false,
+                message: "Please provide id",
+            });
+        }
+
+        const deletedOrder = await orderModel.findByIdAndDelete(id);
+
+        if (!deletedOrder) {
+            return res.send({
+                success: false,
+                message: "Order not found",
+            });
+        }
+
+        return res.send({
+            success: true,
+            message: "Order deleted successfully",
+            data: deletedOrder
+        });
+
+    } catch (error) {
+        return res.send({
+            success: false,
+            message: error.message
+        })
+    }
+}
+
 export {
     SendAllOrders,
     createOrder,
@@ -393,5 +426,6 @@ export {
     updateOrderStatus,
     updateOrderPaymentStatus,
     AssignRiderToOrder,
-    ridersOrder
+    ridersOrder,
+    deleteOrder
 };

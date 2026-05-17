@@ -16,16 +16,21 @@ const orderSlice = createSlice({
                 order.orderStatus = orderStatus;
             }
         },
-        updateAssingToRider: (state, action) => {
+        updateAssignToRider: (state, action) => {
             const { id, riderId } = action.payload;
-            console.log(id, riderId)
             const order = state.orders.find((item) => item._id === id);
             if (order) {
                 order.orderAssignTo = riderId;
             }
+        },
+        deleteOrder: (state, action) => {
+            const id = action.payload.id;
+            state.orders = state.orders.filter((item) => item._id !== id);
+
+
         }
     }
 });
 
-export const { allOrders, updateOrderStatus, updateAssingToRider } = orderSlice.actions
+export const { allOrders, updateOrderStatus, updateAssignToRider, deleteOrder } = orderSlice.actions
 export default orderSlice.reducer;

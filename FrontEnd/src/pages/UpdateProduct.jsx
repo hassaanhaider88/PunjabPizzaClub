@@ -278,7 +278,7 @@ const AdminProductUpdate = () => {
                     <div>
                         <h2 className="mb-3">Prices</h2>
 
-                        <div className="grid md:grid-cols-2 gap-4">
+                        <div className="grid md:grid-cols-2 gap-5">
                             {product.prices.map((p, i) => (
                                 <div
                                     key={i}
@@ -317,7 +317,7 @@ const AdminProductUpdate = () => {
                                     <button
                                         type="button"
                                         onClick={() => removePrice(i)}
-                                        className="absolute -bottom-13 rounded-full right-2 text-xs B p-3 bg-red-400"
+                                        className="absolute bottom-0  z-40 rounded-full right-0 text-xs B p-3 bg-red-400"
                                     >
                                         <AiOutlineDelete size={20} />
                                     </button>

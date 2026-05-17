@@ -16,7 +16,6 @@ const PizzaCard = ({ item, activeMenu = "All" }) => {
   }
 
   const handleAddToCartClick = () => {
-    console.log(item)
     if (item.stockStatus !== "In Stock") {
       toast.warn(`Please Wait Product is Currently ${item.stockStatus}`);
     }
@@ -36,11 +35,11 @@ const PizzaCard = ({ item, activeMenu = "All" }) => {
     <div className="flex shrink-0 items-center justify-center  p-6">
       <div className="bg-[#1a1a1a] rounded-[2.5rem] p-6 flex flex-col items-center shadow-2xl transition-transform cursor-pointer">
         {/* Pizza Image */}
-        <div className="relative rounded-full overflow-hidden -top-14 shadow-sm shadow-red-300 w-52 h-52 mb-2 drop-shadow-[0_20px_20px_rgba(0,0,0,0.5)]">
+        <div className="relative group rounded-full hover:border-2 border-[#FF4757] overflow-hidden -top-14 shadow-sm shadow-red-300 w-52 h-52 mb-2 drop-shadow-[0_20px_20px_rgba(0,0,0,0.5)]">
           <LazyLoadImage
             src={item.url}
             alt={item.name}
-            className="w-full h-full object-cover  border-4 border-transparent hover:border-yellow-500/20 transition-all"
+            className="w-full h-full group-hover:scale-95  duration-300 object-cover  border-4 border-transparent hover:border-yellow-500/20 transition-all"
           />
         </div>
 
@@ -60,10 +59,11 @@ const PizzaCard = ({ item, activeMenu = "All" }) => {
               <button
                 key={item.size}
                 onClick={() => setSelectedSize(item)}
-                className={`px-3 py-1.5 text-[10px] font-bold rounded-lg transition-all ${selectedSize.size === item.size
-                  ? "bg-[#FF4757] text-black"
-                  : "text-gray-500 hover:text-gray-300"
-                  }`}
+                className={`px-3 py-1.5 text-[10px] font-bold rounded-lg transition-all ${
+                  selectedSize.size === item.size
+                    ? "bg-[#FF4757] text-black"
+                    : "text-gray-500 hover:text-gray-300"
+                }`}
               >
                 {item.size === "Xtra Large" ? "XL" : item?.size[0]}
               </button>
@@ -88,7 +88,11 @@ const PizzaCard = ({ item, activeMenu = "All" }) => {
                 Rs.{selectedSize.originalPrice}
               </span>
               <span className="text-[#FF4757]  text-sm font-black">
-                {checkPercentOff(selectedSize.originalPrice, selectedSize.offerPrice,)} % off
+                {checkPercentOff(
+                  selectedSize.originalPrice,
+                  selectedSize.offerPrice,
+                )}{" "}
+                % off
               </span>
             </>
           )}
