@@ -1,3 +1,4 @@
+import { GiFullPizza } from "react-icons/gi";
 /* eslint-disable react-hooks/set-state-in-effect */
 /* eslint-disable react-hooks/exhaustive-deps */
 import { HiOutlineUserCircle } from "react-icons/hi";
@@ -44,12 +45,14 @@ const NavBar = ({ isShow = true }) => {
     <div
       className={`${isShow ? "" : "hidden"} justify-between flex bg-clip-padding backdrop-filter  backdrop-blur-sm bg-opacity-10 items-center sticky top-0 z-100 px-10`}
     >
-      <div className="LogoContainer flex justify-center items-center w-[20%] md:w-[10%]">
-        <LazyLoadImage
-          src="https://res.cloudinary.com/dcrkdgbd9/image/upload/v1777964324/PPCLLogo_bvoffl.png"
-          alt="Punjab Pizza CClub Logo"
+      <div className="LogoContainer gap-2 my-4 flex justify-center items-center w-[20%] md:w-[10%]">
+        {/* <LazyLoadImage
+          src="https://i.pinimg.com/originals/eb/96/af/eb96af1f97f1447195b22359fac8a152.jpg"
+          alt="Company Logo Here"
           className="w-30 bg-cover"
-        />
+        /> */}
+        <GiFullPizza style={{fontSize : "40px"}} color="ff4757" />{" "}
+        <h1 className="text-lg text-nowrap">Pizza Chefs</h1>
       </div>
       <div className="NavLinksContainer md:flex hidden ThreeDivs gap-3 justify-evenly items-center w-[80%] md:w-[90%]">
         <div className="flex gap-5 text-lg font-medium">

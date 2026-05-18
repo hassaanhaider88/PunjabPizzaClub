@@ -9,7 +9,6 @@ import { formatDate } from "../utils/dateFormat";
 
 const SpecialDealCard = ({ deal }) => {
   const dispatch = useDispatch();
-  console.log(deal);
   const isAvailable = deal.isActive;
 
   const handleDealClick = () => {

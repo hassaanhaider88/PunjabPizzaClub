@@ -87,7 +87,7 @@ export default function ContactPage() {
               <div className="bg-[#ff6467] p-3 rounded-full">
                 <MdLocationOn className="text-white text-xl" />
               </div>
-              <span>Bangla Road Nawab Chock, Lalian, Punjab</span>
+              <span> Punjab, Pakistan 🇵🇰</span>
             </div>
 
             <div className="flex items-center gap-4">
@@ -101,7 +101,7 @@ export default function ContactPage() {
               <div className="bg-[#ff6467] p-3 rounded-full">
                 <MdEmail className="text-white text-xl" />
               </div>
-              <span>contact@punjabpizza.com</span>
+              <span>contact@pizzachefs.com</span>
             </div>
           </div>
         </div>

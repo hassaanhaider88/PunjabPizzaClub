@@ -12,7 +12,7 @@ const BACK_END_API = "http://localhost:3000"
 const AllCategory = [
     "Pizza",
     "Burger",
-    "Shoarwaama",
+    "Sharwaama",
     "Paratha Roll",
     "Hot Wings",
 ];

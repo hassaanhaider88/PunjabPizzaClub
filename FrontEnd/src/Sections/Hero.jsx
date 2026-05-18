@@ -43,7 +43,7 @@ const Hero = () => {
             Cheeze Bluster
           </h1>
           <p className="md:text-2xl text-md mt-2 font-semibold tracking-[0.2em] text-white md:w-[90%] w-full text-center">
-            At Punjab, we invite you to embark on a culinary journey that
+            At <span className="text-[#ff4757]">Pizza Chefs</span>, we invite you to embark on a culinary journey that
             celebrates the rich tapestry of flavors and traditions that define
             our beloved region. Our menu is a vibrant mosaic of authentic
             Punjabi dishes, crafted with love and passion by our skilled chefs.

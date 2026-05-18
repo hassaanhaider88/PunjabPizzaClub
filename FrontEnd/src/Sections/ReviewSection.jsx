@@ -32,7 +32,7 @@ const ReviewSection = () => {
         <div className="w-full  justify-center items-center flex flex-col">
           <h2 className="font-serif text-4xl md:text-5xl font-bold text-white leading-[1.15] tracking-tight mb-10">
             What our customers say about{" "}
-            <span className="text-[#FF4757] italic">Punjab Pizza</span>
+            <span className="text-[#FF4757] italic">Pizza Chefs</span>
           </h2>
 
           <div className="relative   border border-[#FF4757]/10 rounded-2xl p-7 md:p-9 overflow-hidden">

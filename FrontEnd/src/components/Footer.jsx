@@ -6,7 +6,7 @@ import { BsWhatsapp } from "react-icons/bs";
 import { Link } from "react-router-dom";
 import React from "react";
 import { LazyLoadImage } from "react-lazy-load-image-component";
-
+import { GiFullPizza } from "react-icons/gi";
 
 const Footer = ({ isShow }) => {
   const year = new Date().getFullYear();
@@ -14,12 +14,14 @@ const Footer = ({ isShow }) => {
     isShow && (
       <>
         <div className="flex h-fit flex-col md:flex-row justify-evenly md:gap-30 gap-5 items-center w-full">
-          <div className="md:w-1/2 w-full flexCenter">
-            <LazyLoadImage
+          <div className="md:w-1/2 w-full gap-4 flexCenter">
+            {/* <LazyLoadImage
               src="https://res.cloudinary.com/dcrkdgbd9/image/upload/v1777964324/PPCLLogo_bvoffl.png"
-              alt="Punjab Pizza Club Lalian"
+              alt="Pizza Chefs Logo"
               className="w-1/2 h-full"
-            />
+            /> */}
+            <GiFullPizza size={120} color="ff4757" />{" "}
+            <h1 className="text-lg">Pizza Chefs</h1>
           </div>
           <div className="md:w-1/2 w-full gap-2 text-lg flex-col flex justify-center items-center">
             <div
@@ -45,19 +47,19 @@ const Footer = ({ isShow }) => {
               onClick={() => window.open("https://wa.com/+923437117831")}
               className="flex justify-start px-10 w-full items-center py-2 gap-5"
             >
-              <FaTiktok size={35} /> <span>@PunjabPizzaClub</span>
+              <FaTiktok size={35} /> <span>@PizzaChefs</span>
             </div>
             <div
               onClick={() => window.open("https://wa.com/+923437117831")}
               className="flex justify-start px-10 w-full items-center py-2 gap-5"
             >
-              <FaFacebookF size={35} /> <span>@PunjabPizza</span>
+              <FaFacebookF size={35} /> <span>@PizzaChefs</span>
             </div>
           </div>
         </div>
         <div className="border-t mb-2 border-gray-700  pt-5 mt-3 text-center text-gray-400 text-sm">
           <p>
-            &copy; {year} Punbjab Pizza Club. All rights reserved. |{" "}
+            &copy; {year} Pizza Chefs. All rights reserved. |{" "}
             <Link to="/privacy" className="hover:text-accent transition">
               Privacy Policy
             </Link>{" "}

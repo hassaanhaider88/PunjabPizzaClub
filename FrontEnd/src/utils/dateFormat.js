@@ -1,5 +1,4 @@
 const formatDate = (dateString) => {
-    console.log(dateString)
     if (!dateString) return "N/A"
     return new Intl.DateTimeFormat("en-GB", {
         dateStyle: "medium",

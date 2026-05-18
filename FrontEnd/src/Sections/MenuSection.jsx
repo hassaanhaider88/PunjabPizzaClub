@@ -2,15 +2,15 @@ import { BiRightArrowAlt } from "react-icons/bi";
 import React, { useState } from "react";
 import SinglePizzaCard from "../components/SinglePizzaCard";
 import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom";
 import { AllCategory } from "../Constants";
 
 import ErrorInFetchingProdcuts from "../components/ErrorInFetchingProdcuts";
-import ProductLoading from "../components/ProductLoading"
+import ProductLoading from "../components/ProductLoading";
 
 const MenuSection = () => {
   const [activeMenu, setActiveMenu] = useState("Pizza");
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const products = useSelector((state) => state.products);
 
@@ -46,7 +46,16 @@ const MenuSection = () => {
         )}
         {products?.isError && <ErrorInFetchingProdcuts />}
       </div>
-      <button onClick={() => navigate("/menu")} className="relative text-xl left-1/2 flexCenter gap-2 mt-5 -translate-x-1/2 group">See More Products <BiRightArrowAlt size={30} className="group-hover:translate-x-3 rotate-180 group-hover:rotate-0 duration-200 transition-all " /></button>
+      <button
+        onClick={() => navigate("/menu")}
+        className="relative text-xl left-1/2 flexCenter gap-2 mt-5 -translate-x-1/2 group"
+      >
+        See More Products{" "}
+        <BiRightArrowAlt
+          size={30}
+          className="group-hover:translate-x-3 rotate-180 group-hover:rotate-0 duration-200 transition-all "
+        />
+      </button>
     </div>
   );
 };
